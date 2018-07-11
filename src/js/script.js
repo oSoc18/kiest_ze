@@ -8,6 +8,8 @@ const opties_gemeentes = document.getElementById("opties_gemeentes");
 const geselecteerde_gemeente = document.getElementById("geselecteerde_gemeente");
 const opties_partijen = document.getElementById("opties_partijen");
 const kanidaaten_lijst = document.getElementById("kanidaaten_lijst");
+const geen_opties_partijen = document.getElementById("geen_opties_partijen");
+const stad_display = document.getElementById("stad_display");
 
 
 const model = {
@@ -93,92 +95,112 @@ function FindPartijWithRecid(Rcis) {
 }
 
 function PartijClicked(evt){
-    console.log("PartijClicked", evt.target, evt.target.id);
-    model.selectedPartijRec = evt.target.id;
-    UpdateAll()
-  }
+  console.log("PartijClicked", evt.target, evt.target.id);
+  model.selectedPartijRec = evt.target.id;
+  UpdateAll()
+}
 
 function DisplayPartijen() {
   const usedChildren = []
 
-  if (model.selectedNis == null) return;
-
+  //if (model.selectedNis == null) return;
+  console.log("selectedNis", model.selectedNis)
   const stad = FindStadMetNis(model.selectedNis)
 
-  const lines = stad.fields.Partij;
-  for (const property in lines) {
-    if (lines.hasOwnProperty(property)) {
-      if (lines[property] == "") continue;
-      const partij = FindPartijWithRecid(lines[property]);
-    
-      let option = document.getElementById(partij.id)
-      if(option == null)
-      {
-        option = document.createElement("div")
-        option.id = partij.id;
-        opties_partijen.appendChild(option);
-        option.innerHTML = `<div class="form-check"> 
-        <input class="form-check-input" type="radio" name="partijRadio" id="${partij.id}" value="option">
-        <label class="form-check-label" for="partijRadio"></label></div>`
-        option.querySelector("input").addEventListener(`click`, PartijClicked);
-      }
-      usedChildren.push(option)
+  stad_display.innerText = stad?stad.fields.Naam:"Onbekende gemeente/stad";
 
-      option.querySelector("label").innerText = partij.fields.Partij
+  geen_opties_partijen.style.display = stad? "none":"block"
+  opties_partijen.style.display = stad? "block":"none"
+
+  if(stad){
+    const lines = stad.fields.Partij;
+    for (const property in lines) {
+      if (lines.hasOwnProperty(property)) {
+        if (lines[property] == "") continue;
+        const partij = FindPartijWithRecid(lines[property]);
+
+        let option = document.getElementById(partij.id)
+        if(option == null)
+        {
+          option = document.createElement("div")
+          option.id = partij.id;
+          opties_partijen.appendChild(option);
+          option.innerHTML = `<div class="form-check"> 
+          <input class="form-check-input" type="radio" name="partijRadio" id="${partij.id}" value="option">
+          <label class="form-check-label" for="partijRadio">${partij.fields.Partij}</label>
+          </div>`
+          option.querySelector("input").addEventListener(`click`, PartijClicked);
+        }
+        usedChildren.push(option)
+      }
     }
   }
 
-  const children = opties_partijen.children;
-  /*for (let i = 0; i < children.length; i++) {
+  const children = opties_partijen.children; // life updating list
+  for (let i = 0; i < children.length; i++) {
     const child = children[i];
-    if(!usedChildren.includes(child))
+    if(!usedChildren.includes(child)){
       opties_partijen.removeChild(child);
-  }*/
+      i--;
+    }
+  }
 }
 
 
 function ContainsAirtableRec(list, rec)
 {
-  list.includes(rec)
+  return list.includes(rec)
 }
 
 function DisplayKanidaten() {
   const usedChildren = []
 
   const lines = model.airTables.Politiekers.records;
+  const partij = FindPartijWithRecid(model.selectedPartijRec);
+
   for (const property in lines) {
     if (lines.hasOwnProperty(property)) {
-      if (lines[property] == "") continue;
+      //if (lines[property] == "") continue;
       const politieker = lines[property];
+
       if(model.selectedPartijRec != null
         && ContainsAirtableRec(politieker.fields.Partij, model.selectedPartijRec))
       {
 
-        let option = document.getElementById(politieker.key)
+        let option = document.getElementById(politieker.id)
         if(option == null)
         {
           option = document.createElement("div")
-          option.id = politieker.key;
+          option.id = politieker.id;
           kanidaaten_lijst.appendChild(option);
-        }else usedChildren.push(option)
+        }
+        usedChildren.push(option)
+
+        let shortName = politieker.fields.Naam;
+        shortName = shortName.substr(shortName.lastIndexOf(" "))
+        let logo = "https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg";
+        if(politieker.fields.Foto)
+          logo = politieker.fields.Foto[0].thumbnails.large.url
         option.innerHTML = `<article class="card mr-4 mt-4" style="width: 17rem;">
-              <img class="card-img-top" src="assets/img/Jordy.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h3 class="card-title">Jordy Sabels</h5>
-                <p class="card-text">Groen Ieper</p>
-                <a href="detail.html" class="btn btn-primary">Ontdek Jordy</a>
-              </div>
-          </article>`
+        <img class="card-img-top" src="${logo}" alt="Card image cap">
+        <div class="card-body">
+        <h3 class="card-title">${politieker.fields.Naam}</h5>
+        <p class="card-text">${partij.fields.Partij}</p>
+        <a href="detail.html" class="btn btn-primary">Ontdek ${shortName}</a>
+        </div>
+        </article>`
       }
     }
   }
 
-  /*const children = kanidaaten_lijst.children;
+  const children = kanidaaten_lijst.children; // life updating list
   for (let i = 0; i < children.length; i++) {
     const child = children[i];
-    if(!usedChildren.includes(child))
+    if(!usedChildren.includes(child)){
       kanidaaten_lijst.removeChild(child);
-  }*/
+      i--;
+    }
+  }
 }
 
 function GemeenteInputEvent() { 
@@ -188,7 +210,7 @@ function GemeenteInputEvent() {
 input_gemeente.addEventListener(`change`, GemeenteInputEvent);
 input_gemeente.addEventListener(`keyup`, GemeenteInputEvent);
 input_gemeente.addEventListener(`input`, GemeenteInputEvent);
-input_gemeente.addEventListener(`mouseup`, GemeenteInputEvent);
+//input_gemeente.addEventListener(`mouseup`, GemeenteInputEvent);
 
 UpdateAll();
 
@@ -205,6 +227,12 @@ function UpdateAll() {
   DisplayKanidaten()
 }
 
+function GemeenteClick(evt){
+  console.log("Click", evt.target, evt.target.id);
+  model.selectedNis = parseInt(evt.target.id);
+  UpdateAll()
+}
+
 function UpdateGemeenteInput() {
   while (opties_gemeentes.firstChild) {
     opties_gemeentes.removeChild(opties_gemeentes.firstChild);
@@ -218,11 +246,7 @@ function UpdateGemeenteInput() {
     option.id = key;
     // Bad code:
     option.innerText = `${lines[i].naam  } ${nisCode_to_postCode[parseInt(key.substr(0, key.length - 1))]}`;
-    option.addEventListener("click", function (evt) {
-      console.log("Click", evt.target, evt.target.id);
-      model.selectedNis = parseInt(evt.target.id);
-      UpdateAll()
-    })
+    option.addEventListener("click", GemeenteClick)
     opties_gemeentes.appendChild(option);
   }
 }
@@ -241,8 +265,8 @@ function GetGemeentes(inputStr) {
 //   const dedup_test = []
 //   let depth = 0;
 
-  function Recurse(key, el) {
-    if (results.length > 10) return;
+function Recurse(key, el) {
+  if (results.length > 10) return;
     // depth++;
     //console.log(depth, el.type, el.naam)
 
