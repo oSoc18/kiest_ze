@@ -32,12 +32,12 @@
     // "jsx-quotes": ["error", "prefer-single"],
     // "camelcase": "error",
     "arrow-spacing": "error",
-    "object-curly-spacing": ["off", "never"]
+    "object-curly-spacing": ["off", "never"],
     // "arrow-parens": ["error", "as-needed"],
     // "key-spacing": "error",
     // "comma-spacing": ["error", { "before": false, "after": true }],
-    // "comma-style": ["error", "last"]
-
+    // "comma-style": ["error", "last"],
+    "no-unused-vars": ["warn"]
   }
 
 }

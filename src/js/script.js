@@ -7,6 +7,8 @@ const input_gemeente = document.getElementsByName("input_gemeente")[0];
 const opties_gemeentes = document.getElementById("opties_gemeentes");
 const geselecteerde_gemeente = document.getElementById("geselecteerde_gemeente");
 const opties_partijen = document.getElementById("opties_partijen");
+const kanidaaten_lijst = document.getElementById("kanidaaten_lijst");
+
 
 const model = {
   _inputString: "",
@@ -19,7 +21,8 @@ const model = {
   get inputString() {
     return this._inputString;
   },
-  selectedNis: null,
+  selectedNis: 230501,
+  selectedPartijRec: null,
   airTables: {
     Partij: null,
     Politiekers: null,
@@ -27,6 +30,7 @@ const model = {
     Stad: null
   }
 }
+window["model"] = model;
 
 // https://stackoverflow.com/questions/9838812/how-can-i-open-a-json-file-in-javascript-without-jquery
 function loadJSON(path, success, error) {
@@ -50,12 +54,10 @@ DownloadAirtableCode()
 
 
 function TableRequest(tableName) {
-  console.log(tableName); /* eslint-disable-line */
   loadJSON(`https://api.airtable.com/v0/app5SoKsYnuOY96ef/${tableName}?api_key=key2Jl1YfS4WWBFa5`,
     function (json) {
       model.airTables[tableName] = json;
       UpdateAll()
-      console.log(tableName, json);
     },
     console.error);
 }
@@ -90,11 +92,14 @@ function FindPartijWithRecid(Rcis) {
   }
 }
 
+function PartijClicked(evt){
+    console.log("PartijClicked", evt.target, evt.target.id);
+    model.selectedPartijRec = evt.target.id;
+    UpdateAll()
+  }
 
 function DisplayPartijen() {
-  while (opties_partijen.firstChild) {
-    opties_partijen.removeChild(opties_partijen.firstChild);
-  }
+  const usedChildren = []
 
   if (model.selectedNis == null) return;
 
@@ -105,35 +110,75 @@ function DisplayPartijen() {
     if (lines.hasOwnProperty(property)) {
       if (lines[property] == "") continue;
       const partij = FindPartijWithRecid(lines[property]);
+    
+      let option = document.getElementById(partij.id)
+      if(option == null)
+      {
+        option = document.createElement("div")
+        option.id = partij.id;
+        opties_partijen.appendChild(option);
+        option.innerHTML = `<div class="form-check"> 
+        <input class="form-check-input" type="radio" name="partijRadio" id="${partij.id}" value="option">
+        <label class="form-check-label" for="partijRadio"></label></div>`
+        option.querySelector("input").addEventListener(`click`, PartijClicked);
+      }
+      usedChildren.push(option)
 
-      const option = document.createElement("div")
-      option.innerHTML = `<div class="form-check"> 
-      <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
-      <label class="form-check-label" for="partijRadio">${partij.fields.Partij}</label></div>`
-      option.id = partij.key;
-
-      // const img = document.createElement("img")
-      // if (partij.fields.Logo && partij.fields.Logo)
-      //   img.src = partij.fields.Logo[0].thumbnails.small.url;
-      // else
-      //   img.src = "http://emilesonneveld.be/bol.png";
-      // img.classList.add("partij_logo");
-      // img.width = "60"
-      // img.height = "20"
-      // option.appendChild(img)
-
-      // const span = document.createElement("span");
-      // span.innerText = ` ${partij.fields.Partij}`;
-      // option.appendChild(span)
-
-      /*option.addEventListener("clicki", function(evt){
-      	console.log("Click", evt.target, evt.target.id);
-      	model.selectedNis = parseInt(evt.target.id);
-      	UpdateAll()
-      })*/
-      opties_partijen.appendChild(option);
+      option.querySelector("label").innerText = partij.fields.Partij
     }
   }
+
+  const children = opties_partijen.children;
+  /*for (let i = 0; i < children.length; i++) {
+    const child = children[i];
+    if(!usedChildren.includes(child))
+      opties_partijen.removeChild(child);
+  }*/
+}
+
+
+function ContainsAirtableRec(list, rec)
+{
+  list.includes(rec)
+}
+
+function DisplayKanidaten() {
+  const usedChildren = []
+
+  const lines = model.airTables.Politiekers.records;
+  for (const property in lines) {
+    if (lines.hasOwnProperty(property)) {
+      if (lines[property] == "") continue;
+      const politieker = lines[property];
+      if(model.selectedPartijRec != null
+        && ContainsAirtableRec(politieker.fields.Partij, model.selectedPartijRec))
+      {
+
+        let option = document.getElementById(politieker.key)
+        if(option == null)
+        {
+          option = document.createElement("div")
+          option.id = politieker.key;
+          kanidaaten_lijst.appendChild(option);
+        }else usedChildren.push(option)
+        option.innerHTML = `<article class="card mr-4 mt-4" style="width: 17rem;">
+              <img class="card-img-top" src="assets/img/Jordy.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h3 class="card-title">Jordy Sabels</h5>
+                <p class="card-text">Groen Ieper</p>
+                <a href="detail.html" class="btn btn-primary">Ontdek Jordy</a>
+              </div>
+          </article>`
+      }
+    }
+  }
+
+  /*const children = kanidaaten_lijst.children;
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i];
+    if(!usedChildren.includes(child))
+      kanidaaten_lijst.removeChild(child);
+  }*/
 }
 
 function GemeenteInputEvent() { 
@@ -150,7 +195,14 @@ UpdateAll();
 function UpdateAll() {
   UpdateGemeenteInput();
   geselecteerde_gemeente.innerText = model.selectedNis;
+
+  // Wait while downloading airtables. Maybe show spinner?
+  if(model.airTables.Stad == null) return;
+  if(model.airTables.Politiekers == null) return;
+  if(model.airTables.Partij == null) return;
+
   DisplayPartijen()
+  DisplayKanidaten()
 }
 
 function UpdateGemeenteInput() {
