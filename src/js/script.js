@@ -180,6 +180,7 @@ function GetGemeentes(inputStr) {
   if (inputStr == null || inputStr == "") {
     results = results.concat(GetGemeentes("Meise"))
     results = results.concat(GetGemeentes("Ieper"))
+    results = results.concat(GetGemeentes("Moorslede"))
     return results;
   }
 
