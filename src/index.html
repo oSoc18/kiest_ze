@@ -16,26 +16,25 @@
       <div class="ml-4 h-100 mt-3 mr-3">
         <div class="form-group">
           <label for="search" class="lead">Zoek jouw gemeente</label>
-          <input type="text" class="form-control w-100" id="search" aria-describedby="searchfield" placeholder="Zoeken...">
+          <input type="text" class="form-control w-100" id="search" aria-describedby="searchfield" placeholder="Zoeken..." name="input_gemeente" autocomplete="off">
         </div>
+        <div>
+          <ul id="opties_gemeentes">
+          </ul>
+        </div>
+        <b id="geselecteerde_gemeente" style="display: none;"></b>
         <div class="form-check mt-4">
           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
           <label class="form-check-label" for="defaultCheck1">In mijn buurt</label>
         </div>
         <div class="mt-4">
           <h2 class="lead mt-2">Kies een partij:</h2>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
-            <label class="form-check-label" for="partijRadio">sp.a</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
-            <label class="form-check-label" for="partijRadio">Groen Ieper</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
-            <label class="form-check-label" for="partijRadio">CD&V-NV-A</label>
-          </div>
+        <div id="opties_partijen">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
+              <label class="form-check-label" for="partijRadio">sp.a</label>
+            </div>
+        </div>
         </div>
         <div class="mt-4">
           <h2 class="lead mt-2">Actief op social media:</h2>

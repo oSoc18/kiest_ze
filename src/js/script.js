@@ -1,12 +1,12 @@
 "use strict";
 
-const nisCode_to_postCode = require(`./nisCode_to_postCode.js`);
-const ah = require(`./admin_hierarchy-1.0.0.js`);
+import { nisCode_to_postCode } from './nisCode_to_postCode.js';
+import { ah } from './admin_hierarchy-1.0.0.js';
 // const datalist_gemeentes = document.getElementById("datalist_gemeentes");
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
 const opties_gemeentes = document.getElementById("opties_gemeentes");
 const geselecteerde_gemeente = document.getElementById("geselecteerde_gemeente");
-const optties_partijen = document.getElementById("optties_partijen");
+const opties_partijen = document.getElementById("opties_partijen");
 
 const model = {
   _inputString: "",
@@ -92,8 +92,8 @@ function FindPartijWithRecid(Rcis) {
 
 
 function DisplayPartijen() {
-  while (optties_partijen.firstChild) {
-    optties_partijen.removeChild(optties_partijen.firstChild);
+  while (opties_partijen.firstChild) {
+    opties_partijen.removeChild(opties_partijen.firstChild);
   }
 
   if (model.selectedNis == null) return;
@@ -106,38 +106,44 @@ function DisplayPartijen() {
       if (lines[property] == "") continue;
       const partij = FindPartijWithRecid(lines[property]);
 
-      const option = document.createElement("li")
+      const option = document.createElement("div")
+      option.innerHTML = `<div class="form-check"> 
+      <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
+      <label class="form-check-label" for="partijRadio">${partij.fields.Partij}</label></div>`
       option.id = partij.key;
 
-      const img = document.createElement("img")
-      if (partij.fields.Logo && partij.fields.Logo)
-        img.src = partij.fields.Logo[0].thumbnails.small.url;
-      else
-        img.src = "http://emilesonneveld.be/bol.png";
-      img.classList.add("partij_logo");
-      img.width = "60"
-      img.height = "20"
-      option.appendChild(img)
+      // const img = document.createElement("img")
+      // if (partij.fields.Logo && partij.fields.Logo)
+      //   img.src = partij.fields.Logo[0].thumbnails.small.url;
+      // else
+      //   img.src = "http://emilesonneveld.be/bol.png";
+      // img.classList.add("partij_logo");
+      // img.width = "60"
+      // img.height = "20"
+      // option.appendChild(img)
 
-      const span = document.createElement("span");
-      span.innerText = ` ${partij.fields.Partij}`;
-      option.appendChild(span)
+      // const span = document.createElement("span");
+      // span.innerText = ` ${partij.fields.Partij}`;
+      // option.appendChild(span)
 
       /*option.addEventListener("clicki", function(evt){
       	console.log("Click", evt.target, evt.target.id);
       	model.selectedNis = parseInt(evt.target.id);
       	UpdateAll()
       })*/
-      optties_partijen.appendChild(option);
+      opties_partijen.appendChild(option);
     }
   }
 }
 
-
-
-function GemeenteInputEvent() /* eslint-disable-line */ {
+function GemeenteInputEvent() { 
   model.inputString = input_gemeente.value;
 }
+
+input_gemeente.addEventListener(`change`, GemeenteInputEvent);
+input_gemeente.addEventListener(`keyup`, GemeenteInputEvent);
+input_gemeente.addEventListener(`input`, GemeenteInputEvent);
+input_gemeente.addEventListener(`mouseup`, GemeenteInputEvent);
 
 UpdateAll();
 
@@ -231,3 +237,4 @@ function GetGemeentes(inputStr) {
   Recurse("02000", ah["02000"]); // From admin_hiearchy file
   return results;
 }
+

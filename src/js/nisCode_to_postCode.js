@@ -327,3 +327,5 @@ const nisCode_to_postCode = {  /* eslint-disable-line */
 73107: 3630,
 73109: 3790
 }
+
+export { nisCode_to_postCode };

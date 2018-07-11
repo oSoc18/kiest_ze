@@ -1,4 +1,4 @@
-const ah = { /* eslint-disable-line */ 
+const ah = { 
 	"02000": {
 		type: "W",
 		naam: "Vlaanderen",
@@ -7968,4 +7968,6 @@ const ah = { /* eslint-disable-line */
 			}
 		}
 	}
-};
+}
+
+export { ah };
