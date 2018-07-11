@@ -1,3 +1,26 @@
 body {
-    color: blue;
+  color: black;
+}
+
+.display-4 {
+  font-size: 2rem;
+}
+
+.form-background {
+  background-color: #3e2749;
+  color: white;
+}
+
+.btn {
+  background-color: #369ea4;
+  border: #369ea4;
+}
+
+.btn:hover {
+  background-color: #369ea4;
+}
+
+.detail-image {
+  -webkit-clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
 }

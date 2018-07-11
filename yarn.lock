@@ -1241,6 +1241,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+bootstrap@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
+
 boxen@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-0.5.1.tgz#5b73d8840eb7f3c8a155cbf69ed3ed68d4720014"
@@ -2317,9 +2321,9 @@ css@^2.1.0, css@^2.2.0:
     source-map-resolve "^0.5.1"
     urix "^0.1.0"
 
-"css@git+https://github.com/pocketjoso/css.git":
+"css@https://github.com/pocketjoso/css.git":
   version "2.2.1"
-  resolved "git+https://github.com/pocketjoso/css.git#8ddea7e3cbc0a183ecf694a7a5fbc84326893893"
+  resolved "https://github.com/pocketjoso/css.git#8ddea7e3cbc0a183ecf694a7a5fbc84326893893"
   dependencies:
     inherits "^2.0.1"
     source-map "^0.1.38"
