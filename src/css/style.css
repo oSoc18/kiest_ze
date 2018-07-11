@@ -21,6 +21,27 @@ body {
 }
 
 .detail-image {
-  -webkit-clip-path: circle(50% at 50% 50%);
+  -webkit-clip-path: circle(50% at 50% 50%); /* stylelint-disable-line*/
   clip-path: circle(50% at 50% 50%);
+  margin-top: -2rem;
+}
+
+.button-terug {
+  margin-left: 3rem;
+  margin-top: 2rem;
+}
+
+.emoji-size {
+  font-size: 3rem;
+}
+
+.tweet {
+  height: 2.5rem;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: black;
+  border: #369ea4 .2rem solid;
+  border-radius: .5rem;
 }

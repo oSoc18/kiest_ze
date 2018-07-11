@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a href="index.html" class="btn btn-primary">Terug</a>
+    <div class="container">
+  <a href="index.html" class="btn btn-primary button-terug">Terug</a>
   <header class="text-center">
       <img src="assets/img/jordy-detail.jpg" alt="Jordy" class="detail-image mb-2" width="250" height="250">
       <h2 class="display-4">Jordy Sabels 😜</h2>
@@ -17,41 +18,26 @@
           <p class="lead text-muted">Status: Beginner</p>
       </div>
   </header>
-  <div class="d-flex flex-row justify-content-around mt-5">
+  <div class="d-flex flex-row justify-content-center mt-5">
       <section>
-          <div class="d-flex flex-row">
+          <div class="d-flex flex-row mb-3">
               <h3 class="lead mr-3">Partij:</h3>
               <a href="#">Groen Ieper</a>
           </div>
-          <div class="d-flex flex-row">
+          <div class="d-flex flex-row mb-3">
               <h3 class="lead mr-3">Ervaring:</h3>
               <p>Eerste verkiezing</p>
           </div>
-          <div>
+          <div class="mb-3">
             <h3 class="lead">Volg Jordy op de voet:</h3>
             <a href="#"><img src="" alt=""></a>
             <a href="#"><img src="" alt=""></a>
             <a href="#"><img src="" alt=""></a>
             <a href="#"><img src="" alt=""></a>
           </div>
-      </section>
-      <section>
-          <div class="d-flex flex-row">
-              <h3 class="lead mr-3">Leeftijd:</h3>
-              <p>23 jaar</p>
-          </div>
-          <h3 class="lead">Mandaten:</h3>
-          <ul>
-            <li>Voorzitter Jong Groen Ieper</li>
-            <li>JKW vzw</li>
-          </ul>
-      </section>
-  </div>
-  <div class="d-flex flex-row justify-content-around mt-2">
-      <section>
-          <h3 class="lead">Beroep:</h3>
+          <h3 class="lead mb-3">Beroep:</h3>
           <p>Wat doet Jordy?</p>
-          <h3 class="lead">Flyer:</h3>
+          <h3 class="lead mb-3">Flyer:</h3>
           <div class="input-group mb-3 w-75">
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile02">
@@ -63,17 +49,38 @@
           </div>
       </section>
       <section>
-          <h3 class="lead">Vrijetijdsbesteding:</h3>
+          <div class="d-flex flex-row mb-3">
+              <h3 class="lead mr-3">Leeftijd:</h3>
+              <p>23 jaar</p>
+          </div>
+          <p>
+              <h3 class="lead mb-3">Mandaten:</h3>
+              <ul>
+                <li>Voorzitter Jong Groen Ieper</li>
+                <li>JKW vzw</li>
+              </ul>
+          </p>
+          <h3 class="lead mb-3">Vrijetijdsbesteding:</h3>
           <ul>
               <li>Tennis</li>
               <li>Gamen in The Lab</li>
           </ul>
       </section>
   </div>
-  <section>
-      <h3 class="lead">Geef Jordy een boost:</h3>
-      <input type="text" class="form-control w-25" id="search" aria-describedby="searchfield" placeholder="Jordy mijn stem heb je!">
-      <button class="btn btn-primary">Tweet je boost!</button>
+  
+  <section class="d-flex flex-column align-items-center w-100">
+      <h3 class="lead mb-4 mt-4">Geef Jordy een boost:</h3>
+      <div class="d-flex flex-row tweet align-items-center mb-4">
+          <input type="text" class="form-control w-100 mr-3" id="search" aria-describedby="searchfield" placeholder="Jordy mijn stem heb je!">
+          <p class="emoji-size mr-3">😀</p>
+      </div>
+      <button class="btn btn-primary mb-4">Tweet je boost!</button>
+      <div class="d-flex flex-row">
+          <p class=" btn btn-secondary mr-3">Jordy is een toffe <span class="emoji-size-boost">👍</span></p>
+          <p class="btn btn-secondary mr-3">Helpful kerel!<span  class="emoji-size-boost"> 💪</span></p>
+          <p class=" btn btn-secondary mr-3">Jordy is een toffe <span  class="emoji-size-boost">🌳</span></p>
+      </div>
   </section>
+</div>
 </body>
 </html>
