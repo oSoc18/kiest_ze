@@ -41,6 +41,10 @@ const commonConfig = {
         ],
       },
       {
+        test:/\.html$/,
+        loader: `html-loader`
+      },
+      {
         test: /\.(jpe?g|png|svg|woff|woff2|webp|gif)$/,
         loader: `url-loader`,
         options: {
@@ -57,10 +61,12 @@ const commonConfig = {
       fetch: `imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch`,
     }),
     new HtmlWebpackPlugin({
+      inject: 'body',
       filename: 'index.html',
       template: "./src/index.html"
     }),
     new HtmlWebpackPlugin({
+      inject: 'body',
       filename: 'detail.html',
       template: "./src/detail.html"
     })

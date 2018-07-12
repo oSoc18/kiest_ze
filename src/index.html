@@ -12,11 +12,11 @@
     <h1 class="display-4">Kiest Ze!</h1>
   </header> -->
   <div class="d-flex flex-row justify-content-between">
-    <form action="" class="form-background"  style="width: 18rem; height: 100%;" >
+    <form class="form-background" style="width: 18rem; height: 100%;">
       <div class="ml-4 h-100 mt-3 mr-3">
         <div class="form-group">
           <label for="search" class="lead">Zoek jouw gemeente</label>
-          <input type="text" class="form-control w-100" id="search" aria-describedby="searchfield" placeholder="Zoeken..." name="input_gemeente" autocomplete="off">
+          <input type="text" class="form-control w-100" id="search" placeholder="Zoeken..." name="input_gemeente" autocomplete="off">
         </div>
         <div>
           <ul id="opties_gemeentes">
@@ -24,16 +24,12 @@
         </div>
         <b id="geselecteerde_gemeente" style="display: none;"></b>
         <div class="form-check mt-4">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <input class="form-check-input" type="checkbox" value=""/>
           <label class="form-check-label" for="defaultCheck1">In mijn buurt</label>
         </div>
         <div class="mt-4">
           <h2 class="lead mt-2">Kies een partij:</h2>
         <div id="opties_partijen">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
-              <label class="form-check-label" for="partijRadio">sp.a</label>
-            </div>
         </div>
         <div id="geen_opties_partijen" style="display:none">
           <i>Deze gemeente zit nog niet in ons systeem :(</i>
@@ -42,15 +38,15 @@
         <div class="mt-4">
           <h2 class="lead mt-2">Actief op social media:</h2>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
+            <input class="form-check-input" type="radio" name="partijRadio" value="option">
             <label class="form-check-label" for="partijRadio">Facebook</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
+            <input class="form-check-input" type="radio" name="partijRadio" value="option">
             <label class="form-check-label" for="partijRadio">Twitter</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="partijRadio" id="partijRadio" value="option">
+            <input class="form-check-input" type="radio" name="partijRadio" value="option">
             <label class="form-check-label" for="partijRadio">Offline</label>
           </div>
         </div>
@@ -58,16 +54,16 @@
           <h2 class="lead mt-2">Mandaten:</h2>
           <div class="d-flex flex-row align-items-center w-75 justify-content-between">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="">
               <label class="form-check-label" for="defaultCheck1">Geen</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1"> < 5 </label>
+              <input class="form-check-input" type="checkbox" value="">
+              <label class="form-check-label" for="defaultCheck1"> &lt; 5 </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1"> > 5 </label>
+              <input class="form-check-input" type="checkbox" value="">
+              <label class="form-check-label" for="defaultCheck1"> &gt; 5 </label>
             </div>
           </div>
         </div>
