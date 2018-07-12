@@ -19,7 +19,7 @@
     // "indent": ["error", 2],
     // "quotes": ["error", "backtick"],
     // "semi": ["error", "always"],
-    "prefer-const": "error",
+    "prefer-const": "warn",
     // "quote-props": ["error", "as-needed"],
     // "comma-dangle": ["error", "always-multiline"],
     // "space-infix-ops": "error",
@@ -37,7 +37,8 @@
     // "key-spacing": "error",
     // "comma-spacing": ["error", { "before": false, "after": true }],
     // "comma-style": ["error", "last"],
-    "no-unused-vars": ["warn"]
+    "no-unused-vars": ["warn"],
+    "no-useless-escape": ["warn"],
   }
 
 }

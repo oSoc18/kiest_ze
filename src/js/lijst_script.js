@@ -1,7 +1,9 @@
-"use strict";
+﻿"use strict";
 
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
+import { updateQueryStringParam, getParameterByName } from './static_utils.js';
+
 // const datalist_gemeentes = document.getElementById("datalist_gemeentes");
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
 const opties_gemeentes = document.getElementById("opties_gemeentes");
@@ -23,8 +25,8 @@ const model = {
   get inputString() {
     return this._inputString;
   },
-  selectedNis: 230501,
-  selectedPartijRec: null,
+  selectedNis: getParameterByName("selectedNis"),
+  selectedPartijRec: getParameterByName("selectedPartijRec"),
   airTables: {
     Partij: null,
     Politiekers: null,
@@ -55,6 +57,7 @@ function loadJSON(path, success, error) {
 DownloadAirtableCode()
 
 
+// Must be in a separate function to copy the tableName by value
 function TableRequest(tableName) {
   loadJSON(`https://api.airtable.com/v0/app5SoKsYnuOY96ef/${tableName}?api_key=key2Jl1YfS4WWBFa5`,
     function (json) {
@@ -186,7 +189,7 @@ function DisplayKanidaten() {
         <div class="card-body">
         <h3 class="card-title">${politieker.fields.Naam}</h5>
         <p class="card-text">${partij.fields.Partij}</p>
-        <a href="detail.html" class="btn btn-primary">Ontdek ${shortName}</a>
+        <a href="detail.html?persoon=${politieker.id}#${politieker.fields.Naam.replace(/ /g, "_")}" class="btn btn-primary">Ontdek ${shortName}</a>
         </div>
         </article>`
       }
@@ -222,6 +225,9 @@ function UpdateAll() {
   if(model.airTables.Stad == null) return;
   if(model.airTables.Politiekers == null) return;
   if(model.airTables.Partij == null) return;
+
+  updateQueryStringParam("selectedNis", model.selectedNis)
+  updateQueryStringParam("selectedPartijRec", model.selectedPartijRec)
 
   DisplayPartijen()
   DisplayKanidaten()
