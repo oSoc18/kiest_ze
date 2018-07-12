@@ -16,13 +16,18 @@ const PATHS = {
 
 const commonConfig = {
   entry: {
-    "index_script": [
-      path.join(PATHS.src, `js/index_script.js`),
-      path.join(PATHS.src, `detail.html`),
+    "lijst_script": [
+      path.join(PATHS.src, `js/lijst_script.js`),
+      path.join(PATHS.src, `lijst.html`),
       path.join(PATHS.src, `css/style.css`),
     ],
     "detail_script": [
       path.join(PATHS.src, `js/detail_script.js`),
+      path.join(PATHS.src, `detail.html`),
+      path.join(PATHS.src, `css/style.css`),
+    ],
+    "index_script": [
+      path.join(PATHS.src, `js/index_script.js`),
       path.join(PATHS.src, `index.html`),
       path.join(PATHS.src, `css/style.css`),
     ],
@@ -75,6 +80,12 @@ const commonConfig = {
     new webpack.ProvidePlugin({
       Promise: `es6-promise`,
       fetch: `imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch`,
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      chunks: ['lijst_script'],
+      filename: 'lijst.html',
+      template: "./src/lijst.html"
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
