@@ -16,8 +16,8 @@ body {
 }
 
 .form-background {
-  background-color: #3e2749;
-  color: white;
+  background-color: #e9ecef;
+  color: #08293d;
 }
 
 .btn {
@@ -67,5 +67,8 @@ body {
 
 .card-footer {
   background-color: #3e2749;
+}
+
+.card-footer-lijst {
   margin-left: -4rem;
 }
