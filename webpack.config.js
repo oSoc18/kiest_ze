@@ -48,10 +48,10 @@ const commonConfig = {
           },
         ],
       },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
-      },
+      //{
+      //  test: /\.css$/,
+      //  use: [ 'style-loader', 'css-loader' ]
+      //},
       {
         test:/\.html$/,
         loader: `html-loader`,
