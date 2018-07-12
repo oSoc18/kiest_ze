@@ -182,7 +182,7 @@ function DisplayKanidaten() {
         if(politieker.fields.Foto)
           logo = politieker.fields.Foto[0].thumbnails.large.url
         option.innerHTML = `<article class="card mr-4 mt-4" style="width: 17rem;">
-        <img class="card-img-top" src="${logo}" alt="Card image cap">
+        <img class="card-img-top politieker-img" src="${logo}" alt="Card image cap ">
         <div class="card-body">
         <h3 class="card-title">${politieker.fields.Naam}</h5>
         <p class="card-text">${partij.fields.Partij}</p>

@@ -45,3 +45,13 @@ body {
   border: #369ea4 .2rem solid;
   border-radius: .5rem;
 }
+
+.politieker-img {
+  width: 16.9rem;
+  height: 18rem;
+  size: percentage;
+}
+
+.card-title {
+  font-size: 1.4rem;
+}
