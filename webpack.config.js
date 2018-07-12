@@ -16,12 +16,12 @@ const PATHS = {
 
 const commonConfig = {
   entry: [
-    path.join(PATHS.src, `js/script.js`),
+    path.join(PATHS.src, `js/index_script.js`),
     path.join(PATHS.src, `css/style.css`),
   ],
   output: {
     path: PATHS.dist,
-    filename: `js/script.js`,
+    filename: `js/index_script.js`,
   },
   module: {
     rules: [
@@ -57,7 +57,12 @@ const commonConfig = {
       fetch: `imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch`,
     }),
     new HtmlWebpackPlugin({
+      filename: 'index.html',
       template: "./src/index.html"
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detail.html',
+      template: "./src/detail.html"
     })
   ],
 };
