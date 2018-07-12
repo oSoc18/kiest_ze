@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "development": "webpack-dev-server --open",
-    "production": "webpack -p",
+    "development": "NODE_ENV=development webpack-dev-server --open",
+    "production": "npm run clean && npm run copydist && NODE_ENV=production webpack -p",
+    "development-windows": "webpack-dev-server --open",
+    "production-windows": "webpack -p",
     "copydist": "ditto ./src/ ./dist/ && rm -rf ./dist/css && rm -rf ./dist/js",
     "clean": "rm -rf ./dist",
     "serve": "http-server ./dist -p 8080"

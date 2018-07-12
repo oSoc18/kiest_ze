@@ -15,13 +15,21 @@ const PATHS = {
 };
 
 const commonConfig = {
-  entry: [
-    path.join(PATHS.src, `js/index_script.js`),
-    path.join(PATHS.src, `css/style.css`),
-  ],
+  entry: {
+    "index_script": [
+      path.join(PATHS.src, `js/index_script.js`),
+      path.join(PATHS.src, `detail.html`),
+      path.join(PATHS.src, `css/style.css`),
+    ],
+    "detail_script": [
+      path.join(PATHS.src, `js/detail_script.js`),
+      path.join(PATHS.src, `index.html`),
+      path.join(PATHS.src, `css/style.css`),
+    ],
+  },
   output: {
     path: PATHS.dist,
-    filename: `js/index_script.js`,
+    filename: `js/[name].js`,
   },
   module: {
     rules: [
@@ -40,9 +48,17 @@ const commonConfig = {
           },
         ],
       },
+      //{
+      //  test: /\.css$/,
+      //  use: [ 'style-loader', 'css-loader' ]
+      //},
       {
         test:/\.html$/,
-        loader: `html-loader`
+        loader: `html-loader`,
+        options: {
+          minimize: true,
+          inject: 'body',
+        }
       },
       {
         test: /\.(jpe?g|png|svg|woff|woff2|webp|gif)$/,
@@ -62,11 +78,13 @@ const commonConfig = {
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
+      chunks: ['index_script'],
       filename: 'index.html',
       template: "./src/index.html"
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
+      chunks: ['detail_script'],
       filename: 'detail.html',
       template: "./src/detail.html"
     })
