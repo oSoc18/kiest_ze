@@ -2,7 +2,7 @@
 
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
-import { updateQueryStringParam, getParameterByName } from './static_utils.js';
+import { updateQueryStringParam, getParameterByName, loadJSON } from './static_utils.js';
 
 // const datalist_gemeentes = document.getElementById("datalist_gemeentes");
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
@@ -14,10 +14,49 @@ const geen_opties_partijen = document.getElementById("geen_opties_partijen");
 const stad_display = document.getElementById("stad_display");
 
 
+function GetTableUrl(tableName)
+{
+  return `https://api.airtable.com/v0/app5SoKsYnuOY96ef/${tableName}?api_key=key2Jl1YfS4WWBFa5`
+}
+
+const StateEnum = Object.freeze({"init":1, "requesting":2, "succes":3, "fail":4})
+
+class JsonRequest {
+  constructor(url) {
+    this._url = url;
+    this._json = null;
+    this.state = StateEnum.init
+  }
+
+  get json()
+  {
+    if(this.state == StateEnum.init)
+      this.TableRequest();
+    return this._json;
+  }
+
+  TableRequest() {
+    const self = this;
+    loadJSON(this._url,
+      function (json) {
+        self.state = StateEnum.succes;
+
+        self._json = json;
+
+        UpdateAll()
+      },
+      function (evt)
+      {
+        this.state = StateEnum.fail
+        console.warn(evt)
+      });
+  }
+}
+
 const model = {
   _inputString: "",
   set inputString(value) {
-    //if(this._inputString === value) return;
+    if(this._inputString === value) return;
 
     this._inputString = value;
     UpdateAll();
@@ -28,56 +67,16 @@ const model = {
   selectedNis: getParameterByName("selectedNis"),
   selectedPartijRec: getParameterByName("selectedPartijRec"),
   airTables: {
-    Partij: null,
-    Politiekers: null,
-    Organisaties: null,
-    Stad: null
+    Partij: new JsonRequest(GetTableUrl("Partij")),
+    Politiekers: new JsonRequest(GetTableUrl("Politiekers")),
+    Organisaties: new JsonRequest(GetTableUrl("Organisaties")),
+    Stad: new JsonRequest(GetTableUrl("Stad")),
   }
 }
 window["model"] = model;
 
-// https://stackoverflow.com/questions/9838812/how-can-i-open-a-json-file-in-javascript-without-jquery
-function loadJSON(path, success, error) {
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        if (success)
-          success(JSON.parse(xhr.responseText));
-      } else {
-        if (error)
-          error(xhr);
-      }
-    }
-  };
-  xhr.open("GET", path, true);
-  xhr.send();
-}
-
-DownloadAirtableCode()
-
-
-// Must be in a separate function to copy the tableName by value
-function TableRequest(tableName) {
-  loadJSON(`https://api.airtable.com/v0/app5SoKsYnuOY96ef/${tableName}?api_key=key2Jl1YfS4WWBFa5`,
-    function (json) {
-      model.airTables[tableName] = json;
-      UpdateAll()
-    },
-    console.error);
-}
-
-function DownloadAirtableCode() {
-  const tableNames = ["Partij", "Politiekers", "Organisaties", "Stad"];
-
-  for (let i = 0; i < tableNames.length; i++) {
-    TableRequest(tableNames[i]);
-  }
-}
-
-
 function FindStadMetNis(nisCode) {
-  const steden = model.airTables.Stad.records;
+  const steden = model.airTables.Stad.json.records;
 
   for (const property in steden) {
     if (steden.hasOwnProperty(property)) {
@@ -88,7 +87,7 @@ function FindStadMetNis(nisCode) {
 }
 
 function FindPartijWithRecid(Rcis) {
-  const partijen = model.airTables.Partij.records;
+  const partijen = model.airTables.Partij.json.records;
   for (const property in partijen) {
     if (partijen.hasOwnProperty(property)) {
       if (partijen[property].id == Rcis)
@@ -158,7 +157,7 @@ function ContainsAirtableRec(list, rec)
 function DisplayKanidaten() {
   const usedChildren = []
 
-  const lines = model.airTables.Politiekers.records;
+  const lines = model.airTables.Politiekers.json.records;
   const partij = FindPartijWithRecid(model.selectedPartijRec);
 
   for (const property in lines) {
@@ -222,9 +221,9 @@ function UpdateAll() {
   geselecteerde_gemeente.innerText = model.selectedNis;
 
   // Wait while downloading airtables. Maybe show spinner?
-  if(model.airTables.Stad == null) return;
-  if(model.airTables.Politiekers == null) return;
-  if(model.airTables.Partij == null) return;
+  if(model.airTables.Stad.json == null) return;
+  if(model.airTables.Politiekers.json == null) return;
+  if(model.airTables.Partij.json == null) return;
 
   updateQueryStringParam("selectedNis", model.selectedNis)
   updateQueryStringParam("selectedPartijRec", model.selectedPartijRec)
@@ -268,11 +267,11 @@ function GetGemeentes(inputStr) {
 
   inputStr = inputStr.toLowerCase();
 
-//   const dedup_test = []
-//   let depth = 0;
+  //   const dedup_test = []
+  //   let depth = 0;
 
-function Recurse(key, el) {
-  if (results.length > 10) return;
+  function Recurse(key, el) {
+    if (results.length > 10) return;
     // depth++;
     //console.log(depth, el.type, el.naam)
 

@@ -1,4 +1,4 @@
-
+﻿
 const updateQueryStringParam = function (key, value) {
     let baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
         urlQueryString = document.location.search,
@@ -29,4 +29,22 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-export { updateQueryStringParam, getParameterByName};
+// https://stackoverflow.com/questions/9838812/how-can-i-open-a-json-file-in-javascript-without-jquery
+function loadJSON(path, success, error) {
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        if (success)
+          success(JSON.parse(xhr.responseText));
+      } else {
+        if (error)
+          error(xhr);
+      }
+    }
+  };
+  xhr.open("GET", path, true);
+  xhr.send();
+}
+
+export { updateQueryStringParam, getParameterByName, loadJSON};

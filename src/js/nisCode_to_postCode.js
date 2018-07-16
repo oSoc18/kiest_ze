@@ -1,4 +1,4 @@
-const nisCode_to_postCode = {  /* eslint-disable-line */ 
+﻿const nisCode_to_postCode = {
 11001: 2630,
 11002: 2000,
 11004: 2530,
