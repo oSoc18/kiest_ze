@@ -2,7 +2,8 @@
 
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
-import { updateQueryStringParam, getParameterByName, loadJSON } from './static_utils.js';
+import { updateQueryStringParam, getParameterByName } from './static_utils.js';
+import { JsonRequest, GetTableUrl } from './common.js';
 
 // const datalist_gemeentes = document.getElementById("datalist_gemeentes");
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
@@ -14,44 +15,7 @@ const geen_opties_partijen = document.getElementById("geen_opties_partijen");
 const stad_display = document.getElementById("stad_display");
 
 
-function GetTableUrl(tableName)
-{
-  return `https://api.airtable.com/v0/app5SoKsYnuOY96ef/${tableName}?api_key=key2Jl1YfS4WWBFa5`
-}
 
-const StateEnum = Object.freeze({"init":1, "requesting":2, "succes":3, "fail":4})
-
-class JsonRequest {
-  constructor(url) {
-    this._url = url;
-    this._json = null;
-    this.state = StateEnum.init
-  }
-
-  get json()
-  {
-    if(this.state == StateEnum.init)
-      this.TableRequest();
-    return this._json;
-  }
-
-  TableRequest() {
-    const self = this;
-    loadJSON(this._url,
-      function (json) {
-        self.state = StateEnum.succes;
-
-        self._json = json;
-
-        UpdateAll()
-      },
-      function (evt)
-      {
-        this.state = StateEnum.fail
-        console.warn(evt)
-      });
-  }
-}
 
 const model = {
   _inputString: "",
@@ -67,10 +31,10 @@ const model = {
   selectedNis: getParameterByName("selectedNis"),
   selectedPartijRec: getParameterByName("selectedPartijRec"),
   airTables: {
-    Partij: new JsonRequest(GetTableUrl("Partij")),
-    Politiekers: new JsonRequest(GetTableUrl("Politiekers")),
-    Organisaties: new JsonRequest(GetTableUrl("Organisaties")),
-    Stad: new JsonRequest(GetTableUrl("Stad")),
+    Partij: new JsonRequest(GetTableUrl("Partij"), UpdateAll),
+    Politiekers: new JsonRequest(GetTableUrl("Politiekers"), UpdateAll),
+    Organisaties: new JsonRequest(GetTableUrl("Organisaties"), UpdateAll),
+    Stad: new JsonRequest(GetTableUrl("Stad"), UpdateAll),
   }
 }
 window["model"] = model;
@@ -205,7 +169,7 @@ function DisplayKanidaten() {
   }
 }
 
-function GemeenteInputEvent() { 
+function GemeenteInputEvent() {
   model.inputString = input_gemeente.value;
 }
 

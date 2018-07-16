@@ -38,7 +38,7 @@
     // "comma-spacing": ["error", { "before": false, "after": true }],
     // "comma-style": ["error", "last"],
     "no-unused-vars": ["warn"],
-    "no-useless-escape": ["warn"],
+    "no-useless-escape": ["off"],
   }
 
 }

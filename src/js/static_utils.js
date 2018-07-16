@@ -1,9 +1,9 @@
 ﻿
 const updateQueryStringParam = function (key, value) {
-    let baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
-        urlQueryString = document.location.search,
-        newParam = `${key  }=${  value}`,
-        params = `?${  newParam}`;
+    const baseUrl = [location.protocol, '//', location.host, location.pathname].join('')
+    const urlQueryString = document.location.search
+    const newParam = `${key  }=${  value}`
+    let params = `?${  newParam}`
 
     // If the "search" string exists, then build params from it
     if (urlQueryString) {
@@ -22,7 +22,7 @@ const updateQueryStringParam = function (key, value) {
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
-    let regex = new RegExp(`[?&]${  name  }(=([^&#]*)|&|#|$)`),
+    const regex = new RegExp(`[?&]${  name  }(=([^&#]*)|&|#|$)`),
         results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
