@@ -1,6 +1,6 @@
 import csv
 
-incrementing_id_partijen = 1
+incrementing_partijen_id = 1
 
 sql_partijen = """
 
@@ -17,16 +17,24 @@ CREATE TABLE `partijen` (
 INSERT INTO `partijen` (`id`, `jaar`, `lijstnummer`, `lijstnaam`, `nis`) VALUES
 """
 
+nis_to_partijen_id = dict()
 
 with open('gemeente-2012-12-17T21 28 08_Lijstresultaten.csv', newline='', encoding="utf8") as csvfile:
 	spamreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
 	for row in spamreader:
 		Naam = row["lijst"].replace("'", "\\'")
-		NIS = row["NIS"]
-		Lijstnummer = row["Lijstnummer"]
+		NIS = int(row["NIS"])
+		Lijstnummer = int(row["Lijstnummer"])
 
-		sql_partijen += f"({incrementing_id_partijen},	2012,	{Lijstnummer},	'{Naam}',	{NIS}),\n"
-		incrementing_id_partijen+=1
+		sql_partijen += f"({incrementing_partijen_id},	2012,	{Lijstnummer},	'{Naam}',	{NIS}),\n"
+
+		if NIS not in nis_to_partijen_id:
+			nis_to_partijen_id[NIS] = dict() # Lijstnummer_to_partijen_id
+
+		tmp = nis_to_partijen_id[NIS]
+		tmp[Lijstnummer] = incrementing_partijen_id
+
+		incrementing_partijen_id+=1
 
 sql_partijen = sql_partijen[:-2] # remove trailing comma
 sql_partijen += ";\n\n\n\n\n\n\n\n"
@@ -75,10 +83,12 @@ CREATE TABLE `politieker_partijen_link` (
   CONSTRAINT `politieker_partijen_link_ibfk_2` FOREIGN KEY (`politieker_id`) REFERENCES `politiekers` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `kiestze`.`politieker_partijen_link`
+(`partij_id`,`politieker_id`,`volgnummer`,`voorkeurstemmen`,`verkozen`,`verkozen_volgnummer`) VALUES
 """
 
 
-incerementing_id = 1
+incerementing_politieker_id = 1
 #is_first_row = False
 
 with open('gemeente-2012-12-17T21 28 08_Kanidaat_resultaten.csv', newline='', encoding="utf8") as csvfile:
@@ -87,8 +97,22 @@ with open('gemeente-2012-12-17T21 28 08_Kanidaat_resultaten.csv', newline='', en
 		Naam = row["Naam"].replace("'", "\\'")
 		Geboorte = 2012 - int(row["Leeftijd"])
 		Geslacht = row["Geslacht"]
-		sql_politiekers += f"({incerementing_id},	0,	'{Naam}',	'{Geboorte}-01-01',	'{Geslacht}'),\n"
-		incerementing_id+=1
+		sql_politiekers += f"({incerementing_politieker_id},	0,	'{Naam}',	'{Geboorte}-01-01',	'{Geslacht}'),\n"
+
+		NIS = int(row["NIS"])
+		Lijstnummer = int(row["Lijstnummer"])
+		Volgnummer = int(row["Volgnummer"])
+		Voorkeurstemmen = int(row["Voorkeurstemmen"])
+		Verkozen = int(row["Verkozen"])
+		verkozen_volgnummer = int(row["Verkozen volgnummer"])
+
+		Lijstnummer_to_partijen_id = nis_to_partijen_id.get(NIS)
+		partij_id = Lijstnummer_to_partijen_id.get(Lijstnummer)
+
+		sql_partijen_politiekers_link += f"({partij_id},{incerementing_politieker_id},{Volgnummer},{Voorkeurstemmen},{Verkozen},{verkozen_volgnummer}),\n"
+
+
+		incerementing_politieker_id+=1
 
 sql_politiekers = sql_politiekers[:-2] # remove trailing comma
 sql_politiekers += ";\n\n\n\n\n\n\n\n"
