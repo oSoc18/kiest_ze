@@ -1,11 +1,8 @@
 import csv
 
-sql_string = """-- Adminer 4.6.3 MySQL dump
+incrementing_id_partijen = 1
 
-SET NAMES utf8;
-SET time_zone = '+00:00';
-SET foreign_key_checks = 0;
-SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+sql_partijen = """
 
 DROP TABLE IF EXISTS `partijen`;
 CREATE TABLE `partijen` (
@@ -17,26 +14,103 @@ CREATE TABLE `partijen` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `partijen` (`id`, `jaar`, `lijstnummer`, `lijstnaam`, `nis`) VALUES"""
+INSERT INTO `partijen` (`id`, `jaar`, `lijstnummer`, `lijstnaam`, `nis`) VALUES
+"""
+
+
+with open('gemeente-2012-12-17T21 28 08_Lijstresultaten.csv', newline='', encoding="utf8") as csvfile:
+	spamreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+	for row in spamreader:
+		Naam = row["lijst"].replace("'", "\\'")
+		NIS = row["NIS"]
+		Lijstnummer = row["Lijstnummer"]
+
+		sql_partijen += f"({incrementing_id_partijen},	2012,	{Lijstnummer},	'{Naam}',	{NIS}),\n"
+		incrementing_id_partijen+=1
+
+sql_partijen = sql_partijen[:-2] # remove trailing comma
+sql_partijen += ";\n\n\n\n\n\n\n\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+sql_politiekers = """
+
+DROP TABLE IF EXISTS `partijen`;
+CREATE TABLE `partijen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `jaar` int(4) NOT NULL,
+  `lijstnummer` int(11) NOT NULL,
+  `lijstnaam` varchar(100) NOT NULL,
+  `nis` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `partijen` (`id`, `jaar`, `lijstnummer`, `lijstnaam`, `nis`) VALUES
+
+"""
+
+sql_partijen_politiekers_link = """
+
+DROP TABLE IF EXISTS `politieker_partijen_link`;
+CREATE TABLE `politieker_partijen_link` (
+  `partij_id` int(11) NOT NULL,
+  `politieker_id` int(11) NOT NULL,
+  `volgnummer` int(11) NOT NULL,
+  `voorkeurstemmen` int(11) NOT NULL,
+  `verkozen` tinyint(1) NOT NULL,
+  `verkozen_volgnummer` int(11) NOT NULL,
+  KEY `partij_id` (`partij_id`),
+  KEY `politieker_id` (`politieker_id`),
+  CONSTRAINT `politieker_partijen_link_ibfk_1` FOREIGN KEY (`partij_id`) REFERENCES `partijen` (`id`),
+  CONSTRAINT `politieker_partijen_link_ibfk_2` FOREIGN KEY (`politieker_id`) REFERENCES `politiekers` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+"""
+
 
 incerementing_id = 1
 #is_first_row = False
 
-with open('gemeente-2012-12-17T21 28 08.csv', newline='', encoding="utf8") as csvfile:
+with open('gemeente-2012-12-17T21 28 08_Kanidaat_resultaten.csv', newline='', encoding="utf8") as csvfile:
 	spamreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
 	for row in spamreader:
 		Naam = row["Naam"].replace("'", "\\'")
 		Geboorte = 2012 - int(row["Leeftijd"])
 		Geslacht = row["Geslacht"]
-		sql_string += f"({incerementing_id},	0,	'{Naam}',	'{Geboorte}-01-01',	'{Geslacht}'),\n"
+		sql_politiekers += f"({incerementing_id},	0,	'{Naam}',	'{Geboorte}-01-01',	'{Geslacht}'),\n"
 		incerementing_id+=1
-		#print(', '.join(row))
 
+sql_politiekers = sql_politiekers[:-2] # remove trailing comma
+sql_politiekers += ";\n\n\n\n\n\n\n\n"
+sql_partijen_politiekers_link = sql_partijen_politiekers_link[:-2] # remove trailing comma
+sql_partijen_politiekers_link += ";\n\n\n\n\n\n\n\n"
 
-sql_string += ";"
+#print(sql_partijen_politiekers_link)
 
-print(sql_string)
+sql_common = """
 
+USE kiestze
 
-f= open("sql_politiekers.sql","wb")
-f.write(sql_string.encode("UTF-8"))
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+-- otherwise we get ERROR 2006 (HY000) at line 18: MySQL server has gone away
+SET global max_allowed_packet=64*1024*1024;
+
+"""
+
+monster_query = sql_common + sql_partijen + sql_politiekers + sql_partijen_politiekers_link
+
+f = open("sql_politiekers.sql","wb")
+f.write(monster_query.encode("UTF-8"))
