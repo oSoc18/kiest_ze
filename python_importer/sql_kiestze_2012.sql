@@ -1689,17 +1689,17 @@ INSERT INTO `partijen` (`id`, `jaar`, `lijstnummer`, `lijstnaam`, `nis`) VALUES
 
 
 
-DROP TABLE IF EXISTS `partijen`;
-CREATE TABLE `partijen` (
+DROP TABLE IF EXISTS `politiekers`;
+CREATE TABLE `politiekers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `jaar` int(4) NOT NULL,
-  `lijstnummer` int(11) NOT NULL,
-  `lijstnaam` varchar(100) NOT NULL,
-  `nis` int(11) NOT NULL,
+  `otb_id` int(11) DEFAULT NULL,
+  `naam` varchar(50) NOT NULL,
+  `geboorte` date DEFAULT NULL,
+  `geslacht` char(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `partijen` (`id`, `jaar`, `lijstnummer`, `lijstnaam`, `nis`) VALUES
+INSERT INTO `politiekers` (`id`, `otb_id`, `naam`, `geboorte`, `geslacht`) VALUES
 
 (1,	0,	'GEES Lien',	'1987-01-01',	'F'),
 (2,	0,	'VAN VAERENBERGH Silke',	'1987-01-01',	'F'),

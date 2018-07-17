@@ -53,17 +53,17 @@ sql_partijen += ";\n\n\n\n\n\n\n\n"
 
 sql_politiekers = """
 
-DROP TABLE IF EXISTS `partijen`;
-CREATE TABLE `partijen` (
+DROP TABLE IF EXISTS `politiekers`;
+CREATE TABLE `politiekers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `jaar` int(4) NOT NULL,
-  `lijstnummer` int(11) NOT NULL,
-  `lijstnaam` varchar(100) NOT NULL,
-  `nis` int(11) NOT NULL,
+  `otb_id` int(11) DEFAULT NULL,
+  `naam` varchar(50) NOT NULL,
+  `geboorte` date DEFAULT NULL,
+  `geslacht` char(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `partijen` (`id`, `jaar`, `lijstnummer`, `lijstnaam`, `nis`) VALUES
+INSERT INTO `politiekers` (`id`, `otb_id`, `naam`, `geboorte`, `geslacht`) VALUES
 
 """
 
@@ -136,5 +136,5 @@ SET global max_allowed_packet=64*1024*1024;
 
 monster_query = sql_common + sql_partijen + sql_politiekers + sql_partijen_politiekers_link
 
-f = open("sql_politiekers.sql","wb")
+f = open("sql_kiestze_2012.sql","wb")
 f.write(monster_query.encode("UTF-8"))
