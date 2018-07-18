@@ -17,19 +17,19 @@ const PATHS = {
 const commonConfig = {
   entry: {
     "lijst_script": [
-      path.join(PATHS.src, `js/lijst_script.js`),
+      path.join(PATHS.src, `static/js/lijst_script.js`),
       path.join(PATHS.src, `lijst.html`),
-      path.join(PATHS.src, `css/style.css`),
+      path.join(PATHS.src, `static/css/style.css`),
     ],
     "detail_script": [
-      path.join(PATHS.src, `js/detail_script.js`),
+      path.join(PATHS.src, `static/js/detail_script.js`),
       path.join(PATHS.src, `detail.html`),
-      path.join(PATHS.src, `css/style.css`),
+      path.join(PATHS.src, `static/css/style.css`),
     ],
     "index_script": [
-      path.join(PATHS.src, `js/index_script.js`),
+      path.join(PATHS.src, `static/js/index_script.js`),
       path.join(PATHS.src, `index.html`),
-      path.join(PATHS.src, `css/style.css`),
+      path.join(PATHS.src, `static/css/style.css`),
     ],
   },
   output: {
