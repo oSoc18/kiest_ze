@@ -1,15 +1,46 @@
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Kiest Ze</title>
-</head>
-<body>
-	<h1>Kiest Ze</h1>
-
-	{% for naam in text %}
-	<h3>{{naam}}</h3>
-	{% endfor %}
-</body>
+<!DOCTYPE html> 
+<html lang=nl>
+	<head>
+		<meta charset=UTF-8>
+		<meta name=viewport content="width=device-width,initial-scale=1">
+		<title>KiestZe</title>
+		<link rel=stylesheet href={% static 'css/bootstrap.min.css' %}>
+		<link rel=stylesheet href={% static 'css/style.css' %}>
+	</head>
+	<body>
+		<header>
+			<div class=card-header>
+				<ul class="nav nav-pills card-header-pills d-flex justify-content-between">
+					<li class=nav-item><a class="nav-link mr-3" href=lijst.html>De lijst</a></li>
+					<div class="d-flex flex-row justify-content-between">
+						<li class=nav-item><a class=mr-3 href=#><img src={% static 'assets/img/facebook-boven.png' %} alt=facebook width=35 height=35></a></li>
+						<li class=nav-item><a class=mr-3 href=#><img src={% static 'assets/img/twitter-boven.png' %} alt=twitter width=35 height=35></a></li>
+						<li class=nav-item><a class=mr-3 href=#><img src={% static 'assets/img/mail.svg' %} alt=mail width=35 height=35></a></li>
+					</div>
+				</ul>
+			</div>
+		</header>
+		<main style=background-color:#e9ecef;height:32rem>
+			<div class="jumbotron d-flex flex-column justify-content-around align-items-center">
+				<h1 class="display-4 mb-5">Kiest ze!</h1>
+				<p class="lead w-50 text-center">Kiest ze! is een platform waarop kiezers die voor het eerst gaan stemmen op een interactieve manier meer te weten kunnen komen over de partijen en kandidaten in hun gemeente. Op een overzichtelijke manier wordt duidelijk gesteld welke partijen zich in jouw bangelijk bestuur bevinden alsook de kandidaten op de lijst.</p>
+				<div class="d-flex flex-row align-items-center">
+					<div class="form-group jumbotron"> <input type=text class="form-control w-100" id=search aria-describedby=searchfield placeholder="Wat is jouw gemeente?" name=input_gemeente autocomplete=off> </div>
+					<a href=lijst.html class="btn btn-primary ml-4 h-25 mb-4">Zoeken</a> 
+				</div>
+			</div>
+		</main>
+		<footer class=card-footer>
+			<p style=color:#fff class=lead>Dit project wordt ondersteund door:</p>
+			<ul style=list-style:none class="d-flex flex-row justify-content-around w-50 card-footer-lijst">
+				<li class=nav-item><a class=mr-3 href=#><img src={% static 'assets/img/logo-osoc-color.svg' %} alt=facebook></a></li>
+				<li class=nav-item><a class=mr-3 href=#><img src={% static 'assets/img/okbe-logo.svg' %} alt=twitter></a></li>
+				<li class=nav-item><a class=mr-3 href=#><img src={% static 'assets/img/openthebox-logo.svg' %} alt=mail></a></li>
+				<li class=nav-item><a class=mr-3 href=#><img src={% static 'assets/img/vlaanderen-logo.svg' %} alt=mail></a></li>
+			</ul>
+		</footer>
+		<script type="text/javascript" src="{% static 'js/index_script.js' %}"></script>
+	</body>
 </html>
