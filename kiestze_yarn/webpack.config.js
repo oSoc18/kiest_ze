@@ -1,7 +1,9 @@
+﻿const fs = require(`fs`);
 const path = require(`path`);
 const merge = require(`webpack-merge`);
 const parts = require(`./webpack.parts`);
 const webpack = require(`webpack`);
+const request = require('request');
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ImageminPlugin = require('imagemin-webpack-plugin').default
@@ -34,7 +36,7 @@ const commonConfig = {
   },
   output: {
     path: PATHS.dist,
-    filename: `js/[name].js`,
+    filename: `static/js/[name].js`,
   },
   module: {
     rules: [
@@ -61,7 +63,7 @@ const commonConfig = {
         test:/\.html$/,
         loader: `html-loader`,
         options: {
-          minimize: true,
+          //minimize: true,
           inject: 'body',
         }
       },
@@ -127,6 +129,14 @@ const developmentConfig = merge([
     devServer: {
       overlay: true,
       contentBase: PATHS.src,
+      before: function(app) {
+        //app.get('/detail', function(req, res){fs.createReadStream('src/detail.html').pipe(res);});
+        //app.get('/index', function(req, res){fs.createReadStream('src/index.html').pipe(res);});
+        //app.get('/lijst', function(req, res){fs.createReadStream('src/lijst.html').pipe(res);});
+        app.get('/detail', function(req, res){request('http://localhost:8080/detail.html').pipe(res).pipe(res);});
+        app.get('/index', function(req, res){request('http://localhost:8080/index.html').pipe(res);});
+        app.get('/lijst', function(req, res){request('http://localhost:8080/lijst.html').pipe(res);});
+      }
     },
   },
   parts.loadCSS(),

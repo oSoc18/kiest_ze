@@ -152,7 +152,7 @@ function DisplayKanidaten() {
         <div class="card-body">
         <h3 class="card-title">${politieker.fields.Naam}</h5>
         <p class="card-text">${partij.fields.Partij}</p>
-        <a href="detail.html?persoon=${politieker.id}#${politieker.fields.Naam.replace(/ /g, "_")}" class="btn btn-primary">Ontdek ${shortName}</a>
+        <a href="detail?persoon=${politieker.id}#${politieker.fields.Naam.replace(/ /g, "_")}" class="btn btn-primary">Ontdek ${shortName}</a>
         </div>
         </article>`
       }
