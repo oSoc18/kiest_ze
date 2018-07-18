@@ -8,8 +8,8 @@ def index(request):
 
 	politiekers = Politieker.objects.filter(naam__search='Tommy')
 	for x in politiekers:
-		link = Politieker_partij_link.objects.get(politieker_id_id=x.id)
-		partij_id = link.partij_id_id
+		link = Politieker_partij_link.objects.get(politieker_id=x.id)
+		partij_id = link.partij_id
 		partij = Partij.objects.get(id=partij_id)
 		partijnaam = partij.lijstnaam
 

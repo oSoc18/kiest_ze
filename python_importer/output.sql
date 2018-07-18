@@ -38330,7 +38330,7 @@ INSERT INTO kiestze_politieker (id, otb_id, naam, geboorte, geslacht) VALUES
 
 
 
-INSERT INTO kiestze_politieker_partij_link (partij_id_id, politieker_id_id, volgnummer, voorkeurstemmen, verkozen, verkozen_volgnummer) VALUES
+INSERT INTO kiestze_politieker_partij_link (partij_id, politieker_id, volgnummer, voorkeurstemmen, verkozen, verkozen_volgnummer) VALUES
 (6,1,6,635,False,1),
 (6,2,7,715,False,2),
 (6,3,9,439,False,13),

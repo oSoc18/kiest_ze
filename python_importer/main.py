@@ -34,7 +34,7 @@ sql_common = """
 
 sql_partijen = "INSERT INTO %s (id, jaar, lijstnummer, lijstnaam, nis) VALUES\n" % partijen_tablename
 sql_politiekers = "INSERT INTO %s (id, otb_id, naam, geboorte, geslacht) VALUES\n" % politiekers_tablename
-sql_partijen_politiekers_link = "INSERT INTO %s (partij_id_id, politieker_id_id, volgnummer, voorkeurstemmen, verkozen, verkozen_volgnummer) VALUES\n" % politieker_partijen_link_tablename
+sql_partijen_politiekers_link = "INSERT INTO %s (partij_id, politieker_id, volgnummer, voorkeurstemmen, verkozen, verkozen_volgnummer) VALUES\n" % politieker_partijen_link_tablename
 
 
 

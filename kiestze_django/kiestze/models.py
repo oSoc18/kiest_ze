@@ -23,8 +23,8 @@ class Politieker(models.Model):
 		verbose_name_plural = 'Politieker'
 
 class Politieker_partij_link(models.Model):
-	partij_id = models.ForeignKey(Partij, on_delete=models.CASCADE)
-	politieker_id = models.ForeignKey(Politieker, on_delete=models.CASCADE)
+	partij = models.ForeignKey(Partij, on_delete=models.CASCADE)
+	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
 	volgnummer = models.IntegerField()
 	voorkeurstemmen = models.IntegerField()
 	verkozen = models.BooleanField()
