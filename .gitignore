@@ -4,3 +4,5 @@ password.txt
 dist/
 *.orig
 .~*
+__pycache__/
+secret.py
