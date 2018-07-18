@@ -8,7 +8,12 @@ def index(request):
 
 	politiekers = Politieker.objects.filter(naam__search='Tommy')
 	for x in politiekers:
-		text = "%s [%i]" %(x.naam, x.id)
+		link = Politieker_partij_link.objects.get(politieker_id_id=x.id)
+		partij_id = link.partij_id_id
+		partij = Partij.objects.get(id=partij_id)
+		partijnaam = partij.lijstnaam
+
+		text = "%s [%i] (%i: %s)" %(x.naam, x.id, partij_id, partijnaam)
 		context['text'].append(text)
 
 	return render(request, 'index.html', context)
