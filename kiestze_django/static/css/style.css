@@ -1,0 +1,112 @@
+body {
+  color: black;
+}
+
+.card-header {
+  background-color: #3e2749;
+}
+
+.nav-link {
+  background-color: white;
+  color: black;
+}
+
+.display-4 {
+  font-size: 2rem;
+}
+
+.form-background {
+  background-color: #e9ecef;
+  color: #08293d;
+}
+
+.btn {
+  background-color: #369ea4;
+  border: #369ea4;
+}
+
+.btn:hover {
+  background-color: #369ea4;
+}
+
+.detail-image {
+  -webkit-clip-path: circle(50% at 50% 50%); /* stylelint-disable-line*/
+  clip-path: circle(50% at 50% 50%);
+  margin-top: -2rem;
+}
+
+.button-terug {
+  margin-left: 3rem;
+  margin-top: 2rem;
+}
+
+.emoji-size {
+  font-size: 3rem;
+}
+
+.tweet {
+  height: 2.5rem;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: black;
+  border: #369ea4 .2rem solid;
+  border-radius: .5rem;
+}
+
+.politieker-img {
+  width: 16.9rem;
+  height: 18rem;
+  size: percentage;
+}
+
+.card-title {
+  font-size: 1.4rem;
+}
+
+.card-footer {
+  background-color: #3e2749;
+}
+
+.card-footer-lijst {
+  margin-left: -4rem;
+}
+
+.linken {
+  text-decoration: none;
+  color: black;
+}
+
+.linken:hover {
+  text-decoration: none;
+}
+
+.popover__content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  transform: translate(0,10px);
+  background-color: white;
+  padding: .5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  width: 15rem;
+  color: black;
+}
+
+.popover__wrapper:hover .popover__content {
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0,-7px);
+  transition: all .5s cubic-bezier(.75, -.02, .2, .97);
+  text-decoration: none;
+}
+
+.popover__message {
+  text-align: center;
+}
+
+.div-load {
+  height: 3rem;
+}

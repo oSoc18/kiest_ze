@@ -21,4 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', views.index),
+    path('lijst', views.lijst),
+    path('detail', views.detail),
+
+    path('query', views.demoquery)
 ]
