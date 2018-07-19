@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
-
+from django.core import serializers
+import json
+import jsonpickle
+import os
+import subprocess
+from subprocess import check_output
 
 def index(request):
 	context = {}
@@ -30,3 +35,23 @@ def demoquery(request):
 		context['text'].append(text)
 
 	return render(request, 'query.html', context)
+
+class Object:
+	def toJSON(self):
+		return json.dumps(self, default=lambda o: o.__dict__,
+			sort_keys=True, indent=4)
+
+def get_politieker_data(request):
+	politiekers = Politieker.objects.get(id=1558)
+	data = jsonpickle.encode(politiekers)
+	#data = politiekers.toJSON() #serializers.serialize('json', politiekers)
+	return HttpResponse(data, content_type='application/json')
+
+
+def git_pull(request):
+	#p = subprocess.Popen(["git", "pull"]) #, cwd=path)
+	#p.wait()
+	#data = p.stdout
+
+	data = check_output(["git", "pull"])
+	return HttpResponse(data, content_type='application/json')

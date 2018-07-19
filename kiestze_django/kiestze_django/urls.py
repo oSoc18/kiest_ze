@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from kiestze import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +25,11 @@ urlpatterns = [
     path('lijst', views.lijst),
     path('detail', views.detail),
 
-    path('query', views.demoquery)
+    path('query', views.demoquery),
+    path('get_politieker_data', views.get_politieker_data),
+    path('git_pull', views.git_pull),
 ]
+
+#url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root':"path/to/your/static/folder"}),
+#add this to urlpatterns variable
+#urlpatterns += staticfiles_urlpatterns()
