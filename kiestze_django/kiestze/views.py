@@ -3,10 +3,11 @@ from django.http import HttpResponse
 from .models import *
 from django.core import serializers
 import json
-import jsonpickle
+#import jsonpickle
 import os
 import subprocess
 from subprocess import check_output
+#import simplejson as json
 
 def index(request):
 	context = {}
@@ -36,15 +37,18 @@ def demoquery(request):
 
 	return render(request, 'query.html', context)
 
-class Object:
-	def toJSON(self):
-		return json.dumps(self, default=lambda o: o.__dict__,
-			sort_keys=True, indent=4)
+def serialise_get_object(get_object):
+	data = serializers.serialize('json', [get_object, ])
+	struct = json.loads(data)
+	data = json.dumps(struct[0])
+	return data;
 
 def get_politieker_data(request):
-	politiekers = Politieker.objects.get(id=1558)
-	data = jsonpickle.encode(politiekers)
-	#data = politiekers.toJSON() #serializers.serialize('json', politiekers)
+	politieker_id = request.GET.get('id')
+	politieker_id = int(politieker_id )
+	politiekers = Politieker.objects.get(id=politieker_id )
+
+	data = serialise_get_object(politiekers)
 	return HttpResponse(data, content_type='application/json')
 
 
@@ -54,4 +58,4 @@ def git_pull(request):
 	#data = p.stdout
 
 	data = check_output(["git", "pull"])
-	return HttpResponse(data, content_type='application/json')
+	return HttpResponse(data, content_type='text/plain')
