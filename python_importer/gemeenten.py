@@ -3,7 +3,7 @@ import csv
 
 tablename = 'kiestze_gemeente'
 incrementing_id = 1
-sql  = "INSERT INTO %s (gemeente, postcode, nis) VALUES\n" % tablename
+sql  = "INSERT INTO %s (naam, postcode, nis) VALUES\n" % tablename
 
 
 with open('gemeenten-data.csv', newline='', encoding="utf8") as csvfile:
@@ -13,7 +13,7 @@ with open('gemeenten-data.csv', newline='', encoding="utf8") as csvfile:
 		postcode = row['Postcode']
 		nis = row['NIS']
 
-		sql += "(\"%s\", %s, %s),\n" %(naam, postcode, nis)
+		sql += "('%s', %s, %s),\n" %(naam, postcode, nis)
 
 		incrementing_id += 1
 
