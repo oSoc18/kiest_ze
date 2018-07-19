@@ -49,6 +49,31 @@ def get_politieker_data(request):
 	return HttpResponse(data, content_type='application/json')
 
 
+def get_all_partij(request):
+	got_all = Partij.objects.filter()
+	data = serializers.serialize('json', got_all)
+	return HttpResponse(data, content_type='application/json')
+
+
+def get_politieker(request):
+	got_all = Politieker.objects.filter()
+	data = serializers.serialize('json', got_all)
+	return HttpResponse(data, content_type='application/json')
+
+
+def get_all_politieker_partij_link_van_gemeente(request):
+
+	gemeente_nis = request.GET.get('gemeente_nis')
+	gemeente_nis = int(gemeente_nis)
+
+	jaar = request.GET.get('jaar')
+	jaar = int(jaar)
+
+	got_all = Politieker_partij_link.objects.filter(partij__nis=gemeente_nis, partij__jaar=jaar)
+	data = serializers.serialize('json', got_all)
+	return HttpResponse(data, content_type='application/json')
+
+
 def git_pull(request):
 	#p = subprocess.Popen(["git", "pull"]) #, cwd=path)
 	#p.wait()

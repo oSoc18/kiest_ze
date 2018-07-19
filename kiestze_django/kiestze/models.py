@@ -50,13 +50,13 @@ class Politieker_partij_link(models.Model):
 		verbose_name_plural = 'Politieker_partij_link'
 
 
-class Aanpassing:
-	guid = models.CharField(max_length=36, primary_key=True) # uuid.uuid4()
-	politieker_id = models.ForeignKey(Politieker, on_delete=models.CASCADE)
-	veld = models.CharField(max_length=50)
-	value = models.CharField(max_length=300)
-	accepted_date = models.DateField()
+class User_edits(models.Model):
+	guid = models.CharField(max_length=36, primary_key=True)  # uuid.uuid4()
+	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
+	column_name = models.CharField(max_length=100)
+	accepted_date = models.DateField(null=True, blank=True)
+	suggested_value = models.CharField(max_length=300)
 
 	class Meta:
-		verbose_name = 'Aanpassing'
-		verbose_name_plural = 'Aanpassing'
+		verbose_name = 'User_edits'
+		verbose_name_plural = 'User_edits'

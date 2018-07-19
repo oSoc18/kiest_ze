@@ -28,6 +28,9 @@ urlpatterns = [
     path('query', views.demoquery),
     path('get_politieker_data', views.get_politieker_data),
     path('git_pull', views.git_pull),
+    path('get_all_partij', views.get_all_partij),
+    #path('get_all_politieker', views.get_all_politieker),
+    path('get_all_politieker_partij_link_van_gemeente', views.get_all_politieker_partij_link_van_gemeente),
 ]
 
 #url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root':"path/to/your/static/folder"}),
