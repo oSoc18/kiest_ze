@@ -3,7 +3,7 @@ from .models import *
 
 
 class GemeenteAdmin(admin.ModelAdmin):
-	list_display = ('id', 'naam', 'nis')
+	list_display = ('nis', 'naam')
 
 class PolitiekerAdmin(admin.ModelAdmin):
 	list_display = ('id', 'otb_id', 'naam', 'geslacht')

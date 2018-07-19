@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
 
+
 class Gemeente(models.Model):
 	naam = models.CharField(max_length=100)
-	nis = models.IntegerField()
+	nis = models.IntegerField(primary_key=True)
 	begindatum = models.DateField(default=timezone.now)
 	einddatum = models.DateField(default=timezone.now)
 
@@ -17,7 +18,7 @@ class Partij(models.Model):
 	jaar = models.IntegerField()
 	lijstnummer = models.IntegerField()
 	lijstnaam = models.CharField(max_length=100)
-	nis = models.IntegerField()
+	nis = models.ForeignKey(Gemeente, on_delete=models.CASCADE)
 
 	class Meta:
 		verbose_name = 'Partij'
@@ -47,3 +48,15 @@ class Politieker_partij_link(models.Model):
 	class Meta:
 		verbose_name = 'Politieker_partij_link'
 		verbose_name_plural = 'Politieker_partij_link'
+
+
+class Aanpassing:
+	guid = models.CharField(max_length=36, primary_key=True) # uuid.uuid4()
+	politieker_id = models.ForeignKey(Politieker, on_delete=models.CASCADE)
+	veld = models.CharField(max_length=50)
+	value = models.CharField(max_length=300)
+	accepted_date = models.DateField()
+
+	class Meta:
+		verbose_name = 'Aanpassing'
+		verbose_name_plural = 'Aanpassing'

@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
+import uuid #https://github.com/skorokithakis/shortuuid
 from django.core import serializers
 import json
-#import jsonpickle
-import os
-import subprocess
 from subprocess import check_output
-#import simplejson as json
 
 def index(request):
 	context = {}
