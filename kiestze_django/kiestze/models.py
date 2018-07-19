@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Partij(models.Model):
 	id = models.IntegerField(primary_key=True)
 	jaar = models.IntegerField()
@@ -10,6 +11,7 @@ class Partij(models.Model):
 	class Meta:
 		verbose_name = 'Partij'
 		verbose_name_plural = 'Partij'
+
 
 class Politieker(models.Model):
 	id = models.IntegerField(primary_key=True)
@@ -22,6 +24,7 @@ class Politieker(models.Model):
 		verbose_name = 'Politieker'
 		verbose_name_plural = 'Politieker'
 
+
 class Politieker_partij_link(models.Model):
 	partij = models.ForeignKey(Partij, on_delete=models.CASCADE)
 	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
@@ -33,3 +36,13 @@ class Politieker_partij_link(models.Model):
 	class Meta:
 		verbose_name = 'Politieker_partij_link'
 		verbose_name_plural = 'Politieker_partij_link'
+
+
+class Gemeente(models.Model):
+	naam = models.CharField(max_length=100)
+	postcode = models.IntegerField()
+	nis = models.IntegerField()
+
+	class Meta:
+		verbose_name = 'Gemeente'
+		verbose_name_plural = 'Gemeente'
