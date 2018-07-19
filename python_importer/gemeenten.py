@@ -13,7 +13,7 @@ with open('gemeenten-data.csv', newline='', encoding="utf8") as csvfile:
 		postcode = row['Postcode']
 		nis = row['NIS']
 
-		sql += "(%s, %s, %s),\n" %(naam, postcode, nis)
+		sql += "(\"%s\", %s, %s),\n" %(naam, postcode, nis)
 
 		incrementing_id += 1
 
