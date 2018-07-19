@@ -33,3 +33,14 @@ class Politieker_partij_link(models.Model):
 	class Meta:
 		verbose_name = 'Politieker_partij_link'
 		verbose_name_plural = 'Politieker_partij_link'
+
+class User_edits(models.Model):
+	id = models.IntegerField(primary_key=True)
+	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
+	column_naam = models.CharField(max_length=100)
+	accepted_date = models.DateField(null=True, blank=True)
+	suggested_value = models.CharField(max_length=200)
+
+	class Meta:
+		verbose_name = 'User_edits'
+		verbose_name_plural = 'User_edits'
