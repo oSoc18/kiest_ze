@@ -1,4 +1,15 @@
 from django.db import models
+from django.utils import timezone
+
+class Gemeente(models.Model):
+	naam = models.CharField(max_length=100)
+	nis = models.IntegerField()
+	begindatum = models.DateField(default=timezone.now)
+	einddatum = models.DateField(default=timezone.now)
+
+	class Meta:
+		verbose_name = 'Gemeente'
+		verbose_name_plural = 'Gemeente'
 
 
 class Partij(models.Model):
@@ -36,13 +47,3 @@ class Politieker_partij_link(models.Model):
 	class Meta:
 		verbose_name = 'Politieker_partij_link'
 		verbose_name_plural = 'Politieker_partij_link'
-
-
-class Gemeente(models.Model):
-	naam = models.CharField(max_length=100)
-	postcode = models.IntegerField()
-	nis = models.IntegerField()
-
-	class Meta:
-		verbose_name = 'Gemeente'
-		verbose_name_plural = 'Gemeente'

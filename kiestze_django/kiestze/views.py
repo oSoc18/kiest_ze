@@ -41,7 +41,7 @@ def serialise_get_object(get_object):
 	data = serializers.serialize('json', [get_object, ])
 	struct = json.loads(data)
 	data = json.dumps(struct[0])
-	return data;
+	return data
 
 def get_politieker_data(request):
 	politieker_id = request.GET.get('id')
