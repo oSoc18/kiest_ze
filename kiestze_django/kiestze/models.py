@@ -51,7 +51,7 @@ class Politieker_partij_link(models.Model):
 		verbose_name_plural = 'Politieker_partij_link'
 
 
-class User_edits(models.Model):
+class User_edit(models.Model):
 	guid = models.CharField(max_length=36, primary_key=True)  # uuid.uuid4()
 	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
 	column_name = models.CharField(max_length=100)
@@ -59,12 +59,12 @@ class User_edits(models.Model):
 	suggested_value = models.CharField(max_length=300)
 
 	class Meta:
-		verbose_name = 'User_edits'
-		verbose_name_plural = 'User_edits'
+		verbose_name = 'User_edit'
+		verbose_name_plural = 'User_edit'
 
 
 class Approver(models.Model):
 	id = models.IntegerField(primary_key=True)
-	aanpassing = models.ForeignKey(User_edits, on_delete=models.CASCADE)
+	aanpassing = models.ForeignKey(User_edit, on_delete=models.CASCADE)
 	user_id = models.ForeignKey(SocialAccount, on_delete=models.CASCADE)
 	date = models.DateField(default=timezone.now)
