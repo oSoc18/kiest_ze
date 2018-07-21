@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from allauth.socialaccount.models import SocialAccount
 
 
 class Gemeente(models.Model):
@@ -60,3 +61,10 @@ class User_edits(models.Model):
 	class Meta:
 		verbose_name = 'User_edits'
 		verbose_name_plural = 'User_edits'
+
+
+class Approver(models.Model):
+	id = models.IntegerField(primary_key=True)
+	aanpassing = models.ForeignKey(User_edits, on_delete=models.CASCADE)
+	user_id = models.ForeignKey(SocialAccount, on_delete=models.CASCADE)
+	date = models.DateField(default=timezone.now)

@@ -1,4 +1,6 @@
-<!DOCTYPE html> 
+{% load socialaccount %}
+
+<!DOCTYPE html>
 <html lang=nl>
 	<head>
 		<meta charset=UTF-8>
@@ -26,8 +28,9 @@
 				<p class="lead w-50 text-center">Kiest ze! is een platform waarop kiezers die voor het eerst gaan stemmen op een interactieve manier meer te weten kunnen komen over de partijen en kandidaten in hun gemeente. Op een overzichtelijke manier wordt duidelijk gesteld welke partijen zich in jouw bangelijk bestuur bevinden alsook de kandidaten op de lijst.</p>
 				<div class="d-flex flex-row align-items-center">
 					<div class="form-group jumbotron"> <input type=text class="form-control w-100" id=search aria-describedby=searchfield placeholder="Wat is jouw gemeente?" name=input_gemeente autocomplete=off> </div>
-					<a href="/lijst" class="btn btn-primary ml-4 h-25 mb-4">Zoeken</a> 
+					<a href="/lijst" class="btn btn-primary ml-4 h-25 mb-4">Zoeken</a>
 				</div>
+				<a href="{% provider_login_url "facebook" method="oauth2" %}">FACEBOOK LOGIN YO</a>
 			</div>
 		</main>
 		<footer class=card-footer>

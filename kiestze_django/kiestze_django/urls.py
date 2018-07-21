@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from kiestze import views
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('allauth/', include('allauth.urls')),
 
     path('', views.index),
     path('lijst', views.lijst),
@@ -32,7 +33,3 @@ urlpatterns = [
     #path('get_all_politieker', views.get_all_politieker),
     path('get_all_politieker_partij_link_van_gemeente', views.get_all_politieker_partij_link_van_gemeente),
 ]
-
-#url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root':"path/to/your/static/folder"}),
-#add this to urlpatterns variable
-#urlpatterns += staticfiles_urlpatterns()
