@@ -40,4 +40,10 @@ function GetTableUrl(tableName)
   return `https://api.airtable.com/v0/app5SoKsYnuOY96ef/${tableName}?api_key=key2Jl1YfS4WWBFa5`
 }
 
-export { StateEnum, JsonRequest, GetTableUrl};
+function GetDjangoUrl(queryString)
+{
+  queryString = queryString.replace(/^\/+/g, '');
+  return `http://127.0.0.1:8000/${  queryString}`
+}
+
+export { StateEnum, JsonRequest, GetTableUrl, GetDjangoUrl};
