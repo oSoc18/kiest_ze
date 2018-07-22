@@ -5,6 +5,7 @@ import uuid #https://github.com/skorokithakis/shortuuid
 from django.core import serializers
 import json
 from subprocess import check_output
+import datetime
 
 def index(request):
 	context = {}
@@ -61,16 +62,60 @@ def get_politieker(request):
 	return HttpResponse(data, content_type='application/json')
 
 
-def get_all_politieker_partij_link_van_gemeente(request):
+def myconverter(o):
+	if isinstance(o, datetime.datetime):
+		return "lolz" # o.__str__()
 
+
+def query_result_to_canonical_json(list_object):
+	"""
+	{
+		"model": "kiestze.politieker_partij_link",
+		"pk": 59028,
+		"fields": {
+			"partij": 998,
+			"politieker": 22368,
+			"volgnummer": 19,
+			"voorkeurstemmen": 215,
+			"verkozen": false,
+			"verkozen_volgnummer": 16
+		}
+	},
+	to
+	"59028" :
+	{
+		"partij": 998,
+		"politieker": 22368,
+		"volgnummer": 19,
+		"voorkeurstemmen": 215,
+		"verkozen": false,
+		"verkozen_volgnummer": 16
+	}
+	To make it easely consumable by the frontend.
+	"""
+	tmp_dict = {}
+
+	tmp_python = serializers.serialize('python', list_object)
+	for el in tmp_python:
+		tmp_dict[el["pk"]] = el["fields"];
+	return json.dumps(tmp_dict, indent=4, sort_keys=True, default=str)
+	# return serializers.serialize('json', tmp_dict)
+
+def get_all_gemeentes(request):
+	got_all = Gemeente.objects.filter().exclude(naam="-")
+	data = query_result_to_canonical_json(got_all)
+	return HttpResponse(data, content_type='application/json')
+
+def get_all_politieker_partij_link_van_gemeente(request):
 	gemeente_nis = request.GET.get('gemeente_nis')
 	gemeente_nis = int(gemeente_nis)
 
 	jaar = request.GET.get('jaar')
 	jaar = int(jaar)
 
-	got_all = Politieker_partij_link.objects.filter(partij__nis=gemeente_nis, partij__jaar=jaar)
-	data = serializers.serialize('json', got_all)
+	got_all = Politieker_partij_link.objects.filter(partij__nis__nis=gemeente_nis) # )partij__jaar=jaar) #
+	data = query_result_to_canonical_json(got_all)
+	# data = got_all.query
 	return HttpResponse(data, content_type='application/json')
 
 
