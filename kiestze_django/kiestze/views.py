@@ -138,6 +138,51 @@ def get_politiekers(request):
 	return HttpResponse(data, content_type='application/json')
 
 
+# def directly_edit_field(request):  #For reference
+# 	# politieker = request.GET['politieker']
+# 	politieker = '36658'
+# 	# fieldname = request.GET['fieldname']
+# 	fieldname = 'geslacht'
+# 	# value = request.GET['value']
+# 	value = 'F'
+#
+# 	object = Politieker.objects.get(id=politieker)
+# 	# object.geslacht = value
+# 	setattr(object, fieldname, value)
+# 	object.save()
+#
+# 	return HttpResponse('Done.')
+
+
+def request_edit(request):
+	if not request.user.is_authenticated:
+		return HttpResponse('You\'re not logged in. Get out.')
+	else:
+		try:
+			politieker = request.GET['politieker']
+			fieldname = request.GET['fieldname']
+			value = request.GET['value']
+			guid = uuid.uuid4()
+
+			edit = User_edit()
+			edit.guid = guid
+			edit.politieker_id = politieker
+			edit.column_name = fieldname
+			edit.accepted_date = None  # Null because not yet accepted
+			edit.suggested_value = value
+			edit.save()
+
+			approver = Approver()
+			approver.aanpassing_id = guid
+			approver.user_id_id = request.user.id
+			approver.save()
+
+			return HttpResponse('Done')
+		except Exception as e:
+			return HttpResponse('Please enter all required GET parameters<br><br>' + str(e))
+
+
+
 def git_pull(request):
 	#p = subprocess.Popen(["git", "pull"]) #, cwd=path)
 	#p.wait()
