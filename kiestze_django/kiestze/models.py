@@ -13,12 +13,16 @@ class Gemeente(models.Model):
 		verbose_name = 'Gemeente'
 		verbose_name_plural = 'Gemeente'
 
+	def __str__(self):
+		return self.naam + " (" + str(self.nis) + ")"
+
 
 class Partij(models.Model):
 	id = models.IntegerField(primary_key=True)
 	jaar = models.IntegerField()
 	lijstnummer = models.IntegerField()
-	lijstnaam = models.CharField(max_length=100)
+	# nis,lijstnummer could be an unique reference too, but we choose to use an id for flexability
+	lijstnaam = models.CharField(max_length=100)  # Op welke plaats kommt dese lijst op de verkiezingsbladen van de gemeente?
 	nis = models.ForeignKey(Gemeente, on_delete=models.CASCADE)
 
 	class Meta:
