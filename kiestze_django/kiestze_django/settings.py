@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',
 
+    'corsheaders',
+
     'kiestze',
 ]
 
@@ -59,12 +61,24 @@ SITE_ID = 1  # Required by allauth, no idea why
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CORS for easier debugging.
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
+#CORS_ORIGIN_WHITELIST = (
+#    'localhost:3030',
+#)
+CORS_ORIGIN_REGEX_WHITELIST = (
+    'localhost:[0-9]+',
+    '127.0.0.1:[0-9]+',
+)
 
 ROOT_URLCONF = 'kiestze_django.urls'
 
@@ -128,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC' # should be GMT+2 ?
 
 USE_I18N = True
 

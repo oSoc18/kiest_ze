@@ -102,5 +102,5 @@ sql_partijen_politiekers_link += ";\n\n\n\n\n\n"
 
 monster_query = sql_common + sql_partijen + sql_politiekers + sql_partijen_politiekers_link
 
-f = open("output.sql","wb")
+f = open("sql_kiestze_2012_postgresql.sql","wb")
 f.write(monster_query.encode("UTF-8"))

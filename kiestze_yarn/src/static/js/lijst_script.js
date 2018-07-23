@@ -3,7 +3,7 @@
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
 import { updateQueryStringParam, getParameterByName } from './static_utils.js';
-import { JsonRequest, GetTableUrl } from './common.js';
+import { JsonRequest, GetTableUrl, GetDjangoUrl } from './common.js';
 
 // const datalist_gemeentes = document.getElementById("datalist_gemeentes");
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
@@ -35,7 +35,12 @@ const model = {
     Politiekers: new JsonRequest(GetTableUrl("Politiekers"), UpdateAll),
     Organisaties: new JsonRequest(GetTableUrl("Organisaties"), UpdateAll),
     Stad: new JsonRequest(GetTableUrl("Stad"), UpdateAll),
-  }
+  },
+  djangoData: {
+    get_all_gemeentes:  new JsonRequest(GetDjangoUrl("/get_all_gemeentes"), UpdateAll),
+    // Tmp:
+    get_all_politieker_partij_link_van_gemeente:  new JsonRequest(GetDjangoUrl("/get_all_politieker_partij_link_van_gemeente?gemeente_nis=23050&jaar=2012"), UpdateAll),
+  },
 }
 window["model"] = model;
 
