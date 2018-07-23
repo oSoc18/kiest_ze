@@ -162,15 +162,22 @@ def request_edit(request):
 			politieker = request.GET['politieker']
 			fieldname = request.GET['fieldname']
 			value = request.GET['value']
-			guid = uuid.uuid4()
 
-			edit = User_edit()
-			edit.guid = guid
-			edit.politieker_id = politieker
-			edit.column_name = fieldname
-			edit.accepted_date = None  # Null because not yet accepted
-			edit.suggested_value = value
-			edit.save()
+			already_exists = User_edit.objects.filter(politieker=politieker, column_name=fieldname, suggested_value=value)
+			if already_exists.count() == 0:  # Suggestion doesn't exist ==> create new one
+				guid = uuid.uuid4()
+
+				edit = User_edit()
+				edit.guid = guid
+				edit.politieker_id = politieker
+				edit.column_name = fieldname
+				edit.accepted_date = None  # Null because not yet accepted
+				edit.suggested_value = value
+				edit.save()
+			else:  # Suggestion already exists ==> use that data and approve the suggestion
+				guid = already_exists[0].guid
+
+
 
 			approver = Approver()
 			approver.aanpassing_id = guid

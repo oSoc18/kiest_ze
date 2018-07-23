@@ -64,7 +64,6 @@ class User_edit(models.Model):
 
 
 class Approver(models.Model):
-	id = models.IntegerField(primary_key=True)
 	aanpassing = models.ForeignKey(User_edit, on_delete=models.CASCADE)
 	user_id = models.ForeignKey(SocialAccount, on_delete=models.CASCADE)
 	date = models.DateField(default=timezone.now)
