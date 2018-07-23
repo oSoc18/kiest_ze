@@ -131,6 +131,22 @@ def get_all_politieker_partij_link_van_gemeente(request):
 	return HttpResponse(data, content_type='application/json')
 
 
+def get_partij(request):
+	gemeente_nis = request.GET.get('gemeente_nis')
+	gemeente_nis = int(gemeente_nis)
+
+	jaar = request.GET.get('jaar')
+	jaar = int(jaar)
+
+	if gemeente_nis == 0:
+		got_all = Partij.objects.filter(jaar=jaar)
+	else:
+		got_all = Partij.objects.filter(nis=gemeente_nis, jaar=jaar)
+
+	data = query_result_to_canonical_json(got_all)
+	return HttpResponse(data, content_type='application/json')
+
+
 def get_politiekers(request):
 	gemeente_nis = request.GET.get('gemeente_nis')
 	gemeente_nis = int(gemeente_nis)

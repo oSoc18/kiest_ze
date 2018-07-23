@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import include, path
 from kiestze import views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('allauth/', include('allauth.urls')),
@@ -35,5 +34,7 @@ urlpatterns = [
     path('get_politiekers', views.get_politiekers),
     path('get_all_politieker_partij_link_van_gemeente', views.get_all_politieker_partij_link_van_gemeente),
     path('get_all_gemeentes', views.get_all_gemeentes),
-    path('request_edit', views.request_edit)
+    path('get_partij', views.get_partij),
+    path('request_edit', views.request_edit),
 ]
+
