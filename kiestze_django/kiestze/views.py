@@ -163,6 +163,14 @@ def get_politiekers(request):
 	return HttpResponse(data, content_type='application/json')
 
 
+def get_politieker_met_naam(request):
+	naam = request.GET.get('naam')
+
+	got_all = Politieker.objects.filter(naam__icontains = naam)  # [:10]
+	data = query_result_to_canonical_json(got_all)
+	return HttpResponse(data, content_type='application/json')
+
+
 # def directly_edit_field(request):  #For reference
 # 	# politieker = request.GET['politieker']
 # 	politieker = '36658'

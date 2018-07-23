@@ -161,12 +161,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # hack, so that server and dev machinse don't have to change code.
-#if not DEBUG:
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-#else:
-#    STATICFILES_DIRS = [
-#        os.path.join(BASE_DIR, "static"),
-#    ]
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+else:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+    ]
 
 
 AUTHENTICATION_BACKENDS = (
