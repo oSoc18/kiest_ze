@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from allauth.socialaccount.models import SocialAccount
-
+from django.contrib.auth.models import User
 
 class Gemeente(models.Model):
 	naam = models.CharField(max_length=100)
@@ -82,5 +82,5 @@ class User_edit(models.Model):
 
 class Approver(models.Model):
 	aanpassing = models.ForeignKey(User_edit, on_delete=models.CASCADE)
-	user_id = models.ForeignKey(SocialAccount, on_delete=models.CASCADE)
+	user_id = models.ForeignKey(User, on_delete=models.CASCADE) # SocialAccount
 	date = models.DateField(default=timezone.now)
