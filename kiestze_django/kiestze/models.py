@@ -84,3 +84,6 @@ class Approver(models.Model):
 	aanpassing = models.ForeignKey(User_edit, on_delete=models.CASCADE)
 	user_id = models.ForeignKey(User, on_delete=models.CASCADE) # SocialAccount
 	date = models.DateField(default=timezone.now)
+
+	def __str__(self):
+		return "[%s] (%s) %s" %(self.date, self.aanpassing, self.user_id)
