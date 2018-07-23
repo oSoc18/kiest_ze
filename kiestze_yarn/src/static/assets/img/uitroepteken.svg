@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="470px" height="529px" viewBox="0 0 470 529" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Asset 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-692.000000, 0.000000)" fill="#43C1D6" fill-rule="nonzero">
+            <g id="Group-5" transform="translate(676.000000, -585.000000)">
+                <g id="Group-3">
+                    <g id="Group-2" transform="translate(379.708129, 585.857954) rotate(7.000000) translate(-379.708129, -585.857954) translate(65.208129, 34.357954)">
+                        <g id="Asset-3">
+                            <path d="M158.614653,725.378029 L321.082032,22.3836414 C328.206487,4.87755366 347.708353,-4.11284218 365.676056,1.8257152 L606.477584,89.9399593 C624.014931,97.0031851 633.080392,116.416921 627.224039,134.36861 L296.211095,775.72018 C289.450666,788.785609 268.9523,796.773478 253.47774,791.200546 L181.252787,764.636237 C165.778227,759.032345 155.29646,739.681887 158.614653,725.378029 Z" id="Shape"></path>
+                            <circle id="Oval" cx="141" cy="962" r="141"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
