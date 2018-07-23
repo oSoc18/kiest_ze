@@ -12,12 +12,67 @@ body {
 }
 
 .display-4 {
-  font-size: 2rem;
+  font-family: 'Brandon_blk';
+  font-size: 4rem;
+}
+
+.lead {
+  font-family: 'Brandon_reg';
+  font-size: 1.7rem;
+}
+
+.lead-footer {
+  font-size: 1.2rem;
+}
+
+.searchfield {
+  border: none;
+  background-color: #4ac1d4;
+  color: white;
+}
+
+.searchfield:focus {
+  outline: none;
+}
+
+.searchfield::placeholder {
+  color: white;
+  font-family: 'Brandon_reg';
+  font-size: 1.2rem;
+}
+
+.search-group {
+  border-bottom: .2rem solid white;
+  padding-bottom: .5rem;
+}
+
+.search-margin {
+  margin-top: 14rem;
+  margin-left: 1rem;
+}
+
+.meerweten {
+  font-family: 'Brandon_reg';
+  font-size: 1rem;
 }
 
 .form-background {
   background-color: #e9ecef;
   color: #08293d;
+}
+
+.background-teken {
+  background-image: url(../assets/img/uitroepteken.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; 
+  height: 33rem;
+  width: 31rem;
+  margin-top: -8rem;
+}
+
+.auto {
+  margin: 0 auto;
 }
 
 .btn {
@@ -66,7 +121,8 @@ body {
 }
 
 .card-footer {
-  background-color: #3e2749;
+  background-color: #3c3c3c;
+  margin-bottom: -3rem;
 }
 
 .card-footer-lijst {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="75px" height="75px" viewBox="0 0 75 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="33.5" cy="33.5" r="33.5"></circle>
+        <filter x="-10.4%" y="-7.5%" width="120.9%" height="120.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-611.000000, -615.000000)">
+            <g id="Group-4" transform="translate(617.000000, 619.000000)">
+                <g id="Oval-6-Copy" transform="translate(33.500000, 33.500000) rotate(-270.000000) translate(-33.500000, -33.500000) ">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#ECB356" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <path d="M26.7828695,36.5011591 L39.662781,24.9289124 C40.1124063,24.4877571 40.1124063,23.7720218 39.662781,23.3308665 C39.2131558,22.8897112 38.4832469,22.8897112 38.0336216,23.3308665 L24.327693,35.6447246 C24.08744,35.8799279 23.9856132,36.1927936 24.0016254,36.5 C23.9856132,36.8083655 24.08744,37.1200721 24.327693,37.3553094 L38.0336216,49.6691335 C38.4832469,50.1102888 39.2131558,50.1102888 39.662781,49.6691335 C40.1124063,49.2280123 40.1124063,48.5122429 39.662781,48.0711217 L26.7828695,36.5011591 Z" id="Shape-Copy" stroke="#FFFFFF" fill="#FFFFFF" fill-rule="nonzero" transform="translate(32.000000, 36.500000) rotate(-90.000000) translate(-32.000000, -36.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
