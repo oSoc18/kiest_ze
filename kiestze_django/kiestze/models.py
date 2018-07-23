@@ -72,6 +72,9 @@ class User_edit(models.Model):
 		verbose_name = 'User_edit'
 		verbose_name_plural = 'User_edit'
 
+	def __str__(self):
+		return "[%s] %s (%s==>%s)" %(self.guid, self.politieker, self.column_name, self.suggested_value)
+
 
 class Approver(models.Model):
 	aanpassing = models.ForeignKey(User_edit, on_delete=models.CASCADE)
