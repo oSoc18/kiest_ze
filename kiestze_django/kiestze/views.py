@@ -22,6 +22,10 @@ def detail(request):
 	return render(request, 'detail.html', context)
 
 
+def privacy(request):
+	return render(request, 'privacy.html')
+
+
 def demoquery(request):
 	context = {}
 	context['text'] = []
