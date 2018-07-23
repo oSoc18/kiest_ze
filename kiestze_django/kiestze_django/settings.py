@@ -57,6 +57,9 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1  # Required by allauth, no idea why
+os.environ['HTTPS'] = 'on'  # Allauth/nginx SSL sorcery
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'HTTPS'
+LOGIN_REDIRECT_URL = '/lijst'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
