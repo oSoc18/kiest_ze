@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.index),
     path('lijst', views.lijst),
     path('detail', views.detail),
+    path('edittest', views.edittest),
 
     path('privacy', views.privacy),
 
@@ -37,4 +38,3 @@ urlpatterns = [
     path('get_partij', views.get_partij),
     path('request_edit', views.request_edit),
 ]
-

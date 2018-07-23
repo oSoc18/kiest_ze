@@ -26,6 +26,13 @@ def privacy(request):
 	return render(request, 'privacy.html')
 
 
+def edittest(request):
+	suggestedEdits = User_edit.objects.all()
+
+	context = {"suggestedEdits": suggestedEdits}
+	return render(request, 'edittest.html', context)
+
+
 def demoquery(request):
 	context = {}
 	context['text'] = []
@@ -184,9 +191,9 @@ def request_edit(request):
 		return HttpResponse('You\'re not logged in. Get out.')
 	else:
 		try:
-			politieker = request.GET['politieker']
-			fieldname = request.GET['fieldname']
-			value = request.GET['value']
+			politieker = request.POST['politieker']
+			fieldname = request.POST['fieldname']
+			value = request.POST['value']
 
 			already_exists = User_edit.objects.filter(politieker=politieker, column_name=fieldname, suggested_value=value)
 			if already_exists.count() == 0:  # Suggestion doesn't exist ==> create new one
