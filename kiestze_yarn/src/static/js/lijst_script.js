@@ -99,6 +99,7 @@ function DisplayPartijen() {
           option.innerHTML = `<div class="form-check"> 
           <input class="form-check-input" type="radio" name="partijRadio" id="${partij.id}" value="option">
           <label class="form-check-label" for="partijRadio">${partij.fields.Partij}</label>
+          <span class="checkmark"></span>
           </div>`
           option.querySelector("input").addEventListener(`click`, PartijClicked);
         }

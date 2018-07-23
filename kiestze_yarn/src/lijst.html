@@ -26,24 +26,25 @@
 <body>
    <header>
     <div class="card-header d-flex flex-row">
-      <img src="" alt="">
-      <div>
-        <input type="text" class="form-control w-25" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
-        <img src="" alt="">
+      <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
+      <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
+          <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
+          <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
       </div>
       <div>
         <ul id="opties_gemeentes">
         </ul>
       </div>
     </div>
- </header>
+    </header>
  <main>
     <div class="d-flex flex-row justify-content-between">
-      <form class="form-background h-100" style="width: 18rem;">
+      <form class="form-background align-self-stretch" style="width: 18rem;">
         <div class="ml-4 h-100 mt-3 mr-3">
           <b id="geselecteerde_gemeente" style="display: none;"></b>
           <div class="mt-4">
-            <h2 class="lead mt-2">Kies een partij:</h2>
+            <h2 class="lead mt-2" style="color: white;">Kies een partij:</h2>
+            <img src="static/assets/img/white-line.svg" alt="white_line" width="40" height="3">
           <div id="opties_partijen">
           </div>
           <div id="geen_opties_partijen" style="display:none">
@@ -51,7 +52,8 @@
           </div>
           </div>
           <div class="mt-4">
-                <h2 class="lead mt-2">Beleidsthema's</h2>
+            <h2 class="lead" style="color: white;">Beleidsthema's</h2>
+            <img src="static/assets/img/white-line.svg" alt="white_line" width="40" height="3">
             <div class="form-check"> 
               <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Onderwijs</label>
@@ -59,24 +61,29 @@
             <div class="form-check"> 
               <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Mobiliteit</label>
+              <span class="checkmark"></span>
             </div>
             <div class="form-check"> 
               <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Gezondheid</label>
+              <span class="checkmark"></span>
             </div>
             <div class="form-check"> 
               <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Huisvesting</label>
+              <span class="checkmark"></span>
             </div>
           </div>
         </div>  
       </form>
       
-      <section class="mt-3 w-75">
+      
+
+      <section class="mt-3 mb-5 w-75">
           <header class="text-center">
-            <h2 class="display-4">Kandidaten voor de gemeente <b id="stad_display"></b></h2>
-            <img src="" alt="">
-            <p class="lead">Filter de kandidaten volgens jouw interesses, om de perfecte kandidaat te vinden.</p>
+            <h2 class="title">Kandidaten voor de gemeente <b id="stad_display"></b></h2>
+            <img src="static/assets/img/yellow-line.svg" alt="yellow-line" width="56" height="3">
+            <p class="lead-title">Filter de kandidaten volgens jouw interesses, om de perfecte kandidaat te vinden.</p>
           </header>
           <div id="kanidaaten_lijst" class="d-flex justify-content-center flex-wrap w-100">
           </div>
