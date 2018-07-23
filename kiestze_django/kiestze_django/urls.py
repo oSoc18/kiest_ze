@@ -26,6 +26,8 @@ urlpatterns = [
     path('lijst', views.lijst),
     path('detail', views.detail),
 
+    path('privacy', views.privacy),
+
     path('query', views.demoquery),
     path('get_politieker_data', views.get_politieker_data),
     path('git_pull', views.git_pull),
