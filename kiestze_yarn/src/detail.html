@@ -6,99 +6,175 @@
   <title>KiestZe</title>
   <link rel="stylesheet" href="static/css/bootstrap.min.css">
   <link rel="stylesheet" href="static/css/style.css">
+  <script>
+    WebFontConfig = {
+      custom: {
+        families: ['Brandon_blk','Brandon_reg'],
+        urls:
+        ['static/assets/fonts/brandonblk/Brandon_blk.css', 'static/assets/fonts/brandonreg/brandon_reg.css']
+      }
+    };
+
+    (function(d) {
+        var wf = d.createElement('script'), s = d.scripts[0];
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+        wf.async = true;
+        s.parentNode.insertBefore(wf, s);
+       })(document);
+    </script>
 </head>
 <body>
-   <header>
-    <div class="card-header">
-        <ul class="nav nav-pills card-header-pills d-flex justify-content-between">
-          <li class="nav-item"><a class="nav-link mr-3" href="lijst">De lijst</a></li>
-            <div class="d-flex flex-row justify-content-between">
-              <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/facebook-boven.png" alt="facebook" width="35" height="35"></a></li>
-              <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/twitter-boven.png" alt="twitter" width="35" height="35"></a></li>
-              <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/mail.svg" alt="mail" width="35" height="35"></a></li>
-            </div>
-        </ul>
-      </div>
- </header>
-    <div class="container">
-  <a href="lijst" class="btn btn-primary button-terug">Terug</a>
-  <header class="text-center">
-      <img src="https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg" alt="Jordy" class="detail-image mb-2" width="250" height="250" id="persoon_foto">
-      <h2 class="display-4" id="persoon_naam">--</h2>
-      <div class="d-flex flex-row text-center justify-content-center">
-          <p class="lead text-muted mr-4">35 Boosts</p>
-          <p class="lead text-muted">Status: Beginner</p>
-      </div>
-  </header>
-  <div class="d-flex flex-row justify-content-center mt-5">
+    <header>
+        <div class="card-header d-flex flex-row">
+          <img src="" alt="">
+          <div>
+            <input type="text" class="form-control w-25" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
+            <img src="" alt="">
+          </div>
+        </div>
+     </header>
+   <main>
+      <a href="lijst" class="btn btn-primary button-terug">Terug</a>
       <section>
-          <div class="d-flex flex-row mb-3">
-              <h3 class="lead mr-3">Partij:</h3>
-              <a href="#">Groen Ieper</a>
-          </div>
-          <div class="d-flex flex-row mb-3">
-              <h3 class="lead mr-3">Ervaring:</h3>
-              <p>Eerste verkiezing</p>
-          </div>
-          <div class="mb-3">
-            <h3 class="lead">Volg Jordy op de voet:</h3>
-            <div class="d-flex flex-row">
-                <a href="#" class="mr-4"><img src="static/assets/img/facebook.png" alt="facebook" width="40" height="40"></a>
-                <a href="#" class="mr-4"><img src="static/assets/img/twitter.png" alt="twitter" width="40" height="40"></a>
-                <a href="#" class="mr-4"><img src="static/assets/img/mail.png" alt="mail" width="40" height="40"></a>
-                <a href="#" class="mr-4"><img src="static/assets/img/open-the-box.png" alt="open-the-box" width="40" height="40"></a>
-            </div>
-          </div>
-          <h3 class="lead mb-3">Beroep:</h3>
-          <p>Wat doet Jordy?</p>
-          <h3 class="lead mb-3">Flyer:</h3>
-          <div class="input-group mb-3 w-75">
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile02">
-                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+          <div>
+              <a href=""><img src="" alt="vorige"></a>
+              <div class="text-center">
+                  <img src="https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg" alt="Jordy" class="detail-image mb-2" width="250" height="250" id="persoon_foto">
               </div>
-              <div class="input-group-append">
-                <span class="input-group-text" id="">Upload</span>
+              <a href=""><img src="" alt="volgende"></a>
+          </div>
+          <div>
+              <h2>Sherley Beernaert</h2>
+              <h3>Groen Ieper</h3>
+              <div>
+                  <img src="" alt="social media">
+                  <img src="" alt="social media">
+              </div>
+          </div>
+          <div>
+              <div>
+                  <img src="" alt="profielfoto">
+                  <p>Zet zich goed in voor de partij!</p>
+                  <img src="" alt="emoji">
+              </div>
+              <div>
+                  <img src="" alt="toevoegen">
               </div>
           </div>
       </section>
       <section>
-          <div class="d-flex flex-row mb-3">
-              <h3 class="lead mr-3">Leeftijd:</h3>
-              <p>23 jaar</p>
-          </div>
-          <p>
-              <h3 class="lead mb-3">Mandaten:</h3>
-              <ul>
-                <li>Voorzitter Jong Groen Ieper</li>
-                <li>JKW vzw</li>
-              </ul>
-          </p>
-          <h3 class="lead mb-3">Vrijetijdsbesteding:</h3>
-          <ul>
-              <li>Tennis</li>
-              <li>Gamen in The Lab</li>
-          </ul>
+        <article>
+            <div>
+                <div>
+                    <h3 class="lead mb-3">Beleidsthema's:</h3>
+                    <img src="" alt="">
+                </div>
+                <div>
+                    <p>Gezondheid</p>
+                    <p>Mobiliteit</p>
+                    <img src="" alt="toevoegen">
+                </div>
+            </div>            
+        </article>
+        <article>
+            <div>
+                <div>
+                    <h3 class="lead mb-3">Beroep:</h3>
+                    <img src="" alt="">
+                </div>
+                <div class="popover__wrapper">
+                    <img src="" alt="verifieer">
+                    <p class="linken">Administratief Bediende</p>
+                    <div class="push popover__content" style="margin-top: -.8rem;"><p class="popover__message">Is dit juist?</p><button>Ja</button><button>Nee</button></div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h3 class="lead mb-3">Opleiding:</h3>
+                    <img src="" alt="">
+                </div>
+                <div class="popover__wrapper">
+                    <img src="" alt="toevoegen">
+                    <p class="linken">Wat zijn de studies van Shirley?</p>
+                    <div class="push popover__content" style="margin-top: -.8rem;"><p class="popover__message"></p><input type="text" class="form-control" id="input-studies" placeholder="Studies" name="input_studies" autocomplete="off"><button>Toevoegen</button></div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h3 class="lead mb-3">Eigen website:</h3>
+                    <img src="" alt="">
+                </div>
+                <div class="popover__wrapper">
+                    <img src="" alt="toevoegen">
+                    <p class="linken">Wat is de url van de website?</p>
+                    <div class="push popover__content" style="margin-top: -.8rem;"><p class="popover__message"></p><input type="text" class="form-control" id="input-studies" placeholder="url" name="input_url" autocomplete="off"><button>Toevoegen</button></div>
+                </div>
+            </div>
+        </article>
+        <article>
+            <div>
+                <div>
+                     <div class="popover__wrapper">
+                       <a href="#" class="linken"><h2 class="lead mt-2 linken">Mandaten</h2></a>
+                       <div class="push popover__content"><p class="popover__message">De bevoegdheid om in naam van iemand anders te handelen. Bv. Een mandaat van de minister geeft de bevoegdheid aan een ambtenaar om in naam van de minister besluiten te nemen.</p></div>
+                       <img src="" alt="vraagteken">
+                     </div>
+                    <img src="" alt="">
+                </div>
+                <div>
+                    <img src="" alt="vast-bol">
+                    <p>Een mandaat</p>
+                </div>
+                <div>
+                    <img src="" alt="vast-bol">
+                    <p>Een mandaat</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                   <h3 class="lead mb-3">Hobby's</h3>
+                   <img src="" alt="">
+                </div>
+                <div>
+                    <div class="popover__wrapper">
+                        <img src="" alt="">
+                        <p class="linken">Hobby één</p>
+                        <div class="push popover__content" style="margin-top: -.8rem;"><p class="popover__message"></p><img src="" alt="profielfoto"><p>Persoonsnaam voerde dit in</p></div>
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <p class="linken">Hobby twee</p>
+                        <div class="push popover__content" style="margin-top: -.8rem;"><p class="popover__message"></p><img src="" alt="profielfoto"><p>Persoonsnaam voerde dit in</p></div>
+                    </div>
+                    <div class="popover__wrapper">
+                        <img src="" alt="" class="linken">
+                        <div class="push popover__content" style="margin-top: -.8rem;"><p class="popover__message"></p><input type="text" class="form-control" id="input-hobby" placeholder="Studies" name="input_hobby" autocomplete="off"><button>Toevoegen</button></div>
+                    </div>
+                </div>
+            </div>
+        </article>
       </section>
-  </div>
-  
-  <section class="d-flex flex-column align-items-center w-100">
-      <h3 class="lead mt-4">Geef Jordy een boost:</h3>
-      <p class="text-muted mb-4 ">Typ een motiverende, positieve boodschap over Jordy van max.16 karakters</p>
-      <div class="d-flex flex-row tweet align-items-center mb-4">
-          <input type="text" class="form-control w-100 mr-3" id="search" aria-describedby="searchfield" placeholder="Jordy mijn stem heb je!">
-          <p class="emoji-size mr-3">😀</p>
-      </div>
-      <button class="btn btn-primary mb-4">Tweet je boost!</button>
-      <div class="d-flex flex-row">
-          <p class=" btn btn-secondary mr-3">Jordy is een toffe <span class="emoji-size-boost">👍</span></p>
-          <p class="btn btn-secondary mr-3">Helpful kerel!<span  class="emoji-size-boost"> 💪</span></p>
-          <p class=" btn btn-secondary mr-3">Jordy is een toffe <span  class="emoji-size-boost">🌳</span></p>
-      </div>
-</div>
-<!--
-<script type="text/javascript" src="js/script_detail.js"></script></body>
--->
-  </section>
+      
+   </main>
+
+   <footer class="d-flex flex-row justify-content-between align-items-center footer" style="height:18vh;">
+        <div class="ml-5">
+            <p style="color: white;" class="lead lead-footer">Onze partners:</p>
+            <ul style="list-style: none; margin-left: -2.8rem;" class="d-flex flex-row justify-content-between">
+               <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3"></a></li>
+               <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3"></a></li>
+               <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3"></a></li>
+               <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3"></a></li>
+            </ul>
+        </div>
+        <div class="mr-5">
+           <p style="color: white;" class="lead lead-footer">Volg ons op social media:</p>
+           <ul style="list-style: none;" class="d-flex flex-row justify-content-between w-50">
+               <li class="nav-item"><a href="#"><img src="static/assets/img/facebook-boven.png" alt="facebook" width="35" height="35" class="mr-3"></a></li>
+               <li class="nav-item"><a href="#"><img src="static/assets/img/twitter-boven.png" alt="twitter" width="35" height="35" class="mr-3"></a></li>
+               <li class="nav-item"><a href="#"><img src="static/assets/img/mail.svg" alt="mail" width="35" height="35" class="mr-3"></a></li>
+           </ul>
+        </div>
+    </footer>
 </body>
 </html>
