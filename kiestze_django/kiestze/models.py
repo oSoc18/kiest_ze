@@ -18,9 +18,9 @@ class Gemeente(models.Model):
 
 
 class Partij(models.Model):
-	id = models.IntegerField(primary_key=True)
+	id = models.AutoField(primary_key=True)
 	jaar = models.IntegerField()
-	lijstnummer = models.IntegerField()
+	lijstnummer = models.IntegerField(null=True, blank=True)
 	# nis,lijstnummer could be an unique reference too, but we choose to use an id for flexability
 	lijstnaam = models.CharField(max_length=100)  # Op welke plaats kommt dese lijst op de verkiezingsbladen van de gemeente?
 	nis = models.ForeignKey(Gemeente, on_delete=models.CASCADE)
@@ -29,9 +29,12 @@ class Partij(models.Model):
 		verbose_name = 'Partij'
 		verbose_name_plural = 'Partij'
 
+	def __str__(self):
+		return self.lijstnaam + " (" + str(self.nis) + ")"
+
 
 class Politieker(models.Model):
-	id = models.IntegerField(primary_key=True)
+	id = models.AutoField(primary_key=True)
 	otb_id = models.IntegerField()
 	naam = models.CharField(max_length=100)
 	geboorte = models.DateField()
@@ -40,6 +43,9 @@ class Politieker(models.Model):
 	class Meta:
 		verbose_name = 'Politieker'
 		verbose_name_plural = 'Politieker'
+
+	def __str__(self):
+		return self.naam + " [" + str(self.id) + "]"
 
 
 class Politieker_partij_link(models.Model):
