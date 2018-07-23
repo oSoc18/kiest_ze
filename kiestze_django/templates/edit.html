@@ -5,27 +5,43 @@
 </head>
 <body>
 	<ul>
-	{% for edit in suggestedEdits %}
+	{% for field in fields %}
 	<li>
-		{{ edit }}
-		<button onclick="approve({{ edit.politieker.id }}, '{{ edit.column_name }}', '{{ edit.suggested_value }}')">Approve</button>
+		{{ field.fieldname }}
 		<ul>
-			{% for approver in edit.approvers %}
-			<li>{{ approver.user_id }}</li>
-			{% endfor %}
+		{% for edit in field.suggestedEdits %}
+		<li>
+			{{ edit }}
+			<button onclick="approve({{ edit.politieker.id }}, '{{ edit.column_name }}', '{{ edit.suggested_value }}')">Approve</button>
+			<ul>
+				{% for approver in edit.approvers %}
+				<li>{{ approver.user_id }}</li>
+				{% endfor %}
+			</ul>
+		</li>
+		{% endfor %}
 		</ul>
+
+		<input type="text" name="suggestedValue" placeholder="Suggereer nieuwe waarde">
+		<button name="submitButton" onclick="submitUserEdit(event, '{{ field.fieldname }}')">Verzend</button>
 	</li>
 	{% endfor %}
 	</ul>
 
 	{% csrf_token %}
-	<input type="text" name="suggestedValue" placeholder="Suggereer nieuwe waarde">
-	<button name="submitButton">Verzend</button>
+
 
 
 	<script>
+		'use strict';
+		function submitUserEdit(evt, fieldname) {
+		    approve(politieker_id, fieldname, evt.target.parentElement.querySelector('input[name="suggestedValue"]').value)
+		}
+
+
+		
 		function approve(politieker, fieldname, suggested_value) {
-			var data = new FormData();
+			let data = new FormData();
 			data.append('csrfmiddlewaretoken', csrfmiddlewaretoken.value);
 			data.append('politieker', politieker);
 			data.append('fieldname', fieldname);
@@ -34,7 +50,6 @@
 			var xhr = new XMLHttpRequest();
 			xhr.open('POST', 'request_edit', true);
 			xhr.onload = function () {
-				// do something to response
 				console.log(this.responseText);
 				//location.reload();
 			};
@@ -47,10 +62,6 @@
 		let suggestedValue = document.getElementsByName('suggestedValue')[0];
 		let submitButton = document.getElementsByName('submitButton')[0];
 		let csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0];
-		submitButton.addEventListener('click', function(evt) {
-			console.log(suggestedValue.value);
-			approve(politieker_id, fieldname, suggestedValue.value);
-		});
 	</script>
 </body>
 </html>

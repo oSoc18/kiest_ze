@@ -26,16 +26,29 @@ def privacy(request):
 	return render(request, 'privacy.html')
 
 
-def edit(request):
-	suggestedEdits = User_edit.objects.all()
-	approvers = {}
+class FieldWrapper:
+	def __init__(self, fieldname):
+		self.fieldname = fieldname
 
-	for edit in suggestedEdits:
-		approvers[edit.guid] = Approver.objects.filter(aanpassing=edit.guid)
+	def getSuggestedEdits(self):
+		return User_edit.objects.filter(column_name=self.fieldname)
+	suggestedEdits = property(getSuggestedEdits)
+
+
+def edit(request):
+	# suggestedEdits = User_edit.objects.all()
+	fields = [
+		FieldWrapper(fieldname='geboorte'),
+		FieldWrapper(fieldname='twitter'),
+		FieldWrapper(fieldname='facebook')
+	]
+	# approvers = {}
+
+	# for edit in suggestedEdits:
+	# 	approvers[edit.guid] = Approver.objects.filter(aanpassing=edit.guid)
 
 	context = {
-		"suggestedEdits": suggestedEdits,
-		"approvers": approvers
+		'fields': fields,
 	}
 	return render(request, 'edit.html', context)
 
