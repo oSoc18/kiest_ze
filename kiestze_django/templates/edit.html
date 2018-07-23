@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit test</title>
+</head>
+<body>
+	<ul>
+	{% for edit in suggestedEdits %}
+	<li>
+		{{ edit }}
+		<button onclick="approve({{ edit.politieker.id }}, '{{ edit.column_name }}', '{{ edit.suggested_value }}')">Approve</button>
+		<ul>
+			{% for approver in edit.approvers %}
+			<li>{{ approver.user_id }}</li>
+			{% endfor %}
+		</ul>
+	</li>
+	{% endfor %}
+	</ul>
+
+	{% csrf_token %}
+	<input type="text" name="suggestedValue" placeholder="Suggereer nieuwe waarde">
+	<button name="submitButton">Verzend</button>
+
+
+	<script>
+		function approve(politieker, fieldname, suggested_value) {
+			var data = new FormData();
+			data.append('csrfmiddlewaretoken', csrfmiddlewaretoken.value);
+			data.append('politieker', politieker);
+			data.append('fieldname', fieldname);
+			data.append('value', suggested_value);
+
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', 'request_edit', true);
+			xhr.onload = function () {
+				// do something to response
+				console.log(this.responseText);
+				//location.reload();
+			};
+			xhr.send(data);
+		}
+
+		let politieker_id = '22295';
+		let fieldname = 'geboorte';
+
+		let suggestedValue = document.getElementsByName('suggestedValue')[0];
+		let submitButton = document.getElementsByName('submitButton')[0];
+		let csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0];
+		submitButton.addEventListener('click', function(evt) {
+			console.log(suggestedValue.value);
+			approve(politieker_id, fieldname, suggestedValue.value);
+		});
+	</script>
+</body>
+</html>

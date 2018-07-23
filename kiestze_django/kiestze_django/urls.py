@@ -24,7 +24,7 @@ urlpatterns = [
     path('', views.index),
     path('lijst', views.lijst),
     path('detail', views.detail),
-    path('edittest', views.edittest),
+    path('edit', views.edit),
 
     path('privacy', views.privacy),
 

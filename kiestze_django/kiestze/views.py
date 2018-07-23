@@ -26,11 +26,18 @@ def privacy(request):
 	return render(request, 'privacy.html')
 
 
-def edittest(request):
+def edit(request):
 	suggestedEdits = User_edit.objects.all()
+	approvers = {}
 
-	context = {"suggestedEdits": suggestedEdits}
-	return render(request, 'edittest.html', context)
+	for edit in suggestedEdits:
+		approvers[edit.guid] = Approver.objects.filter(aanpassing=edit.guid)
+
+	context = {
+		"suggestedEdits": suggestedEdits,
+		"approvers": approvers
+	}
+	return render(request, 'edit.html', context)
 
 
 def demoquery(request):

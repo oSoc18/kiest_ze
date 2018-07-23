@@ -72,6 +72,10 @@ class User_edit(models.Model):
 		verbose_name = 'User_edit'
 		verbose_name_plural = 'User_edit'
 
+	def getApprovers(self):
+		return Approver.objects.filter(aanpassing=self.guid)
+	approvers = property(getApprovers)
+
 	def __str__(self):
 		return "[%s] %s (%s==>%s)" %(self.guid, self.politieker, self.column_name, self.suggested_value)
 
