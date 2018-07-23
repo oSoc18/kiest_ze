@@ -10,6 +10,11 @@ class PolitiekerAdmin(admin.ModelAdmin):
 	list_display = ('id', 'otb_id', 'naam', 'geslacht')
 	# readonly_fields = ('id',)
 
+	def get_form(self, request, obj=None, **kwargs):
+		form = super(PolitiekerAdmin, self).get_form(request, obj, **kwargs)
+		form.base_fields['otb_id'].initial = 0 # for easy input
+		return form
+
 
 class PartijAdmin(admin.ModelAdmin):
 	list_display = ('lijstnaam', 'lijstnummer', 'jaar')
