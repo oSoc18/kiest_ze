@@ -24,15 +24,19 @@
     </script>
 </head>
 <body>
-    <header>
-        <div class="card-header d-flex flex-row">
-          <img src="" alt="">
-          <div>
-            <input type="text" class="form-control w-25" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
-            <img src="" alt="">
-          </div>
-        </div>
-     </header>
+   <header>
+    <div class="card-header d-flex flex-row card-header-detail">
+      <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
+      <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
+          <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
+          <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
+      </div>
+      <div>
+        <ul id="opties_gemeentes">
+        </ul>
+      </div>
+    </div>
+   </header>
    <main>
       <a href="lijst" class="btn btn-primary button-terug">Terug</a>
       <section>
