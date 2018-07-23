@@ -152,14 +152,13 @@ function DisplayKanidaten() {
         let logo = "https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg";
         if(politieker.fields.Foto)
           logo = politieker.fields.Foto[0].thumbnails.large.url
-        option.innerHTML = `<article class="card mr-4 mt-4" style="width: 17rem;">
+        option.innerHTML = `<a href="detail?persoon=${politieker.id}#${politieker.fields.Naam.replace(/ /g, "_")}"><article class="card mr-4 mt-4" style="width: 17rem;">
         <img class="card-img-top politieker-img" src="${logo}" alt="Card image cap ">
         <div class="card-body">
         <h3 class="card-title">${politieker.fields.Naam}</h5>
         <p class="card-text">${partij.fields.Partij}</p>
-        <a href="detail?persoon=${politieker.id}#${politieker.fields.Naam.replace(/ /g, "_")}" class="btn btn-primary">Ontdek ${shortName}</a>
         </div>
-        </article>`
+        </article></a>`
       }
     }
   }
