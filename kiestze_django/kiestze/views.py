@@ -237,10 +237,14 @@ def request_edit(request):
 			else:  # Suggestion already exists ==> use that data and approve the suggestion
 				guid = already_exists[0].guid
 
-			approver = Approver()
-			approver.aanpassing_id = guid
-			approver.user_id_id = request.user.id
-			approver.save()
+			already_approved = Approver.objects.filter(aanpassing=guid, user_id=request.user.id)
+			if already_approved.count() != 0:
+				return HttpResponse('You already voted!')
+			else:
+				approver = Approver()
+				approver.aanpassing_id = guid
+				approver.user_id_id = request.user.id
+				approver.save()
 
 			return HttpResponse('Done')
 		except Exception as e:
