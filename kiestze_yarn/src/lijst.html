@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,35 +10,37 @@
   <script>
     WebFontConfig = {
       custom: {
-        families: ['Brandon_blk','Brandon_reg'],
-        urls:
-        ['static/assets/fonts/brandonblk/Brandon_blk.css', 'static/assets/fonts/brandonreg/brandon_reg.css']
+        families: ['Brandon_blk', 'Brandon_reg'],
+        urls: ['static/assets/fonts/brandonblk/Brandon_blk.css', 'static/assets/fonts/brandonreg/brandon_reg.css']
       }
     };
 
-    (function(d) {
-        var wf = d.createElement('script'), s = d.scripts[0];
-        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
-        wf.async = true;
-        s.parentNode.insertBefore(wf, s);
-       })(document);
-   </script>
+    (function (d) {
+      var wf = d.createElement('script'),
+        s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+      wf.async = true;
+      s.parentNode.insertBefore(wf, s);
+    })(document);
+
+  </script>
 </head>
+
 <body>
-   <header>
+  <header>
     <div class="card-header d-flex flex-row">
       <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
       <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
-          <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
-          <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
+        <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
+        <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
       </div>
       <div>
         <ul id="opties_gemeentes">
         </ul>
       </div>
     </div>
-    </header>
- <main>
+  </header>
+  <main>
     <div class="d-flex flex-row justify-content-between">
       <form class="form-background align-self-stretch" style="width: 18rem;">
         <div class="ml-4 h-100 mt-3 mr-3">
@@ -45,69 +48,98 @@
           <div class="mt-4">
             <h2 class="lead mt-2" style="color: white;">Kies een partij:</h2>
             <img src="static/assets/img/white-line.svg" alt="white_line" width="40" height="3">
-          <div id="opties_partijen">
-          </div>
-          <div id="geen_opties_partijen" style="display:none">
-            <i>Deze gemeente zit nog niet in ons systeem :(</i>
-          </div>
+            <div id="opties_partijen">
+            </div>
+            <div id="geen_opties_partijen" style="display:none">
+              <i>Deze gemeente zit nog niet in ons systeem :(</i>
+            </div>
           </div>
           <div class="mt-4">
             <h2 class="lead" style="color: white;">Beleidsthema's</h2>
             <img src="static/assets/img/white-line.svg" alt="white_line" width="40" height="3">
-            <div class="form-check"> 
+            <div class="form-check">
               <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Onderwijs</label>
             </div>
-            <div class="form-check"> 
+            <div class="form-check">
               <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Mobiliteit</label>
               <span class="checkmark"></span>
             </div>
-            <div class="form-check"> 
+            <div class="form-check">
               <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Gezondheid</label>
               <span class="checkmark"></span>
             </div>
-            <div class="form-check"> 
+            <div class="form-check">
               <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Huisvesting</label>
               <span class="checkmark"></span>
             </div>
           </div>
-        </div>  
+        </div>
       </form>
-      
-      
 
       <section class="mt-3 mb-5 w-75">
-          <header class="text-center">
-            <h2 class="title">Kandidaten voor de gemeente <b id="stad_display"></b></h2>
-            <img src="static/assets/img/yellow-line.svg" alt="yellow-line" width="56" height="3">
-            <p class="lead-title">Filter de kandidaten volgens jouw interesses, om de perfecte kandidaat te vinden.</p>
-          </header>
-          <div id="kanidaaten_lijst" class="d-flex justify-content-center flex-wrap w-100">
-          </div>
+        <header class="text-center">
+          <h2 class="title">Kandidaten voor de gemeente
+            <b id="stad_display"></b>
+          </h2>
+          <img src="static/assets/img/yellow-line.svg" alt="yellow-line" width="56" height="3">
+          <p class="lead-title">Filter de kandidaten volgens jouw interesses, om de perfecte kandidaat te vinden.</p>
+        </header>
+        <div id="kanidaaten_lijst" class="d-flex justify-content-center flex-wrap w-100">
+        </div>
       </section>
     </div>
   </main>
+
   <footer class="d-flex flex-row justify-content-between align-items-center footer" style="height:18vh;">
-      <div class="ml-5">
-          <p style="color: white;" class="lead lead-footer">Onze partners:</p>
-          <ul style="list-style: none; margin-left: -2.8rem;" class="d-flex flex-row justify-content-between">
-             <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3"></a></li>
-             <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3"></a></li>
-             <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3"></a></li>
-             <li class="nav-item"><a class="mr-3" href="#"><img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3"></a></li>
-          </ul>
-      </div>
-      <div class="mr-5">
-         <p style="color: white;" class="lead lead-footer">Volg ons op social media:</p>
-         <ul style="list-style: none;" class="d-flex flex-row justify-content-between w-50">
-             <li class="nav-item"><a href="#"><img src="static/assets/img/facebook-boven.png" alt="facebook" width="35" height="35" class="mr-3"></a></li>
-             <li class="nav-item"><a href="#"><img src="static/assets/img/twitter-boven.png" alt="twitter" width="35" height="35" class="mr-3"></a></li>
-             <li class="nav-item"><a href="#"><img src="static/assets/img/mail.svg" alt="mail" width="35" height="35" class="mr-3"></a></li>
-         </ul>
-      </div>
+    <div class="ml-5">
+      <p style="color: white;" class="lead lead-footer">Onze partners:</p>
+      <ul style="list-style: none; margin-left: -2.8rem;" class="d-flex flex-row justify-content-between">
+        <li class="nav-item">
+          <a class="mr-3" href="#">
+            <img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="mr-3" href="#">
+            <img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="mr-3" href="#">
+            <img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="mr-3" href="#">
+            <img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3">
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="mr-5">
+      <p style="color: white;" class="lead lead-footer">Volg ons op social media:</p>
+      <ul style="list-style: none;" class="d-flex flex-row justify-content-between w-50">
+        <li class="nav-item">
+          <a href="#">
+            <img src="static/assets/img/facebook-boven.png" alt="facebook" width="35" height="35" class="mr-3">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#">
+            <img src="static/assets/img/twitter-boven.png" alt="twitter" width="35" height="35" class="mr-3">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#">
+            <img src="static/assets/img/mail.svg" alt="mail" width="35" height="35" class="mr-3">
+          </a>
+        </li>
+      </ul>
+    </div>
   </footer>
 </body>
 

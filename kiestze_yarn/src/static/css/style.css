@@ -1,10 +1,26 @@
 body {
-  color: black;
+  color: #3c3c3c;
+}
+
+.background-shape {
+  background-image: url(../assets/img/boven-img.svg);
+  background-repeat: no-repeat;
+  background-size: inherit;
+  background-position: top center;
+}
+
+.linker-helft {
+  margin-left: -6rem;
+}
+
+.background-purple {
+  background-image: url(../assets/img/purple-background.svg);
+  background-repeat: no-repeat;
+  background-position: top right;
 }
 
 .card-header {
-  background-color: white;
-  filter: drop-shadow(0 0 6px #333);
+  background-color: transparent;
   border: none;
 }
 
@@ -35,7 +51,30 @@ body {
 
 .title {
   font-family: 'Brandon_blk';
-  font-size: 2rem;
+  font-size: 2.5rem;
+}
+
+.boost {
+  font-family: 'Brandon_reg';
+  font-size: 1.1rem;
+}
+
+.subtitle {
+  font-family: 'Brandon_blk';
+  font-size: 1.8rem;
+  color: #4ac1d4;
+}
+
+.emoji {
+  font-size: 1.6rem;
+}
+
+.border-boost {
+  border: .1rem solid #c9c9c9;
+  padding: .5rem;
+  padding-top: 1.2rem;
+  border-radius: 10rem;
+  height: 3rem;
 }
 
 .lead-title {
