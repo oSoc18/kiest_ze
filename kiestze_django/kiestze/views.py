@@ -236,9 +236,9 @@ def request_edit(request):
 
 
 def git_pull(request):
-	#p = subprocess.Popen(["git", "pull"]) #, cwd=path)
-	#p.wait()
-	#data = p.stdout
-
-	data = check_output(["git", "pull"])
-	return HttpResponse(data, content_type='text/plain')
+	if request.user.is_staff:
+		data = check_output(["git", "pull"])
+		# data += check_output(["systemctl", "restart", "gunicorn"])  # Doesn't work (no root)
+		return HttpResponse(data, content_type='text/plain')
+	else:
+		return HttpResponse('Nice try.')
