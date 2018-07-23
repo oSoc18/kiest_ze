@@ -11,13 +11,16 @@ def index(request):
 	context = {}
 	return render(request, 'index.html', context)
 
+
 def lijst(request):
 	context = {}
 	return render(request, 'lijst.html', context)
 
+
 def detail(request):
 	context = {}
 	return render(request, 'detail.html', context)
+
 
 def demoquery(request):
 	context = {}
@@ -35,11 +38,13 @@ def demoquery(request):
 
 	return render(request, 'query.html', context)
 
+
 def serialise_get_object(get_object):
 	data = serializers.serialize('json', [get_object, ])
 	struct = json.loads(data)
 	data = json.dumps(struct[0])
 	return data
+
 
 def get_politieker_data(request):
 	politieker_id = request.GET.get('id')
@@ -176,8 +181,6 @@ def request_edit(request):
 				edit.save()
 			else:  # Suggestion already exists ==> use that data and approve the suggestion
 				guid = already_exists[0].guid
-
-
 
 			approver = Approver()
 			approver.aanpassing_id = guid
