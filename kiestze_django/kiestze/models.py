@@ -52,10 +52,10 @@ class Politieker(models.Model):
 class PolitiekerPartijLink(models.Model):
 	partij = models.ForeignKey(Partij, on_delete=models.CASCADE)
 	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
-	volgnummer = models.IntegerField()
-	voorkeurstemmen = models.IntegerField()
-	verkozen = models.BooleanField()
-	verkozen_volgnummer = models.IntegerField()
+	volgnummer = models.IntegerField(blank=True)
+	voorkeurstemmen = models.IntegerField(blank=True)
+	verkozen = models.BooleanField(blank=True, default=False)
+	verkozen_volgnummer = models.IntegerField(blank=True)
 
 	class Meta:
 		verbose_name = 'Politieker_partij_link'

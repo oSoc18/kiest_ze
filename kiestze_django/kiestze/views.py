@@ -253,6 +253,20 @@ def request_edit(request):
 			return HttpResponse('Please enter all required GET parameters<br><br>' + str(e))
 
 
+def create_link_using_id(request):
+	if request.method == 'POST':
+		partij_id = request.GET.get('partij')
+		politieker_id = request.GET.get('politieker')
+
+		link = PolitiekerPartijLink()
+		link.partij = partij_id
+		link.politieker = politieker_id
+		link.save()
+		return HttpResponse('Link successfully created.')
+
+	return render(request, 'create_link_using_id.html')
+
+
 def git_pull(request):
 	if request.user.is_staff:
 		data = check_output(["git", "pull"])
