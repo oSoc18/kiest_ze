@@ -19,7 +19,7 @@ monster_query = sql_common
 
 
 
-tableName = "Partij"
+tableName = "Politiekers"
 url = f'https://api.airtable.com/v0/app5SoKsYnuOY96ef/{tableName}?api_key=key2Jl1YfS4WWBFa5'
 
 params = dict(
@@ -60,5 +60,5 @@ INSERT INTO `air_Politiekers` (`id`, `otb_id`, `naam`, `geboorte`, `geslacht`) V
 """
 # example record key: recmbyKsOdabhIOCd
 
-f = open("sql_airtables.sql","wb")
+f = open("airtables_postgresql.sql","wb")
 f.write(monster_query.encode("UTF-8"))
