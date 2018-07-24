@@ -27,7 +27,6 @@ cur = conn.cursor()
 resp = requests.get(url=url)
 json_object = resp.json() # Check the JSON Response Content documentation below
 
-
 for record in json_object["records"]:
 	naam_stukken = record["fields"]["Naam"].split(' ')
 	cur.execute("SELECT * FROM kiestze_politieker WHERE naam ILIKE '%"+naam_stukken[0]+"%' AND  naam ILIKE '%"+naam_stukken[-1]+"%';")
@@ -41,7 +40,7 @@ for record in json_object["records"]:
 
 	for fieldKey in record["fields"]:
 		if fieldKey in ["Partij", "Mandaten", "Naam"]:
-			print("IGNORED")
+			#print("IGNORED")
 			continue
 
 		fieldValue = record["fields"][fieldKey]
@@ -49,7 +48,7 @@ for record in json_object["records"]:
 			# assume this is image
 			fieldValue = fieldValue[0]["thumbnails"]["large"]["url"]
 
-		print(fieldValue)
+		#print(fieldValue)
 
 		guid = uuid.uuid4()
 		column_name = fieldKey
@@ -59,7 +58,6 @@ for record in json_object["records"]:
 		sql += "('%s', '%s', '%s', '%s', %s),\n" % (guid, column_name, accepted_date, suggested_value, politieker_id)
 		print(" ")
 
-print(type("test"))
 # example record key: recmbyKsOdabhIOCd
 
 sql = sql[:-2] # remove trailing comma
@@ -67,3 +65,4 @@ sql += "\n;\n\n\n\n\n"
 
 f = open("airtables_postgresql.sql","wb")
 f.write(sql.encode("UTF-8"))
+
