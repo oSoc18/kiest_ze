@@ -241,6 +241,7 @@ a:hover {
   width: 16.9rem;
   height: 18rem;
   size: percentage;
+  object-fit: cover;
 }
 
 .card-title {
