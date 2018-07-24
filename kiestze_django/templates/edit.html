@@ -39,7 +39,6 @@
 		}
 
 
-
 		function approve(politieker, fieldname, suggested_value) {
 			let data = new FormData();
 			data.append('csrfmiddlewaretoken', csrfmiddlewaretoken.value);
@@ -56,8 +55,8 @@
 			xhr.send(data);
 		}
 
-		let politieker_id = '22295';
-		let fieldname = 'geboorte';
+		let politieker_id = {{ politieker }};
+		console.log(politieker_id);
 
 		let suggestedValue = document.getElementsByName('suggestedValue')[0];
 		let submitButton = document.getElementsByName('submitButton')[0];

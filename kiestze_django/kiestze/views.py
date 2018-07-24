@@ -27,28 +27,31 @@ def privacy(request):
 
 
 class FieldWrapper:
-	def __init__(self, fieldname):
+	def __init__(self, fieldname, politieker):
 		self.fieldname = fieldname
+		self.politieker = politieker
 
 	def getSuggestedEdits(self):
-		return User_edit.objects.filter(column_name=self.fieldname)
+		return User_edit.objects.filter(column_name=self.fieldname, politieker_id=self.politieker)
 	suggestedEdits = property(getSuggestedEdits)
 
 
 def edit(request):
-	# suggestedEdits = User_edit.objects.all()
-	fields = [
-		FieldWrapper(fieldname='geboorte'),
-		FieldWrapper(fieldname='twitter'),
-		FieldWrapper(fieldname='facebook')
-	]
-	# approvers = {}
+	politieker = request.GET.get('politieker')
 
-	# for edit in suggestedEdits:
-	# 	approvers[edit.guid] = Approver.objects.filter(aanpassing=edit.guid)
+	count = Politieker.objects.filter(id=politieker).count()
+	if count == 0:
+		return HttpResponse('Politieker not found.')
+
+	fields = [
+		FieldWrapper(fieldname='geboorte', politieker=politieker),
+		FieldWrapper(fieldname='twitter', politieker=politieker),
+		FieldWrapper(fieldname='facebook', politieker=politieker)
+	]
 
 	context = {
 		'fields': fields,
+		'politieker': politieker,
 	}
 	return render(request, 'edit.html', context)
 
