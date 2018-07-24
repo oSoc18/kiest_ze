@@ -69,7 +69,7 @@ class EditableField(models.Model):
 class UserEdit(models.Model):
 	guid = models.CharField(max_length=36, primary_key=True)  # uuid.uuid4()
 	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
-	field = models.CharField(max_length=100)
+	field = models.ForeignKey(EditableField, on_delete=models.CASCADE)
 	accepted_date = models.DateTimeField(null=True, blank=True)
 	suggested_value = models.CharField(max_length=300)
 
