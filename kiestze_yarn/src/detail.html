@@ -41,7 +41,7 @@
         </div>
       </div>
     </header>
-    <main class="d-flex flex-row justify-content-around align-items-top mt-5">
+    <main class="d-flex flex-row justify-content-around align-items-top mt-5" style="height: 85vh;">
       <section class="d-flex flex-column justify-content-around align-items-center linker-helft">
         <div class="d-flex flex-row justify-content-between align-items-center w-100">
           <a href="#">
@@ -78,121 +78,122 @@
         </div>
       </section>
       <section style="color: white;">
-        <article>
+        <article class="mb-5">
           <div>
-            <div>
-              <h3 class="lead mb-3">Beleidsthema's:</h3>
-              <img src="" alt="">
+            <div class="text-left">
+              <h3 class="lead">Beleidsthema's:</h3>
+              <img src="static/assets/img/yellow-detail-line.svg" alt="yellow" width="40" height="3">
             </div>
-            <div>
-              <p>Gezondheid</p>
-              <p>Mobiliteit</p>
-              <img src="" alt="toevoegen">
+            <div class="d-flex flex-row align-items-top mb-3">
+              <p class="mr-2">Gezondheid,</p>
+              <p class="mr-2">Mobiliteit</p>
+              <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1 ml-2">
             </div>
           </div>
         </article>
-        <div class="d-flex flex-row justify-content-around">
+        <div class="d-flex flex-row justify-content-between align-items-top">
           <article>
-            <div>
+            <div class="mb-5">
               <div>
-                <h3 class="lead mb-3">Beroep:</h3>
-                <img src="" alt="">
+                <h3 class="lead">Beroep:</h3>
+                <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div class="popover__wrapper">
-                <img src="" alt="verifieer">
-                <p class="linken">Administratief Bediende</p>
+                <div class="d-flex flex-row mb-3">
+                  <img src="static/assets/img/dude1.svg" alt="verifieer" width="40" height="40">
+                  <p class="linken" style="color: white;">Suggereert <strong>notaris</strong></p>
+                </div>
                 <div class="push popover__content" style="margin-top: -.8rem;">
                   <p class="popover__message">Is dit juist?</p>
-                  <button>Ja</button>
-                  <button>Nee</button>
+                  <div class="d-flex flex-row">
+                    <button class="mr-4">Ja</button>
+                    <button>Nee</button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div>
+            <div class="mb-5">
               <div>
-                <h3 class="lead mb-3">Opleiding:</h3>
-                <img src="" alt="">
+                <h3 class="lead">Opleiding:</h3>
+                <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div class="popover__wrapper">
-                <img src="" alt="toevoegen">
-                <p class="linken">Wat zijn de studies van Shirley?</p>
+                <div class="d-flex flex-row">
+                  <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1">
+                  <p class="linken ml-2" style="color: white">Vul aan</p>
+                </div>
                 <div class="push popover__content" style="margin-top: -.8rem;">
                   <p class="popover__message"></p>
-                  <input type="text" class="form-control" id="input-studies" placeholder="Studies" name="input_studies"
+                  <input type="text" class="form-control mb-2 form-popover" id="input-studies" placeholder="Studies" name="input_studies"
                     autocomplete="off">
                   <button>Toevoegen</button>
                 </div>
               </div>
             </div>
-            <div>
+            <div class="mb-5">
               <div>
-                <h3 class="lead mb-3">Eigen website:</h3>
-                <img src="" alt="">
+                <h3 class="lead">Eigen website:</h3>
+                <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div class="popover__wrapper">
-                <img src="" alt="toevoegen">
-                <p class="linken">Wat is de url van de website?</p>
+                <div class="d-flex flex-row">
+                  <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1">
+                  <p class="linken ml-2" style="color: white;">Voeg toe</p>
+                </div>
                 <div class="push popover__content" style="margin-top: -.8rem;">
                   <p class="popover__message"></p>
-                  <input type="text" class="form-control" id="input-studies" placeholder="url" name="input_url" autocomplete="off">
+                  <input type="text" class="form-control mb-2 form-popover" id="input-studies" placeholder="url" name="input_url" autocomplete="off">
                   <button>Toevoegen</button>
                 </div>
               </div>
             </div>
           </article>
-          <article>
-            <div>
+          <article class="ml-5">
+            <div class="mb-5">
               <div>
                 <div class="popover__wrapper">
-                  <a href="#" class="linken">
-                    <h2 class="lead mt-2 linken">Mandaten</h2>
+                  <a href="#" class="linken d-flex flex-row">
+                    <h2 class="lead linken" style="color: white">Mandaten</h2>
+                    <img src="static/assets/img/info-circle.svg" alt="vraagteken" class="ml-2">
                   </a>
                   <div class="push popover__content">
                     <p class="popover__message">De bevoegdheid om in naam van iemand anders te handelen. Bv. Een mandaat van de minister geeft de bevoegdheid
                       aan een ambtenaar om in naam van de minister besluiten te nemen.</p>
                   </div>
-                  <img src="" alt="vraagteken">
                 </div>
-                <img src="" alt="">
+                <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
-              <div>
-                <img src="" alt="vast-bol">
-                <p>Een mandaat</p>
+              <div class="d-flex flex-row">
+                <img src="static/assets/img/blue-bol.svg" alt="vast-bol" width="20" height="20" class="mt-1">
+                <p class="ml-2">Een mandaat</p>
               </div>
-              <div>
-                <img src="" alt="vast-bol">
-                <p>Een mandaat</p>
+              <div class="d-flex flex-row">
+                <img src="static/assets/img/blue-bol.svg" alt="vast-bol" width="20" height="20" class="mt-1">
+                <p class="ml-2">Een mandaat</p>
               </div>
             </div>
-            <div>
+            <div class="mb-5">
               <div>
-                <h3 class="lead mb-3">Hobby's</h3>
-                <img src="" alt="">
+                <h3 class="lead">Hobby's</h3>
+                <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div>
                 <div class="popover__wrapper">
-                  <img src="" alt="">
-                  <p class="linken">Hobby één</p>
-                  <div class="push popover__content" style="margin-top: -.8rem;">
-                    <p class="popover__message"></p>
-                    <img src="" alt="profielfoto">
-                    <p>Persoonsnaam voerde dit in</p>
+                  <div class="linken d-flex flex-row">
+                    <img src="static/assets/img/blue-bol.svg" alt="vast-bol" width="20" height="20" class="mt-1">
+                    <p style="color: white" class="ml-2">Hobby één</p>
                   </div>
-                </div>
-                <div>
-                  <img src="" alt="">
-                  <p class="linken">Hobby twee</p>
                   <div class="push popover__content" style="margin-top: -.8rem;">
                     <p class="popover__message"></p>
-                    <img src="" alt="profielfoto">
-                    <p>Persoonsnaam voerde dit in</p>
+                    <img src="static/assets/img/dude1.svg" alt="profielfoto" width="60" height="60">
+                    <p style="margin-top: -1rem;">Persoonsnaam voerde dit in</p>
                   </div>
                 </div>
                 <div class="popover__wrapper">
                   <img src="" alt="" class="linken">
                   <div class="push popover__content" style="margin-top: -.8rem;">
                     <p class="popover__message"></p>
-                    <input type="text" class="form-control" id="input-hobby" placeholder="Studies" name="input_hobby"
+                    <input type="text" class="form-control mb-2 form-popover" id="input-hobby" placeholder="Studies" name="input_hobby"
                       autocomplete="off">
                     <button>Toevoegen</button>
                   </div>
