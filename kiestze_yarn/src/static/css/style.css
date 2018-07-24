@@ -325,3 +325,67 @@ button:focus {
 .div-load {
   height: 3rem;
 }
+
+.carousel-control-prev {
+  opacity: 1;
+  top: 85vh;
+  left: 41vw;
+}
+
+.carousel-control-prev:hover {
+  opacity: 1;
+}
+
+.carousel-control-next {
+  opacity: 1;
+  top: 85vh;
+}
+
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+.uitleg-image-een {
+  margin-top: 8rem;
+}
+
+.uitleg-image-twee {
+  margin-top: 6rem;
+}
+
+.terug {
+  color: #3c3c3c;
+  font-family: 'Brandon_reg';
+  font-size: 1.3rem;
+}
+
+.terug-div {
+  border: solid #3c3c3c .2rem;
+  border-radius: 10rem;
+  padding: .5rem;
+  margin-top: -4rem;
+  margin-bottom: 3rem;
+  width: 8rem;
+}
+
+.carousel-indicators {
+  left: 42vw;
+  background-color: transparent;
+  bottom: 3vh;
+}
+
+.carousel-indicators li {
+  background-color: transparent;
+  background-image: url(../assets/img/lege_bol.svg);
+  background-repeat: no-repeat;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.carousel-indicators .active {
+  background-color: transparent;
+  background-image: url(../assets/img/volle_bol.svg);
+  background-repeat: no-repeat;
+  width: 1.5rem;
+  height: 1.5rem;
+}
