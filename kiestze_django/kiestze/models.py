@@ -69,6 +69,9 @@ class EditableField(models.Model):
 		verbose_name = 'EditableField'
 		verbose_name_plural = 'EditableField'
 
+	def __str__(self):
+		return self.fieldname
+
 
 class UserEdit(models.Model):
 	guid = models.CharField(max_length=36, primary_key=True)  # uuid.uuid4()

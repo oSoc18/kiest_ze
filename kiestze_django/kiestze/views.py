@@ -43,11 +43,12 @@ def edit(request):
 	if count == 0:
 		return HttpResponse('Politieker not found.')
 
-	fields = [
-		FieldWrapper(fieldname='geboorte', politieker=politieker),
-		FieldWrapper(fieldname='twitter', politieker=politieker),
-		FieldWrapper(fieldname='facebook', politieker=politieker)
-	]
+	all_fields = EditableField.objects.all()
+	fields = []
+	return HttpResponse(all_fields)
+
+	for field in all_fields:
+		fields.append(FieldWrapper(fieldname=field.fieldname, politieker=politieker))
 
 	context = {
 		'fields': fields,
