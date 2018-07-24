@@ -71,9 +71,9 @@ for k in editablefield_names:
 	sql_editablefield += "('"+k+"'),\n"
 #('Foto')
 sql_editablefield = sql_editablefield[:-2] # remove trailing comma
-sql_editablefield += "\n;\n\n\n\n\n"
+sql_editablefield += "\n"
 sql_editablefield += """
-ON CONFLICT (id) DO NOTHING;"""
+ON CONFLICT (fieldname) DO NOTHING;\n\n\n\n\n"""
 
 
 sql = sql[:-2] # remove trailing comma
