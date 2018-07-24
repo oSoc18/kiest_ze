@@ -37,5 +37,6 @@ urlpatterns = [
     path('get_all_gemeentes', views.get_all_gemeentes),
     path('get_partij', views.get_partij),
     path('get_politieker_met_naam', views.get_politieker_met_naam),
+    path('get_last_accepted_edit', views.get_last_accepted_edit),
     path('request_edit', views.request_edit),
 ]

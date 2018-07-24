@@ -3,6 +3,7 @@ from django.utils import timezone
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
 
+
 class Gemeente(models.Model):
 	naam = models.CharField(max_length=100)
 	nis = models.IntegerField(primary_key=True)
@@ -59,6 +60,10 @@ class Politieker_partij_link(models.Model):
 	class Meta:
 		verbose_name = 'Politieker_partij_link'
 		verbose_name_plural = 'Politieker_partij_link'
+
+
+class EditableField(models.Model):
+	fieldname = models.CharField(max_length=100)
 
 
 class User_edit(models.Model):

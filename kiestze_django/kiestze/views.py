@@ -203,6 +203,25 @@ def get_politieker_met_naam(request):
 	return HttpResponse(data, content_type='application/json')
 
 
+def get_last_accepted_edit(request):
+	politieker = request.GET.get('politieker')
+
+	accepted_edits = User_edit.objects.filter(politieker=politieker).exclude(accepted_date__isnull=True)
+	count = accepted_edits.count()
+
+	if count == 0:
+		return HttpResponse('No accepted edits for this politieker')
+
+	fields = EditableField.objects.all()
+	edits = {}
+	for field in fields:
+		last_edit = accepted_edits.filter(column_name=field.fieldname).values().last()  # Django magic
+		edits[field.fieldname] = last_edit
+
+	data = json.dumps(edits, default=str)
+	return HttpResponse(data, content_type='application/json')
+
+
 def request_edit(request):
 	if not request.user.is_authenticated:
 		return HttpResponse('You\'re not logged in. Get out.')
