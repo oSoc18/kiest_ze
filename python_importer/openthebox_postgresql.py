@@ -17,7 +17,7 @@ cur = conn.cursor()
 
 # same as in python_importer
 sql = """
-INSERT INTO public.kiestze_user_edit(guid, column_name, accepted_date, suggested_value, politieker_id) VALUES
+INSERT INTO public.kiestze_useredit(guid, field, accepted_date, suggested_value, politieker_id) VALUES
 
 """
 

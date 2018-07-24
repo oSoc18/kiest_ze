@@ -11,9 +11,11 @@ import secret
 # C:\Users\emill\dev\kiest_ze\python_importer\airtables_postgresql.py
 # C:\Users\emill\dev\kiest_ze\kiestze_django\kiestze_django\secret.py
 
+
+
 # same as in python_importer
 sql = """
-INSERT INTO public.kiestze_user_edit(guid, column_name, accepted_date, suggested_value, politieker_id) VALUES
+INSERT INTO public.kiestze_useredit(guid, field, accepted_date, suggested_value, politieker_id) VALUES
 
 """
 
@@ -26,6 +28,8 @@ cur = conn.cursor()
 
 resp = requests.get(url=url)
 json_object = resp.json() # Check the JSON Response Content documentation below
+
+editablefield_names = {}
 
 for record in json_object["records"]:
 	naam_stukken = record["fields"]["Naam"].split(' ')
@@ -48,7 +52,8 @@ for record in json_object["records"]:
 			# assume this is image
 			fieldValue = fieldValue[0]["thumbnails"]["large"]["url"]
 
-		#print(fieldValue)
+		fieldKey = fieldKey.lower()
+		editablefield_names[fieldKey] = "Numb value" # Just look at the keys
 
 		guid = uuid.uuid4()
 		column_name = fieldKey
@@ -60,9 +65,22 @@ for record in json_object["records"]:
 
 # example record key: recmbyKsOdabhIOCd
 
+sql_editablefield = """INSERT INTO kiestze_editablefield (fieldname) VALUES 
+"""
+for k in editablefield_names:
+	sql_editablefield += "('"+k+"'),\n"
+#('Foto')
+sql_editablefield = sql_editablefield[:-2] # remove trailing comma
+sql_editablefield += "\n;\n\n\n\n\n"
+sql_editablefield += """
+ON CONFLICT (id) DO NOTHING;"""
+
+
 sql = sql[:-2] # remove trailing comma
 sql += "\n;\n\n\n\n\n"
 
+sql_all = sql_editablefield + sql
+
 f = open("airtables_postgresql.sql","wb")
-f.write(sql.encode("UTF-8"))
+f.write(sql_all.encode("UTF-8"))
 
