@@ -49,7 +49,7 @@ class Politieker(models.Model):
 		return self.naam + " [" + str(self.id) + "]"
 
 
-class Politieker_partij_link(models.Model):
+class PolitiekerPartijLink(models.Model):
 	partij = models.ForeignKey(Partij, on_delete=models.CASCADE)
 	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
 	volgnummer = models.IntegerField()
@@ -66,10 +66,10 @@ class EditableField(models.Model):
 	fieldname = models.CharField(max_length=100)
 
 
-class User_edit(models.Model):
-	guid = models.CharField(max_length=36, primary_key=True)  # uuid.uuid4()
+class UserEdit(models.Model):
+	id = models.CharField(max_length=36, primary_key=True)  # uuid.uuid4()
 	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
-	column_name = models.CharField(max_length=100)
+	field = models.CharField(max_length=100)
 	accepted_date = models.DateTimeField(null=True, blank=True)
 	suggested_value = models.CharField(max_length=300)
 
@@ -77,16 +77,16 @@ class User_edit(models.Model):
 		verbose_name = 'User_edit'
 		verbose_name_plural = 'User_edit'
 
-	def getApprovers(self):
+	def get_approvers(self):
 		return Approver.objects.filter(aanpassing=self.guid)
-	approvers = property(getApprovers)
+	approvers = property(get_approvers)
 
 	def __str__(self):
-		return "[%s] %s (%s==>%s)" %(self.guid, self.politieker, self.column_name, self.suggested_value)
+		return "[%s] %s (%s==>%s)" %(self.uuid, self.politieker, self.field, self.suggested_value)
 
 
 class Approver(models.Model):
-	aanpassing = models.ForeignKey(User_edit, on_delete=models.CASCADE)
+	aanpassing = models.ForeignKey(UserEdit, on_delete=models.CASCADE)
 	user_id = models.ForeignKey(User, on_delete=models.CASCADE) # SocialAccount
 	date = models.DateTimeField(default=timezone.now)
 
