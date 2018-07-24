@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
-import uuid #https://github.com/skorokithakis/shortuuid
+import uuid  # https://github.com/skorokithakis/shortuuid
 from django.core import serializers
 import json
 from subprocess import check_output
 import datetime
+
 
 def index(request):
 	context = {}
@@ -27,35 +28,39 @@ def privacy(request):
 
 
 class FieldWrapper:
-	def __init__(self, fieldname):
+	def __init__(self, fieldname, politieker):
 		self.fieldname = fieldname
+		self.politieker = politieker
 
 	def getSuggestedEdits(self):
-		return User_edit.objects.filter(column_name=self.fieldname)
+		return User_edit.objects.filter(column_name=self.fieldname, politieker_id=self.politieker)
 	suggestedEdits = property(getSuggestedEdits)
 
 
 def edit(request):
-	# suggestedEdits = User_edit.objects.all()
-	fields = [
-		FieldWrapper(fieldname='geboorte'),
-		FieldWrapper(fieldname='twitter'),
-		FieldWrapper(fieldname='facebook')
-	]
-	# approvers = {}
+	politieker = request.GET.get('politieker')
 
-	# for edit in suggestedEdits:
-	# 	approvers[edit.guid] = Approver.objects.filter(aanpassing=edit.guid)
+	count = Politieker.objects.filter(id=politieker).count()
+	if count == 0:
+		return HttpResponse('Politieker not found.')
+
+	fields = [
+		FieldWrapper(fieldname='geboorte', politieker=politieker),
+		FieldWrapper(fieldname='twitter', politieker=politieker),
+		FieldWrapper(fieldname='facebook', politieker=politieker)
+	]
 
 	context = {
 		'fields': fields,
+		'politieker': politieker,
 	}
 	return render(request, 'edit.html', context)
 
 
 def demoquery(request):
-	context = {}
-	context['text'] = []
+	context = {
+		'text': []
+	}
 
 	politiekers = Politieker.objects.filter(naam__search='John')
 	for x in politiekers:
@@ -184,7 +189,7 @@ def get_politiekers(request):
 	got_all = Politieker_partij_link.objects.only("politieker").filter(partij__nis=gemeente_nis, partij__jaar=jaar)
 	arr = query_result_to_array(got_all, "politieker")
 	
-	got_all = Politieker.objects.filter(id__in=arr) # [:10]
+	got_all = Politieker.objects.filter(id__in=arr)  # [:10]
 	data = query_result_to_canonical_json(got_all)
 	# data = got_all.query
 	return HttpResponse(data, content_type='application/json')
@@ -193,25 +198,9 @@ def get_politiekers(request):
 def get_politieker_met_naam(request):
 	naam = request.GET.get('naam')
 
-	got_all = Politieker.objects.filter(naam__icontains = naam)  # [:10]
+	got_all = Politieker.objects.filter(naam__icontains=naam)  # [:10]
 	data = query_result_to_canonical_json(got_all)
 	return HttpResponse(data, content_type='application/json')
-
-
-# def directly_edit_field(request):  #For reference
-# 	# politieker = request.GET['politieker']
-# 	politieker = '36658'
-# 	# fieldname = request.GET['fieldname']
-# 	fieldname = 'geslacht'
-# 	# value = request.GET['value']
-# 	value = 'F'
-#
-# 	object = Politieker.objects.get(id=politieker)
-# 	# object.geslacht = value
-# 	setattr(object, fieldname, value)
-# 	object.save()
-#
-# 	return HttpResponse('Done.')
 
 
 def request_edit(request):
@@ -249,7 +238,6 @@ def request_edit(request):
 			return HttpResponse('Done')
 		except Exception as e:
 			return HttpResponse('Please enter all required GET parameters<br><br>' + str(e))
-
 
 
 def git_pull(request):
