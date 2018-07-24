@@ -12,7 +12,7 @@ class PolitiekerAdmin(admin.ModelAdmin):
 
 	def get_form(self, request, obj=None, **kwargs):
 		form = super(PolitiekerAdmin, self).get_form(request, obj, **kwargs)
-		form.base_fields['otb_id'].initial = 0 # for easy input
+		form.base_fields['otb_id'].initial = 0  # for easy input
 		return form
 
 
@@ -22,15 +22,15 @@ class PartijAdmin(admin.ModelAdmin):
 
 	def get_form(self, request, obj=None, **kwargs):
 		form = super(PartijAdmin, self).get_form(request, obj, **kwargs)
-		form.base_fields['jaar'].initial = 2018 # temporary for easy input
-		form.base_fields['nis'].initial = 36012 # temporary for easy input
+		form.base_fields['jaar'].initial = 2018  # temporary for easy input
+		form.base_fields['nis'].initial = 36012  # temporary for easy input
 		return form
 
 
 admin.site.register(Partij, PartijAdmin)
 admin.site.register(Politieker, PolitiekerAdmin)
-admin.site.register(Politieker_partij_link)
+admin.site.register(PolitiekerPartijLink)
 admin.site.register(Gemeente, GemeenteAdmin)
-admin.site.register(User_edit)
+admin.site.register(UserEdit)
 admin.site.register(Approver)
 admin.site.register(EditableField)

@@ -5,7 +5,6 @@ import uuid  # https://github.com/skorokithakis/shortuuid
 from django.core import serializers
 import json
 from subprocess import check_output
-import datetime
 
 
 def index(request):
@@ -32,9 +31,9 @@ class FieldWrapper:
 		self.fieldname = fieldname
 		self.politieker = politieker
 
-	def getSuggestedEdits(self):
-		return User_edit.objects.filter(column_name=self.fieldname, politieker_id=self.politieker)
-	suggestedEdits = property(getSuggestedEdits)
+	def get_suggested_edits(self):
+		return UserEdit.objects.filter(field=self.fieldname, politieker_id=self.politieker)
+	suggestedEdits = property(get_suggested_edits)
 
 
 def edit(request):
@@ -64,7 +63,7 @@ def demoquery(request):
 
 	politiekers = Politieker.objects.filter(naam__search='John')
 	for x in politiekers:
-		link = Politieker_partij_link.objects.get(politieker_id=x.id)
+		link = PolitiekerPartijLink.objects.get(politieker_id=x.id)
 		partij_id = link.partij_id
 		partij = Partij.objects.get(id=partij_id)
 		partijnaam = partij.lijstnaam
@@ -84,8 +83,8 @@ def serialise_get_object(get_object):
 
 def get_politieker_data(request):
 	politieker_id = request.GET.get('id')
-	politieker_id = int(politieker_id )
-	politiekers = Politieker.objects.get(id=politieker_id )
+	politieker_id = int(politieker_id)
+	politiekers = Politieker.objects.get(id=politieker_id)
 
 	data = serialise_get_object(politiekers)
 	return HttpResponse(data, content_type='application/json')
@@ -95,11 +94,6 @@ def get_all_partij(request):
 	got_all = Partij.objects.filter()
 	data = serializers.serialize('json', got_all)
 	return HttpResponse(data, content_type='application/json')
-
-
-def myconverter(o):
-	if isinstance(o, datetime.datetime):
-		return "lolz" # o.__str__()
 
 
 def query_result_to_canonical_json(list_object):
@@ -158,7 +152,7 @@ def get_all_politieker_partij_link_van_gemeente(request):
 	jaar = request.GET.get('jaar')
 	jaar = int(jaar)
 
-	got_all = Politieker_partij_link.objects.filter(partij__nis=gemeente_nis, partij__jaar=jaar)
+	got_all = PolitiekerPartijLink.objects.filter(partij__nis=gemeente_nis, partij__jaar=jaar)
 	data = query_result_to_canonical_json(got_all)
 	return HttpResponse(data, content_type='application/json')
 
@@ -186,7 +180,7 @@ def get_politiekers(request):
 	jaar = request.GET.get('jaar')
 	jaar = int(jaar)
 
-	got_all = Politieker_partij_link.objects.only("politieker").filter(partij__nis=gemeente_nis, partij__jaar=jaar)
+	got_all = PolitiekerPartijLink.objects.only("politieker").filter(partij__nis=gemeente_nis, partij__jaar=jaar)
 	arr = query_result_to_array(got_all, "politieker")
 	
 	got_all = Politieker.objects.filter(id__in=arr)  # [:10]
@@ -206,7 +200,7 @@ def get_politieker_met_naam(request):
 def get_last_accepted_edit(request):
 	politieker = request.GET.get('politieker')
 
-	accepted_edits = User_edit.objects.filter(politieker=politieker).exclude(accepted_date__isnull=True)
+	accepted_edits = UserEdit.objects.filter(politieker=politieker).exclude(accepted_date__isnull=True)
 	count = accepted_edits.count()
 
 	if count == 0:
@@ -215,7 +209,7 @@ def get_last_accepted_edit(request):
 	fields = EditableField.objects.all()
 	edits = {}
 	for field in fields:
-		last_edit = accepted_edits.filter(column_name=field.fieldname).values().last()  # Django magic
+		last_edit = accepted_edits.filter(field=field.fieldname).values().last()  # Django magic
 		edits[field.fieldname] = last_edit
 
 	data = json.dumps(edits, default=str)
@@ -231,14 +225,14 @@ def request_edit(request):
 			fieldname = request.POST['fieldname']
 			value = request.POST['value']
 
-			already_exists = User_edit.objects.filter(politieker=politieker, column_name=fieldname, suggested_value=value)
+			already_exists = UserEdit.objects.filter(politieker=politieker, field=fieldname, suggested_value=value)
 			if already_exists.count() == 0:  # Suggestion doesn't exist ==> create new one
 				guid = uuid.uuid4()
 
-				edit = User_edit()
+				edit = UserEdit()
 				edit.guid = guid
 				edit.politieker_id = politieker
-				edit.column_name = fieldname
+				edit.field = fieldname
 				edit.accepted_date = None  # Null because not yet accepted
 				edit.suggested_value = value
 				edit.save()
