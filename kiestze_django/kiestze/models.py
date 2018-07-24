@@ -65,7 +65,7 @@ class User_edit(models.Model):
 	guid = models.CharField(max_length=36, primary_key=True)  # uuid.uuid4()
 	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
 	column_name = models.CharField(max_length=100)
-	accepted_date = models.DateField(null=True, blank=True)
+	accepted_date = models.DateTimeField(null=True, blank=True)
 	suggested_value = models.CharField(max_length=300)
 
 	class Meta:
@@ -83,7 +83,7 @@ class User_edit(models.Model):
 class Approver(models.Model):
 	aanpassing = models.ForeignKey(User_edit, on_delete=models.CASCADE)
 	user_id = models.ForeignKey(User, on_delete=models.CASCADE) # SocialAccount
-	date = models.DateField(default=timezone.now)
+	date = models.DateTimeField(default=timezone.now)
 
 	def __str__(self):
 		return "[%s] (%s) %s" %(self.date, self.aanpassing, self.user_id)
