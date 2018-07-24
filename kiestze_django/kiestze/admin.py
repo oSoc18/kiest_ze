@@ -27,10 +27,22 @@ class PartijAdmin(admin.ModelAdmin):
 		return form
 
 
+class UserEditAdmin(admin.ModelAdmin):
+	list_display = ('guid', 'politieker', 'field', 'suggested_value', 'accepted_date')
+
+
+class ApproverAdmin(admin.ModelAdmin):
+	list_display = ('id', 'aanpassing', 'user_id')
+
+
+class EditableFieldAdmin(admin.ModelAdmin):
+	list_display = ('id', 'fieldname')
+
+
 admin.site.register(Partij, PartijAdmin)
 admin.site.register(Politieker, PolitiekerAdmin)
 admin.site.register(PolitiekerPartijLink)
 admin.site.register(Gemeente, GemeenteAdmin)
-admin.site.register(UserEdit)
-admin.site.register(Approver)
-admin.site.register(EditableField)
+admin.site.register(UserEdit, UserEditAdmin)
+admin.site.register(Approver, ApproverAdmin)
+admin.site.register(EditableField, EditableFieldAdmin)

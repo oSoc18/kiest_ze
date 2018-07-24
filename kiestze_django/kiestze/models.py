@@ -65,6 +65,10 @@ class PolitiekerPartijLink(models.Model):
 class EditableField(models.Model):
 	fieldname = models.CharField(max_length=100)
 
+	class Meta:
+		verbose_name = 'EditableField'
+		verbose_name_plural = 'EditableField'
+
 
 class UserEdit(models.Model):
 	guid = models.CharField(max_length=36, primary_key=True)  # uuid.uuid4()
@@ -74,8 +78,8 @@ class UserEdit(models.Model):
 	suggested_value = models.CharField(max_length=300)
 
 	class Meta:
-		verbose_name = 'User_edit'
-		verbose_name_plural = 'User_edit'
+		verbose_name = 'UserEdit'
+		verbose_name_plural = 'UserEdit'
 
 	def get_approvers(self):
 		return Approver.objects.filter(aanpassing=self.guid)
@@ -89,6 +93,10 @@ class Approver(models.Model):
 	aanpassing = models.ForeignKey(UserEdit, on_delete=models.CASCADE)
 	user_id = models.ForeignKey(User, on_delete=models.CASCADE) # SocialAccount
 	date = models.DateTimeField(default=timezone.now)
+
+	class Meta:
+		verbose_name = 'Approver'
+		verbose_name_plural = 'Approver'
 
 	def __str__(self):
 		return "[%s] (%s) %s" %(self.date, self.aanpassing, self.user_id)
