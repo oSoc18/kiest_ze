@@ -63,7 +63,8 @@ function GetTableUrl(tableName)
 function GetDjangoUrl(queryString)
 {
   queryString = queryString.replace(/^\/+/g, '');
-  return `http://127.0.0.1:8000/${  queryString}`
+  return `https://kiestze.be/${queryString}`
+  //return `http://127.0.0.1:8000/${queryString}`
 }
 
 export { StateEnum, JsonRequest, GetTableUrl, GetDjangoUrl};
