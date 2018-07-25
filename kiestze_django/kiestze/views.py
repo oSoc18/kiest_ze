@@ -207,10 +207,8 @@ def get_last_accepted_edit(request):
 	fields = EditableField.objects.all()
 	edits = {}
 	for field in fields:
-		if count > 0:
-			last_edit = accepted_edits.filter(field=field.fieldname).values().last()  # Django magic
-		else:
-			last_edit = ""
+		# field_id = EditableField.objects.get(fieldname=field.i)
+		last_edit = accepted_edits.filter(field=field.id).values().last()  # Django magic
 		edits[field.fieldname] = last_edit
 
 	data = json.dumps(edits, default=str)
