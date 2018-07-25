@@ -9,6 +9,9 @@ const partij_naam = document.getElementById("partij_naam");
 const politieker_website = document.getElementById("politieker_website");
 const politieker_website_input = document.getElementById("politieker_website_input");
 const politieker_website_button = document.getElementById("politieker_website_button");
+const politieker_facebook = document.getElementById("politieker_facebook");
+const politieker_twitter = document.getElementById("politieker_twitter");
+const politieker_linkedin = document.getElementById("politieker_linkedin");
 
 
 politieker_website_button.addEventListener("click", function(evt)
@@ -69,6 +72,25 @@ function UpdateAll()
   politieker_website.innerText = website_value;
   politieker_website.href = website_value;
   //politieker_website_input.value = website_value;
+  
+  if(politieker.edits.facebook == null)
+    politieker_facebook.style.display = "none"
+  else{
+    politieker_facebook.style.display = "inline"
+    politieker_facebook.href = politieker.edits.facebook.suggested_value
+  }
+  if(politieker.edits.twitter == null)
+    politieker_twitter.style.display = "none"
+  else{
+    politieker_twitter.style.display = "inline"
+    politieker_twitter.href = politieker.edits.twitter.suggested_value
+  }
+  if(politieker.edits.linkedin == null)
+    politieker_linkedin.style.display = "none"
+  else{
+    politieker_linkedin.style.display = "inline"
+    politieker_linkedin.href = politieker.edits.linkedin.suggested_value
+  }
 }
 
 const model = {
