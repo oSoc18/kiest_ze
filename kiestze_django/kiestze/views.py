@@ -164,16 +164,26 @@ def get_all_politieker_partij_link_van_gemeente(request):
 	return HttpResponse(data, content_type='application/json')
 
 
+# not accesibly by URL
+# Gives defould zero when not found
+def get_querystring_int(request, varName):
+	gemeente_nis = request.GET.get(varName)
+	if gemeente_nis is not None and gemeente_nis != '':
+		tmpVal = int(gemeente_nis)
+	else:
+		tmpVal = 0 # not found
+	return tmpVal
+
 def get_partij(request):
-	gemeente_nis = request.GET.get('gemeente_nis')
-	gemeente_nis = int(gemeente_nis)
+	gemeente_nis = get_querystring_int(request, 'gemeente_nis')
+	partij_id = get_querystring_int(request, 'partij_id')
+	jaar = get_querystring_int(request, 'jaar')
 
-	jaar = request.GET.get('jaar')
-	jaar = int(jaar)
-
-	if gemeente_nis == 0:
+	if partij_id != 0:
+		got_all = Partij.objects.filter(id = partij_id)
+	elif gemeente_nis == 0:
 		got_all = Partij.objects.filter(jaar=jaar)
-	if jaar == 0:
+	elif jaar == 0:
 		got_all = Partij.objects.filter(nis=gemeente_nis)
 	else:
 		got_all = Partij.objects.filter(nis=gemeente_nis, jaar=jaar)
@@ -228,11 +238,17 @@ def get_object_with_edits_for_politieker(politieker_id):
 
 
 def get_last_accepted_edit(request):
-	politieker = request.GET.get('politieker')
+	politieker_id = request.GET.get('politieker')
 
-	edits = get_object_with_edits_for_politieker(politieker)
+	get_object = Politieker.objects.get(id=politieker_id)
 
-	data = json.dumps(edits, default=str)
+	data = serializers.serialize('python', [get_object, ])
+	data = data[0]["fields"]
+
+	edits = get_object_with_edits_for_politieker(politieker_id)
+	data["edits"] = edits
+
+	data = json.dumps(data, default=str)
 	return HttpResponse(data, content_type='application/json')
 
 

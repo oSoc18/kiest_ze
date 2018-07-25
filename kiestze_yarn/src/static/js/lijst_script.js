@@ -193,7 +193,7 @@ function DisplayKanidaten() {
       if(politieker.edits.foto)
         logo = politieker.edits.foto.suggested_value
       const shortName2 = politieker.naam.replace(/ /g, "_");
-      option.innerHTML = `<a href="detail?persoon=${politieker_id}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
+      option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
         <img class="card-img-top politieker-img" src="${logo}" alt="Card image cap ">
         <div class="card-body">
         <h3 class="card-title">${politieker.naam}</h5>
