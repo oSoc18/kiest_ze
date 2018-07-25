@@ -3,15 +3,15 @@ html {
 }
 
 @font-face {
-  font-family: 'Brandon_reg';
-  src: url(Brandon_reg.woff2) format('woff2'), url(Brandon_reg.woff) format('woff');
+  font-family: 'Brandon_blk';
+  src: url("../assets/fonts/brandonblk/Brandonblk.woff2") format('woff2'), url("../assets/fonts/brandonblk/Brandonblk.woff") format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Brandon_blk';
-  src: url(Brandonblk.woff2) format('woff2'), url(Brandonblk.woff) format('woff');
+  font-family: 'Brandon_reg';
+  src: url("../assets/fonts/brandonreg/Brandon_reg.woff2") format('woff2'), url("../assets/fonts/brandonreg/Brandon_reg.woff") format('woff');
   font-weight: normal;
   font-style: normal;
 }
