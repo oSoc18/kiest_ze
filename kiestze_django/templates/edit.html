@@ -9,7 +9,7 @@
 	<li>
 		{{ field.fieldname }}
 		<ul>
-		{% for edit in field.suggestedEdits %}
+		{% for edit in field.suggested_edits %}
 		<li>
 			{{ edit }}
 			<button onclick="approve({{ edit.politieker.id }}, '{{ edit.column_name }}', '{{ edit.suggested_value }}')">Approve</button>
