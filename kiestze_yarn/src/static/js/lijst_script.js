@@ -272,6 +272,7 @@ function UpdateGemeenteInput() {
     if (lines[i] == "") continue;
     const option = document.createElement("li")
     option.classList.add(`optie_gemeente`)
+    option.classList.add(`dropdown-item`)
     const key = lines[i].key
     option.id = key;
     // Bad code:
