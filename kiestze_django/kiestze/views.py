@@ -224,15 +224,16 @@ def request_edit(request):
 			politieker = request.POST['politieker']
 			fieldname = request.POST['fieldname']
 			value = request.POST['value']
+			fieldname_id = EditableField.objects.get(fieldname=fieldname).id
 
-			already_exists = UserEdit.objects.filter(politieker=politieker, field=fieldname, suggested_value=value)
+			already_exists = UserEdit.objects.filter(politieker=politieker, field_id=fieldname_id, suggested_value=value)
 			if already_exists.count() == 0:  # Suggestion doesn't exist ==> create new one
 				guid = uuid.uuid4()
 
 				edit = UserEdit()
 				edit.guid = guid
 				edit.politieker_id = politieker
-				edit.field = fieldname
+				edit.field_id = fieldname_id
 				edit.accepted_date = None  # Null because not yet accepted
 				edit.suggested_value = value
 				edit.save()
@@ -247,6 +248,12 @@ def request_edit(request):
 				approver.aanpassing_id = guid
 				approver.user_id_id = request.user.id
 				approver.save()
+
+				count = Approver.objects.filter(aanpassing=guid).count()
+				if count >= 3:
+					approvededit = UserEdit.objects.get(guid=guid)
+					approvededit.accepted_date = timezone.now()
+					approvededit.save()
 
 			return HttpResponse('Done')
 		except Exception as e:
