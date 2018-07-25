@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="108px" height="37px" viewBox="0 0 108 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="filter-copy-2" transform="translate(-645.000000, -107.000000)">
+            <g id="Group-4" transform="translate(645.000000, 106.000000)">
+                <g id="Group-16-Copy-3">
+                    <text id="Terug" font-family="BrandonGrotesque-Regular, Brandon Grotesque" font-size="24" font-weight="normal" fill="#3C3C3C">
+                        <tspan x="34.872" y="25">Terug</tspan>
+                    </text>
+                    <rect id="Rectangle-3" stroke="#3C3C3C" stroke-width="2.4" x="1.2" y="2.4" width="105.6" height="33.6" rx="16.8"></rect>
+                    <g id="54321" transform="translate(15.600000, 9.600000)" fill="#3C3C3C" fill-rule="nonzero" stroke="#3C3C3C" stroke-width="1.2">
+                        <path d="M1.6697217,8.40072124 L9.39766863,1.20021213 C9.66744379,0.925715498 9.66744379,0.480369107 9.39766863,0.205872474 C9.12789346,-0.0686241581 8.68994812,-0.0686241581 8.42017296,0.205872474 L0.196615803,7.86782867 C0.0524639928,8.01417738 -0.00863208601,8.20884937 0.000975261981,8.4 C-0.00863208601,8.59187187 0.0524639928,8.78582262 0.196615803,8.93219254 L8.42017296,16.5941275 C8.68994812,16.8686242 9.12789346,16.8686242 9.39766863,16.5941275 C9.66744379,16.3196521 9.66744379,15.8742845 9.39766863,15.5998091 L1.6697217,8.40072124 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

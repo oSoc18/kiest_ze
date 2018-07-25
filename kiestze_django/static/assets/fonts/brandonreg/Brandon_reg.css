@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Brandon_reg';
+  src: url(Brandon_reg.woff2) format('woff2'), url(Brandon_reg.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
