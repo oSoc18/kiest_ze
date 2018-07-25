@@ -27,6 +27,7 @@
 </head>
 
 <body class="background-shape">
+  {% csrf_token %}
   <div class="background-purple">
     <header>
       <div class="card-header d-flex flex-row card-header-detail">
@@ -50,7 +51,7 @@
             <img src="static/assets/img/left-button.svg" alt="vorige" width="50" height="50">
           </a>
           <div class="text-center ml-5 mr-5">
-            <img src="https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg" alt="Jordy" class="detail-image mb-2"
+            <img src="https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg" alt="Profile picture" class="detail-image mb-2"
               width="250" height="250" id="persoon_foto">
           </div>
           <a href="#">
@@ -157,12 +158,13 @@
               <div class="popover__wrapper">
                 <div class="d-flex flex-row">
                   <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1">
-                  <p class="linken ml-2 list-items-detail" style="color: white;">Voeg toe</p>
+                  <a href="http://" id="politieker_website" target="_blank"></a>
+                  <!-- <p class="linken ml-2 list-items-detail" style="color: white;">Voeg toe</p> -->
                 </div>
                 <div class="push popover__content" style="margin-top: -.8rem;">
                   <p class="popover__message"></p>
-                  <input type="text" class="form-control mb-2 form-popover" id="input-studies" placeholder="url" name="input_url" autocomplete="off">
-                  <input type="submit" value="Toevoegen" class="button">
+                  <input type="text" class="form-control mb-2 form-popover" id="politieker_website_input" placeholder="http://..." name="suggestedValue" autocomplete="off">
+                  <input type="submit" value="Toevoegen" class="button" id="politieker_website_button">
                 </div>
               </div>
             </div>

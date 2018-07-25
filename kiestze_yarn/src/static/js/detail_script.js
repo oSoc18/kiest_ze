@@ -6,6 +6,38 @@ import { JsonRequest, GetTableUrl, GetDjangoUrl } from './common.js';
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
 const partij_naam = document.getElementById("partij_naam");
+const politieker_website = document.getElementById("politieker_website");
+const politieker_website_input = document.getElementById("politieker_website_input");
+const politieker_website_button = document.getElementById("politieker_website_button");
+
+
+politieker_website_button.addEventListener("click", function(evt)
+{
+  const suggestedValue = evt.target.parentElement.querySelector('input[name="suggestedValue"]').value;
+  approve(model.selectedPolitiekerId, "website", suggestedValue);
+})
+
+
+function approve(politieker, fieldname, suggested_value) {
+  const data = new FormData();
+  const csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0]
+  if(csrfmiddlewaretoken != null)
+    data.append('csrfmiddlewaretoken', csrfmiddlewaretoken.value);
+  else console.error("csrfmiddlewaretoken should be injected by Django")
+  data.append('politieker', politieker);
+  data.append('fieldname', fieldname);
+  data.append('value', suggested_value);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST',  GetDjangoUrl('request_edit'), true);
+  xhr.onload = function () {
+    console.log(this.responseText);
+    model.djangoData.get_last_accepted_edit.Reload();
+    //location.reload();
+  };
+  xhr.send(data);
+}
+
 
 function UpdateAll()
 {
@@ -29,6 +61,10 @@ function UpdateAll()
 
 
   partij_naam.innerText = partij.lijstnaam
+
+  politieker_website.innerText = politieker.edits.website.suggested_value;
+  politieker_website.href = politieker.edits.website.suggested_value;
+  //politieker_website_input.value = politieker.edits.website.suggested_value;
 
 }
 

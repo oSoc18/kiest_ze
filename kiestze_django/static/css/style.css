@@ -64,6 +64,11 @@ h3 {
 .title {
   font-family: 'Brandon_blk';
   font-size: 2.5rem;
+  text-transform: lowercase;
+}
+
+.title::first-letter {
+  text-transform: capitalize;
 }
 
 .boost {
@@ -110,6 +115,7 @@ h3 {
 .searchfield {
   border: none;
   background-color: #4ac1d4;
+  font-family: 'Brandon_reg';
   color: white;
 }
 
@@ -353,7 +359,7 @@ a:hover {
 }
 
 .uitleg-image-twee {
-  margin-top: 6rem;
+  margin-top: 12rem;
 }
 
 .terug {
@@ -391,4 +397,108 @@ a:hover {
   background-repeat: no-repeat;
   width: 1.5rem;
   height: 1.5rem;
+}
+
+@media only screen  and (min-width: 1440px) {
+
+  .display-4 {
+    font-size: 5rem;
+  }
+
+  .lead {
+    font-size: 1.8rem;
+  }
+
+  .background-teken {
+    background-image: url(../assets/img/uitroepteken.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top center;
+    height: 49.5rem;
+    width: 46.5rem;
+    margin-top: -2rem;
+  }
+
+  .home {
+    margin-left: 8rem;
+  }
+
+  .search-margin {
+    margin: 1rem;
+    margin-top: 8rem;
+    margin-left: 1.5rem;
+  }
+
+  .searchfield {
+    font-size: 1.7rem;
+  }
+
+  .searchfield::placeholder {
+    font-size: 1.7rem;
+  }
+
+  .meerbutton {
+    margin-right: 9rem;
+  }
+
+  .meerweten {
+    font-size: 1.5rem;
+  }
+
+  .gele-home-button {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .uitleg-background {
+    width: 45vw;
+  }
+
+  .tekst-uitleg {
+    height: 50vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    margin-left: 8rem;
+  }
+
+  .intro-tekst {
+    width: 38vw;
+  }
+
+  .uitleg-image-een {
+    width: 34rem;
+    height: 40rem;
+  }
+
+  .uitleg-image-twee {
+    width: 34rem;
+    height: 32rem;
+  }
+
+  .kies-partij {
+    font-size: 2rem;
+  }
+
+  .white-line {
+    margin-top: -1rem;
+  }
+
+  .font-filter {
+    font-size: 1.5rem;
+  }
+
+  .background-purple {
+    background-image: url(../assets/img/purple-background-hd.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .list-items-detail {
+    font-size: 1.6rem;
+  }
 }
