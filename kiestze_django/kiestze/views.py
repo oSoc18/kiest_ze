@@ -29,10 +29,11 @@ def privacy(request):
 class FieldWrapper:
 	def __init__(self, fieldname, politieker):
 		self.fieldname = fieldname
+		self.fieldname_id = EditableField.objects.get(fieldname=self.fieldname).id
 		self.politieker = politieker
 
 	def get_suggested_edits(self):
-		return UserEdit.objects.filter(field=self.fieldname, politieker_id=self.politieker)
+		return UserEdit.objects.filter(field=self.fieldname_id, politieker_id=self.politieker)
 	suggestedEdits = property(get_suggested_edits)
 
 
