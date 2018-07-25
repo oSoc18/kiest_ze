@@ -31,7 +31,7 @@
 
     const $article = document.createElement(`article`);
     $article.innerHTML = `
-    <div class="d-flex flex-row align-items-center border-boost mb-1 mt-4">
+    <div class="d-flex flex-row flex-wrap align-items-center border-boost mb-1 mt-4">
     <img src="static/assets/img/default_man.svg" alt="profielfoto" width="40" height="40" class="mr-2 mb-2">
     <p class="boost mr-2 mt-1">${boostData.boost}</p>
     </div>`
