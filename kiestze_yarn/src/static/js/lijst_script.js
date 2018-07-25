@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
@@ -28,22 +28,51 @@ const model = {
   get inputString() {
     return this._inputString;
   },
-  selectedNis: getParameterByName("selectedNis"),
-  selectedPartijRec: getParameterByName("selectedPartijRec"),
-  airTables: {
+  
+  _selectedNis: "",
+  set selectedNis(value) {
+    value = parseInt(value); // enforce int
+    if(this._selectedNis === value) return;
+
+    this._selectedNis = value;
+    updateQueryStringParam("selectedNis", model.selectedNis)
+    UpdateAll();
+  },
+  get selectedNis() {
+    return this._selectedNis;
+  },
+  
+  _selectedPartijId: "",
+  set selectedPartijId(value) {
+    value = parseInt(value); // enforce int
+    if(this._selectedPartijId === value) return;
+
+    this._selectedPartijId = value;
+    updateQueryStringParam("selectedPartijId", model.selectedPartijId)
+    UpdateAll();
+  },
+  get selectedPartijId() {
+    return this._selectedPartijId;
+  },
+
+  /*airTables: {
     Partij: new JsonRequest(GetTableUrl("Partij"), UpdateAll),
     Politiekers: new JsonRequest(GetTableUrl("Politiekers"), UpdateAll),
     Organisaties: new JsonRequest(GetTableUrl("Organisaties"), UpdateAll),
     Stad: new JsonRequest(GetTableUrl("Stad"), UpdateAll),
-  },
+  },*/
   djangoData: {
-    get_all_gemeentes:  new JsonRequest(GetDjangoUrl("/get_all_gemeentes"), UpdateAll),
-    // Tmp:
+    get_all_gemeentes:  new JsonRequest(GetDjangoUrl("/get_all_gemeentes"), UpdateAll), // TODO
     get_partij:  new JsonRequest("", UpdateAll),
     get_politiekers:  new JsonRequest("", UpdateAll),
+    get_all_politieker_partij_link_van_gemeente:  new JsonRequest("", UpdateAll),
   },
 }
 window["model"] = model;
+
+
+model.selectedNis = getParameterByName("selectedNis")
+model.selectedPartijId = getParameterByName("selectedPartijId")
 
 function FindStadMetNis(nisCode) {
   const steden = model.airTables.Stad.json.records;
@@ -68,7 +97,7 @@ function FindPartijWithRecid(Rcis) {
 
 function PartijClicked(evt){
   console.log("PartijClicked", evt.target, evt.target.id);
-  model.selectedPartijRec = evt.target.id;
+  model.selectedPartijId = evt.target.id;
   UpdateAll()
 }
 
@@ -77,35 +106,28 @@ function DisplayPartijen() {
 
   //if (model.selectedNis == null) return;
   console.log("selectedNis", model.selectedNis)
-  const stad = FindStadMetNis(model.selectedNis)
 
-  stad_display.innerText = stad?stad.fields.Naam:"Onbekende gemeente/stad";
 
-  geen_opties_partijen.style.display = stad? "none":"block"
-  opties_partijen.style.display = stad? "block":"none"
+  const get_partij = model.djangoData.get_partij.json;
+  
+  for (const partij_id in get_partij) {
+    if (get_partij.hasOwnProperty(partij_id)) {
+      const partij = get_partij[partij_id];
 
-  if(stad){
-    const lines = stad.fields.Partij;
-    for (const property in lines) {
-      if (lines.hasOwnProperty(property)) {
-        if (lines[property] == "") continue;
-        const partij = FindPartijWithRecid(lines[property]);
-
-        let option = document.getElementById(partij.id)
-        if(option == null)
-        {
-          option = document.createElement("div")
-          option.id = partij.id;
-          opties_partijen.appendChild(option);
-          option.innerHTML = `<div class="form-check"> 
-          <input class="form-check-input" type="radio" name="partijRadio" id="${partij.id}" value="option">
-          <label class="form-check-label" for="partijRadio">${partij.fields.Partij}</label>
+      let option = document.getElementById(`partij_${partij_id}`)
+      if(option == null)
+      {
+        option = document.createElement("div")
+        option.id = `partij_${partij_id}`
+        opties_partijen.appendChild(option);
+        option.innerHTML = `<div class="form-check"> 
+          <input class="form-check-input" type="radio" name="partijRadio" id="${partij_id}" value="option">
+          <label class="form-check-label" for="partijRadio">${partij.lijstnaam}</label>
           <span class="checkmark"></span>
           </div>`
-          option.querySelector("input").addEventListener(`click`, PartijClicked);
-        }
-        usedChildren.push(option)
+        option.querySelector("input").addEventListener(`click`, PartijClicked);
       }
+      usedChildren.push(option)
     }
   }
 
@@ -126,42 +148,58 @@ function ContainsAirtableRec(list, rec)
 }
 
 function DisplayKanidaten() {
+  if(model.djangoData.get_all_politieker_partij_link_van_gemeente.json == null) return;
+  if(model.djangoData.get_politiekers.json == null) return;
+  if(model.djangoData.get_partij.json == null) return;
+  if(model.selectedPartijId == "") return;
+
   const usedChildren = []
 
-  const lines = model.airTables.Politiekers.json.records;
-  const partij = FindPartijWithRecid(model.selectedPartijRec);
+  const selectedPolitiekerIds = []
 
-  for (const property in lines) {
-    if (lines.hasOwnProperty(property)) {
-      //if (lines[property] == "") continue;
-      const politieker = lines[property];
+  const links = model.djangoData.get_all_politieker_partij_link_van_gemeente.json
+  
+  for (const link_id in links) {
+    if (links.hasOwnProperty(link_id)) {
+      const link = links[link_id];
 
-      if(model.selectedPartijRec != null
-        && ContainsAirtableRec(politieker.fields.Partij, model.selectedPartijRec))
+      if(link.partij== model.selectedPartijId)
       {
+        selectedPolitiekerIds.push(link.politieker)
+      }
+    }
+  }
 
-        let option = document.getElementById(politieker.id)
-        if(option == null)
-        {
-          option = document.createElement("div")
-          option.id = politieker.id;
-          kanidaaten_lijst.appendChild(option);
-        }
-        usedChildren.push(option)
 
-        let shortName = politieker.fields.Naam;
-        shortName = shortName.substr(shortName.lastIndexOf(" "))
-        let logo = "https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg";
-        if(politieker.fields.Foto)
-          logo = politieker.fields.Foto[0].thumbnails.large.url
-        option.innerHTML = `<a href="detail?persoon=${politieker.id}#${politieker.fields.Naam.replace(/ /g, "_")}"><article class="card mr-4 mt-4" style="width: 17rem;">
+  const partij = model.djangoData.get_partij.json[model.selectedPartijId]
+
+  for (const i in selectedPolitiekerIds) {
+    if (selectedPolitiekerIds.hasOwnProperty(i)) {
+      const politieker_id = selectedPolitiekerIds[i];
+      const politieker = model.djangoData.get_politiekers.json[politieker_id];
+
+      let option = document.getElementById(`politieker_${politieker_id}`)
+      if(option == null)
+      {
+        option = document.createElement("div")
+        option.id = `politieker_${politieker_id}`;
+        kanidaaten_lijst.appendChild(option);
+      }
+      usedChildren.push(option)
+
+      let shortName = politieker.naam;
+      shortName = shortName.substr(shortName.lastIndexOf(" "))
+      let logo = "https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg";
+      if(politieker.edits.foto)
+        logo = politieker.edits.foto.suggested_value
+      const shortName2 = politieker.naam.replace(/ /g, "_");
+      option.innerHTML = `<a href="detail?persoon=${politieker_id}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
         <img class="card-img-top politieker-img" src="${logo}" alt="Card image cap ">
         <div class="card-body">
-        <h3 class="card-title">${politieker.fields.Naam}</h5>
-        <p class="card-text">${partij.fields.Partij}</p>
+        <h3 class="card-title">${politieker.naam}</h5>
+        <p class="card-text">${partij.lijstnaam}</p>
         </div>
         </article></a>`
-      }
     }
   }
 
@@ -191,18 +229,18 @@ function UpdateAll() {
   geselecteerde_gemeente.innerText = model.selectedNis;
 
   // Wait while downloading airtables. Maybe show spinner?
-  if(model.airTables.Stad.json == null) return;
-  if(model.airTables.Politiekers.json == null) return;
-  if(model.airTables.Partij.json == null) return;
+  //if(model.airTables.Stad.json == null) return;
+  //if(model.airTables.Politiekers.json == null) return;
+  //if(model.airTables.Partij.json == null) return;
 
   const shortNis = ShorterNis(model.selectedNis)
   model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?gemeente_nis=${shortNis}&jaar=0`)
   model.djangoData.get_politiekers.url = GetDjangoUrl(`/get_politiekers?gemeente_nis=${shortNis}&jaar=0`)
+  model.djangoData.get_all_politieker_partij_link_van_gemeente.url = GetDjangoUrl(`/get_all_politieker_partij_link_van_gemeente?gemeente_nis=${shortNis}&jaar=0`)
   const json1 = model.djangoData.get_politiekers.json;
   const json2 = model.djangoData.get_partij.json;
+  const json3 = model.djangoData.get_all_politieker_partij_link_van_gemeente.json;
 
-  updateQueryStringParam("selectedNis", model.selectedNis)
-  updateQueryStringParam("selectedPartijRec", model.selectedPartijRec)
 
   DisplayPartijen()
   DisplayKanidaten()

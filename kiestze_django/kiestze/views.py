@@ -156,7 +156,10 @@ def get_all_politieker_partij_link_van_gemeente(request):
 	jaar = request.GET.get('jaar')
 	jaar = int(jaar)
 
-	got_all = PolitiekerPartijLink.objects.filter(partij__nis=gemeente_nis, partij__jaar=jaar)
+	if jaar == 0:
+		got_all = PolitiekerPartijLink.objects.filter(partij__nis=gemeente_nis)
+	else:
+		got_all = PolitiekerPartijLink.objects.filter(partij__nis=gemeente_nis, partij__jaar=jaar)
 	data = query_result_to_canonical_json(got_all)
 	return HttpResponse(data, content_type='application/json')
 
