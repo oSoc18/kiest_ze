@@ -13,7 +13,7 @@ import csv
 
 partijen_tablename = 'kiestze_partij'
 politiekers_tablename = 'kiestze_politieker'
-politieker_partijen_link_tablename = 'kiestze_politieker_partij_link'
+politieker_partijen_link_tablename = 'kiestze_politiekerpartijlink'
 
 
 incrementing_partijen_id = 1

@@ -6,7 +6,9 @@ body {
   background-image: url(../assets/img/boven-img.svg);
   background-repeat: no-repeat;
   background-size: inherit;
-  background-position: top center;
+  /* background-position: top center; */
+  background-position: top;
+  background-position-x: 25vw;
 }
 
 p {
@@ -19,7 +21,7 @@ h3 {
 }
 
 .linker-helft {
-  margin-left: -6rem;
+  margin-left: -3rem;
 }
 
 .background-purple {
@@ -173,7 +175,7 @@ h3 {
 }
 
 .form-check-label {
-  color: #3c3c3c;
+  color: white;
   font-family: 'Brandon_reg';
   font-size: 1.3rem;
 }
@@ -298,7 +300,7 @@ a:hover {
   outline: none;
 }
 
-button {
+.button {
   background-color: #3c3c3c;
   color: white;
   border: #3c3c3c;
@@ -306,7 +308,7 @@ button {
   padding: 0 .5rem;
 }
 
-button:focus {
+.button:focus {
   outline: none;
 }
 
