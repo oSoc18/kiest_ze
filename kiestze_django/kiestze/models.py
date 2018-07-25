@@ -63,7 +63,8 @@ class PolitiekerPartijLink(models.Model):
 
 
 class EditableField(models.Model):
-	fieldname = models.CharField(max_length=100)
+	id = models.AutoField(primary_key=True)
+	fieldname = models.CharField(max_length=100, unique=True)
 
 	class Meta:
 		verbose_name = 'EditableField'
