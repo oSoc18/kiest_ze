@@ -286,7 +286,7 @@ def request_edit(request):
 				approver.save()
 
 				count = Approver.objects.filter(aanpassing=guid).count()
-				if count >= 3:
+				if count >= 3 or request.user.is_staff:
 					approvededit = UserEdit.objects.get(guid=guid)
 					approvededit.accepted_date = timezone.now()
 					approvededit.save()
