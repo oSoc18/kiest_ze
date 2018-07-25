@@ -203,13 +203,13 @@ def get_last_accepted_edit(request):
 	accepted_edits = UserEdit.objects.filter(politieker=politieker).exclude(accepted_date__isnull=True)
 	count = accepted_edits.count()
 
-	if count == 0:
-		return HttpResponse('No accepted edits for this politieker')
-
 	fields = EditableField.objects.all()
 	edits = {}
 	for field in fields:
-		last_edit = accepted_edits.filter(field=field.fieldname).values().last()  # Django magic
+		if count > 0:
+			last_edit = accepted_edits.filter(field=field.fieldname).values().last()  # Django magic
+		else:
+			last_edit = ""
 		edits[field.fieldname] = last_edit
 
 	data = json.dumps(edits, default=str)
