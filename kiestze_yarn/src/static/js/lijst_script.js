@@ -192,12 +192,18 @@ function DisplayKanidaten() {
 
       let shortName = politieker.naam;
       shortName = shortName.substr(shortName.lastIndexOf(" "))
-      let logo = "https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg";
+      let objectFit = `contain`;
+      let logo = "static/assets/img/default_man.svg";
+      if(politieker.geslacht == `F`) {
+        logo = "static/assets/img/default_vrouw.svg";
+      }
       if(politieker.edits.foto)
-        logo = politieker.edits.foto.suggested_value
+        {logo = politieker.edits.foto.suggested_value
+         objectFit = `cover`;
+        }
       const shortName2 = politieker.naam.replace(/ /g, "_");
       option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
-        <img class="card-img-top politieker-img" src="${logo}" alt="Card image cap ">
+        <img class="card-img-top politieker-img" src="${logo}" alt="Card image cap" style="object-fit:${objectFit}">
         <div class="card-body">
         <h3 class="card-title">${politieker.naam}</h5>
         <p class="card-text">${partij.lijstnaam}</p>
