@@ -16,6 +16,7 @@ const politieker_linkedin = document.getElementById("politieker_linkedin");
 const politieker_openthebox = document.getElementById("politieker_openthebox");
 const politieker_openthebox_not_found = document.getElementById("politieker_openthebox_not_found");
 const gemeente_element = document.getElementById("gemeente_element");
+const input_foto_url = document.getElementById("input_foto_url");
 
 
 politieker_website_button.addEventListener("click", function(evt)
@@ -23,6 +24,13 @@ politieker_website_button.addEventListener("click", function(evt)
   const suggestedValue = evt.target.parentElement.querySelector('input[name="suggestedValue"]').value;
   approve(model.selectedPolitiekerId, "website", suggestedValue);
 })
+
+input_foto_url.addEventListener("click", function(evt)
+{
+  const suggestedValue = evt.target.parentElement.querySelector('input[name="suggestedValue"]').value;
+  approve(model.selectedPolitiekerId, "foto", suggestedValue);
+})
+
 
 
 function approve(politieker, fieldname, suggested_value) {
@@ -196,7 +204,6 @@ function GetGemeenteNaamForNis(nis)
     for (const property in children) {
       if (children.hasOwnProperty(property)) {
         const child_el = children[property]
-        console.log(property)
         if(property == 11292){
           console.log("the end is near")
         }
