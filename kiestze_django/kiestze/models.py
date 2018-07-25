@@ -36,9 +36,8 @@ class Partij(models.Model):
 
 class Politieker(models.Model):
 	id = models.AutoField(primary_key=True)
-	otb_id = models.IntegerField()
 	naam = models.CharField(max_length=100)
-	geboorte = models.DateField()
+	geboorte = models.DateField(blank=True)
 	geslacht = models.CharField(max_length=1)
 
 	class Meta:
