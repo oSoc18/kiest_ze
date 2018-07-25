@@ -96,8 +96,11 @@ def get_all_partij(request):
 	data = serializers.serialize('json', got_all)
 	return HttpResponse(data, content_type='application/json')
 
-
 def query_result_to_canonical_json(list_object):
+	tmp_dict = query_result_to_canonical_obj(list_object)
+	return json.dumps(tmp_dict, indent=4, sort_keys=True, default=str)
+
+def query_result_to_canonical_obj(list_object):
 	"""
 	{
 		"model": "kiestze.politieker_partij_link",
@@ -128,7 +131,7 @@ def query_result_to_canonical_json(list_object):
 	tmp_python = serializers.serialize('python', list_object)
 	for el in tmp_python:
 		tmp_dict[el["pk"]] = el["fields"]
-	return json.dumps(tmp_dict, indent=4, sort_keys=True, default=str)
+	return tmp_dict
 	# return serializers.serialize('json', tmp_dict)
 
 
@@ -167,6 +170,8 @@ def get_partij(request):
 
 	if gemeente_nis == 0:
 		got_all = Partij.objects.filter(jaar=jaar)
+	if jaar == 0:
+		got_all = Partij.objects.filter(nis=gemeente_nis)
 	else:
 		got_all = Partij.objects.filter(nis=gemeente_nis, jaar=jaar)
 
@@ -181,13 +186,21 @@ def get_politiekers(request):
 	jaar = request.GET.get('jaar')
 	jaar = int(jaar)
 
-	got_all = PolitiekerPartijLink.objects.only("politieker").filter(partij__nis=gemeente_nis, partij__jaar=jaar)
+	if jaar == 0:
+		got_all = PolitiekerPartijLink.objects.only("politieker").filter(partij__nis=gemeente_nis)
+	else:
+		got_all = PolitiekerPartijLink.objects.only("politieker").filter(partij__nis=gemeente_nis, partij__jaar=jaar)
 	arr = query_result_to_array(got_all, "politieker")
-	
+
 	got_all = Politieker.objects.filter(id__in=arr)  # [:10]
-	data = query_result_to_canonical_json(got_all)
+	data = query_result_to_canonical_obj(got_all)
+
+	for politieker_id in data:
+		obj = get_object_with_edits_for_politieker(politieker_id)
+		data[politieker_id]["edits"] = obj
+
 	# data = got_all.query
-	return HttpResponse(data, content_type='application/json')
+	return HttpResponse(json.dumps(data, indent=4, sort_keys=True, default=str), content_type='application/json')
 
 
 def get_politieker_met_naam(request):
@@ -198,10 +211,8 @@ def get_politieker_met_naam(request):
 	return HttpResponse(data, content_type='application/json')
 
 
-def get_last_accepted_edit(request):
-	politieker = request.GET.get('politieker')
-
-	accepted_edits = UserEdit.objects.filter(politieker=politieker).exclude(accepted_date__isnull=True)
+def get_object_with_edits_for_politieker(politieker_id):
+	accepted_edits = UserEdit.objects.filter(politieker=politieker_id).exclude(accepted_date__isnull=True)
 	count = accepted_edits.count()
 
 	fields = EditableField.objects.all()
@@ -210,6 +221,13 @@ def get_last_accepted_edit(request):
 		# field_id = EditableField.objects.get(fieldname=field.i)
 		last_edit = accepted_edits.filter(field=field.id).values().last()  # Django magic
 		edits[field.fieldname] = last_edit
+	return edits
+
+
+def get_last_accepted_edit(request):
+	politieker = request.GET.get('politieker')
+
+	edits = get_object_with_edits_for_politieker(politieker)
 
 	data = json.dumps(edits, default=str)
 	return HttpResponse(data, content_type='application/json')

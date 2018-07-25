@@ -18,8 +18,28 @@ class JsonRequest {
     return this._json;
   }
 
+  get url()
+  {
+    return this._url;
+  }
+  
+  set url(value)
+  {
+    if(this._url === value) return;
+    this._url = value;
+    this._json = null;
+    this.state = StateEnum.init
+    this.callback()
+  }
+
   JsonRequest() {
+    this.state = StateEnum.requesting
     const self = this;
+    if(this._url == "")
+    {
+      this.state = StateEnum.fail;
+      return;
+    }
     loadJSON(this._url,
       function (json) {
         self.state = StateEnum.succes;

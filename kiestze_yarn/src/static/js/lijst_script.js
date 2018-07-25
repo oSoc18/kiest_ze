@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
@@ -39,7 +39,8 @@ const model = {
   djangoData: {
     get_all_gemeentes:  new JsonRequest(GetDjangoUrl("/get_all_gemeentes"), UpdateAll),
     // Tmp:
-    get_all_politieker_partij_link_van_gemeente:  new JsonRequest(GetDjangoUrl("/get_all_politieker_partij_link_van_gemeente?gemeente_nis=23050&jaar=2012"), UpdateAll),
+    get_partij:  new JsonRequest("", UpdateAll),
+    get_politiekers:  new JsonRequest("", UpdateAll),
   },
 }
 window["model"] = model;
@@ -194,6 +195,12 @@ function UpdateAll() {
   if(model.airTables.Politiekers.json == null) return;
   if(model.airTables.Partij.json == null) return;
 
+  const shortNis = ShorterNis(model.selectedNis)
+  model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?gemeente_nis=${shortNis}&jaar=0`)
+  model.djangoData.get_politiekers.url = GetDjangoUrl(`/get_politiekers?gemeente_nis=${shortNis}&jaar=0`)
+  const json1 = model.djangoData.get_politiekers.json;
+  const json2 = model.djangoData.get_partij.json;
+
   updateQueryStringParam("selectedNis", model.selectedNis)
   updateQueryStringParam("selectedPartijRec", model.selectedPartijRec)
 
@@ -205,6 +212,13 @@ function GemeenteClick(evt){
   console.log("Click", evt.target, evt.target.id);
   model.selectedNis = parseInt(evt.target.id);
   UpdateAll()
+}
+
+function ShorterNis(longNisCode)
+{
+  longNisCode=`${longNisCode}`
+  longNisCode= longNisCode.substr(0, longNisCode.length - 1)
+  return parseInt(longNisCode)
 }
 
 function UpdateGemeenteInput() {
@@ -219,7 +233,7 @@ function UpdateGemeenteInput() {
     const key = lines[i].key
     option.id = key;
     // Bad code:
-    option.innerText = `${lines[i].naam  } ${nisCode_to_postCode[parseInt(key.substr(0, key.length - 1))]}`;
+    option.innerText = `${lines[i].naam  } ${nisCode_to_postCode[parseInt(ShorterNis(key))]}`;
     option.addEventListener("click", GemeenteClick)
     opties_gemeentes.appendChild(option);
   }

@@ -15,7 +15,7 @@ import secret
 
 # same as in python_importer
 sql = """
-INSERT INTO public.kiestze_useredit(guid, field, accepted_date, suggested_value, politieker_id) VALUES
+INSERT INTO public.kiestze_useredit(guid, field_id, accepted_date, suggested_value, politieker_id) VALUES
 
 """
 
@@ -30,6 +30,7 @@ resp = requests.get(url=url)
 json_object = resp.json() # Check the JSON Response Content documentation below
 
 editablefield_names = {}
+editablefield_names_count = 0
 
 for record in json_object["records"]:
 	naam_stukken = record["fields"]["Naam"].split(' ')
@@ -53,14 +54,16 @@ for record in json_object["records"]:
 			fieldValue = fieldValue[0]["thumbnails"]["large"]["url"]
 
 		fieldKey = fieldKey.lower()
-		editablefield_names[fieldKey] = "Numb value" # Just look at the keys
+		if not fieldKey in editablefield_names:
+			editablefield_names_count += 1
+			editablefield_names[fieldKey] = editablefield_names_count # Just look at the keys
 
 		guid = uuid.uuid4()
 		column_name = fieldKey
 		accepted_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 		suggested_value = fieldValue
 
-		sql += "('%s', '%s', '%s', '%s', %s),\n" % (guid, column_name, accepted_date, suggested_value, politieker_id)
+		sql += "('%s', %s, '%s', '%s', %s),\n" % (guid, editablefield_names[column_name], accepted_date, suggested_value, politieker_id)
 		print(" ")
 
 # example record key: recmbyKsOdabhIOCd
