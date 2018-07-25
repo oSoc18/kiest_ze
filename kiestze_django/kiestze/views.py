@@ -244,7 +244,7 @@ def get_last_accepted_edit(request):
 
 	data = serializers.serialize('python', [get_object, ])
 	data = data[0]["fields"]
-	data['naam'] = data['naam'].title()
+	data[0]['naam'] = data[0]['naam'].title()
 
 	edits = get_object_with_edits_for_politieker(politieker_id)
 	data["edits"] = edits
