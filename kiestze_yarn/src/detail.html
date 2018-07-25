@@ -31,14 +31,15 @@
   <div class="background-purple">
     <header>
       <a class="search-link" href="lijst">
-        <div class="card-header d-flex flex-row card-header-detail">
+        <div class="card-header d-flex flex-row card-header-detail" style="display: inline;">
           <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
-          <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
+          <!-- <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
             <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
             <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
-          </div>
+          </div> -->
         </div>
       </a>
+      <span id="gemeente_element">Gemeente</span>
     </header>
     <main class="d-flex flex-row justify-content-around align-items-top mt-5" style="height: 90vh; min-height: max-content;">
       <section class="d-flex flex-column justify-content-around align-items-center linker-helft">
@@ -186,12 +187,8 @@
                 <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div class="d-flex flex-row">
-                <img src="static/assets/img/blue-bol.svg" alt="vast-bol" width="20" height="20" class="mt-1">
-                <p class="ml-2 list-items-detail">Een mandaat</p>
-              </div>
-              <div class="d-flex flex-row">
-                <img src="static/assets/img/blue-bol.svg" alt="vast-bol" width="20" height="20" class="mt-1">
-                <p class="ml-2 list-items-detail">Een mandaat</p>
+                <a href="" target="_blank" id="politieker_openthebox">Openen in Open The Box!</a>
+                <span id="politieker_openthebox_not_found">Geen referentie naar openthebox gevonden.</span>
               </div>
             </div>
             <div class="mb-5">

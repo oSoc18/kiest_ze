@@ -13,7 +13,7 @@ const opties_partijen = document.getElementById("opties_partijen");
 const kanidaaten_lijst = document.getElementById("kanidaaten_lijst");
 const geen_opties_partijen = document.getElementById("geen_opties_partijen");
 const stad_display = document.getElementById("stad_display");
-
+const dropdownMenuLink = document.getElementById("dropdownMenuLink");
 
 
 
@@ -258,12 +258,14 @@ function UpdateAll() {
 function GemeenteClick(evt){
   console.log("Click", evt.target, evt.target.id);
   model.selectedNis = parseInt(evt.target.id);
+  input_gemeente.value = ""
+  input_gemeente.placeholder = evt.target.innerText
   UpdateAll()
 }
 
 function ShorterNis(longNisCode)
 {
-  longNisCode=`${longNisCode}`
+  longNisCode=`${longNisCode}` // cast to string
   longNisCode= longNisCode.substr(0, longNisCode.length - 1)
   return parseInt(longNisCode)
 }

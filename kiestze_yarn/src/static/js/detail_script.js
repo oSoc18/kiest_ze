@@ -2,6 +2,7 @@
 
 import { updateQueryStringParam, getParameterByName } from './static_utils.js';
 import { JsonRequest, GetTableUrl, GetDjangoUrl } from './common.js';
+import { ah } from './admin_hierarchy-1.0.0.js';
 
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
@@ -12,6 +13,9 @@ const politieker_website_button = document.getElementById("politieker_website_bu
 const politieker_facebook = document.getElementById("politieker_facebook");
 const politieker_twitter = document.getElementById("politieker_twitter");
 const politieker_linkedin = document.getElementById("politieker_linkedin");
+const politieker_openthebox = document.getElementById("politieker_openthebox");
+const politieker_openthebox_not_found = document.getElementById("politieker_openthebox_not_found");
+const gemeente_element = document.getElementById("gemeente_element");
 
 
 politieker_website_button.addEventListener("click", function(evt)
@@ -91,6 +95,18 @@ function UpdateAll()
     politieker_linkedin.style.display = "inline"
     politieker_linkedin.href = politieker.edits.linkedin.suggested_value
   }
+
+  if(politieker.edits.openthebox_id == null){
+    politieker_openthebox.style.display = "none"
+    politieker_openthebox_not_found.style.display = "inherit"
+  }
+  else{
+    politieker_openthebox.style.display = "inline"
+    politieker_openthebox_not_found.style.display = "none"
+    politieker_openthebox.href = `https://openthebox.be/person/${politieker.edits.openthebox_id.suggested_value}`
+  }
+
+  gemeente_element.innerText = GetGemeenteNaamForNis(partij.nis)
 }
 
 const model = {
@@ -162,3 +178,33 @@ model.airTables.PolitiekerRecord = new JsonRequest(GetPolitiekerUrl(model.politi
 */
 
 UpdateAll()
+
+
+function GetGemeenteNaamForNis(nis)
+{
+  let result = null;
+  function Recurse(el)
+  {
+    const children = el; //.children;
+    if(typeof children == "string") return;
+    for (const property in children) {
+      if (children.hasOwnProperty(property)) {
+        const child_el = children[property]
+        console.log(property)
+        if(property == 11292){
+          console.log("the end is near")
+        }
+        if(property == nis)
+        {
+          result = child_el["naam"]
+          return;
+        }
+        Recurse(child_el);
+        if(result != null)
+          return;
+      }
+    }
+  }
+  Recurse(ah["02000"]); // From admin_hiearchy file
+  return result;
+}
