@@ -14,7 +14,7 @@ class JsonRequest {
 
   get json() {
     if (this.state == StateEnum.init)
-      this.JsonRequest();
+      this.DoJsonRequest();
     return this._json;
   }
 
@@ -32,7 +32,13 @@ class JsonRequest {
     this.callback()
   }
 
-  JsonRequest() {
+  Reload()
+  {
+    if(this.state == StateEnum.requesting) return;
+    this.DoJsonRequest()
+  }
+   
+  DoJsonRequest() {
     this.state = StateEnum.requesting
     const self = this;
     if(this._url == "")
@@ -63,8 +69,8 @@ function GetTableUrl(tableName)
 function GetDjangoUrl(queryString)
 {
   queryString = queryString.replace(/^\/+/g, '');
-  return `https://kiestze.be/${queryString}`
-  //return `http://127.0.0.1:8000/${queryString}`
+  //return `https://kiestze.be/${queryString}`
+  return `http://127.0.0.1:8000/${queryString}`
 }
 
 export { StateEnum, JsonRequest, GetTableUrl, GetDjangoUrl};

@@ -89,7 +89,10 @@ class UserEdit(models.Model):
 	approvers = property(get_approvers)
 
 	def __str__(self):
-		return "[%s] %s (%s==>%s)" %(self.guid, self.politieker, self.field, self.suggested_value)
+		tmp = "[%s] %s (%s==>%s)" %(self.guid, self.politieker, self.field, self.suggested_value)
+		if self.accepted_date != None:
+			tmp += " accepted_date: " + self.accepted_date.strftime("%Y-%m-%d %H:%M:%S")
+		return tmp
 
 
 class Approver(models.Model):
