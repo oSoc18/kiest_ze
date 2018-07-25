@@ -43,6 +43,10 @@
     </header>
     <main class="d-flex flex-row justify-content-around align-items-top mt-5" style="height: 85vh;">
       <section class="d-flex flex-column justify-content-around align-items-center linker-helft">
+        <div class="d-flex flex-row justify-content-around align-items-center align-self-start mt-1 mb-5">
+            <img src="static/assets/img/pijl_terug.svg" alt="pijl" width="20" height="20">
+            <a href="lijst.html" class="terug ml-2">Overzicht</a>
+        </div>
         <div class="d-flex flex-row justify-content-between align-items-center w-100">
           <a href="#">
             <img src="static/assets/img/left-button.svg" alt="vorige" width="50" height="50">
@@ -66,14 +70,20 @@
           </div>
           <h3 class="subtitle mt-3">Sterk Moorslede</h3>
         </div>
-        <div>
+        <div class="d-flex justify-content-around align-items-center mb-5 mt-5">
           <div class="d-flex flex-row align-items-center border-boost mb-1">
             <img src="static/assets/img/dude1.svg" alt="profielfoto" width="50" height="50" class="mr-2">
             <p class="boost mr-2">Zet zich goed in voor de partij!</p>
             <p class="emoji mr-2">👍</p>
           </div>
-          <div>
-            <img src="static/assets/img/big-add.svg" alt="toevoegen">
+          <div class="boosts"></div>
+          <div class="popover__wrapper">
+            <img src="static/assets/img/big-add.svg" alt="toevoegen" class="linken ml-3">
+            <div class="push popover__content" style="margin-top: -.8rem;">
+                <p class="popover__message"></p>
+                <label class="boostlabel"><input type="text" class="form-control mb-2 form-popover" id="input-studies" placeholder="Jouw Boost" name="input_url" autocomplete="off"></label>
+                <input type="submit" value="Toevoegen" class="button">
+            </div>
           </div>
         </div>
       </section>
@@ -81,7 +91,7 @@
         <article class="mb-5">
           <div>
             <div class="text-left">
-              <h3 class="lead">Beleidsthema's:</h3>
+              <h3 class="lead">Beleidsthema's</h3>
               <img src="static/assets/img/yellow-detail-line.svg" alt="yellow" width="40" height="3">
             </div>
             <div class="d-flex flex-row align-items-top mb-3">
@@ -95,7 +105,7 @@
           <article>
             <div class="mb-5">
               <div>
-                <h3 class="lead">Beroep:</h3>
+                <h3 class="lead">Beroep</h3>
                 <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div class="popover__wrapper">
@@ -104,17 +114,17 @@
                   <p class="linken" style="color: white;">Suggereert <strong>notaris</strong></p>
                 </div>
                 <div class="push popover__content" style="margin-top: -.8rem;">
-                  <p class="popover__message">Is dit juist?</p>
+                  <p class="popover__message">Is Kevin juist?</p>
                   <div class="d-flex flex-row">
-                    <button class="mr-4">Ja</button>
-                    <button>Nee</button>
+                      <input type="submit" value="Ja" class="button">
+                    <input type="submit" value="Nee" class="button">
                   </div>
                 </div>
               </div>
             </div>
             <div class="mb-5">
               <div>
-                <h3 class="lead">Opleiding:</h3>
+                <h3 class="lead">Opleiding</h3>
                 <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div class="popover__wrapper">
@@ -126,13 +136,13 @@
                   <p class="popover__message"></p>
                   <input type="text" class="form-control mb-2 form-popover" id="input-studies" placeholder="Studies" name="input_studies"
                     autocomplete="off">
-                  <button>Toevoegen</button>
+                    <input type="submit" value="Toevoegen" class="button">
                 </div>
               </div>
             </div>
             <div class="mb-5">
               <div>
-                <h3 class="lead">Eigen website:</h3>
+                <h3 class="lead">Eigen website</h3>
                 <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div class="popover__wrapper">
@@ -143,7 +153,7 @@
                 <div class="push popover__content" style="margin-top: -.8rem;">
                   <p class="popover__message"></p>
                   <input type="text" class="form-control mb-2 form-popover" id="input-studies" placeholder="url" name="input_url" autocomplete="off">
-                  <button>Toevoegen</button>
+                  <input type="submit" value="Toevoegen" class="button">
                 </div>
               </div>
             </div>
@@ -186,7 +196,7 @@
                   <div class="push popover__content" style="margin-top: -.8rem;">
                     <p class="popover__message"></p>
                     <img src="static/assets/img/dude1.svg" alt="profielfoto" width="60" height="60">
-                    <p style="margin-top: -1rem;">Persoonsnaam voerde dit in</p>
+                    <p style="margin-top: -1rem;">Kevin voerde dit in</p>
                   </div>
                 </div>
                 <div class="popover__wrapper">
@@ -195,7 +205,7 @@
                     <p class="popover__message"></p>
                     <input type="text" class="form-control mb-2 form-popover" id="input-hobby" placeholder="Studies" name="input_hobby"
                       autocomplete="off">
-                    <button>Toevoegen</button>
+                    <input type="submit" value="Toevoegen" class="button">
                   </div>
                 </div>
               </div>
@@ -233,15 +243,15 @@
         </ul>
       </div>
       <div class="mr-5">
-        <p style="color: white;" class="lead lead-footer">Volg ons op social media:</p>
+        <p style="color: white;" class="lead lead-footer">Volg ons op sociale media:</p>
         <ul style="list-style: none;" class="d-flex flex-row justify-content-between w-50">
           <li class="nav-item">
-            <a href="#">
+            <a href="https://www.facebook.com/kiestze/">
               <img src="static/assets/img/facebook-boven.png" alt="facebook" width="35" height="35" class="mr-3">
             </a>
           </li>
           <li class="nav-item">
-            <a href="#">
+            <a href="https://twitter.com/Kiestze ">
               <img src="static/assets/img/twitter-boven.png" alt="twitter" width="35" height="35" class="mr-3">
             </a>
           </li>
@@ -254,6 +264,7 @@
       </div>
     </footer>
   </div>
+  <script src="static/js/boosts.js"></script>
 </body>
 
 </html>
