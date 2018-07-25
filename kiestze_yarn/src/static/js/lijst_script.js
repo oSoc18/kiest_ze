@@ -271,6 +271,7 @@ function UpdateGemeenteInput() {
   for (let i = 0; i < lines.length; i++) {
     if (lines[i] == "") continue;
     const option = document.createElement("li")
+    option.classList.add(`optie_gemeente`)
     const key = lines[i].key
     option.id = key;
     // Bad code:

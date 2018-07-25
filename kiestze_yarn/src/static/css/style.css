@@ -1,3 +1,7 @@
+html {
+  min-width: 1300px;
+}
+
 body {
   color: #3c3c3c;
 }
@@ -59,6 +63,12 @@ h3 {
 .display-4 {
   font-family: 'Brandon_blk';
   font-size: 4rem;
+}
+
+.optie_gemeente {
+  list-style: none;
+  font-family: 'Brandon_reg';
+  font-size: 1.2rem;
 }
 
 .title {
@@ -127,6 +137,10 @@ h3 {
   color: white;
   font-family: 'Brandon_reg';
   font-size: 1.2rem;
+}
+
+.extra-boost {
+  margin-top: -1.2rem;
 }
 
 .search-group {
@@ -223,6 +237,7 @@ a:hover {
   -webkit-clip-path: circle(50% at 50% 50%); /* stylelint-disable-line*/
   clip-path: circle(50% at 50% 50%);
   margin-top: -2rem;
+  object-fit: cover;
 }
 
 .button-terug {
@@ -502,3 +517,5 @@ a:hover {
     font-size: 1.6rem;
   }
 }
+
+
