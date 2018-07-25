@@ -232,7 +232,7 @@ def get_object_with_edits_for_politieker(politieker_id):
 	edits = {}
 	for field in fields:
 		# field_id = EditableField.objects.get(fieldname=field.i)
-		last_edit = accepted_edits.filter(field=field.id).order_by('accepted_date').values().last()  # Django magic
+		last_edit = accepted_edits.filter(field=field.id).values().last()  # Django magic
 		edits[field.fieldname] = last_edit
 	return edits
 
@@ -244,6 +244,7 @@ def get_last_accepted_edit(request):
 
 	data = serializers.serialize('python', [get_object, ])
 	data = data[0]["fields"]
+	data['naam'] = data['naam'].title()
 
 	edits = get_object_with_edits_for_politieker(politieker_id)
 	data["edits"] = edits
