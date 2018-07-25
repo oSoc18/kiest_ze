@@ -30,17 +30,15 @@
   {% csrf_token %}
   <div class="background-purple">
     <header>
-      <div class="card-header d-flex flex-row card-header-detail">
-        <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
-        <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
-          <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
-          <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
+      <a class="search-link" href="lijst.html">
+        <div class="card-header d-flex flex-row card-header-detail">
+          <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
+          <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
+            <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
+            <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
+          </div>
         </div>
-        <div>
-          <ul id="opties_gemeentes">
-          </ul>
-        </div>
-      </div>
+      </a>
     </header>
     <main class="d-flex flex-row justify-content-around align-items-top mt-5" style="height: 90vh;">
       <section class="d-flex flex-column justify-content-around align-items-center linker-helft">
@@ -50,9 +48,13 @@
           <a href="#">
             <img src="static/assets/img/left-button.svg" alt="vorige" width="50" height="50">
           </a>
-          <div class="text-center ml-5 mr-5">
-            <img src="https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg" alt="Profile picture" class="detail-image mb-2"
-              width="250" height="250" id="persoon_foto">
+          <div class="text-center ml-5 mr-5 popover__wrapper">
+            <img src="https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg" alt="Profile picture" class="detail-image mb-2 linken" width="250" height="250" id="persoon_foto">
+            <div class="push popover__content" style="margin-top: -.8rem;">
+              <p class="popover__message"></p>
+              <input type="text" class="form-control mb-2 form-popover" id="input-studies" placeholder="url" name="input_url" autocomplete="off">
+              <input type="submit" value="Toevoegen" class="button">
+            </div>
           </div>
           <a href="#">
             <img src="static/assets/img/right-button.svg" alt="volgende" width="50" height="50">
@@ -74,10 +76,10 @@
             <div class="d-flex flex-wrap align-items-center">
               <div class="d-flex flex-row align-items-center border-boost mb-1">
                 <img src="static/assets/img/dude1.svg" alt="profielfoto" width="50" height="50" class="mr-2">
-                <p class="boost mr-2">Zet zich goed in voor de partij!</p>
+                <p class="boost mr-2">Zet zich goed in!</p>
                 <p class="emoji mr-2">👍</p>
               </div>
-              <section class="boosts">
+              <section class="boosts ml-2 extra-boost">
   
               </section>
             </div>
@@ -265,7 +267,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#">
+            <a href="mailto:kiestze@gmail.com">
               <img src="static/assets/img/mail.svg" alt="mail" width="35" height="35" class="mr-3">
             </a>
           </li>

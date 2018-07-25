@@ -1,3 +1,21 @@
+html {
+  min-width: 1300px;
+}
+
+@font-face {
+  font-family: 'Brandon_blk';
+  src: url("../assets/fonts/brandonblk/Brandonblk.woff2") format('woff2'), url("../assets/fonts/brandonblk/Brandonblk.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brandon_reg';
+  src: url("../assets/fonts/brandonreg/Brandon_reg.woff2") format('woff2'), url("../assets/fonts/brandonreg/Brandon_reg.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   color: #3c3c3c;
 }
@@ -59,6 +77,12 @@ h3 {
 .display-4 {
   font-family: 'Brandon_blk';
   font-size: 4rem;
+}
+
+.optie_gemeente {
+  list-style: none;
+  font-family: 'Brandon_reg';
+  font-size: 1.2rem;
 }
 
 .title {
@@ -127,6 +151,10 @@ h3 {
   color: white;
   font-family: 'Brandon_reg';
   font-size: 1.2rem;
+}
+
+.extra-boost {
+  margin-top: -1.2rem;
 }
 
 .search-group {
@@ -223,6 +251,7 @@ a:hover {
   -webkit-clip-path: circle(50% at 50% 50%); /* stylelint-disable-line*/
   clip-path: circle(50% at 50% 50%);
   margin-top: -2rem;
+  object-fit: cover;
 }
 
 .button-terug {
@@ -502,3 +531,5 @@ a:hover {
     font-size: 1.6rem;
   }
 }
+
+
