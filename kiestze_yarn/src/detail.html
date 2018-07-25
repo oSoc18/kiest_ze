@@ -31,7 +31,7 @@
   <div class="background-purple">
     <header>
       <a class="search-link" href="lijst">
-        <div class="card-header d-flex flex-row card-header-detail" style="display: inline;">
+        <div class="card-header flex-row card-header-detail" style="display: inline;">
           <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
           <!-- <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
             <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
@@ -39,7 +39,7 @@
           </div> -->
         </div>
       </a>
-      <span id="gemeente_element">Gemeente</span>
+      <span id="gemeente_element" style="position: absolute; font-size: 20px;">Gemeente</span>
     </header>
     <main class="d-flex flex-row justify-content-around align-items-top mt-5" style="height: 90vh; min-height: max-content;">
       <section class="d-flex flex-column justify-content-around align-items-center linker-helft">
@@ -50,7 +50,7 @@
             <img src="static/assets/img/left-button.svg" alt="vorige" width="50" height="50">
           </a>
           <div class="text-center ml-5 mr-5 popover__wrapper">
-            <img src="https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg" alt="Profile picture" class="detail-image mb-2 linken" width="250" height="250" id="persoon_foto">
+            <img src="static/assets/img/default_man.svg" alt="Profile picture" class="detail-image mb-2 linken" width="250" height="250" id="persoon_foto">
             <div class="push popover__content" style="margin-top: -.8rem;">
               <p class="popover__message"></p>
               <input type="text" class="form-control mb-2 form-popover" id="input-studies" placeholder="url" name="input_url" autocomplete="off">

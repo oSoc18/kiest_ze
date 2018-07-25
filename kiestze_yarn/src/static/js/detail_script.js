@@ -60,12 +60,18 @@ function UpdateAll()
 
   politieker_naam.innerText = politieker.naam;
 
-  let logo = "https://pbs.twimg.com/profile_images/787106179482869760/CwwG2e2M_400x400.jpg";
+  let objectFit = `contain`;
+  let profiel_foto = "static/assets/img/default_man.svg";
+  if(politieker.geslacht == `F`) {
+    profiel_foto = "static/assets/img/default_vrouw.svg";
+  }
   if(politieker.edits.foto)
-    logo = politieker.edits.foto.suggested_value
-
-  persoon_foto.src = logo;
-
+  {
+    profiel_foto = politieker.edits.foto.suggested_value
+    objectFit = `cover`;
+  }
+  persoon_foto.src = profiel_foto;
+  persoon_foto.style.objectFit = objectFit;
 
   partij_naam.innerText = partij.lijstnaam
 

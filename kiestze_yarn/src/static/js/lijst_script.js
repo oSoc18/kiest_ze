@@ -193,17 +193,18 @@ function DisplayKanidaten() {
       let shortName = politieker.naam;
       shortName = shortName.substr(shortName.lastIndexOf(" "))
       let objectFit = `contain`;
-      let logo = "static/assets/img/default_man.svg";
+      let profiel_foto = "static/assets/img/default_man.svg";
       if(politieker.geslacht == `F`) {
-        logo = "static/assets/img/default_vrouw.svg";
+        profiel_foto = "static/assets/img/default_vrouw.svg";
       }
       if(politieker.edits.foto)
-        {logo = politieker.edits.foto.suggested_value
-         objectFit = `cover`;
-        }
+      {
+        profiel_foto = politieker.edits.foto.suggested_value
+        objectFit = `cover`;
+      }
       const shortName2 = politieker.naam.replace(/ /g, "_");
       option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
-        <img class="card-img-top politieker-img" src="${logo}" alt="Card image cap" style="object-fit:${objectFit}">
+        <img class="card-img-top politieker-img" src="${profiel_foto}" alt="Card image cap" style="object-fit:${objectFit}">
         <div class="card-body">
         <h3 class="card-title">${politieker.naam}</h5>
         <p class="card-text">${partij.lijstnaam}</p>
