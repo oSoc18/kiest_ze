@@ -14,7 +14,7 @@ print(path)
 copyfile("kiestze_yarn/src/static/css/style.css", "kiestze_yarn/dist/static/css/style.css")
 copyfile("kiestze_yarn/src/static/css/bootstrap.min.css", "kiestze_yarn/dist/static/css/bootstrap.min.css")
 
-
+copy_tree("kiestze_yarn/src/static/", "kiestze_django/static/")
 copy_tree("kiestze_yarn/dist/static/", "kiestze_django/static/")
 
 copyfile("kiestze_yarn/dist/detail.html", "kiestze_django/templates/detail.html")

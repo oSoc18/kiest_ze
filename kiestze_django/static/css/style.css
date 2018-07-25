@@ -1,9 +1,54 @@
 body {
-  color: black;
+  color: #3c3c3c;
 }
 
-.card-header {
-  background-color: #3e2749;
+.background-shape {
+  background-image: url(../assets/img/boven-img.svg);
+  background-repeat: no-repeat;
+  background-size: inherit;
+  /* background-position: top center; */
+  background-position: top;
+  background-position-x: 25vw;
+}
+
+p {
+  font-family: 'Brandon_reg';
+  font-size: 1.3rem;
+}
+
+h3 {
+  margin-bottom: 0rem;
+}
+
+.linker-helft {
+  margin-left: -3rem;
+}
+
+.background-purple {
+  background-image: url(../assets/img/purple-background.svg);
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+
+.card-header-lijst {
+  background-color: white;
+  filter: drop-shadow(0 0 2px #333);
+  border: none;
+}
+
+.card {
+  filter: drop-shadow(0 0 2px #333);
+  border: none;
+  border-radius: 0rem;
+  font-style: none;
+  color: #3c3c3c;
+  transition: transform .3s;
+}
+
+.card:hover {
+  text-decoration: none;
+  color: #3c3c3c;
+  transform: scale(1.05);
 }
 
 .nav-link {
@@ -12,12 +57,145 @@ body {
 }
 
 .display-4 {
-  font-size: 2rem;
+  font-family: 'Brandon_blk';
+  font-size: 4rem;
+}
+
+.title {
+  font-family: 'Brandon_blk';
+  font-size: 2.5rem;
+}
+
+.boost {
+  font-family: 'Brandon_reg';
+  font-size: 1.1rem;
+}
+
+.subtitle {
+  font-family: 'Brandon_blk';
+  font-size: 1.8rem;
+  color: #4ac1d4;
+}
+
+.emoji {
+  font-size: 1.6rem;
+}
+
+.border-boost {
+  border: .1rem solid #c9c9c9;
+  padding: .5rem;
+  padding-top: 1.2rem;
+  border-radius: 10rem;
+  height: 3rem;
+}
+
+.lead-title {
+  font-family: 'Brandon_reg';
+  font-size: 1.4rem;
+}
+
+h3 {
+  margin-bottom: 0rem;
+}
+
+.lead {
+  font-family: 'Brandon_reg';
+  font-size: 1.7rem;
+}
+
+.lead-footer {
+  font-size: 1.2rem;
+}
+
+.searchfield {
+  border: none;
+  background-color: #4ac1d4;
+  color: white;
+}
+
+.searchfield:focus {
+  outline: none;
+}
+
+.searchfield::placeholder {
+  color: white;
+  font-family: 'Brandon_reg';
+  font-size: 1.2rem;
+}
+
+.search-group {
+  border-bottom: .2rem solid white;
+}
+
+.form-control:focus {
+  outline: none;
+}
+
+.search-lijst {
+  border: none;
+  border-bottom: .2rem solid #c9c9c9;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  border-radius: 0rem;
+  color: #c9c9c9;
+  font-family: 'Brandon_blk';
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.search-lijst:focus {
+  outline: none;
+  border-bottom: .2rem solid #c9c9c9;
+}
+
+.search-lijst::placeholder {
+  color: #c9c9c9;
+  font-family: 'Brandon_blk';
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.search-margin {
+  margin-top: 14rem;
+  margin-left: 1rem;
+}
+
+.meerweten {
+  font-family: 'Brandon_reg';
+  font-size: 1rem;
 }
 
 .form-background {
-  background-color: #e9ecef;
+  background-color: #4ac1d4;
+  min-height: 100vh;
+  max-height: 500vh;
+  overflow-y: inherit;
   color: #08293d;
+}
+
+.form-check-label {
+  color: white;
+  font-family: 'Brandon_reg';
+  font-size: 1.3rem;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.background-teken {
+  background-image: url(../assets/img/uitroepteken.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; 
+  height: 33rem;
+  width: 31rem;
+  margin-top: -8rem;
+}
+
+.auto {
+  margin: 0 auto;
 }
 
 .btn {
@@ -27,6 +205,12 @@ body {
 
 .btn:hover {
   background-color: #369ea4;
+}
+
+.card-header-detail {
+  filter: none;
+  background-color: transparent;
+  border: none;
 }
 
 .detail-image {
@@ -59,14 +243,21 @@ body {
   width: 16.9rem;
   height: 18rem;
   size: percentage;
+  object-fit: cover;
 }
 
 .card-title {
+  font-family: 'Brandon_blk';
   font-size: 1.4rem;
 }
 
-.card-footer {
-  background-color: #3e2749;
+.card-text {
+  font-family: 'Brandon_reg';
+  font-size: 1.5rem;
+}
+
+.footer {
+  background-color: #3c3c3c;
 }
 
 .card-footer-lijst {
@@ -88,10 +279,37 @@ body {
   position: absolute;
   transform: translate(0,10px);
   background-color: white;
+  border-radius: 1rem;
   padding: .5rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
   width: 15rem;
   color: black;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Brandon_reg';
+  font-size: 1.2rem;
+}
+
+.form-popover {
+  border-radius: 10rem;
+}
+
+.form-popover:focus {
+  outline: none;
+}
+
+.button {
+  background-color: #3c3c3c;
+  color: white;
+  border: #3c3c3c;
+  border-radius: 10rem;
+  padding: 0 .5rem;
+}
+
+.button:focus {
+  outline: none;
 }
 
 .popover__wrapper:hover .popover__content {
@@ -109,4 +327,68 @@ body {
 
 .div-load {
   height: 3rem;
+}
+
+.carousel-control-prev {
+  opacity: 1;
+  top: 85vh;
+  left: 41vw;
+}
+
+.carousel-control-prev:hover {
+  opacity: 1;
+}
+
+.carousel-control-next {
+  opacity: 1;
+  top: 85vh;
+}
+
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+.uitleg-image-een {
+  margin-top: 8rem;
+}
+
+.uitleg-image-twee {
+  margin-top: 6rem;
+}
+
+.terug {
+  color: #3c3c3c;
+  font-family: 'Brandon_reg';
+  font-size: 1.3rem;
+}
+
+.terug-div {
+  border: solid #3c3c3c .2rem;
+  border-radius: 10rem;
+  padding: .5rem;
+  margin-top: -4rem;
+  margin-bottom: 3rem;
+  width: 8rem;
+}
+
+.carousel-indicators {
+  left: 42vw;
+  background-color: transparent;
+  bottom: 3vh;
+}
+
+.carousel-indicators li {
+  background-color: transparent;
+  background-image: url(../assets/img/lege_bol.svg);
+  background-repeat: no-repeat;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.carousel-indicators .active {
+  background-color: transparent;
+  background-image: url(../assets/img/volle_bol.svg);
+  background-repeat: no-repeat;
+  width: 1.5rem;
+  height: 1.5rem;
 }

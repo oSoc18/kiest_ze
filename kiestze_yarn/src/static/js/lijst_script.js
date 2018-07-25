@@ -120,9 +120,12 @@ function DisplayPartijen() {
         option = document.createElement("div")
         option.id = `partij_${partij_id}`
         opties_partijen.appendChild(option);
+        let label = "";
+        if(partij.jaar == "2018")
+          label = "<b style='color:#fff676;'>2018!</b>"
         option.innerHTML = `<div class="form-check"> 
           <input class="form-check-input" type="radio" name="partijRadio" id="${partij_id}" value="option">
-          <label class="form-check-label" for="partijRadio">${partij.lijstnaam}</label>
+          <label class="form-check-label" for="partijRadio">${label} ${partij.lijstnaam}</label>
           <span class="checkmark"></span>
           </div>`
         option.querySelector("input").addEventListener(`click`, PartijClicked);
