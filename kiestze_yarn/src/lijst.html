@@ -1,3 +1,5 @@
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -38,7 +40,7 @@
       </div>
     </div> 
     <div>
-      <a href="">lol dit is fb login</a>
+      <a href="{% provider_login_url "facebook" %}">Facebook</a>
     </div>
   </header>
 
