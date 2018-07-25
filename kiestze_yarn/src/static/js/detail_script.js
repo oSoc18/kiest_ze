@@ -62,10 +62,13 @@ function UpdateAll()
 
   partij_naam.innerText = partij.lijstnaam
 
-  politieker_website.innerText = politieker.edits.website.suggested_value;
-  politieker_website.href = politieker.edits.website.suggested_value;
-  //politieker_website_input.value = politieker.edits.website.suggested_value;
+  let website_value = "";
+  if(politieker.edits.website != null)
+    website_value = politieker.edits.website.suggested_value
 
+  politieker_website.innerText = website_value;
+  politieker_website.href = website_value;
+  //politieker_website_input.value = website_value;
 }
 
 const model = {
