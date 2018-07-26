@@ -29,17 +29,13 @@
 <body class="background-shape">
   <div style="display: none">{% csrf_token %}</div>
   <div class="background-purple">
-    <header>
+    <header class="ml-2">
       <a class="search-link" href="lijst">
         <div class="card-header flex-row card-header-detail" style="display: inline;">
           <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
-          <!-- <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
-            <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Moorslede" name="input_gemeente" autocomplete="off">
-            <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
-          </div> -->
         </div>
       </a>
-      <span id="gemeente_element" style="position: absolute; font-size: 20px;">Gemeente</span>
+      <span id="gemeente_element" style="position: absolute; font-size: 20px;" class="search-lijst">Gemeente</span>
     </header>
     <main class="d-flex flex-row justify-content-around align-items-top mt-5" style="height: 90vh; min-height: max-content;">
       <section class="d-flex flex-column justify-content-around align-items-center linker-helft">
@@ -99,7 +95,7 @@
 
         </div>
       </section>
-      <section style="color: white;" class="align-self-center" style="margin-left: 6rem;">
+      <section style="color: white;" class="align-self-center ml-5">
         <article class="mb-5">
           <div>
             <div class="text-left">
@@ -160,8 +156,8 @@
               </div>
               <div class="popover__wrapper">
                 <div class="d-flex flex-row">
-                  <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1">
-                  <a href="http://" id="politieker_website" target="_blank"></a>
+                  <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1 linken">
+                  <a href="http://" id="politieker_website" target="_blank" class="ml-2 list-items-toegevoegd" style="color: white;"</a>
                   <!-- <p class="linken ml-2 list-items-detail" style="color: white;">Voeg toe</p> -->
                 </div>
                 <div class="push popover__content" style="margin-top: -.8rem;">
@@ -187,8 +183,8 @@
                 <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
               </div>
               <div class="d-flex flex-row">
-                <a href="" target="_blank" id="politieker_openthebox">Openen in Open The Box!</a>
-                <span id="politieker_openthebox_not_found">Geen referentie naar openthebox gevonden.</span>
+                <a href="" target="_blank" id="politieker_openthebox" class="link-open">Openen in Open The Box!</a>
+                <span id="politieker_openthebox_not_found" class="ref-not-found">Geen referentie naar openthebox gevonden.</span>
               </div>
             </div>
             <div class="mb-5">

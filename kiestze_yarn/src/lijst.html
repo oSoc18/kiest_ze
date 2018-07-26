@@ -39,8 +39,12 @@
         </ul>
       </div>
     </div> 
-    <div>
-      <a href="/allauth/facebook/login">Facebook</a>
+    <div class="mr-3 d-flex align-items-bottom popover__wrapper">
+      <img src="static/assets/img/facebook-detail.svg" alt="facebook" width="30" height="30" class="linken">
+      <a href="/allauth/facebook/login" class="facebook-link">Log in</a>
+      <div class="push popover__content tekst-popover-lijst">
+        <p class="popover__message"></p>
+        <p class="ml-3"> Om zaken over de kandidaten te bewerken moet je ingelogd zijn.</p></div>
     </div>
   </header>
 
@@ -58,7 +62,7 @@
               <i>Deze gemeente zit nog niet in ons systeem :(</i>
             </div>
           </div>
-          <div class="mt-4 font-filter" style="display: none">
+          <div class="mt-4 font-filter">
             <h2 class="lead" style="color: white;">Beleidsthema's</h2>
             <img src="static/assets/img/white-line.svg" alt="white_line" width="40" height="3" class="white-line">
             <div class="form-check">
@@ -82,11 +86,11 @@
               <label class="form-check-label" for="partijRadio">Veiligheid</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
+              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Onderwijs</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="partijRadio" id="partijpunt" value="option">
+              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
               <label class="form-check-label" for="partijRadio">Integratie</label>
             </div>
           </div>

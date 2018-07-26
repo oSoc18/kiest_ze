@@ -39,7 +39,42 @@ h3 {
 }
 
 .linker-helft {
-  margin-left: -3rem;
+  /* margin-left: -3rem; */
+}
+
+.facebook-link {
+  color: #3c3c3c;
+  font-family: 'Brandon_blk';
+  font-size: 1.6rem;
+  text-decoration: none;
+}
+
+.facebook-link:hover {
+  color: #3c3c3c;
+}
+
+.link-open {
+  color: white;
+  text-decoration: underline;
+  font-family: 'Brandon_reg';
+  font-size: 1.4rem;
+  width: 10rem;
+}
+
+.link-open:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.list-items-toegevoegd {
+  color: white;
+  font-family: 'Brandon_reg';
+  font-size: 1.5rem;
+}
+
+.tekst-popover-lijst {
+  margin-top: 3rem;
+  margin-left: -8rem;
 }
 
 .background-purple {
@@ -425,6 +460,10 @@ a:hover {
   background-repeat: no-repeat;
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.ref-not-found {
+  width: 10rem;
 }
 
 @media only screen  and (min-width: 1440px) {
