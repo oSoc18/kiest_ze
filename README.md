@@ -43,17 +43,18 @@ All assets go trough webpack to go minified. Javascript will also get bundles an
 - Create a file called `secret.py` in `kiestze_django/kiestze_django/` with the variables `key`, `psql_user` and `psql_password` (you can generate a Django secret key on https://djskgen.herokuapp.com/)
 - `python kiestze_django/manage.py runserver` to run the development server
 
-This is only a development server. For setting up a production server (using nginx and gunicorn), see https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
+This is only a development server. For setting up a production server (using nginx and gunicorn), see  
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
 
 
 ## API
-To get get all 'politiekers' for a certain 'gemeente', use:
+To get get all 'politiekers' for a certain 'gemeente', use:  
 https://kiestze.be/get_politiekers?gemeente_nis=36012&jaar=0
 
-To get all 'partijen' for a certain 'gemeente', use:
+To get all 'partijen' for a certain 'gemeente', use:  
 https://kiestze.be/get_partij?gemeente_nis=36012&jaar=0
 
-To know what 'politiekers' are connected to what 'partijen', use the following call:
+To know what 'politiekers' are connected to what 'partijen', use the following call:  
 https://kiestze.be/get_all_politieker_partij_link_van_gemeente?gemeente_nis=36012&jaar=0
 
 (Note, that when jaar=0, information of all years will be returned)
