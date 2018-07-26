@@ -4,15 +4,11 @@ import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { updateQueryStringParam, getParameterByName } from './static_utils.js';
 import { JsonRequest, GetDjangoUrl, GetGemeentes } from './common.js';
 
-// const datalist_gemeentes = document.getElementById("datalist_gemeentes");
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
 const opties_gemeentes = document.getElementById("opties_gemeentes");
 const geselecteerde_gemeente = document.getElementById("geselecteerde_gemeente");
 const opties_partijen = document.getElementById("opties_partijen");
 const kanidaaten_lijst = document.getElementById("kanidaaten_lijst");
-//const geen_opties_partijen = document.getElementById("geen_opties_partijen");
-//const stad_display = document.getElementById("stad_display");
-//const dropdownMenuLink = document.getElementById("dropdownMenuLink");
 
 
 
@@ -55,12 +51,6 @@ const model = {
     return this._selectedPartijId;
   },
 
-  /*airTables: {
-    Partij: new JsonRequest(GetTableUrl("Partij"), UpdateAll),
-    Politiekers: new JsonRequest(GetTableUrl("Politiekers"), UpdateAll),
-    Organisaties: new JsonRequest(GetTableUrl("Organisaties"), UpdateAll),
-    Stad: new JsonRequest(GetTableUrl("Stad"), UpdateAll),
-  },*/
   djangoData: {
     get_all_gemeentes:  new JsonRequest(GetDjangoUrl("/get_all_gemeentes"), UpdateAll), // TODO
     get_partij:  new JsonRequest("", UpdateAll),
@@ -73,28 +63,7 @@ window["model"] = model;
 
 model.selectedNis = getParameterByName("selectedNis")
 model.selectedPartijId = getParameterByName("selectedPartijId")
-/*
-function FindStadMetNis(nisCode) {
-  const steden = model.airTables.Stad.json.records;
 
-  for (const property in steden) {
-    if (steden.hasOwnProperty(property)) {
-      if (steden[property].fields.NisCode == nisCode)
-        return steden[property];
-    }
-  }
-}
-
-function FindPartijWithRecid(Rcis) {
-  const partijen = model.airTables.Partij.json.records;
-  for (const property in partijen) {
-    if (partijen.hasOwnProperty(property)) {
-      if (partijen[property].id == Rcis)
-        return partijen[property];
-    }
-  }
-}
-*/
 function PartijClicked(evt){
   console.log("PartijClicked", evt.target, evt.target.id);
   model.selectedPartijId = evt.target.id;
@@ -103,10 +72,6 @@ function PartijClicked(evt){
 
 function DisplayPartijen() {
   const usedChildren = []
-
-  //if (model.selectedNis == null) return;
-  //console.log("selectedNis", model.selectedNis)
-
 
   const get_partij = model.djangoData.get_partij.json;
   
@@ -143,13 +108,6 @@ function DisplayPartijen() {
     }
   }
 }
-
-/*
-function ContainsAirtableRec(list, rec)
-{
-  return list.includes(rec)
-}
-*/
 
 function DisplayKanidaten() {
   if(model.djangoData.get_all_politieker_partij_link_van_gemeente.json == null) return;
@@ -235,6 +193,11 @@ input_gemeente.addEventListener(`input`, GemeenteInputEvent);
 
 UpdateAll();
 
+function BadString(str)
+{
+  return str == null || str == "" || isNaN(str);
+}
+
 function UpdateAll() {
   UpdateGemeenteInput();
   geselecteerde_gemeente.innerText = model.selectedNis;
@@ -243,18 +206,12 @@ function UpdateAll() {
   if(radioButton)
     radioButton.checked = true
 
-  // Wait while downloading airtables. Maybe show spinner?
-  //if(model.airTables.Stad.json == null) return;
-  //if(model.airTables.Politiekers.json == null) return;
-  //if(model.airTables.Partij.json == null) return;
-
-  const shortNis = ShorterNis(model.selectedNis)
-  model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?gemeente_nis=${shortNis}&jaar=0`)
-  model.djangoData.get_politiekers.url = GetDjangoUrl(`/get_politiekers?gemeente_nis=${shortNis}&jaar=0`)
-  model.djangoData.get_all_politieker_partij_link_van_gemeente.url = GetDjangoUrl(`/get_all_politieker_partij_link_van_gemeente?gemeente_nis=${shortNis}&jaar=0`)
-  //const json1 = model.djangoData.get_politiekers.json;
-  //const json2 = model.djangoData.get_partij.json;
-  //const json3 = model.djangoData.get_all_politieker_partij_link_van_gemeente.json;
+  if(!BadString(model.selectedNis)){
+    const shortNis = ShorterNis(model.selectedNis)
+    model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?gemeente_nis=${shortNis}&jaar=0`)
+    model.djangoData.get_politiekers.url = GetDjangoUrl(`/get_politiekers?gemeente_nis=${shortNis}&jaar=0`)
+    model.djangoData.get_all_politieker_partij_link_van_gemeente.url = GetDjangoUrl(`/get_all_politieker_partij_link_van_gemeente?gemeente_nis=${shortNis}&jaar=0`)
+  }
 
 
   DisplayPartijen()
@@ -295,5 +252,3 @@ function UpdateGemeenteInput() {
     opties_gemeentes.appendChild(option);
   }
 }
-
-

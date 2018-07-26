@@ -29,6 +29,17 @@ body {
   background-position-x: 25vw;
 }
 
+.landing-page-input
+{
+  border-bottom: none;
+  background: transparent;
+}
+
+.landing-page-input::placeholder
+{
+  color: white;
+}
+
 p {
   font-family: 'Brandon_reg';
   font-size: 1.3rem;

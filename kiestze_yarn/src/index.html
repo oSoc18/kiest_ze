@@ -39,9 +39,9 @@
         <div class="d-flex flex-row align-items-center background-teken">
           <div class="d-flex flex-row align-items-center search-margin dropdown">
 
-            <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
+            <div class="form-group search-group" style="height: 2rem;">
               <div class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Gemeente" name="input_gemeente" autocomplete="off">
+                <input type="text" class="form-control w-75 search-lijst landing-page-input" id="search" placeholder="Gemeente" name="input_gemeente" autocomplete="off">
               </div>
               <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
               <ul id="opties_gemeentes" class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -52,8 +52,8 @@
               <input type="text" class="w-100 searchfield" id="search" aria-describedby="searchfield" placeholder="Jouw gemeente" name="input_gemeente"
                 autocomplete="off">
             </div> -->
-            
-            <a href="lijst">
+
+            <a id="lijst_link" href="lijst">
               <img src="static/assets/img/search.svg" alt="search" width="30" height="30" class="mb-4 ml-1">
             </a>
           </div>
@@ -196,7 +196,8 @@
   </footer>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
-  <script src="static/js/boots/bootstrap.min.js"></script>
+  <!-- <script src="static/js/boots/bootstrap.min.js"></script> -->
+  <script src="static/js/boots/bootstrap.bundle.min.js"></script>
   <script>
     $('.carousel').carousel('pause')
   </script>

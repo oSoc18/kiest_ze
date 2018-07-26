@@ -7,7 +7,6 @@ const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
 const partij_naam = document.getElementById("partij_naam");
 const politieker_website = document.getElementById("politieker_website");
-//const politieker_website_input = document.getElementById("politieker_website_input");
 const politieker_website_button = document.getElementById("politieker_website_button");
 const politieker_facebook = document.getElementById("politieker_facebook");
 const politieker_twitter = document.getElementById("politieker_twitter");
@@ -52,11 +51,17 @@ function approve(politieker, fieldname, suggested_value) {
   xhr.send(data);
 }
 
+function BadString(str)
+{
+  return str == null || str == "";
+}
 
 function UpdateAll()
 {
-  model.djangoData.get_last_accepted_edit.url = GetDjangoUrl(`/get_last_accepted_edit?politieker=${model.selectedPolitiekerId}`)
-  model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?partij_id=${model.selectedPartijId}`)
+  if(!BadString(model.selectedPolitiekerId))
+    model.djangoData.get_last_accepted_edit.url = GetDjangoUrl(`/get_last_accepted_edit?politieker=${model.selectedPolitiekerId}`)
+  if(!BadString(model.selectedPartijId))
+    model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?partij_id=${model.selectedPartijId}`)
   
   const politieker = model.djangoData.get_last_accepted_edit.json
   if(politieker == null) return;
@@ -151,7 +156,7 @@ const model = {
   
   _selectedPolitiekerId: "",
   set selectedPolitiekerId(value) {
-    console.error("Not implemented yet!")
+    //console.error("Not implemented yet!")
     value = parseInt(value); // enforce int
     if(this._selectedPolitiekerId === value) return;
 
@@ -163,32 +168,15 @@ const model = {
     return this._selectedPolitiekerId;
   },
 
-  /*airTables: {
-    Partij: new JsonRequest(GetTableUrl("Partij"), UpdateAll),
-    PolitiekerRecord: null, 
-    Organisaties: new JsonRequest(GetTableUrl("Organisaties"), UpdateAll),
-    Stad: new JsonRequest(GetTableUrl("Stad"), UpdateAll),
-  }*/
   djangoData: {
-    //get_all_gemeentes:  new JsonRequest(GetDjangoUrl("/get_all_gemeentes"), UpdateAll), // TODO
     get_partij:  new JsonRequest("", UpdateAll),
     get_last_accepted_edit:  new JsonRequest("", UpdateAll),
-    //get_politiekers:  new JsonRequest("", UpdateAll),
-    //get_all_politieker_partij_link_van_gemeente:  new JsonRequest("", UpdateAll),
   },
 }
 window["model"] = model;
 
 model.selectedPartijId = getParameterByName("partij_id")
 model.selectedPolitiekerId = getParameterByName("politieker_id")
-/*
-function GetPolitiekerUrl(rec)
-{
-  return `https://api.airtable.com/v0/app5SoKsYnuOY96ef/Politiekers/${rec}?api_key=key2Jl1YfS4WWBFa5`
-}
-
-model.airTables.PolitiekerRecord = new JsonRequest(GetPolitiekerUrl(model.politieker_id), UpdateAll)
-*/
 
 UpdateAll()
 
