@@ -1,14 +1,14 @@
 ﻿"use strict";
 
 import { updateQueryStringParam, getParameterByName } from './static_utils.js';
-import { JsonRequest, GetTableUrl, GetDjangoUrl } from './common.js';
+import { JsonRequest, GetDjangoUrl } from './common.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
 
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
 const partij_naam = document.getElementById("partij_naam");
 const politieker_website = document.getElementById("politieker_website");
-const politieker_website_input = document.getElementById("politieker_website_input");
+//const politieker_website_input = document.getElementById("politieker_website_input");
 const politieker_website_button = document.getElementById("politieker_website_button");
 const politieker_facebook = document.getElementById("politieker_facebook");
 const politieker_twitter = document.getElementById("politieker_twitter");

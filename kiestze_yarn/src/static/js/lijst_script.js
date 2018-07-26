@@ -3,7 +3,7 @@
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
 import { updateQueryStringParam, getParameterByName } from './static_utils.js';
-import { JsonRequest, GetTableUrl, GetDjangoUrl } from './common.js';
+import { JsonRequest, GetDjangoUrl } from './common.js';
 
 // const datalist_gemeentes = document.getElementById("datalist_gemeentes");
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
@@ -11,9 +11,9 @@ const opties_gemeentes = document.getElementById("opties_gemeentes");
 const geselecteerde_gemeente = document.getElementById("geselecteerde_gemeente");
 const opties_partijen = document.getElementById("opties_partijen");
 const kanidaaten_lijst = document.getElementById("kanidaaten_lijst");
-const geen_opties_partijen = document.getElementById("geen_opties_partijen");
-const stad_display = document.getElementById("stad_display");
-const dropdownMenuLink = document.getElementById("dropdownMenuLink");
+//const geen_opties_partijen = document.getElementById("geen_opties_partijen");
+//const stad_display = document.getElementById("stad_display");
+//const dropdownMenuLink = document.getElementById("dropdownMenuLink");
 
 
 
@@ -36,6 +36,7 @@ const model = {
 
     this._selectedNis = value;
     updateQueryStringParam("selectedNis", model.selectedNis)
+    console.log("selectedNis", model.selectedNis)
     UpdateAll();
   },
   get selectedNis() {
@@ -73,7 +74,7 @@ window["model"] = model;
 
 model.selectedNis = getParameterByName("selectedNis")
 model.selectedPartijId = getParameterByName("selectedPartijId")
-
+/*
 function FindStadMetNis(nisCode) {
   const steden = model.airTables.Stad.json.records;
 
@@ -94,7 +95,7 @@ function FindPartijWithRecid(Rcis) {
     }
   }
 }
-
+*/
 function PartijClicked(evt){
   console.log("PartijClicked", evt.target, evt.target.id);
   model.selectedPartijId = evt.target.id;
@@ -105,7 +106,7 @@ function DisplayPartijen() {
   const usedChildren = []
 
   //if (model.selectedNis == null) return;
-  console.log("selectedNis", model.selectedNis)
+  //console.log("selectedNis", model.selectedNis)
 
 
   const get_partij = model.djangoData.get_partij.json;
@@ -144,11 +145,12 @@ function DisplayPartijen() {
   }
 }
 
-
+/*
 function ContainsAirtableRec(list, rec)
 {
   return list.includes(rec)
 }
+*/
 
 function DisplayKanidaten() {
   if(model.djangoData.get_all_politieker_partij_link_van_gemeente.json == null) return;
@@ -237,6 +239,10 @@ UpdateAll();
 function UpdateAll() {
   UpdateGemeenteInput();
   geselecteerde_gemeente.innerText = model.selectedNis;
+  
+  const radioButton = document.getElementById(model.selectedPartijId)
+  if(radioButton)
+    radioButton.checked = true
 
   // Wait while downloading airtables. Maybe show spinner?
   //if(model.airTables.Stad.json == null) return;
@@ -247,9 +253,9 @@ function UpdateAll() {
   model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?gemeente_nis=${shortNis}&jaar=0`)
   model.djangoData.get_politiekers.url = GetDjangoUrl(`/get_politiekers?gemeente_nis=${shortNis}&jaar=0`)
   model.djangoData.get_all_politieker_partij_link_van_gemeente.url = GetDjangoUrl(`/get_all_politieker_partij_link_van_gemeente?gemeente_nis=${shortNis}&jaar=0`)
-  const json1 = model.djangoData.get_politiekers.json;
-  const json2 = model.djangoData.get_partij.json;
-  const json3 = model.djangoData.get_all_politieker_partij_link_van_gemeente.json;
+  //const json1 = model.djangoData.get_politiekers.json;
+  //const json2 = model.djangoData.get_partij.json;
+  //const json3 = model.djangoData.get_all_politieker_partij_link_van_gemeente.json;
 
 
   DisplayPartijen()
