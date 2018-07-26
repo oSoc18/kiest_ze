@@ -14,10 +14,20 @@ We choose Django becouse:
 - Python 3
 - PostgreSQL
 
-### Run server
+### Run server (development)
 - cd kiestze_django/
 - pip install -r requirements.txt # Check this file to get a full list of packages.
-- systemctl restart gunicorn
+- Create a file called `secret.py` in `kiestze_django/kiestze_django/` with the variables `key`, `psql_user` and `psql_password` (you can generate a Django secret key on https://djskgen.herokuapp.com/)
+- `python kiestze_django/manage.py runserver` to run the development server
+
+This is only a development server. For setting up a production server (using nginx and gunicorn), see  
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
+
+## Run server (production)
+- cd kiestze
+- `python build_steps.py`
+- Create a file called `secret.py` in `kiestze_django/kiestze_django/` with the variables `key`, `psql_user` and `psql_password` (you can generate a Django secret key on https://djskgen.herokuapp.com/)
+- Start nginx and gunicorn (follow digitialocean tutorial above for info on how to set it up)
 
 ## Frontend
 All assets go trough webpack to go minified. Javascript will also get bundles and be converted to simple javascript to work on all devices.
@@ -35,16 +45,6 @@ All assets go trough webpack to go minified. Javascript will also get bundles an
 ### Build Frontend
 - cd kiestze_yarn
 - `yarn production` (`yarn production-windows` on Windows)
-
-
-## Run production
-- cd kiestze
-- `python build_steps.py`
-- Create a file called `secret.py` in `kiestze_django/kiestze_django/` with the variables `key`, `psql_user` and `psql_password` (you can generate a Django secret key on https://djskgen.herokuapp.com/)
-- `python kiestze_django/manage.py runserver` to run the development server
-
-This is only a development server. For setting up a production server (using nginx and gunicorn), see  
-https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
 
 
 ## API
