@@ -1,6 +1,7 @@
 ﻿"use strict";
 
 import { loadJSON } from './static_utils.js';
+import { ah } from './admin_hierarchy-1.0.0.js';
 
 const StateEnum = Object.freeze({ "init": 1, "requesting": 2, "succes": 3, "fail": 4 })
 
@@ -73,4 +74,97 @@ function GetDjangoUrl(queryString)
   //return `http://127.0.0.1:8000/${queryString}`
 }
 
-export { StateEnum, JsonRequest, GetTableUrl, GetDjangoUrl};
+
+function GetGemeentes(inputStr) {
+  let results = [];
+  if (inputStr == null || inputStr == "") {
+    results = results.concat(GetGemeentes("Meise"))
+    results = results.concat(GetGemeentes("Ieper"))
+    results = results.concat(GetGemeentes("Moorslede"))
+    return results;
+  }
+
+  inputStr = inputStr.toLowerCase();
+
+  //   const dedup_test = []
+  //   let depth = 0;
+
+  function Recurse(key, el) {
+    if (results.length > 10) return;
+    // depth++;
+    //console.log(depth, el.type, el.naam)
+
+    if (el.type == "I" || el.type == "G") {
+      //for (let i = 0; i < dedup_test.length; i++) {
+      //	if(dedup_test[i].naam == el.naam)
+      //		console.log("Found dup: ", el);
+      //	// Found dup:  {type: "G", naam: "Sint-Pieters-Kapelle", children: {…}}
+      //	// Found dup:  {type: "G", naam: "Zandvoorde", children: {…}}
+      //	// Found dup:  {type: "G", naam: "Oostkerke", children: {…}}
+      //	// Found dup:  {type: "G", naam: "Ramskapelle", children: {…}}
+      //	// Found dup:  {type: "G", naam: "Sint-Joris", children: {…}}
+      //	// Found dup:  {type: "G", naam: "Sint-Maria-Oudenhove", children: {…}}
+      //	// Found dup:  {type: "G", naam: "Nieuwerkerken", children: {…}}
+      //	// Found dup:  {type: "G", naam: "Haren", children: {…}}
+      //	// Found dup:  {type: "G", naam: "Kolmont", children: {…}}
+      //}
+      //dedup_test.push(el);
+
+      // Could use levenstein
+      if (el.naam.toLowerCase().indexOf(inputStr) != -1) {
+        results.push({
+          naam: el.naam,
+          type: el.type,
+          key: key
+        });
+      }
+    } else {
+      const children = el.children;
+      for (const property in children) {
+        if (children.hasOwnProperty(property)) {
+          Recurse(property, children[property]);
+        }
+      }
+
+      for (const property in el) {
+        if (el.hasOwnProperty(property) && !(["type", "naam", "children"].includes(property))) {
+          Recurse(property, el[property]);
+        }
+      }
+
+    }
+
+  }
+  Recurse("02000", ah["02000"]); // From admin_hiearchy file
+  return results;
+}
+
+function GetGemeenteNaamForNis(nis)
+{
+  let result = null;
+  function Recurse(el)
+  {
+    const children = el; //.children;
+    if(typeof children == "string") return;
+    for (const property in children) {
+      if (children.hasOwnProperty(property)) {
+        const child_el = children[property]
+        if(property == 11292){
+          console.log("the end is near")
+        }
+        if(property == nis)
+        {
+          result = child_el["naam"]
+          return;
+        }
+        Recurse(child_el);
+        if(result != null)
+          return;
+      }
+    }
+  }
+  Recurse(ah["02000"]); // From admin_hiearchy file
+  return result;
+}
+
+export { StateEnum, JsonRequest, GetTableUrl, GetDjangoUrl, GetGemeentes, GetGemeenteNaamForNis};

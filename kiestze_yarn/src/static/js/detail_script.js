@@ -1,8 +1,7 @@
 ﻿"use strict";
 
 import { updateQueryStringParam, getParameterByName } from './static_utils.js';
-import { JsonRequest, GetDjangoUrl } from './common.js';
-import { ah } from './admin_hierarchy-1.0.0.js';
+import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis } from './common.js';
 
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
@@ -193,31 +192,3 @@ model.airTables.PolitiekerRecord = new JsonRequest(GetPolitiekerUrl(model.politi
 
 UpdateAll()
 
-
-function GetGemeenteNaamForNis(nis)
-{
-  let result = null;
-  function Recurse(el)
-  {
-    const children = el; //.children;
-    if(typeof children == "string") return;
-    for (const property in children) {
-      if (children.hasOwnProperty(property)) {
-        const child_el = children[property]
-        if(property == 11292){
-          console.log("the end is near")
-        }
-        if(property == nis)
-        {
-          result = child_el["naam"]
-          return;
-        }
-        Recurse(child_el);
-        if(result != null)
-          return;
-      }
-    }
-  }
-  Recurse(ah["02000"]); // From admin_hiearchy file
-  return result;
-}
