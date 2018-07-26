@@ -81,6 +81,8 @@ h3 {
   color: white;
   font-family: 'Brandon_reg';
   font-size: 1.5rem;
+  width: 15rem;
+  word-wrap: break-word;
 }
 
 .tekst-popover-lijst {

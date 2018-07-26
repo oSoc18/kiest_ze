@@ -38,10 +38,14 @@
         <ul id="opties_gemeentes" class="dropdown-menu" aria-labelledby="dropdownMenu2">
         </ul>
       </div>
-    </div> 
+    </div>
     <div class="mr-3 d-flex align-items-bottom popover__wrapper">
       <img src="static/assets/img/facebook-detail.svg" alt="facebook" width="30" height="30" class="linken">
-      <a href="/allauth/facebook/login" class="facebook-link">Log in</a>
+        {% if user.is_authenticated %}
+            <span>{{ user }}</span>
+        {% else %}
+            <a href="/allauth/facebook/login" class="facebook-link">Log in</a>
+        {% endif %}
       <div class="push popover__content tekst-popover-lijst">
         <p class="popover__message"></p>
         <p class="ml-3"> Om zaken over de kandidaten te bewerken moet je ingelogd zijn.</p></div>
