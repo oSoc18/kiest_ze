@@ -5,9 +5,9 @@ yarn development-windows
 yarn production-windows
 
 ## Backend
-We choose Django becouse:
-- Safe and handy acces to database
-- Python is a powerfull language (Especially compared to some alternatives that we won't mention)
+We choose Django because:
+- Safe and handy access  to database
+- Python is a powerful language (Especially compared to some alternatives that we won't mention)
 - Digital ocean has good support for it. https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
 
 ### Install Requirements
@@ -27,10 +27,10 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postg
 - cd kiestze
 - `python build_steps.py`
 - Create a file called `secret.py` in `kiestze_django/kiestze_django/` with the variables `key`, `psql_user` and `psql_password` (you can generate a Django secret key on https://djskgen.herokuapp.com/)
-- Start nginx and gunicorn (follow digitialocean tutorial above for info on how to set it up)
+- Start nginx and gunicorn (follow digitalocean tutorial above for info on how to set it up)
 
 ## Frontend
-All assets go trough webpack to go minified. Javascript will also get bundles and be converted to simple javascript to work on all devices.
+All assets go through webpack to go minified. Javascript will also get bundles and be converted to simple javascript to work on all devices.
 
 ### Install requirements
 - NodeJS

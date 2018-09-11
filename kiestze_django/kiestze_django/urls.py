@@ -25,6 +25,7 @@ urlpatterns = [
     path('lijst', views.lijst),
     path('detail', views.detail),
     path('edit', views.edit),
+    path('politieker_editablefield_editor', views.politieker_editablefield_editor),
 
     path('privacy', views.privacy),
 

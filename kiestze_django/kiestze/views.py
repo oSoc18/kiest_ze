@@ -26,6 +26,10 @@ def detail(request):
 	context = {}
 	return render(request, 'detail.html', context)
 
+def politieker_editablefield_editor(request):
+	context = {}
+	return render(request, 'politieker_editablefield_editor.html', context)
+
 
 def privacy(request):
 	return render(request, 'privacy.html')
