@@ -26,7 +26,9 @@ politieker_from_db = cur.fetchone()
 print("Voorbeeld: " + str(politieker_from_db))
 count = 0
 while politieker_from_db is not None:
-	if count >= 500:
+	if count < 500:
+		continue
+	if count >= 2000:
 		break
 
 	sleep(1/100) # max 100 request per second

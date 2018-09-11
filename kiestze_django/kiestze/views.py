@@ -13,6 +13,11 @@ def index(request):
 
 
 def lijst(request):
+	#if request.user.is_authenticated:
+	#	login_html_snippet = "<span>" + str(request.user) + "</span>"
+	#else:
+	#	login_html_snippet = '<a href="/allauth/facebook/login" class="facebook-link">Log in</a>'
+	#context = {"login_html_snippet": login_html_snippet}
 	context = {}
 	return render(request, 'lijst.html', context)
 
