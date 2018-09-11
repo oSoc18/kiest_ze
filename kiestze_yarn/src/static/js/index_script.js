@@ -1,6 +1,6 @@
-﻿import { JsonRequest, GetDjangoUrl, GetGemeentes } from './common.js';
+﻿import { GetGemeentes } from './common.js';
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
-import { updateQueryStringParam, getParameterByName } from './static_utils.js';
+import { updateQueryStringParam } from './static_utils.js';
 
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
 const opties_gemeentes = document.getElementById("opties_gemeentes");

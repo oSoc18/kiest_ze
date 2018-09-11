@@ -46,7 +46,7 @@ if(btnMaakAanpassing) {
 
     const politieker = model.selectedPolitiekerId;
     const fieldname = evt.target.value;
-    evt.target.parentElement.getElementsByTagName("iframe")[0].src = `http://127.0.0.1:8000/politieker_editablefield_editor?politieker=22295&fieldname=${fieldname}`;
+    evt.target.parentElement.getElementsByTagName("iframe")[0].src = `http://127.0.0.1:8000/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`;
   }
 
   closeSpan.onclick = function () {
@@ -119,9 +119,9 @@ function UpdateAll()
 
   partij_naam.innerText = partij.lijstnaam
 
-  let website_value = "";
-  if(politieker.edits.website != null)
-    website_value = politieker.edits.website.suggested_value
+  //let website_value = "";
+  //if(politieker.edits.website != null)
+  //  website_value = politieker.edits.website.suggested_value
 
   //politieker_website.innerText = website_value;
   //politieker_website.href = website_value;

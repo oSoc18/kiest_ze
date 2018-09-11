@@ -31,7 +31,7 @@
         <li>
             <img src="/static/assets/img/pending.svg"/>
             <div class="value-el">{{ edit.suggested_value }}</div>
-            <span class="dot">{{ edit.approvers|length_filter }}/5</span>
+            <span class="dot">{{ edit.approvers|length_filter }}/3</span>
             <button class="button"
                     onclick="approve({{ edit.politieker.id }}, '{{ edit.field }}', '{{ edit.suggested_value }}')">
                 Dit klopt!
