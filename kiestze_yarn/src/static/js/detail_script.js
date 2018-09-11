@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 
 import { updateQueryStringParam, getParameterByName } from './static_utils.js';
 import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis } from './common.js';
@@ -15,6 +15,10 @@ const politieker_openthebox = document.getElementById("politieker_openthebox");
 const politieker_openthebox_not_found = document.getElementById("politieker_openthebox_not_found");
 const gemeente_element = document.getElementById("gemeente_element");
 const input_foto_url = document.getElementById("input_foto_url");
+const lijst_terug_knop = document.getElementById("lijst_terug_knop");
+
+
+lijst_terug_knop.href=`lijst?selectedPartijId=${getParameterByName("partij_id")}&selectedNis=${getParameterByName("selectedNis")}`
 
 /*
 politieker_website_button.addEventListener("click", function(evt)
@@ -39,7 +43,7 @@ const closeSpan = document.getElementsByClassName("closeSpan")[0];
 
 btnMaakAanpassing.onclick = function(evt) {
     modal.style.display = "block"; // Open modal
-  
+
     const politieker = model.selectedPolitiekerId;
     const fieldname = evt.target.value;
     evt.target.parentElement.getElementsByTagName("iframe")[0].src = `http://127.0.0.1:8000/politieker_editablefield_editor?politieker=22295&fieldname=${fieldname}`;

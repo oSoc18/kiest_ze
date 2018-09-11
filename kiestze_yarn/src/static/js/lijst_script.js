@@ -23,7 +23,7 @@ const model = {
   get inputString() {
     return this._inputString;
   },
-  
+
   _selectedNis: "",
   set selectedNis(value) {
     value = parseInt(value); // enforce int
@@ -37,7 +37,7 @@ const model = {
   get selectedNis() {
     return this._selectedNis;
   },
-  
+
   _selectedPartijId: "",
   set selectedPartijId(value) {
     value = parseInt(value); // enforce int
@@ -74,7 +74,7 @@ function DisplayPartijen() {
   const usedChildren = []
 
   const get_partij = model.djangoData.get_partij.json;
-  
+
   for (const partij_id in get_partij) {
     if (get_partij.hasOwnProperty(partij_id)) {
       const partij = get_partij[partij_id];
@@ -120,7 +120,7 @@ function DisplayKanidaten() {
   const selectedPolitiekerIds = []
 
   const links = model.djangoData.get_all_politieker_partij_link_van_gemeente.json
-  
+
   for (const link_id in links) {
     if (links.hasOwnProperty(link_id)) {
       const link = links[link_id];
@@ -162,7 +162,7 @@ function DisplayKanidaten() {
         objectFit = `cover`;
       }
       const shortName2 = politieker.naam.replace(/ /g, "_");
-      option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
+      option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}&selectedNis=${getParameterByName("selectedNis")}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
         <img class="card-img-top politieker-img" src="${profiel_foto}" alt="Card image cap" style="object-fit:${objectFit}">
         <div class="card-body">
         <h3 class="card-title">${politieker.naam}</h5>
@@ -201,7 +201,7 @@ function BadString(str)
 function UpdateAll() {
   UpdateGemeenteInput();
   geselecteerde_gemeente.innerText = model.selectedNis;
-  
+
   const radioButton = document.getElementById(model.selectedPartijId)
   if(radioButton)
     radioButton.checked = true
