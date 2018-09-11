@@ -6,8 +6,8 @@ import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis } from './common.js';
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
 const partij_naam = document.getElementById("partij_naam");
-const politieker_website = document.getElementById("politieker_website");
-const politieker_website_button = document.getElementById("politieker_website_button");
+//const politieker_website = document.getElementById("politieker_website");
+//const politieker_website_button = document.getElementById("politieker_website_button");
 const politieker_facebook = document.getElementById("politieker_facebook");
 const politieker_twitter = document.getElementById("politieker_twitter");
 const politieker_linkedin = document.getElementById("politieker_linkedin");
@@ -16,12 +16,12 @@ const politieker_openthebox_not_found = document.getElementById("politieker_open
 const gemeente_element = document.getElementById("gemeente_element");
 const input_foto_url = document.getElementById("input_foto_url");
 
-
+/*
 politieker_website_button.addEventListener("click", function(evt)
 {
   const suggestedValue = evt.target.parentElement.querySelector('input[name="suggestedValue"]').value;
   approve(model.selectedPolitiekerId, "website", suggestedValue);
-})
+})*/
 
 input_foto_url.addEventListener("click", function(evt)
 {
@@ -91,8 +91,8 @@ function UpdateAll()
   if(politieker.edits.website != null)
     website_value = politieker.edits.website.suggested_value
 
-  politieker_website.innerText = website_value;
-  politieker_website.href = website_value;
+  //politieker_website.innerText = website_value;
+  //politieker_website.href = website_value;
   //politieker_website_input.value = website_value;
   
   if(politieker.edits.facebook == null)
