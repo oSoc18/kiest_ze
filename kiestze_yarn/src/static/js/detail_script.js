@@ -36,9 +36,9 @@ input_foto_url.addEventListener("click", function(evt)
 
 
 
+const btnMaakAanpassing = document.getElementById("btnMaakAanpassing");
+const modal = document.getElementById('myModal');
 if(btnMaakAanpassing) {
-  const modal = document.getElementById('myModal');
-  const btnMaakAanpassing = document.getElementById("btnMaakAanpassing");
   const closeSpan = document.getElementsByClassName("closeSpan")[0];
 
   btnMaakAanpassing.onclick = function (evt) {
