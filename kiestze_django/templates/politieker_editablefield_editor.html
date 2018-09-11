@@ -2,18 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-  <link rel="stylesheet" href="static/css/bootstrap.min.css">
-  <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        ul.no-bullets {
+            list-style-type: none
+        }
+    </style>
 </head>
 <body>
 
-    <div class="d-flex flex-row">
-                  <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1 linken">
-                  <a href="http://" id="politieker_website" target="_blank" class="ml-2 list-items-toegevoegd" style="color: white;"></a>
-                  <!-- <p class="linken ml-2 list-items-detail" style="color: white;">Voeg toe</p> -->
-                </div>
+<h2>Not implemented yet!</h2>
+fieldwrapper.fieldname: {{ fieldwrapper.fieldname }}
+<ul class="no-bullets">
+    {% for edit in fieldwrapper.suggestedEdits %}
+        <li>
+            <img src="/static/assets/img/pending.svg"/>
+            {{ edit.suggested_value }}
+            <button class="button"
+                    onclick="approve({{ edit.politieker.id }}, '{{ edit.field }}', '{{ edit.suggested_value }}')">
+                Approve
+            </button>
+            <br/>
+            Mensen die hier op stemde:
+            <ul>
+                {% for approver in edit.approvers %}
+                    <li>{{ approver.user_id }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
 
-                  <input type="text" class="form-control mb-2 form-popover" id="politieker_website_input" placeholder="http://..." name="suggestedValue" autocomplete="off">
-                  <input type="submit" value="Toevoegen" class="button" id="politieker_website_button">
+
+<div class="d-flex flex-row">
+    <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1 linken">
+    <a href="http://" id="politieker_website" target="_blank" class="ml-2 list-items-toegevoegd"
+       style="color: white;"></a>
+    <!-- <p class="linken ml-2 list-items-detail" style="color: white;">Voeg toe</p> -->
+</div>
+
+<input type="text" class="form-control mb-2 form-popover" id="politieker_website_input" placeholder="http://..."
+       name="suggestedValue" autocomplete="off">
+<input type="submit" value="Toevoegen" class="button" id="politieker_website_button">
+
+
 </body>
 </html>

@@ -27,7 +27,12 @@ def detail(request):
 	return render(request, 'detail.html', context)
 
 def politieker_editablefield_editor(request):
-	context = {}
+	politieker = request.GET.get('politieker')
+	fieldname = request.GET.get('fieldname')
+	fieldwrapper = FieldWrapper(fieldname=fieldname, politieker=politieker)
+	context = {
+		'fieldwrapper': fieldwrapper,
+	}
 	return render(request, 'politieker_editablefield_editor.html', context)
 
 
@@ -59,9 +64,11 @@ def edit(request):
 	for field in all_fields:
 		fields.append(FieldWrapper(fieldname=field.fieldname, politieker=politieker))
 
+	accepted_edits = get_object_with_edits_for_politieker(politieker)
 	context = {
 		'fields': fields,
 		'politieker': politieker,
+		'accepted_edits': accepted_edits,
 	}
 	return render(request, 'edit.html', context)
 
@@ -235,7 +242,7 @@ def get_politieker_met_naam(request):
 
 def get_object_with_edits_for_politieker(politieker_id):
 	accepted_edits = UserEdit.objects.filter(politieker=politieker_id).exclude(accepted_date__isnull=True)
-	count = accepted_edits.count()
+	#count = accepted_edits.count()
 
 	fields = EditableField.objects.all()
 	edits = {}
@@ -264,7 +271,7 @@ def get_last_accepted_edit(request):
 
 def request_edit(request):
 	if not request.user.is_authenticated:
-		return HttpResponse('You\'re not logged in. Get out.')
+		return HttpResponse('You\'re not logged in.', status=401)
 	else:
 		try:
 			politieker = request.POST['politieker']
@@ -303,7 +310,7 @@ def request_edit(request):
 
 			return HttpResponse('Done')
 		except Exception as e:
-			return HttpResponse('Please enter all required GET parameters<br><br>' + str(e))
+			return HttpResponse('Please enter all required GET parameters<br><br>' + str(e), status=400)
 
 
 def create_link_using_id(request):
@@ -326,4 +333,4 @@ def git_pull(request):
 		# data += check_output(["systemctl", "restart", "gunicorn"])  # Doesn't work (no root)
 		return HttpResponse(data, content_type='text/plain')
 	else:
-		return HttpResponse('Nice try.')
+		return HttpResponse('Nice try.', status=401)

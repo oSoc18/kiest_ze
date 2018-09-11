@@ -1,66 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Edit test</title>
+    <title>Edit test</title>
 </head>
 <body>
-	<ul>
-	{% for field in fields %}
-	<li>
-		{{ field.fieldname }}
-		<ul>
-		{% for edit in field.suggestedEdits %}
-		<li>
-			{{ edit }}
-			<button onclick="approve({{ edit.politieker.id }}, '{{ edit.field }}', '{{ edit.suggested_value }}')">Approve</button>
-			<ul>
-				{% for approver in edit.approvers %}
-				<li>{{ approver.user_id }}</li>
-				{% endfor %}
-			</ul>
-		</li>
-		{% endfor %}
-		</ul>
+<ul>
+    {% for field in fields %}
+        <li>
+            {{ field.fieldname }}
+        <br/>
+        Current value: <b>
+            {% if accepted_edits|lookup:field.fieldname %}
+                {{ accepted_edits|lookup_suggested_value:field.fieldname }}
+            {% endif %}
+        </b>
+            <ul>
+                {% for edit in field.suggestedEdits %}
+                    <li>
+                        {{ edit }}
+                        <button onclick="approve({{ edit.politieker.id }}, '{{ edit.field }}', '{{ edit.suggested_value }}')">
+                            Approve
+                        </button>
+                        <ul>
+                            {% for approver in edit.approvers %}
+                                <li>{{ approver.user_id }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
 
-		<input type="text" name="suggestedValue" placeholder="Suggereer nieuwe waarde">
-		<button name="submitButton" onclick="submitUserEdit(event, '{{ field.fieldname }}')">Verzend</button>
-	</li>
-	{% endfor %}
-	</ul>
+            <input type="text" name="suggestedValue" placeholder="Suggereer nieuwe waarde">
+            <button name="submitButton" onclick="submitUserEdit(event, '{{ field.fieldname }}')">Verzend</button>
+        </li>
+    {% endfor %}
+</ul>
 
-	{% csrf_token %}
-
-
-
-	<script>
-		'use strict';
-		function submitUserEdit(evt, fieldname) {
-		    approve(politieker_id, fieldname, evt.target.parentElement.querySelector('input[name="suggestedValue"]').value)
-		}
+{% csrf_token %}
 
 
-		function approve(politieker, fieldname, suggested_value) {
-			let data = new FormData();
-			data.append('csrfmiddlewaretoken', csrfmiddlewaretoken.value);
-			data.append('politieker', politieker);
-			data.append('fieldname', fieldname);
-			data.append('value', suggested_value);
+<script>
+    'use strict';
 
-			var xhr = new XMLHttpRequest();
-			xhr.open('POST', 'request_edit', true);
-			xhr.onload = function () {
-				console.log(this.responseText);
-				//location.reload();
-			};
-			xhr.send(data);
-		}
+    function submitUserEdit(evt, fieldname) {
+        approve(politieker_id, fieldname, evt.target.parentElement.querySelector('input[name="suggestedValue"]').value)
+    }
 
-		let politieker_id = {{ politieker }};
-		console.log(politieker_id);
 
-		let suggestedValue = document.getElementsByName('suggestedValue')[0];
-		let submitButton = document.getElementsByName('submitButton')[0];
-		let csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0];
-	</script>
+    function approve(politieker, fieldname, suggested_value) {
+        let data = new FormData();
+        data.append('csrfmiddlewaretoken', csrfmiddlewaretoken.value);
+        data.append('politieker', politieker);
+        data.append('fieldname', fieldname);
+        data.append('value', suggested_value);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'request_edit', true);
+        xhr.onload = function () {
+            console.log(this.responseText);
+            //location.reload();
+        };
+        xhr.send(data);
+    }
+
+    let politieker_id = {{ politieker }};
+    console.log(politieker_id);
+
+    let suggestedValue = document.getElementsByName('suggestedValue')[0];
+    let submitButton = document.getElementsByName('submitButton')[0];
+    let csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0];
+</script>
 </body>
 </html>
