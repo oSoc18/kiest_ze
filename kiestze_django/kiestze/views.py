@@ -5,6 +5,7 @@ import uuid  # https://github.com/skorokithakis/shortuuid
 from django.core import serializers
 import json
 from subprocess import check_output
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 
 def index(request):
@@ -26,6 +27,7 @@ def detail(request):
 	context = {}
 	return render(request, 'detail.html', context)
 
+@xframe_options_exempt
 def politieker_editablefield_editor(request):
 	politieker = request.GET.get('politieker')
 	fieldname = request.GET.get('fieldname')
@@ -269,6 +271,7 @@ def get_last_accepted_edit(request):
 	return HttpResponse(data, content_type='application/json')
 
 
+@xframe_options_exempt
 def request_edit(request):
 	if not request.user.is_authenticated:
 		return HttpResponse('You\'re not logged in.', status=401)

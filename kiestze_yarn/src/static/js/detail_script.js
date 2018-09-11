@@ -31,6 +31,34 @@ input_foto_url.addEventListener("click", function(evt)
 
 
 
+
+
+const modal = document.getElementById('myModal');
+const btnMaakAanpassing = document.getElementById("btnMaakAanpassing");
+const closeSpan = document.getElementsByClassName("closeSpan")[0];
+
+btnMaakAanpassing.onclick = function(evt) {
+    modal.style.display = "block"; // Open modal
+  
+    const politieker = model.selectedPolitiekerId;
+    const fieldname = evt.target.value;
+    evt.target.parentElement.getElementsByTagName("iframe")[0].src = `http://127.0.0.1:8000/politieker_editablefield_editor?politieker=22295&fieldname=${fieldname}`;
+}
+
+closeSpan.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+
+
 function approve(politieker, fieldname, suggested_value) {
   const data = new FormData();
   const csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0]
@@ -62,7 +90,7 @@ function UpdateAll()
     model.djangoData.get_last_accepted_edit.url = GetDjangoUrl(`/get_last_accepted_edit?politieker=${model.selectedPolitiekerId}`)
   if(!BadString(model.selectedPartijId))
     model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?partij_id=${model.selectedPartijId}`)
-  
+
   const politieker = model.djangoData.get_last_accepted_edit.json
   if(politieker == null) return;
 
@@ -94,7 +122,7 @@ function UpdateAll()
   //politieker_website.innerText = website_value;
   //politieker_website.href = website_value;
   //politieker_website_input.value = website_value;
-  
+
   if(politieker.edits.facebook == null)
     politieker_facebook.style.display = "none"
   else{
@@ -139,7 +167,7 @@ const model = {
   get inputString() {
     return this._inputString;
   },*/
-  
+
   _selectedPartijId: "",
   set selectedPartijId(value) {
     value = parseInt(value); // enforce int
@@ -153,7 +181,7 @@ const model = {
     return this._selectedPartijId;
   },
 
-  
+
   _selectedPolitiekerId: "",
   set selectedPolitiekerId(value) {
     //console.error("Not implemented yet!")
