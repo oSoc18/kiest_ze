@@ -133,7 +133,7 @@ const developmentConfig = merge([
         //app.get('/detail', function(req, res){fs.createReadStream('src/detail.html').pipe(res);});
         //app.get('/index', function(req, res){fs.createReadStream('src/index.html').pipe(res);});
         //app.get('/lijst', function(req, res){fs.createReadStream('src/lijst.html').pipe(res);});
-        app.get('/detail', function(req, res){request('http://localhost:8080/detail.html').pipe(res).pipe(res);});
+        app.get('/detail', function(req, res){request('http://localhost:8080/detail.html').pipe(res);});
         app.get('/index', function(req, res){request('http://localhost:8080/index.html').pipe(res);});
         app.get('/lijst', function(req, res){request('http://localhost:8080/lijst.html').pipe(res);});
       }
