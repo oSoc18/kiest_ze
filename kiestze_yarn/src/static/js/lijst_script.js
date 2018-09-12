@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { updateQueryStringParam, getParameterByName } from './static_utils.js';

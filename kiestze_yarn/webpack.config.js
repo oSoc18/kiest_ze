@@ -33,6 +33,11 @@ const commonConfig = {
       path.join(PATHS.src, `index.html`),
       path.join(PATHS.src, `static/css/style.css`),
     ],
+    "politieker_editablefield_editor_script": [
+      path.join(PATHS.src, `static/js/politieker_editablefield_editor_script.js`),
+      path.join(PATHS.src, `politieker_editablefield_editor.html`),
+      path.join(PATHS.src, `static/css/style.css`),
+    ],
   },
   output: {
     path: PATHS.dist,
@@ -94,6 +99,12 @@ const commonConfig = {
       chunks: ['index_script'],
       filename: 'index.html',
       template: "./src/index.html"
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      chunks: ['politieker_editablefield_editor_script'],
+      filename: 'politieker_editablefield_editor.html',
+      template: "./src/politieker_editablefield_editor.html"
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
