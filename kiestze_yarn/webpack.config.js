@@ -147,6 +147,7 @@ const developmentConfig = merge([
         app.get('/detail', function(req, res){request('http://localhost:8080/detail.html').pipe(res);});
         app.get('/index', function(req, res){request('http://localhost:8080/index.html').pipe(res);});
         app.get('/lijst', function(req, res){request('http://localhost:8080/lijst.html').pipe(res);});
+        app.get('/politieker_editablefield_editor', function(req, res){request('http://localhost:8080/politieker_editablefield_editor.html').pipe(res);});
       }
     },
   },

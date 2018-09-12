@@ -52,7 +52,12 @@
 
 <input type="text" class="form-control mb-2 form-popover" name="suggestedValue" id="politieker_website_input" placeholder="http://..."
 name="suggestedValue" autocomplete="off" />
-<input type="submit" value="Toevoegen" class="button" id="politieker_website_button"  onclick="submitUserEdit(event, '{{ fieldwrapper.fieldname }}')" />
+<div id="belijds_thema_div">
+      <select id="belijds_thema_1"></select>
+      <select id="belijds_thema_2"></select>
+      <select id="belijds_thema_3"></select>
+</div>
+<input type="submit" value="Toevoegen" class="button" id="submit_new_value" />
 
 <!--
 <script src="/static/js/approuve_system.js" ></script>

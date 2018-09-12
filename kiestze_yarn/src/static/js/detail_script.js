@@ -1,8 +1,7 @@
 "use strict";
 
 import { updateQueryStringParam, getParameterByName, findAncestor } from './static_utils.js';
-import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis } from './common.js';
-import { belijds_themas } from './belijds_themas.js';
+import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis, RenderEditableFieldStringToHtml, approve } from './common.js';
 
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
@@ -18,9 +17,6 @@ const gemeente_element = document.getElementById("gemeente_element");
 const input_foto_url = document.getElementById("input_foto_url");
 const lijst_terug_knop = document.getElementById("lijst_terug_knop");
 const belijds_thema_paragraph = document.getElementById("belijds_thema_paragraph");
-const belijds_themas_1 = document.getElementById("belijds_themas_1");
-const belijds_themas_2 = document.getElementById("belijds_themas_2");
-const belijds_themas_3 = document.getElementById("belijds_themas_3");
 
 if(lijst_terug_knop)
   lijst_terug_knop.href=`lijst?selectedPartijId=${getParameterByName("partij_id")}&selectedNis=${getParameterByName("selectedNis")}`
@@ -29,39 +25,19 @@ if(lijst_terug_knop)
 politieker_website_button.addEventListener("click", function(evt)
 {
   const suggestedValue = evt.target.parentElement.querySelector('input[name="suggestedValue"]').value;
-  approve(model.selectedPolitiekerId, "website", suggestedValue);
+  approve(model.selectedPolitiekerId, "website", suggestedValue, AfterApprove);
 })*/
 
 input_foto_url.addEventListener("click", function(evt)
 {
   const suggestedValue = evt.target.parentElement.querySelector('input[name="suggestedValue"]').value;
-  approve(model.selectedPolitiekerId, "foto", suggestedValue);
+  approve(model.selectedPolitiekerId, "foto", suggestedValue, AfterApprove);
 })
 
-
-function DisplayBelijdsThemas()
+function AfterApprove()
 {
-  const belijds_themas_collection = [
-    belijds_themas_1,
-    belijds_themas_2,
-    belijds_themas_3,
-  ]
-
-  for (let i = 0; i < belijds_themas_collection.length; i++) {
-    const belijds_themas_el = belijds_themas_collection[i];
-
-    for (let i = 0; i < belijds_themas.length; i++) {
-      const thema_string = belijds_themas[i]
-      const optionEl = document.createElement("option")
-        optionEl.value = belijds_themas
-        belijds_themas_el.appendChild(optionEl);
-        
-        optionEl.innerText = thema_string
-    }
-  }
+  model.djangoData.get_last_accepted_edit.Reload();
 }
-DisplayBelijdsThemas();
-
 
 
 function OpenModal(m)
@@ -73,6 +49,8 @@ function CloseModal(m)
 {
   if(!m.classList.contains("w3s-modal")) console.warn("Not a modal!");
   m.style.display = "none";
+
+  model.djangoData.get_last_accepted_edit.Reload(); // hacky buisiness logic
 }
 
 // Fix all modals in document
@@ -108,7 +86,7 @@ if(edit_openthebox_id) {
 
     const politieker = model.selectedPolitiekerId;
     const fieldname = evt.target.value;
-    evt.target.parentElement.getElementsByTagName("iframe")[0].src = GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`);
+    evt.target.parentElement.getElementsByTagName("iframe")[0].src = (`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`);
   }
 }
 const edit_belijds_thema = document.getElementById("edit_belijds_thema");
@@ -120,12 +98,12 @@ if(edit_belijds_thema) {
 
     const politieker = model.selectedPolitiekerId;
     const fieldname = evt.target.value;
-    evt.target.parentElement.getElementsByTagName("iframe")[0].src = GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`);
+    evt.target.parentElement.getElementsByTagName("iframe")[0].src = (`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`);
   }
 }
 
 
-
+/*
 function approve(politieker, fieldname, suggested_value) {
   const data = new FormData();
   const csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0]
@@ -144,17 +122,11 @@ function approve(politieker, fieldname, suggested_value) {
     //location.reload();
   };
   xhr.send(data);
-}
+}*/
 
 function ShowPolitiekerBelijdsThemas(suggested_value)
 {
-  const belijds_themas = suggested_value.split("|");
-  const list = []
-  for (let i = 0; i < belijds_themas.length; i++) {
-    if(belijds_themas[i] != "-")
-      list.push(`<b>${  belijds_themas[i]  }</b>`)
-  }
-  belijds_thema_paragraph.innerHTML = list.join(", ");
+  belijds_thema_paragraph.innerHTML = RenderEditableFieldStringToHtml(suggested_value, "belijds_thema");
 }
 
 function BadString(str)
