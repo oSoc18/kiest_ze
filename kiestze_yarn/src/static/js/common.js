@@ -21,6 +21,8 @@ function RenderEditableFieldStringToHtml(suggested_value, fieldtype)
       return list.join(", ");
     })();
 
+    case "openthebox_id":
+      return `<a target="_blank" href='${GetOtbUrl(suggested_value)}'>${suggested_value}</a>`
     default:
       console.warn(`No specific renderer for fieldtype: ${fieldtype}`)
       return suggested_value;
@@ -108,6 +110,10 @@ class JsonRequest {
   }
 }
 
+function GetOtbUrl(otbId)
+{
+  return `https://openthebox.be/person/${otbId}`;
+}
 function GetTableUrl(tableName)
 {
   return `https://api.airtable.com/v0/app5SoKsYnuOY96ef/${tableName}?api_key=key2Jl1YfS4WWBFa5`
@@ -220,4 +226,5 @@ export { StateEnum,
   GetGemeentes,
   GetGemeenteNaamForNis,
   approve,
-  RenderEditableFieldStringToHtml};
+  RenderEditableFieldStringToHtml,
+  GetOtbUrl};

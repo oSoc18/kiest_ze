@@ -270,6 +270,47 @@ def get_last_accepted_edit(request):
 	data = json.dumps(data, default=str)
 	return HttpResponse(data, content_type='application/json')
 
+def get_sugested_edits(request):
+	fieldname = request.GET.get('fieldname')
+	politieker_id = request.GET.get('politieker')
+	if not fieldname or not politieker_id:
+		return HttpResponse("fieldname or politieker is missing", 400)
+
+	get_object = Politieker.objects.get(id=politieker_id)
+
+	data = serializers.serialize('python', [get_object, ])
+	data = data[0]["fields"]
+	data['naam'] = data['naam'].title() # Hack
+
+	edits = get_object_with_edits_for_politieker(politieker_id)
+	data["edits"] = edits
+
+	user_edits = UserEdit.objects.filter(politieker=politieker_id, field__fieldname=fieldname)
+
+	return_object = {}
+	for userEdit in user_edits:
+
+		approvers = Approver.objects.filter(aanpassing=userEdit.guid)
+
+		app = []
+		for approver in approvers:
+			app.append({
+				"user_id": approver.user_id,
+				"date": approver.date,
+			})
+
+		tmp = {
+			#"suggested_value": userEdit.suggested_value, used as key now
+			"accepted_date": userEdit.accepted_date,
+			"guid": userEdit.guid,
+			"field": userEdit.field,
+			"approvers": app,
+		}
+
+		return_object[userEdit.suggested_value] = (tmp)
+
+	data = json.dumps(return_object, default=str)
+	return HttpResponse(data, content_type='application/json')
 
 @xframe_options_exempt
 def request_edit(request):

@@ -1,7 +1,7 @@
 "use strict";
 
 import { updateQueryStringParam, getParameterByName, findAncestor } from './static_utils.js';
-import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis, RenderEditableFieldStringToHtml, approve } from './common.js';
+import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis, RenderEditableFieldStringToHtml, approve, GetOtbUrl } from './common.js';
 
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
@@ -199,7 +199,7 @@ function UpdateAll()
   else{
     politieker_openthebox.style.display = "inline"
     politieker_openthebox_not_found.style.display = "none"
-    politieker_openthebox.href = `https://openthebox.be/person/${politieker.edits.openthebox_id.suggested_value}`
+    politieker_openthebox.href = GetOtbUrl(politieker.edits.openthebox_id.suggested_value)
   }
 
   gemeente_element.innerText = GetGemeenteNaamForNis(partij.nis)
