@@ -39,27 +39,28 @@
 <body class="background-shape">
   <div style="display: none">{% csrf_token %}</div>
   <div class="background-purple">
-    <header class="ml-2">
+    <header>
       <a id="lijst_terug_knop" href="">
         <div class="card-header flex-row card-header-detail" style="display: inline;">
           <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="nav-kies-logo">
         </div>
       </a>
-      <span id="gemeente_element" style="position: absolute;" class="search-lijst">Gemeente</span>
+      <span id="gemeente_element" style="position: absolute;" class="search-lijst gemeente">Gemeente</span>
     </header>
-    <main class="d-flex flex-row justify-content-around align-items-top mt-5" style="height: 90vh; min-height: max-content;">
-      <section class="d-flex flex-column justify-content-around align-items-center linker-helft">
-        <div class="mt-1" style="height: 9rem;">
+    <main class="pagina-flex">
+      <section class="flex-section">
+        <div class="div-boven">
         </div>
-        <div class="d-flex flex-row justify-content-between align-items-center w-100">
+        <div class="div-flex">
           <a href="#" style="display: none">
             <img src="static/assets/img/left-button.svg" alt="vorige" width="50" height="50">
           </a>
-          <div class="text-center ml-5 mr-5 popover__wrapper">
-            <img src="static/assets/img/default_man.svg" alt="Profile picture" class="detail-image mb-2 linken" width="250" height="250" id="persoon_foto">
-            <div class="push popover__content" style="margin-top: -.8rem;">
+          <div class="popover__wrapper">
+            <img src="static/assets/img/default_man.svg" alt="Profile picture" class="persoon_foto linken" width="180"
+              height="180" id="persoon_foto">
+            <div class="push popover__content">
               <p class="popover__message"></p>
-              <input type="text" class="form-control mb-2 form-popover" placeholder="url" autocomplete="off" name="suggestedValue">
+              <input type="text" class="form-control form-popover" placeholder="url" autocomplete="off" name="suggestedValue">
               <input type="submit" value="Toevoegen" class="button" id="input_foto_url">
             </div>
           </div>
@@ -67,32 +68,39 @@
             <img src="static/assets/img/right-button.svg" alt="volgende" width="50" height="50">
           </a>
         </div>
-        <div class="text-center">
-          <h2 class="title mt-4" id="politieker_naam">- -</h2>
-          <div>
-            <img src="static/assets/img/lijn-grijs.svg" alt="scheidingslijn" width="80" height="5">
-            <a href="" id="politieker_facebook" target="_blank"><img src="static/assets/img/facebook-detail.svg" alt="social media" width="25" height="25" class="mr-2"></a>
-            <a href="" id="politieker_twitter"  target="_blank"><img src="static/assets/img/twitter-detail.svg"  alt="social media" width="25" height="25" class="mr-2"></a>
-            <a href="" id="politieker_linkedin" target="_blank"><img src="static/assets/img/linkedin.svg"        alt="social media" width="25" height="25" class="mr-2"></a>
-            <img src="static/assets/img/lijn-grijs.svg" alt="scheidingslijn" width="80" height="5">
+        <div class="socials-hd">
+          <h2 class="title" id="politieker_naam">- -</h2>
+          <div class="socials">
+            <img src="static/assets/img/lijn-grijs.svg" alt="scheidingslijn" width="20" height="20">
+            <a href="" id="politieker_facebook" target="_blank"><img src="static/assets/img/facebook-detail.svg" alt="social media"
+                width="25" height="25" class="mr-2"></a>
+            <a href="" id="politieker_twitter" target="_blank"><img src="static/assets/img/twitter-detail.svg" alt="social media"
+                width="25" height="25" class="mr-2"></a>
+            <a href="" id="politieker_linkedin" target="_blank"><img src="static/assets/img/linkedin.svg" alt="social media"
+                width="25" height="25" class="mr-2"></a>
+            <a href="" id="politieker_website" target="_blank"><img src="static/assets/img/internet_icon.svg" alt="social media"
+                width="25" height="25" class="mr-2"></a>
+            <a href="" id="politieker_email" target="_blank"><img src="static/assets/img/envelope-icon.svg" alt="social media"
+                width="25" height="25" class="mr-2"></a>
+            <img src="static/assets/img/lijn-grijs.svg" alt="scheidingslijn" width="20" height="20">
           </div>
-          <h3 class="subtitle mt-3" id="partij_naam">-</h3>
+          <h3 class="subtitle" id="partij_naam">-</h3>
         </div>
-        <div class="d-flex flex-column justify-content-around align-items-center mb-5 mt-5">
-         <div class="d-flex justify-content-around align-items-center">
-            <div class="d-flex flex-wrap align-items-center">
+        <div class="">
+          <div class="boost-h">
+            <div class="">
               <div class="d-flex flex-row align-items-center border-boost mb-1">
-                <img src="static/assets/img/dude1.svg" alt="profielfoto" width="50" height="50" class="mr-2">
-                <p class="boost mr-2">Zet zich goed in!</p>
-                <p class="emoji mr-2">👍</p>
+                <img src="static/assets/img/dude1.svg" alt="profielfoto" width="30" height="30" class="profielfoto">
+                <p class="boost">Zet zich goed in!</p>
+                <p class="">👍</p>
               </div>
               <section class="boosts ml-2 extra-boost">
-  
+
               </section>
             </div>
             <div class="popover__wrapper">
-              <img src="static/assets/img/big-add.svg" alt="toevoegen" class="linken ml-3">
-              <form class="push popover__content form" style="margin-top: -.8rem; color: black;">
+              <img src="static/assets/img/big-add.svg" alt="toevoegen" class="linken big-add">
+              <form class="push popover__content">
                 <label for="boost">
                   <input type="text" class="form-control mb-2 form-popover input boost" id="boost" placeholder="Jouw Boost"
                     autocomplete="off" maxlength="25">
@@ -105,14 +113,23 @@
 
         </div>
       </section>
-      <section style="color: white;" class="align-self-center ml-5">
-        <article class="mb-5">
+      <section style="color: white;" class="d-flex flex-column align-items-center purple-background-thema section-twee">
+        <img src="static/assets/img/login_facebook.svg" alt="login_facebook" width="227" height="42" class="login-facebook mt-4">
+        <article>
           <div>
-            <div class="text-left">
+            <div class="themas">
               <h3 class="lead">Beleidsthema's</h3>
               <img src="static/assets/img/yellow-detail-line.svg" alt="yellow" width="40" height="3">
             </div>
             <div class="">
+              <div class="d-flex flex-row">
+                <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
+                <p class="list-items-detail">Gezondheid</p>
+              </div>
+              <div class="d-flex flex-row">
+                <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
+                <p class="list-items-detail">Mobiliteit</p>
+              </div>
               <p id="belijds_thema_paragraph"></p>
 
 
@@ -123,13 +140,16 @@
                   <iframe src="" height="400px" style="width:100%;"></iframe>
                 </div>
               </div>
-              <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1 ml-2">
+              <div class="voegtoe">
+                <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="toevoegen-thema mr-2 mt-1">
+                <p class="ml-2 mb-1">Voeg toe</p>
+              </div>
             </div>
           </div>
         </article>
-        <article class="mb-5">
+        <article class="">
 
-          <div class="mb-5">
+          <div class="">
             <div>
               <div class="popover__wrapper">
                 <a href="#" class="linken d-flex flex-row">
@@ -142,7 +162,7 @@
               </div>
               <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
             </div>
-            <div class="">
+            <div class="d-flex flex-column">
 
               <button id="edit_openthebox_id" style="display: block" value="openthebox_id">Maak aanpassing...</button>
               <div id="edit_openthebox_id_modal" class="w3s-modal">
@@ -153,7 +173,12 @@
               </div>
 
               <a href="" target="_blank" id="politieker_openthebox" class="link-open">Openen in Open The Box!</a>
-              <span id="politieker_openthebox_not_found" class="ref-not-found">Geen referentie naar openthebox gevonden.</span>
+              <span id="politieker_openthebox_not_found" class="ref-not-found">Geen referentie naar openthebox
+                gevonden.</span>
+              <div class="voegtoe mt-2">
+                <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="toevoegen-thema mt-2">
+                <p class="ml-3 mb-1">Voeg toe</p>
+              </div>
             </div>
           </div>
         </article>
@@ -161,30 +186,34 @@
 
     </main>
 
-    <footer class="d-flex flex-row justify-content-between align-items-center footer" style="height:18vh;">
-      <div class="ml-5">
+    <footer class="footer">
+      <div class="pl-5 footer-div">
         <p style="color: white;" class="lead lead-footer">Onze partners:</p>
-        <ul style="list-style: none; margin-left: -2.8rem;" class="d-flex flex-row justify-content-between">
-          <li class="nav-item">
-            <a class="mr-3" href="http://2018.summerofcode.be/">
-              <img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3">
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="mr-3" href="https://www.openknowledge.be/">
-              <img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3">
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="mr-3" href="https://openthebox.be/search">
-              <img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3">
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="mr-3" href="https://vlaanderenkiest.be/verkiezingen2012/">
-              <img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3">
-            </a>
-          </li>
+        <ul style="list-style: none; margin-left: -2.8rem;" class="footer-item-one">
+          <div class="footer-logos">
+            <li class="nav-item">
+              <a class="mr-3" href="http://2018.summerofcode.be/">
+                <img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="mr-3" href="https://www.openknowledge.be/">
+                <img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3">
+              </a>
+            </li>
+          </div>
+          <div class="footer-logos">
+            <li class="nav-item">
+              <a class="mr-3" href="https://openthebox.be/search">
+                <img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="mr-3" href="https://vlaanderenkiest.be/verkiezingen2012/">
+                <img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3">
+              </a>
+            </li>
+          </div>
         </ul>
       </div>
       <div class="mr-5">

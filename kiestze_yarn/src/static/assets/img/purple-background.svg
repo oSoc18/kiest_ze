@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="756px" height="842px" viewBox="0 0 756 842" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="637px" height="842px" viewBox="0 0 637 842" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
     <title>Path 3</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="detail" transform="translate(-546.000000, 0.000000)" fill="#3E2749">
-            <polyline id="Path-3" transform="translate(924.500000, 421.000000) rotate(-180.000000) translate(-924.500000, -421.000000) " points="1303 2.92839098 1113.88442 842 546 841 546 0"></polyline>
+        <g id="detail-copy-9" transform="translate(-665.000000, 0.000000)" fill="#3E2749">
+            <polyline id="Path-3" transform="translate(984.000000, 421.000000) rotate(-180.000000) translate(-984.000000, -421.000000) " points="1303 2.92839098 1143.61329 842 665 841 665 0"></polyline>
         </g>
     </g>
 </svg>
