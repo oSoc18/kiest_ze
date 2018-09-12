@@ -30,7 +30,7 @@ function RenderEditableFieldStringToHtml(suggested_value, fieldtype)
 }
 
 function approve(politieker, fieldname, suggested_value, callback) {
-  if(suggested_value == "" && ! window.confirm("Value is empty, sure you wan't to submit?"))
+  if((suggested_value == "" || suggested_value == undefined) && ! window.confirm("Value is empty, sure you wan't to submit?"))
     return;
   console.log(politieker, fieldname, suggested_value)
 

@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="static/css/bootstrap.min.css">
   <link rel="stylesheet" href="static/css/style.css">
   <link rel="stylesheet" href="static/css/w3s-modal.css">
+  <style type="text/css">
+    .hide-django {
+      display:none;
+    }
+  </style>
   <script>
     WebFontConfig = {
       custom: {
@@ -37,7 +42,7 @@
 </head>
 
 <body class="background-shape">
-  <div style="display: none">{% csrf_token %}</div>
+  <div class="hide-django">{% csrf_token %}</div>
   <div class="background-purple">
     <header>
       <a id="lijst_terug_knop" href="">
@@ -115,7 +120,14 @@
         </div>
       </section>
       <section style="color: white;" class="d-flex flex-column align-items-center purple-background-thema section-twee">
-        <img src="static/assets/img/login_facebook.svg" alt="login_facebook" width="227" height="42" class="login-facebook mt-4">
+
+        <div class="hide-django">{% if user.is_authenticated %}</div>
+            <span id="user_login_span">{{ user }}</span>
+        <div class="hide-django">{% else %}</div>
+            <a href="/allauth/facebook/login" class="facebook-link">
+              <img src="static/assets/img/login_facebook.svg" alt="login_facebook" width="227" height="42" class="login-facebook mt-4">
+            </a>
+        <div class="hide-django">{% endif %}</div>
         <article>
           <div>
             <div class="themas">

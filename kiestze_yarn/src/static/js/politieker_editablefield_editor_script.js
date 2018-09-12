@@ -6,7 +6,7 @@ import { belijds_themas } from './belijds_themas.js';
 
 
 const submit_new_value = document.getElementById("submit_new_value");
-const politieker_website_input = document.getElementById("politieker_website_input");
+const input_new_value = document.getElementById("input_new_value");
 const ul_suggesties = document.getElementById("ul_suggesties");
 const belijds_thema_div = document.getElementById("belijds_thema_div");
 const belijds_thema_1 = document.getElementById("belijds_thema_1");
@@ -25,7 +25,12 @@ const fieldname = getParameterByName("fieldname");
 
 // Used from HTML
 function submitUserEdit(evt) {
-  approve(politieker_id, fieldname, evt.target.parentElement.querySelector('input[name="suggestedValue"]').value)
+  approve(politieker_id, fieldname, evt.target.parentElement.querySelector('input[name="suggestedValue"]').value, AfterSubmit)
+}
+
+function AfterSubmit()
+{
+  model.djangoData.get_sugested_edits.Reload();
 }
 
 function DisplayBelijdsThemas()
@@ -80,20 +85,25 @@ function DisplaySuggestedEdits() {
         option.id = `sugested_edit_${key}`
         ul_suggesties.appendChild(option);
         const display = RenderEditableFieldStringToHtml(key, fieldname)
+        let btnClass = "button";
+        for (let i = 0; i < sugested_edit.approvers.length; i++) {
+          const ap = sugested_edit.approvers[i]
+          if(ap.user_id == getParameterByName("userName"))
+            btnClass = "button-already-voted"; // Need to implement CSS. Need to deactivate button too.
+        }
         option.innerHTML = `
           <img src="/static/assets/img/pending.svg"/>
           <div class="value-el">${display}</div>
           <span class="dot">${sugested_edit.approvers.length}/3</span>
-          <button class="button">
-          Dit klopt!</button>
+          <button class="${btnClass}">Dit klopt!</button>
           <br/>`
         const addEvtListnr = function(el, suggested_value){
           el.addEventListener(`click`, 
             function(){
-              approve(politieker_id, fieldname, suggested_value)
+              approve(politieker_id, fieldname, suggested_value, AfterSubmit)
             });
         }
-        addEvtListnr(option.querySelector("button"), sugested_edit.suggested_value);
+        addEvtListnr(option.querySelector("button"), key);
       }
       usedChildren.push(option)
     }
@@ -120,33 +130,30 @@ function UpdateAll()
     v.innerHTML = RenderEditableFieldStringToHtml(fieldname, ); Django gives us prefilled values, need to return Json instead
   }*/
 
-  politieker_website_input.style.display = "block";
+  input_new_value.style.display = "block";
   belijds_thema_div.style.display = "none"
-  politieker_website_input.placeholder = ""
+  input_new_value.placeholder = ""
 
   switch(fieldname)
   {
     case "belijds_thema":
-      politieker_website_input.style.display = "none";
+      input_new_value.style.display = "none";
       belijds_thema_div.style.display = "block"
 
-      model.valueToBeSubmitted = 
+      input_new_value.value = 
           `${belijds_thema_1.value}|${belijds_thema_2.value  }|${belijds_thema_3.value}`;
       break;
 
     case "openthebox_id":
-      politieker_website_input.placeholder = "Paste ID here"
-      model.valueToBeSubmitted = politieker_website_input.value;
+      input_new_value.placeholder = "Paste ID here"
       break;
 
     case "website":
-      politieker_website_input.placeholder = "http://..."
-      model.valueToBeSubmitted = politieker_website_input.value;
+      input_new_value.placeholder = "http://..."
       break;
 
     default:
       console.warn("No specific input for fieldName")
-      model.valueToBeSubmitted = politieker_website_input.value;
       break;
 
   }

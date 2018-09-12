@@ -51,7 +51,7 @@
     <div class="mr-3 d-flex align-items-bottom popover__wrapper">
       <img src="static/assets/img/facebook-detail.svg" alt="facebook" width="30" height="30" class="linken">
         {% if user.is_authenticated %}
-            <span>{{ user }}</span>
+            <span id="user_login_span">{{ user }}</span>
         {% else %}
             <a href="/allauth/facebook/login" class="facebook-link">Log in</a>
         {% endif %}

@@ -86,7 +86,8 @@ if(edit_openthebox_id) {
 
     const politieker = model.selectedPolitiekerId;
     const fieldname = evt.target.value;
-    evt.target.parentElement.getElementsByTagName("iframe")[0].src = (`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`);
+    evt.target.parentElement.getElementsByTagName("iframe")[0].src = 
+    GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}&userName=${model.userName}`);
   }
 }
 const edit_belijds_thema = document.getElementById("edit_belijds_thema");
@@ -98,7 +99,8 @@ if(edit_belijds_thema) {
 
     const politieker = model.selectedPolitiekerId;
     const fieldname = evt.target.value;
-    evt.target.parentElement.getElementsByTagName("iframe")[0].src = (`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`);
+    evt.target.parentElement.getElementsByTagName("iframe")[0].src = 
+    GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}&userName=${model.userName}`);
   }
 }
 
@@ -157,7 +159,7 @@ function UpdateAll()
   }
   if(politieker.edits.foto)
   {
-    profiel_foto = politieker.edits.foto.suggested_value
+    profiel_foto = politieker.edits.foto
     objectFit = `cover`;
   }
   persoon_foto.src = profiel_foto;
@@ -167,7 +169,7 @@ function UpdateAll()
 
   //let website_value = "";
   //if(politieker.edits.website != null)
-  //  website_value = politieker.edits.website.suggested_value
+  //  website_value = politieker.edits.website
 
   //politieker_website.innerText = website_value;
   //politieker_website.href = website_value;
@@ -177,19 +179,19 @@ function UpdateAll()
     politieker_facebook.style.display = "none"
   else{
     politieker_facebook.style.display = "inline"
-    politieker_facebook.href = politieker.edits.facebook.suggested_value
+    politieker_facebook.href = politieker.edits.facebook
   }
   if(politieker.edits.twitter == null)
     politieker_twitter.style.display = "none"
   else{
     politieker_twitter.style.display = "inline"
-    politieker_twitter.href = politieker.edits.twitter.suggested_value
+    politieker_twitter.href = politieker.edits.twitter
   }
   if(politieker.edits.linkedin == null)
     politieker_linkedin.style.display = "none"
   else{
     politieker_linkedin.style.display = "inline"
-    politieker_linkedin.href = politieker.edits.linkedin.suggested_value
+    politieker_linkedin.href = politieker.edits.linkedin
   }
 
   if(politieker.edits.openthebox_id == null){
@@ -199,12 +201,12 @@ function UpdateAll()
   else{
     politieker_openthebox.style.display = "inline"
     politieker_openthebox_not_found.style.display = "none"
-    politieker_openthebox.href = GetOtbUrl(politieker.edits.openthebox_id.suggested_value)
+    politieker_openthebox.href = GetOtbUrl(politieker.edits.openthebox_id)
   }
 
   gemeente_element.innerText = GetGemeenteNaamForNis(partij.nis)
 
-  ShowPolitiekerBelijdsThemas(politieker.edits.belijds_thema.suggested_value);
+  ShowPolitiekerBelijdsThemas(politieker.edits.belijds_thema);
 }
 
 const model = {
@@ -246,6 +248,12 @@ const model = {
   },
   get selectedPolitiekerId() {
     return this._selectedPolitiekerId;
+  },
+
+  get userName() {
+    const el = document.getElementById("user_login_span");
+    if(el == null) return null;
+    return el.innerText;
   },
 
   djangoData: {
