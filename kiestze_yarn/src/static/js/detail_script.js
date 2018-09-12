@@ -1,7 +1,8 @@
 "use strict";
 
-import { updateQueryStringParam, getParameterByName } from './static_utils.js';
+import { updateQueryStringParam, getParameterByName, findAncestor } from './static_utils.js';
 import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis } from './common.js';
+import { belijds_themas } from './belijds_themas.js';
 
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
@@ -16,6 +17,10 @@ const politieker_openthebox_not_found = document.getElementById("politieker_open
 const gemeente_element = document.getElementById("gemeente_element");
 const input_foto_url = document.getElementById("input_foto_url");
 const lijst_terug_knop = document.getElementById("lijst_terug_knop");
+const belijds_thema_paragraph = document.getElementById("belijds_thema_paragraph");
+const belijds_themas_1 = document.getElementById("belijds_themas_1");
+const belijds_themas_2 = document.getElementById("belijds_themas_2");
+const belijds_themas_3 = document.getElementById("belijds_themas_3");
 
 if(lijst_terug_knop)
   lijst_terug_knop.href=`lijst?selectedPartijId=${getParameterByName("partij_id")}&selectedNis=${getParameterByName("selectedNis")}`
@@ -34,30 +39,88 @@ input_foto_url.addEventListener("click", function(evt)
 })
 
 
+function DisplayBelijdsThemas()
+{
+  const belijds_themas_collection = [
+    belijds_themas_1,
+    belijds_themas_2,
+    belijds_themas_3,
+  ]
+
+  for (let i = 0; i < belijds_themas_collection.length; i++) {
+    const belijds_themas_el = belijds_themas_collection[i];
+
+    for (let i = 0; i < belijds_themas.length; i++) {
+      const thema_string = belijds_themas[i]
+      const optionEl = document.createElement("option")
+        optionEl.value = belijds_themas
+        belijds_themas_el.appendChild(optionEl);
+        
+        optionEl.innerText = thema_string
+    }
+  }
+}
+DisplayBelijdsThemas();
 
 
-const btnMaakAanpassing = document.getElementById("btnMaakAanpassing");
-const modal = document.getElementById('myModal');
-if(btnMaakAanpassing) {
-  const closeSpan = document.getElementsByClassName("closeSpan")[0];
 
-  btnMaakAanpassing.onclick = function (evt) {
-    modal.style.display = "block"; // Open modal
+function OpenModal(m)
+{
+  if(!m.classList.contains("w3s-modal")) console.warn("Not a modal!");
+  m.style.display = "block";
+}
+function CloseModal(m)
+{
+  if(!m.classList.contains("w3s-modal")) console.warn("Not a modal!");
+  m.style.display = "none";
+}
+
+// Fix all modals in document
+(function() {
+  const closeSpans = document.getElementsByClassName("w3s-closeSpan");
+  for (let i = 0; i < closeSpans.length; i++) {
+    const closeSpan = closeSpans[i]
+    closeSpan.onclick = function (evt) {
+      const m = findAncestor(evt.target, ".w3s-modal")
+      CloseModal(m)
+    }
+  }
+  const w3sModals = document.getElementsByClassName("w3s-modal");
+  // In separate function to give m a new scope
+  const attachCloseEvent = function(m) {
+    m.onclick = function() {
+      CloseModal(m)
+    }
+  }
+  for (let i = 0; i < w3sModals.length; i++) {
+    const m = w3sModals[i]
+    attachCloseEvent(m)
+  }
+})();
+
+
+const edit_openthebox_id = document.getElementById("edit_openthebox_id");
+const edit_openthebox_id_modal = document.getElementById('edit_openthebox_id_modal');
+if(edit_openthebox_id) {
+
+  edit_openthebox_id.onclick = function (evt) {
+    OpenModal(edit_openthebox_id_modal)
 
     const politieker = model.selectedPolitiekerId;
     const fieldname = evt.target.value;
-    evt.target.parentElement.getElementsByTagName("iframe")[0].src = `http://127.0.0.1:8000/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`;
+    evt.target.parentElement.getElementsByTagName("iframe")[0].src = GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`);
   }
+}
+const edit_belijds_thema = document.getElementById("edit_belijds_thema");
+const edit_belijds_thema_modal = document.getElementById('edit_belijds_thema_modal');
+if(edit_belijds_thema) {
 
-  closeSpan.onclick = function () {
-    modal.style.display = "none";
-  }
+  edit_belijds_thema.onclick = function (evt) {
+    OpenModal(edit_belijds_thema_modal)
 
-// When the user clicks anywhere outside of the modal, close it
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
+    const politieker = model.selectedPolitiekerId;
+    const fieldname = evt.target.value;
+    evt.target.parentElement.getElementsByTagName("iframe")[0].src = GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}`);
   }
 }
 
@@ -81,6 +144,17 @@ function approve(politieker, fieldname, suggested_value) {
     //location.reload();
   };
   xhr.send(data);
+}
+
+function ShowPolitiekerBelijdsThemas(suggested_value)
+{
+  const belijds_themas = suggested_value.split("|");
+  const list = []
+  for (let i = 0; i < belijds_themas.length; i++) {
+    if(belijds_themas[i] != "-")
+      list.push(`<b>${  belijds_themas[i]  }</b>`)
+  }
+  belijds_thema_paragraph.innerHTML = list.join(", ");
 }
 
 function BadString(str)
@@ -157,6 +231,8 @@ function UpdateAll()
   }
 
   gemeente_element.innerText = GetGemeenteNaamForNis(partij.nis)
+
+  ShowPolitiekerBelijdsThemas(politieker.edits.belijds_thema.suggested_value);
 }
 
 const model = {

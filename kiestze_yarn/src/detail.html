@@ -7,7 +7,7 @@
   <title>KiestZe</title>
   <link rel="stylesheet" href="static/css/bootstrap.min.css">
   <link rel="stylesheet" href="static/css/style.css">
-  <link rel="stylesheet" href="static/css/modal_related.css">
+  <link rel="stylesheet" href="static/css/w3s-modal.css">
   <script>
     WebFontConfig = {
       custom: {
@@ -112,9 +112,22 @@
               <h3 class="lead">Beleidsthema's</h3>
               <img src="static/assets/img/yellow-detail-line.svg" alt="yellow" width="40" height="3">
             </div>
-            <div class="d-flex flex-row align-items-top mb-3">
-              <p class="mr-2 list-items-detail">Gezondheid,</p>
-              <p class="mr-2 list-items-detail">Mobiliteit</p>
+            <div class="">
+              <p id="belijds_thema_paragraph"></p>
+
+
+              <button id="edit_belijds_thema" style="display: block" value="belijds_thema">Maak aanpassing...</button>
+              <div id="edit_belijds_thema_modal" class="w3s-modal">
+                <div class="w3s-modal-content">
+                  <iframe src="" height="400px"></iframe>
+                  <span class="w3s-closeSpan">&times;</span>
+                </div>
+              </div>
+
+              <br/>
+              <select id="belijds_themas_1"></select>
+              <select id="belijds_themas_2"></select>
+              <select id="belijds_themas_3"></select>
               <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="mt-1 ml-2">
             </div>
           </div>
@@ -135,13 +148,12 @@
               <img src="static/assets/img/yellow-detail-line.svg" alt="yellow-detail-line" width="40" height="3">
             </div>
             <div class="">
-              <button id="btnMaakAanpassing" style="display: block" value="openthebox_id">Maak aanpassing...</button>
 
-              <div id="myModal" class="modal">
-                <div class="modal-content">
-                  <iframe src=""></iframe>
-                  <span class="closeSpan">&times;</span>
-                  <p>Some text in the Modal..</p>
+              <button id="edit_openthebox_id" style="display: block" value="openthebox_id">Maak aanpassing...</button>
+              <div id="edit_openthebox_id_modal" class="w3s-modal">
+                <div class="w3s-modal-content">
+                  <iframe src="" height="400px"></iframe>
+                  <span class="w3s-closeSpan">&times;</span>
                 </div>
               </div>
 
