@@ -24,10 +24,13 @@ This is only a development server. For setting up a production server (using ngi
 https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
 
 ## Run server (production)
-- cd kiestze
+- ssh kiestze.be
+- cd /home/sam/kiest_ze
+- git pull
 - `python build_steps.py`
 - Create a file called `secret.py` in `kiestze_django/kiestze_django/` with the variables `key`, `psql_user` and `psql_password` (you can generate a Django secret key on https://djskgen.herokuapp.com/)
 - Start nginx and gunicorn (follow digitalocean tutorial above for info on how to set it up)
+- If already started: sudo systemctl restart gunicorn
 
 ## Frontend
 All assets go through webpack to go minified. Javascript will also get bundles and be converted to simple javascript to work on all devices.

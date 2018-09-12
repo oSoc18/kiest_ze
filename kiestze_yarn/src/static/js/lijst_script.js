@@ -158,7 +158,7 @@ function DisplayKanidaten() {
       }
       if(politieker.edits.foto)
       {
-        profiel_foto = politieker.edits.foto.suggested_value
+        profiel_foto = politieker.edits.foto
         objectFit = `cover`;
       }
       const shortName2 = politieker.naam.replace(/ /g, "_");
