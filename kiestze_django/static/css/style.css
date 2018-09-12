@@ -21,6 +21,8 @@ body {
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  -webkit-clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
 }
 
 .profielfoto {
@@ -644,6 +646,15 @@ a:hover {
 
   .big-add {
     margin-left: 1rem;
+  }
+
+  .scheidingslijn {
+    width: 80px;
+    height: 5px;
+  }
+
+  .message_inlog {
+    width: 16rem;
   }
 }
 
