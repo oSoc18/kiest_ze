@@ -1,6 +1,3 @@
-html.width-hack {
-  min-width: 1300px;
-}
 
 @font-face {
   font-family: 'Brandon_blk';
@@ -20,13 +17,36 @@ body {
   color: #3c3c3c;
 }
 
-.background-shape {
-  background-image: url(../assets/img/boven-img.svg);
-  background-repeat: no-repeat;
-  background-size: inherit;
-  /* background-position: top center; */
-  background-position: top;
-  background-position-x: 25vw;
+.persoon_foto {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profielfoto {
+  margin-top: -.5rem;
+}
+
+.big-add {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.themas {
+  margin-top: 2rem;
+}
+
+.purple-background-thema {
+  background-color:#3e2749;
+  width: 100vw;
+}
+
+.toevoegen-thema {
+  margin-bottom: 2rem;
+}
+
+.voegtoe {
+  display: flex;
 }
 
 .landing-page-input
@@ -47,10 +67,6 @@ p {
 
 h3 {
   margin-bottom: 0rem;
-}
-
-.linker-helft {
-  /* margin-left: -3rem; */
 }
 
 .facebook-link {
@@ -88,12 +104,6 @@ h3 {
 .tekst-popover-lijst {
   margin-top: 3rem;
   margin-left: -8rem;
-}
-
-.background-purple {
-  background-image: url(../assets/img/purple-background.svg);
-  background-repeat: no-repeat;
-  background-position: top right;
 }
 
 .card-header-lijst {
@@ -135,7 +145,7 @@ h3 {
 
 .title {
   font-family: 'Brandon_blk';
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   text-transform: lowercase;
 }
 
@@ -150,7 +160,7 @@ h3 {
 
 .subtitle {
   font-family: 'Brandon_blk';
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #4ac1d4;
 }
 
@@ -159,11 +169,14 @@ h3 {
 }
 
 .border-boost {
+  margin-top: 2rem;
+  margin-left: -1.3rem;
   border: .1rem solid #c9c9c9;
-  padding: .5rem;
+  padding-bottom: .2rem;
   padding-top: 1.2rem;
   border-radius: 10rem;
-  height: 3rem;
+  height: 2rem;
+  width: 12rem
 }
 
 .lead-title {
@@ -213,6 +226,10 @@ h3 {
   outline: none;
 }
 
+.nav-kies-logo {
+  margin-top: 1.5rem;
+}
+
 .search-lijst {
   border: none;
   border-bottom: .2rem solid #c9c9c9;
@@ -222,8 +239,9 @@ h3 {
   border-radius: 0rem;
   color: #c9c9c9;
   font-family: 'Brandon_blk';
-  font-size: 1.1rem;
   text-transform: uppercase;
+  font-size: 17px;
+  margin-top: 1rem;
 }
 
 .search-lijst:focus {
@@ -339,7 +357,12 @@ a:hover {
 }
 
 .footer {
+  padding-top: 1rem;
   background-color: #3c3c3c;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card-footer-lijst {
@@ -364,7 +387,7 @@ a:hover {
   border-radius: 1rem;
   padding: .5rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-  width: 15rem;
+  width: 10rem;
   color: black;
   display: flex;
   flex-flow: column;
@@ -395,6 +418,8 @@ a:hover {
 }
 
 .popover__wrapper:hover .popover__content {
+  margin-top: -5rem;
+  margin-right: 4rem;
   z-index: 10;
   opacity: 1;
   visibility: visible;
@@ -477,6 +502,149 @@ a:hover {
 
 .ref-not-found {
   width: 10rem;
+}
+
+.pagina-flex {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.footer-item-one {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.gemeente {
+  margin-top: .7rem;
+}
+
+@media only screen  and (min-width: 1024px) {
+
+  .purple-background-thema {
+    background-color: transparent;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .background-shape {
+    background-image: url(../assets/img/boven-img.svg);
+    background-repeat: no-repeat;
+    background-size: inherit;
+    /* background-position: top center; */
+    background-position: top;
+    background-position-x: 25vw;
+  }
+
+  .background-purple {
+    background-image: url(../assets/img/purple-background.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    margin-right: -5rem;
+    width: 100vw;
+  }
+
+  .pagina-flex {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: top;
+    margin-top: 5rem;
+    width: 100vw;
+  }
+
+  .flex-section {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+  }
+
+  .section-twee {
+    width: 50%;
+    margin-top: -5rem;
+  }
+
+  .div-boven {
+    margin-top: 1rem;
+    height: 1rem;
+  }
+
+  .div-flex {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  .login-facebook {
+    align-self: flex-end;
+    margin-right: 2rem;
+    margin-top: -10rem;
+  }
+
+  .footer-logos {
+    display: flex;
+  }
+
+  .search-lijst {
+    font-size: 20px;
+    border-bottom: .2rem solid #c9c9c9;
+  }
+
+  .nav-kies-logo {
+    width: 92px;
+    height: 18px;
+    margin-top: 1rem;
+  }
+
+  .socials {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .footer-item-one {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  .footer-div {
+    width: 50%;
+  }
+
+  .socials-hd {
+    text-align: center
+  }
+
+  .persoon_foto {
+    width: 220px;
+    height: 220px;
+  }
+
+  .boost-h {
+    display: flex;
+    margin-top: 1rem;
+  }
+
+  .big-add {
+    margin-left: 1rem;
+  }
 }
 
 @media only screen  and (min-width: 1440px) {
@@ -582,5 +750,3 @@ a:hover {
     font-size: 1.6rem;
   }
 }
-
-

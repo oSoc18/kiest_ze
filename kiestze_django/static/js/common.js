@@ -1,9 +1,57 @@
-﻿"use strict";
+"use strict";
 
 import { loadJSON } from './static_utils.js';
 import { ah } from './admin_hierarchy-1.0.0.js';
 
 const StateEnum = Object.freeze({ "init": 1, "requesting": 2, "succes": 3, "fail": 4 })
+
+function RenderEditableFieldStringToHtml(suggested_value, fieldtype)
+{
+
+  switch(fieldtype)
+  {
+    case "belijds_thema":
+    return (function(){
+      const belijds_thema = suggested_value.split("|");
+      const list = []
+      for (let i = 0; i < belijds_thema.length; i++) {
+        if(belijds_thema[i] != "-")
+          list.push(`<b>${  belijds_thema[i]  }</b>`)
+      }
+      return list.join(", ");
+    })();
+
+    case "openthebox_id":
+      return `<a target="_blank" href='${GetOtbUrl(suggested_value)}'>${suggested_value}</a>`
+    default:
+      console.warn(`No specific renderer for fieldtype: ${fieldtype}`)
+      return suggested_value;
+  }
+}
+
+function approve(politieker, fieldname, suggested_value, callback) {
+  if(suggested_value == "" && ! window.confirm("Value is empty, sure you wan't to submit?"))
+    return;
+  console.log(politieker, fieldname, suggested_value)
+
+  const data = new FormData();
+  const csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0]
+  if(csrfmiddlewaretoken != null)
+    data.append('csrfmiddlewaretoken', csrfmiddlewaretoken.value);
+  else console.error("csrfmiddlewaretoken should be injected by Django")
+    data.append('politieker', politieker);
+  data.append('fieldname', fieldname);
+  data.append('value', suggested_value);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', GetDjangoUrl('request_edit'), true);
+  xhr.onload = function () {
+    console.log(this.responseText);
+    callback();
+    //location.reload();
+  };
+  xhr.send(data);
+}
 
 class JsonRequest {
   constructor(url, callback) {
@@ -62,6 +110,10 @@ class JsonRequest {
   }
 }
 
+function GetOtbUrl(otbId)
+{
+  return `https://openthebox.be/person/${otbId}`;
+}
 function GetTableUrl(tableName)
 {
   return `https://api.airtable.com/v0/app5SoKsYnuOY96ef/${tableName}?api_key=key2Jl1YfS4WWBFa5`
@@ -167,4 +219,12 @@ function GetGemeenteNaamForNis(nis)
   return result;
 }
 
-export { StateEnum, JsonRequest, GetTableUrl, GetDjangoUrl, GetGemeentes, GetGemeenteNaamForNis};
+export { StateEnum,
+  JsonRequest,
+  GetTableUrl,
+  GetDjangoUrl,
+  GetGemeentes,
+  GetGemeenteNaamForNis,
+  approve,
+  RenderEditableFieldStringToHtml,
+  GetOtbUrl};

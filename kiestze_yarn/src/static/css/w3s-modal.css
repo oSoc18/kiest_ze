@@ -26,7 +26,7 @@
 /* The Close Button */
 .w3s-closeSpan {
     color: #aaaaaa;
-    float: right;
+    /*float: right;*/
     font-size: 28px;
     font-weight: bold;
 }

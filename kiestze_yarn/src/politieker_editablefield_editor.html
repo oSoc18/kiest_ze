@@ -23,30 +23,11 @@
 </head>
 <body>
 
-    <div style="display: none">{% csrf_token %}</div>
+<div style="display: none">{% csrf_token %}</div>
 
-    <p>Dis zijn suggesties:</p>
-    <ul class="no-bullets">
-        {% for edit in fieldwrapper.suggestedEdits %}
-        <li>
-            <img src="/static/assets/img/pending.svg"/>
-            <div class="value-el">{{ edit.suggested_value }}</div>
-            <span class="dot">{{ edit.approvers|length_filter }}/3</span>
-            <button class="button"
-            onclick="approve({{ edit.politieker.id }}, '{{ edit.field }}', '{{ edit.suggested_value }}')">
-            Dit klopt!
-        </button>
-        <br/>
-            <!--
-            Mensen die hier op stemde:
-            <ul>
-                {% for approver in edit.approvers %}
-                    <li>{{ approver.user_id }}</li>
-                {% endfor %}
-            </ul>
-        -->
-    </li>
-    {% endfor %}
+<p>Dit zijn suggesties:</p>
+<ul class="no-bullets" id="ul_suggesties">
+    <!-- Gets filled in by JS now -->
 </ul>
 
 

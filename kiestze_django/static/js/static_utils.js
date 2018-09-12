@@ -1,4 +1,10 @@
 ﻿
+// https://stackoverflow.com/questions/22119673/find-the-closest-ancestor-element-that-has-a-specific-class
+function findAncestor (el, sel) {
+    while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
+    return el;
+}
+
 const updateQueryStringParam = function (key, value) {
     const baseUrl = [location.protocol, '//', location.host, location.pathname].join('')
     const urlQueryString = document.location.search
@@ -47,4 +53,4 @@ function loadJSON(path, success, error) {
   xhr.send();
 }
 
-export { updateQueryStringParam, getParameterByName, loadJSON};
+export { updateQueryStringParam, getParameterByName, loadJSON, findAncestor};
