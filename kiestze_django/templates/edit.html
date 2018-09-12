@@ -13,7 +13,7 @@
         <br/>
         Current value: <b>
             {% if accepted_edits|lookup:field.fieldname %}
-                {{ accepted_edits|lookup_suggested_value:field.fieldname }}
+                {{ accepted_edits|lookup:field.fieldname }}
             {% endif %}
         </b>
             <ul>
@@ -38,7 +38,7 @@
     {% endfor %}
 </ul>
 
-<script src="/static/js/approuve_system.js" ></script>
+<script src="/static/js/politieker_editablefield_editor_script.js" ></script>
 
 
 </body>

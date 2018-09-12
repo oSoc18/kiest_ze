@@ -12,6 +12,7 @@ function RenderEditableFieldStringToHtml(suggested_value, fieldtype)
   {
     case "belijds_thema":
     return (function(){
+      if (suggested_value == null) return ""
       const belijds_thema = suggested_value.split("|");
       const list = []
       for (let i = 0; i < belijds_thema.length; i++) {
@@ -122,8 +123,8 @@ function GetTableUrl(tableName)
 function GetDjangoUrl(queryString)
 {
   queryString = queryString.replace(/^\/+/g, '');
-  return `https://kiestze.be/${queryString}`
-  //return `http://127.0.0.1:8000/${queryString}`
+  //return `https://kiestze.be/${queryString}`
+  return `http://127.0.0.1:8000/${queryString}`
 }
 
 
