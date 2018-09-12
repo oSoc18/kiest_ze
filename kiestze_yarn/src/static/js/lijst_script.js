@@ -160,6 +160,16 @@ function DisplayKanidaten() {
       {
         profiel_foto = politieker.edits.foto
         objectFit = `cover`;
+      } else if (politieker.edits.twitter){
+        const s = politieker.edits.twitter;
+        const i = s.lastIndexOf("twitter.com/")
+        let j = s.indexOf("?", i);
+        if(j==-1) j = s.length;
+        const begin = i + "twitter.com/".length;
+        const screen_name = s.substring(begin, j);
+        profiel_foto = `https://twitter.com/${screen_name}/profile_image?size=original`
+        // Proxy, becouse twitter has some CORS restrictions
+        profiel_foto = GetDjangoUrl(`/proxy?url=${encodeURIComponent(profiel_foto)}`)
       }
       const shortName2 = politieker.naam.replace(/ /g, "_");
       option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}&selectedNis=${getParameterByName("selectedNis")}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">

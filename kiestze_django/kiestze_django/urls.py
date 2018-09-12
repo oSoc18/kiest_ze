@@ -32,6 +32,7 @@ urlpatterns = [
     path('query', views.demoquery),
     path('get_politieker_data', views.get_politieker_data),
     path('git_pull', views.git_pull),
+    path('proxy', views.proxy),
     path('get_all_partij', views.get_all_partij),
     path('get_politiekers', views.get_politiekers),
     path('get_all_politieker_partij_link_van_gemeente', views.get_all_politieker_partij_link_van_gemeente),

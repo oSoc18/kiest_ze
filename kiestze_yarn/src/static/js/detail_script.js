@@ -18,8 +18,8 @@ const input_foto_url = document.getElementById("input_foto_url");
 const lijst_terug_knop = document.getElementById("lijst_terug_knop");
 const belijds_thema_paragraph = document.getElementById("belijds_thema_paragraph");
 
-if(lijst_terug_knop)
-  lijst_terug_knop.href=`lijst?selectedPartijId=${getParameterByName("partij_id")}&selectedNis=${getParameterByName("selectedNis")}`
+if(lijst_terug_knop) // selectedPartijId=${getParameterByName("partij_id")}&
+  lijst_terug_knop.href=`lijst?selectedNis=${getParameterByName("selectedNis")}`
 
 /*
 politieker_website_button.addEventListener("click", function(evt)
@@ -161,6 +161,16 @@ function UpdateAll()
   {
     profiel_foto = politieker.edits.foto
     objectFit = `cover`;
+  } else if (politieker.edits.twitter){
+    const s = politieker.edits.twitter;
+    const i = s.lastIndexOf("twitter.com/")
+    let j = s.indexOf("?", i);
+    if(j==-1) j = s.length;
+    const begin = i + "twitter.com/".length;
+    const screen_name = s.substring(begin, j);
+    profiel_foto = `https://twitter.com/${screen_name}/profile_image?size=original`
+    // Proxy, becouse twitter has some CORS restrictions
+    profiel_foto = GetDjangoUrl(`/proxy?url=${encodeURIComponent(profiel_foto)}`)
   }
   persoon_foto.src = profiel_foto;
   persoon_foto.style.objectFit = objectFit;

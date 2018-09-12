@@ -6,6 +6,7 @@ from django.core import serializers
 import json
 from subprocess import check_output
 from django.views.decorators.clickjacking import xframe_options_exempt
+import requests
 
 
 def index(request):
@@ -382,3 +383,18 @@ def git_pull(request):
 		return HttpResponse(data, content_type='text/plain')
 	else:
 		return HttpResponse('Nice try.', status=401)
+
+# to avoid CORS crap
+def proxy(request):
+	url = request.GET.get('url')
+	# url = "http://emilesonneveld.be/bol.png"
+
+	requests_response = requests.get(url)
+
+	django_response = HttpResponse(
+		content=requests_response.content,
+		status=requests_response.status_code,
+		content_type=requests_response.headers['Content-Type']
+	)
+
+	return django_response

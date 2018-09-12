@@ -12,6 +12,7 @@ function RenderEditableFieldStringToHtml(suggested_value, fieldtype)
   {
     case "belijds_thema":
     return (function(){
+      if (suggested_value == null) return ""
       const belijds_thema = suggested_value.split("|");
       const list = []
       for (let i = 0; i < belijds_thema.length; i++) {
