@@ -29,6 +29,12 @@ body {
   margin-top: -.5rem;
 }
 
+.voeg_zelf {
+  font-family: "Brandon_blk";
+  font-size: 1.2rem;
+  margin-bottom: -.4rem;
+}
+
 .big-add {
   margin-top: 1.5rem;
   margin-bottom: 1rem;
@@ -310,6 +316,40 @@ h3 {
   font-size: 1.3rem;
 }
 
+.suggesties-lijst {
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: .5rem;
+}
+
+.value-el {
+  margin-left: -1.2rem;
+}
+
+.klopt-button {
+  margin-left: -7rem;
+}
+
+.dot {
+  margin-right: -12rem;
+  background-color: white;
+  padding: 1.2rem;
+  border: .1rem solid #3c3c3c;
+  border-radius: 10rem;
+}
+
+.numberr {
+  margin-top: -7rem;
+  margin-left: -.65rem;
+}
+
+.second-number {
+  color: #4ac1d4;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -461,6 +501,15 @@ a:hover {
   border: #3c3c3c;
   border-radius: 10rem;
   padding: 0 .5rem;
+}
+
+.button-toevoegen {
+  background-color: #ebb25e;
+  color: white;
+  border: #ebb25e;
+  border-radius: 10rem;
+  padding: .8 .5rem;
+  margin-left: 2rem;
 }
 
 .button:focus {
@@ -639,7 +688,7 @@ a:hover {
   margin-top: -1.5rem;
 }
 
-.lijstnummer {
+.volgnummer {
   background-color: #ebb25e;
   border: .2rem solid #ebb25e;
   border-radius: 10rem;
@@ -674,6 +723,14 @@ a:hover {
   width: 70vw;
   margin: 0 auto;
   padding-top: 1rem;
+  margin-bottom: -2rem;
+}
+
+.beleidsthema-div {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 80vw;
 }
 
 .popup-heading-list {

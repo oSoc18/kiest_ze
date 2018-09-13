@@ -14,6 +14,8 @@ const belijds_thema_2 = document.getElementById("belijds_thema_2");
 const belijds_thema_3 = document.getElementById("belijds_thema_3");
 const name_change = document.getElementById("name_change");
 const name_change_plural = document.getElementById("name_change_plural");
+const add = document.getElementById("add");
+const add_subtitle = document.getElementById("add_subtitle");
 
 document.body.addEventListener("change", function(){
   UpdateAll(); // Bring the overkill!
@@ -93,12 +95,11 @@ function DisplaySuggestedEdits() {
           if(ap.user_id == getParameterByName("userName"))
             btnClass = "button-already-voted"; // Need to implement CSS. Need to deactivate button too.
         }
-        option.innerHTML = `
-          <img src="/static/assets/img/pending.svg"/>
+        option.innerHTML = `<div class="suggesties-lijst">
           <div class="value-el">${display}</div>
-          <span class="dot">${sugested_edit.approvers.length}/3</span>
-          <button class="${btnClass}">Dit klopt!</button>
-          <br/>`
+          <button class="${btnClass} klopt-button">Dit klopt!</button>
+          <span class="dot"><span class="numberr">${sugested_edit.approvers.length}/<span class="second-number">3</span></span></span>
+          <br/></div>`
         const addEvtListnr = function(el, suggested_value){
           el.addEventListener(`click`, 
             function(){
@@ -137,6 +138,8 @@ function UpdateAll()
   input_new_value.placeholder = "";
   name_change.innerText = "Suggesties";
   name_change_plural.innerText = "suggesties";
+  add.innerText = "";
+  add_subtitle.innerText= "";
 
   switch(fieldname)
   {
@@ -145,6 +148,8 @@ function UpdateAll()
       belijds_thema_div.style.display = "block";
       name_change.innerText = "Beleidsthema";
       name_change_plural.innerText = "beleidsthema's";
+      add.innerText = "drie beleidsthema's toe";
+      add_subtitle.innerText = "Voor welke thema's zet deze persoon zich het meeste in?"
 
       input_new_value.value = 
           `${belijds_thema_1.value}|${belijds_thema_2.value  }|${belijds_thema_3.value}`;
@@ -154,6 +159,8 @@ function UpdateAll()
       input_new_value.placeholder = "Paste ID here";
       name_change.innerText = "Mandaat";
       name_change_plural.innerText = "mandaten";
+      add.innerText = "een suggestie";
+      add_subtitle.innerHTML = "Zoek de persoon op Openthebox en bekijk het identificatienummer in de link.  Bv. https://openthebox.be/person/<strong>348073</strong> .";
       break;
 
     case "facebook":

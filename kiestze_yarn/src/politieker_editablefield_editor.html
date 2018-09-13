@@ -42,18 +42,20 @@
 </ul>
 
 <div class="edit-toevoegen">
-    <p>Voeg zelf een <span id="add"></span> toe:</p>
+    <p class="voeg_zelf">Voeg zelf <span id="add"></span> toe:</p>
     <p id="add_subtitle"></p>
 </div>
 
 <input type="text" class="form-control mb-2 form-popover" name="suggestedValue" id="input_new_value" placeholder="http://..."
 name="suggestedValue" autocomplete="off" />
-<div id="belijds_thema_div">
-      <select id="belijds_thema_1"></select>
-      <select id="belijds_thema_2"></select>
-      <select id="belijds_thema_3"></select>
+<div class="beleidsthema-div">
+    <div id="belijds_thema_div" class="beleids_thema_div">
+          <select id="belijds_thema_1"></select>
+          <select id="belijds_thema_2"></select>
+          <select id="belijds_thema_3"></select>
+    </div>
+    <input type="submit" value="Toevoegen" class="button-toevoegen" id="submit_new_value" />
 </div>
-<input type="submit" value="Toevoegen" class="button" id="submit_new_value" />
 
 </body>
 </html>
