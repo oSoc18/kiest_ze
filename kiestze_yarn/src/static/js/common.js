@@ -68,6 +68,7 @@ class JsonRequest {
   }
 
   get json() {
+    console.log("json", this.url)
     if (this.state == StateEnum.init)
       this.DoJsonRequest();
     return this._json;

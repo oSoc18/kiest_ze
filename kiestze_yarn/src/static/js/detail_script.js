@@ -1,17 +1,19 @@
 "use strict";
 
 import { updateQueryStringParam, getParameterByName, findAncestor, findClosestTagnameInHiarchy } from './static_utils.js';
-import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis, RenderEditableFieldStringToHtml, approve, GetOtbUrl } from './common.js';
+import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis, approve, GetOtbUrl } from './common.js';
 
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
 const partij_naam = document.getElementById("partij_naam");
 const politieker_openthebox = document.getElementById("politieker_openthebox");
+const politieker_openthebox_found = document.getElementById("politieker_openthebox_found");
 const politieker_openthebox_not_found = document.getElementById("politieker_openthebox_not_found");
 const gemeente_element = document.getElementById("gemeente_element");
 const input_foto_url = document.getElementById("input_foto_url");
 const lijst_terug_knop = document.getElementById("lijst_terug_knop");
 const belijds_thema_paragraph = document.getElementById("belijds_thema_paragraph");
+const previews_openthebox_id = document.getElementById("previews_openthebox_id");
 
 if(lijst_terug_knop) // selectedPartijId=${getParameterByName("partij_id")}&
   lijst_terug_knop.href=`lijst?selectedNis=${getParameterByName("selectedNis")}`
@@ -61,8 +63,7 @@ function CloseModal(m)
   const w3sModals = document.getElementsByClassName("w3s-modal");
   // In separate function to give m a new scope
   const attachCloseEvent = function(m) {
-    m.addEventListener("click", function(evt){
-      console.log("click", evt)
+    m.addEventListener("click", function(){
       CloseModal(m)
     })
   }
@@ -83,7 +84,6 @@ function HookUpModalBlock(fieldname)
       OpenModal(edit_fieldname_modal)
 
       const politieker = model.selectedPolitiekerId;
-      const fieldname = evt.target.value;
       const iframe = findClosestTagnameInHiarchy(evt.target, "iframe");
       iframe.src = 
         GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}&userName=${model.userName}`);
@@ -110,10 +110,26 @@ function ShowSocialMediaIcon(politieker, fieldname) {
   }
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function ShowPolitiekerBelijdsThemas(suggested_value)
 {
-  belijds_thema_paragraph.innerHTML = RenderEditableFieldStringToHtml(suggested_value, "belijds_thema");
+  //belijds_thema_paragraph.innerHTML = RenderEditableFieldStringToHtml(suggested_value, "belijds_thema");
+  
+  let html = ""
+  if (suggested_value != null) {
+    const belijds_thema = suggested_value.split("|");
+    for (let i = 0; i < belijds_thema.length; i++) {
+      const t = belijds_thema[i]
+      html+=`<div class="d-flex flex-row">
+      <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
+      <p class="list-items-detail">${capitalizeFirstLetter(t)}</p>
+      </div>`
+    }
+  }
+  belijds_thema_paragraph.innerHTML = html; // Clear
 }
 
 function BadString(str)
@@ -142,6 +158,27 @@ function UpdateAll()
   let partij = model.djangoData.get_partij.json;
   if(partij == null) return;
   partij = partij[model.selectedPartijId] // Hack
+
+  {
+    if(politieker.edits.openthebox_id)
+      model.openthebox_person.url = `https://openthebox.be/api/graph/neighbourhood/Person/${politieker.edits.openthebox_id}/nl?hops=1`;
+    else
+      model.openthebox_person.url = "";
+
+    const otb_json = model.openthebox_person.json;
+    let html = ""
+    if(otb_json)
+    {
+      for (let i = 0; i < otb_json.length; i++) {
+        const j = otb_json[i]
+        if(j.group == "nodes" && j.data.pid != politieker.data.openthebox_id) {
+          html += `<b>${j.data.caption}</b><br/>`
+        }
+      }
+
+    }
+    previews_openthebox_id.innerHTML = html;
+  }
 
   politieker_naam.innerText = politieker.naam;
 
@@ -179,11 +216,11 @@ function UpdateAll()
   //ShowSocialMediaIcon(politieker, "email")
 
   if(politieker.edits.openthebox_id == null){
-    politieker_openthebox.style.display = "none"
-    politieker_openthebox_not_found.style.display = "inherit"
+    politieker_openthebox_found.style.display = "none"
+    RemoveInlineDisplayStyle(politieker_openthebox_not_found)
   }
   else{
-    politieker_openthebox.style.display = "inline"
+    RemoveInlineDisplayStyle(politieker_openthebox_found)
     politieker_openthebox_not_found.style.display = "none"
     politieker_openthebox.href = GetOtbUrl(politieker.edits.openthebox_id)
   }
@@ -241,9 +278,10 @@ const model = {
   },
 
   djangoData: {
-    get_partij:  new JsonRequest("", UpdateAll),
-    get_last_accepted_edit:  new JsonRequest("", UpdateAll),
+    get_partij: new JsonRequest("", UpdateAll),
+    get_last_accepted_edit: new JsonRequest("", UpdateAll),
   },
+  openthebox_person: new JsonRequest("", UpdateAll),
 }
 window["model"] = model;
 

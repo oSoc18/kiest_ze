@@ -229,28 +229,23 @@
               <img src="static/assets/img/yellow-detail-line.svg" alt="yellow" width="40" height="3">
             </div>
             <div class="">
-              <div class="d-flex flex-row">
-                <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
-                <p class="list-items-detail">Gezondheid</p>
-              </div>
-              <div class="d-flex flex-row">
-                <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
-                <p class="list-items-detail">Mobiliteit</p>
-              </div>
               <p id="belijds_thema_paragraph"></p>
 
 
-              <button id="edit_belijds_thema" style="display: block" value="belijds_thema">Maak aanpassing...</button>
+              <div id="edit_belijds_thema" style="display: block; cursor: pointer;" value="belijds_thema">
+                <div class="voegtoe">
+                  <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="toevoegen-thema mr-2 mt-1">
+                  <p class="ml-2 mb-1">Aanpassen...</p>
+                </div>
+              </div>
+
               <div id="edit_belijds_thema_modal" class="w3s-modal">
                 <div class="w3s-modal-content">
                   <span class="w3s-closeSpan">&times;</span>
                   <iframe src="" height="400px" style="width:100%;"></iframe>
                 </div>
               </div>
-              <div class="voegtoe">
-                <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="toevoegen-thema mr-2 mt-1">
-                <p class="ml-2 mb-1">Voeg toe</p>
-              </div>
+
             </div>
           </div>
         </article>
@@ -273,7 +268,19 @@
             </div>
             <div class="d-flex flex-column">
 
-              <button id="edit_openthebox_id" style="display: block" value="openthebox_id">Maak aanpassing...</button>
+              <div id="politieker_openthebox_found">
+                <div id="previews_openthebox_id"><!-- Will get filled in by JS--></div>
+                <a href="" target="_blank" id="politieker_openthebox" class="link-open">Vind meer op Open The Box...</a>
+              </div>
+              <span id="politieker_openthebox_not_found" class="ref-not-found">Geen referentie naar openthebox gevonden.</span>
+
+              <div id="edit_openthebox_id" style="display: block; cursor: pointer;" value="openthebox_id">
+                <div class="voegtoe">
+                  <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="toevoegen-thema mr-2 mt-1">
+                  <p class="ml-2 mb-1">Aanpassen...</p>
+                </div>
+              </div>
+
               <div id="edit_openthebox_id_modal" class="w3s-modal">
                 <div class="w3s-modal-content">
                   <span class="w3s-closeSpan">&times;</span>
@@ -281,13 +288,6 @@
                 </div>
               </div>
 
-              <a href="" target="_blank" id="politieker_openthebox" class="link-open">Openen in Open The Box!</a>
-              <span id="politieker_openthebox_not_found" class="ref-not-found">Geen referentie naar openthebox
-                gevonden.</span>
-              <div class="voegtoe mt-2">
-                <img src="static/assets/img/add.svg" alt="toevoegen" width="20" height="20" class="toevoegen-thema mt-2">
-                <p class="ml-3 mb-1">Voeg toe</p>
-              </div>
             </div>
           </div>
         </article>
