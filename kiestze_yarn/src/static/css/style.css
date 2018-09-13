@@ -51,15 +51,24 @@ body {
   display: flex;
 }
 
-.landing-page-input
-{
+.landing-page-input {
   border-bottom: none;
   background: transparent;
+  color: white;
+  font-family: 'Brandon_reg';
+  font-size: 1.8rem;
+  border: none;
+  margin-top: 8rem;
 }
 
-.landing-page-input::placeholder
-{
+.landing-page-input:focus {
+  outline: none;
+}
+
+.landing-page-input::placeholder {
   color: white;
+  font-family: 'Brandon_reg';
+  font-size: 1.8rem;
 }
 
 p {
@@ -222,6 +231,13 @@ h3 {
 
 .search-group {
   border-bottom: .2rem solid white;
+  display: flex;
+  align-items: center;
+  /* width: 8rem; */
+  /* margin: 0 auto; */
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-top: -1rem;
 }
 
 .form-control:focus {
@@ -258,11 +274,6 @@ h3 {
   text-transform: uppercase;
 }
 
-.search-margin {
-  margin-top: 14rem;
-  margin-left: 1rem;
-}
-
 .meerweten {
   font-family: 'Brandon_reg';
   font-size: 1rem;
@@ -270,14 +281,31 @@ h3 {
 
 .form-background {
   background-color: #4ac1d4;
-  min-height: 100vh;
-  max-height: 500vh;
-  overflow-y: inherit;
   color: #08293d;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding-bottom: 2rem;
+  width: 100vw;
+}
+
+.kandidaten-overzicht {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+.kandidaten-lijst {
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+}
+
+.kandidaten-titel {
+  margin-top: 2rem;
 }
 
 .form-check-label {
-  color: white;
+  color: #3c3c3c;
   font-family: 'Brandon_reg';
   font-size: 1.3rem;
 }
@@ -287,13 +315,14 @@ a:hover {
 }
 
 .background-teken {
-  background-image: url(../assets/img/uitroepteken.svg);
+  background-image: url(../assets/img/mobile_bol.svg);
   background-repeat: no-repeat;
+  width: 282px;
+  height: 282px;
   background-size: contain;
-  background-position: center; 
-  height: 33rem;
-  width: 31rem;
-  margin-top: -8rem;
+  background-position: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .auto {
@@ -425,7 +454,7 @@ a:hover {
   z-index: 10;
   opacity: 1;
   visibility: visible;
-  transform: translate(-6rem,3px);
+  transform: translate(0,-7px);
   transition: all .5s cubic-bezier(.75, -.02, .2, .97);
   text-decoration: none;
 }
@@ -438,10 +467,18 @@ a:hover {
   height: 3rem;
 }
 
+.controls {
+  width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
 .carousel-control-prev {
   opacity: 1;
-  top: 85vh;
-  left: 41vw;
+  position: relative;
 }
 
 .carousel-control-prev:hover {
@@ -450,7 +487,7 @@ a:hover {
 
 .carousel-control-next {
   opacity: 1;
-  top: 85vh;
+  position: relative;
 }
 
 .carousel-control-next:hover {
@@ -471,19 +508,11 @@ a:hover {
   font-size: 1.3rem;
 }
 
-.terug-div {
-  border: solid #3c3c3c .2rem;
-  border-radius: 10rem;
-  padding: .5rem;
-  margin-top: -4rem;
-  margin-bottom: 3rem;
-  width: 8rem;
-}
-
 .carousel-indicators {
-  left: 42vw;
+  /* left: 42vw; */
   background-color: transparent;
-  bottom: 3vh;
+  bottom: 0rem;
+  /* bottom: 3vh; */
 }
 
 .carousel-indicators li {
@@ -522,7 +551,233 @@ a:hover {
   margin-top: .7rem;
 }
 
+.uitleg-image {
+  display: none;
+}
+
+.main-index {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.left-index {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.index-flex {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.main-lead {
+  font-size: 1.4rem;
+  width: 80vw;
+  text-align: center;
+}
+
+.terug-carousel {
+  display: none;
+}
+
+.tekst-uitleg {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.search-icon {
+  margin-top: 8rem;
+  margin-left: -5rem;
+}
+
+.main-carousel {
+  display: flex;
+  align-items: center;
+  width: 80vw;
+  margin: 0 auto;
+}
+
+.form-control:focus {
+  outline: none;
+}
+
+.dropdown-thema {
+  border: none;
+  margin-top: .5rem;
+  width: 15rem;
+  font-family: 'Brandon_reg';
+  font-size: 1.3rem;
+}
+
+.search-lijst-group {
+  margin-top: 1rem;
+}
+
+.focus-search {
+  margin-top: -1.5rem;
+}
+
+.lijstnummer {
+  background-color: #ebb25e;
+  border: .2rem solid #ebb25e;
+  border-radius: 10rem;
+  padding-left: .7rem;
+  padding-right: .7rem;
+  color: white;
+  font-family: 'Brandon_blk';
+  font-size: 1.3rem;
+  margin-right: .5rem;
+}
+
+.lijstplaats {
+  display: flex;
+  align-items: center;
+}
+
 @media only screen  and (min-width: 1024px) {
+
+  .overzicht-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .search-group-flex {
+    margin-bottom: -1rem;
+    width: 10rem;
+  }
+
+  .overzicht-div {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+  }
+
+  .form-background {
+    background-color: #4ac1d4;
+    min-height: 100vh;
+    max-height: 1000vh;
+    overflow-y: inherit;
+    color: #08293d;
+    width: 25%;
+    align-self: stretch;
+  }
+
+
+
+
+
+
+  .main_index {
+    background-image: url(../assets/img/boven-img.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-position-x: 73vw;
+  }
+
+  .home {
+    height: 100vh;
+  }
+
+  .index-flex {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 80vh;
+    width: 80vw;
+    margin: 0 auto;
+    padding-top: 8rem;
+  }
+
+  .terug-carousel {
+    display: inherit;
+  }
+
+  .terug-div {
+    border: solid #3c3c3c .2rem;
+    border-radius: 10rem;
+    padding: .5rem;
+    margin-top: -4rem;
+    margin-bottom: 3rem;
+    width: 8rem;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  div#dropdownMenuLink.dropdown-toggle::after {
+    display: none;
+  }
+
+  .uitleg-image {
+    display: inherit;
+    background-color: #4ac1d4;
+    height: 100vh;
+    margin: 0 auto;
+    width: 50vw;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-carousel {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .tekst-uitleg {
+    width: 40vw;
+    height: 80vh;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 3rem;
+    margin-bottom: 0;
+  }
+
+  .carousel {
+    height: 100vh;
+  }
+
+  .controls {
+    width: 40vw;
+    text-align: right;
+  }
+
+  .carousel-indicators {
+    left: 50vw;
+    bottom: 3vh;
+  }
+
+  .carousel-control-prev {
+    margin-top: -7rem;
+    left: 24vw;
+  }
+
+  .carousel-control-next {
+    margin-top: -7rem;
+    left: 25vw;
+  }
+
+  .left-index {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .main-lead {
+    width: 30vw;
+    text-align: left;
+  }
 
   .purple-background-thema {
     background-color: transparent;
@@ -600,6 +855,12 @@ a:hover {
     border-bottom: .2rem solid #c9c9c9;
   }
 
+  .search-lijst-group {
+    display: flex;
+    align-items: center;
+    margin-top: -.6rem;
+  }
+
   .nav-kies-logo {
     width: 92px;
     height: 18px;
@@ -631,7 +892,7 @@ a:hover {
   }
 
   .socials-hd {
-    text-align: center
+    text-align: center;
   }
 
   .persoon_foto {
@@ -646,15 +907,6 @@ a:hover {
 
   .big-add {
     margin-left: 1rem;
-  }
-
-  .scheidingslijn {
-    width: 80px;
-    height: 5px;
-  }
-
-  .message_inlog {
-    width: 16rem;
   }
 }
 

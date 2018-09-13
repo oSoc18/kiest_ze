@@ -1,4 +1,4 @@
-{% load socialaccount %}
+<span style="display:none;">{% load socialaccount %}</span> 
 
 <!DOCTYPE html>
 <html lang="nl" class="width-hack">
@@ -37,69 +37,66 @@
     gtag('config', 'UA-122933363-1');
   </script>
 </head>
+
 <body>
-  <main>
-    <section style="height:100vh;" id="home" class="home">
-      <div class="d-flex justify-content-center align-items-center h-75 w-75 auto">
-        <div class="d-flex flex-column justify-content-around align-items-top">
-          <h1 class="display-4 mb-5">Kiest ze</h1>
-          <p class="lead w-75 text-left">Welke kandidaten gun jij een zetel in jouw gemeenteraad?</p>
+  <main class="main_index">
+    <section id="home" class="home">
+      <div class="index-flex">
+        <div class="left-index">
+          <h1 class="display-4">Kiest ze</h1>
+          <p class="lead main-lead">Welke kandidaten gun jij een zetel in jouw gemeenteraad?</p>
         </div>
-        <div class="d-flex flex-row align-items-center background-teken">
-          <div class="d-flex flex-row align-items-center search-margin dropdown">
+        <div class="background-teken">
+          <div class="">
 
-            <div class="form-group search-group" style="height: 2rem;">
-              <div class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <input type="text" class="form-control w-75 search-lijst landing-page-input" id="search" placeholder="Gemeente" name="input_gemeente" autocomplete="off">
+            <div class="search-group">
+              <div>
+                <div class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <input type="text" class="landing-page-input" id="search" placeholder="Gemeente" name="input_gemeente"
+                    autocomplete="off">
+                </div>
+                <ul id="opties_gemeentes" class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                </ul>
               </div>
-              <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
-              <ul id="opties_gemeentes" class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              </ul>
+              <a id="lijst_link" href="lijst">
+                <img src="static/assets/img/search.svg" alt="search" width="30" height="30" class="search-icon">
+              </a>
             </div>
- <!-- 
-            <div class="form-group search-group">
-              <input type="text" class="w-100 searchfield" id="search" aria-describedby="searchfield" placeholder="Jouw gemeente" name="input_gemeente"
-                autocomplete="off">
-            </div> -->
 
-            <a id="lijst_link" href="lijst">
-              <img src="static/assets/img/search.svg" alt="search" width="30" height="30" class="mb-4 ml-1">
-            </a>
           </div>
         </div>
       </div>
-      <div class="text-center mt-5 meerbutton">
-        <p class="meerweten mt-5">Wil je meer weten over ons Kiest Ze?</p>
+      <div class="main-index">
+        <p class="">Wil je meer weten over ons Kiest Ze?</p>
         <a href="#carousel">
-          <img src="static/assets/img/button-meer.svg" alt="meer-weten" width="50" height="50" class="gele-home-button">
+          <img src="static/assets/img/button-meer.svg" alt="meer-weten" width="50" height="50" class="meer-weten">
         </a>
       </div>
     </section>
-    <section style="height:100vh;" id="carousel">
+    <section id="carousel" class="carousel">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="d-flex flex-row justify-content-between align-items-center" style="height: 100vh;">
-              <div style="background-color: #4ac1d4;" class="pl-5 pr-5 align-self-stretch uitleg-background" style="width: 40vw;">
-                <img src="static/assets/img/uitleg_1.svg" alt="uitleg_1" width="397" height="460" class="uitleg-image-een">
+            <div class="main-carousel">
+              <div class="uitleg-image">
+                <img src="static/assets/img/uitleg_1.svg" alt="uitleg_1" width="397" height="460" class="">
               </div>
-              <div class="w-50 mr-5 tekst-uitleg">
-                <div class="terug-div d-flex flex-row justify-content-around align-items-center">
+              <div class="tekst-uitleg">
+                <div class="terug-div terug-carousel">
                   <img src="static/assets/img/pijl_terug.svg" alt="pijl" width="20" height="20">
-                  <a href="#home" class="terug ml-2">Terug</a>
+                  <a href="#home" class="terug">Terug</a>
                 </div>
                 <h2>Ons Vertrekpunt</h2>
                 <img src="static/assets/img/grey_line.svg" alt="grijze-lijn" width="67" height="5">
-                <p class="intro-tekst">Op
-                  <strong>zondag 14 oktober</strong> trekken opnieuw alle Vlamingen naar de stembus, waar we onze nieuwe gemeenteraden
+                <p class="">Op
+                  <strong>zondag 14 oktober</strong> trekken opnieuw alle Vlamingen naar de stembus, waar we onze
+                  nieuwe gemeenteraden
                   kiezen.
-                  <strong>308 gemeenten</strong> openen nogmaals de stembus om de stem van het volk te laten luiden. </p>
-                <p class="intro-tekst">In iedere gemeente komen verschillende partijen op die zowel onafhankelijk als verbonden kunnen zijn aan
+                  <strong>308 gemeenten</strong> openen nogmaals de stembus om de stem van het volk te laten luiden.
+                </p>
+                <p class="">In iedere gemeente komen verschillende partijen op die zowel onafhankelijk als verbonden
+                  kunnen zijn aan
                   een federale partij. Geef je de
                   <strong>partij</strong> een stem of liever een
                   <strong>kopstem</strong>? Welke politici gun jij een
@@ -108,78 +105,96 @@
             </div>
           </div>
           <div class="carousel-item">
-            <div class="d-flex flex-row justify-content-between align-items-center" style="height: 100vh;">
-              <div style="background-color: #4ac1d4;" class="pl-5 pr-5 align-self-stretch uitleg-background" style="width: 40vw;">
-                <img src="static/assets/img/uitleg_2.svg" alt="uitleg_2" width="421" height="308" class="uitleg-image-twee">
+            <div class="main-carousel">
+              <div class="uitleg-image">
+                <img src="static/assets/img/uitleg_2.svg" alt="uitleg_2" width="421" height="308" class="">
               </div>
-              <div class="w-50  mr-5 tekst-uitleg">
-                <div class="terug-div d-flex flex-row justify-content-around align-items-center">
+              <div class="tekst-uitleg">
+                <div class="terug-div terug-carousel">
                   <img src="static/assets/img/pijl_terug.svg" alt="pijl" width="20" height="20">
-                  <a href="#home" class="terug ml-2">Terug</a>
+                  <a href="#home" class="terug">Terug</a>
                 </div>
                 <h2>Hoe werkt het?</h2>
                 <img src="static/assets/img/grey_line.svg" alt="grijze-lijn" width="67" height="5">
-                <p class="intro-tekst">Kiest ze is een platform waarop <strong>kiezers die voor het eerst gaan stemmen</strong> op een interactieve manier meer te weten kunnen komen over de <strong>partijen en kandidaten</strong> in hun gemeente.</p>
-                <p class="intro-tekst">Op een overzichtelijke manier wordt duidelijk gesteld welke partijen zich in <strong>jouw bangelijk bestuur</strong> bevinden als ook de kandidaten op de lijst.</p>
+                <p class="">Kiest ze is een platform waarop <strong>kiezers die voor het eerst gaan stemmen</strong> op
+                  een interactieve manier meer te weten kunnen komen over de <strong>partijen en kandidaten</strong> in
+                  hun gemeente.</p>
+                <p class="">Op een overzichtelijke manier wordt duidelijk gesteld welke partijen zich in <strong>jouw
+                    bangelijk bestuur</strong> bevinden als ook de kandidaten op de lijst.</p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
-            <div class="d-flex flex-row justify-content-between align-items-center" style="height: 100vh;">
-              <div style="background-color: #4ac1d4;" class="pl-5 pr-5 align-self-stretch uitleg-background" style="width: 40vw;">
+            <div class="main-carousel">
+              <div class="uitleg-image">
                 <img src="static/assets/img/uitleg_3.svg" alt="uitleg_3" width="420" height="446" class="uitleg-image-een">
               </div>
-              <div class="w-50 mr-5 tekst-uitleg">
-                <div class="terug-div d-flex flex-row justify-content-around align-items-center">
+              <div class="tekst-uitleg">
+                <div class="terug-div terug-carousel">
                   <img src="static/assets/img/pijl_terug.svg" alt="pijl" width="20" height="20">
-                  <a href="#home" class="terug ml-2">Terug</a>
+                  <a href="#home" class="terug">Terug</a>
                 </div>
                 <h2>Wie zijn we?</h2>
                 <img src="static/assets/img/grey_line.svg" alt="grijze-lijn" width="67" height="5">
-                <p class="intro-tekst">Dit project is opgestart tijdens <strong>‘Open Summer of Code 2018’</strong> waar innovatieve open source projecten worden gerealiseerd door <strong>studenten, hun coaches en meewerkende organisaties</strong>. 
-                    ‘Kiest ze’ ontstond door een samenwerking van ‘open Summer of code’, ‘Open The Box’ en de Vlaamse Overheid.</p>
-                <p class="intro-tekst">Gedurende <strong>16 dagen</strong> werkten <strong>4 studenten en hun coach</strong> aan dit project.
-                    Het team bestond uit 2 studenten back-end developing, 1 design student en 1 student bestuurskunde.</p>
+                <p class="">Dit project is opgestart tijdens <strong>‘Open Summer of Code 2018’</strong> waar
+                  innovatieve open source projecten worden gerealiseerd door <strong>studenten, hun coaches en
+                    meewerkende organisaties</strong>.
+                  ‘Kiest ze’ ontstond door een samenwerking van ‘open Summer of code’, ‘Open The Box’ en de Vlaamse
+                  Overheid.</p>
+                <p class="">Gedurende <strong>16 dagen</strong> werkten <strong>4 studenten en hun coach</strong> aan
+                  dit project.
+                  Het team bestond uit 2 studenten back-end developing, 1 design student en 1 student bestuurskunde.</p>
               </div>
             </div>
           </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <img src="static/assets/img/previous.svg" alt="previous" width="50" height="50">
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <img src="static/assets/img/next.svg" alt="next" width="50" height="50">
-          <span class="sr-only">Next</span>
-        </a>
+        <div class="controls">
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <img src="static/assets/img/previous.svg" alt="previous" width="50" height="50">
+            <span class="sr-only">Previous</span>
+          </a>
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <img src="static/assets/img/next.svg" alt="next" width="50" height="50">
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="d-flex flex-row justify-content-between align-items-center footer" style="height:18vh;">
-    <div class="ml-5">
+  <footer class="footer">
+    <div class="pl-5 footer-div">
       <p style="color: white;" class="lead lead-footer">Onze partners:</p>
-      <ul style="list-style: none; margin-left: -2.8rem;" class="d-flex flex-row justify-content-between">
-        <li class="nav-item">
-          <a class="mr-3" href="#">
-            <img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="mr-3" href="#">
-            <img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="mr-3" href="#">
-            <img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="mr-3" href="#">
-            <img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3">
-          </a>
-        </li>
+      <ul style="list-style: none; margin-left: -2.8rem;" class="footer-item-one">
+        <div class="footer-logos">
+          <li class="nav-item">
+            <a class="mr-3" href="http://2018.summerofcode.be/">
+              <img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="mr-3" href="https://www.openknowledge.be/">
+              <img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3">
+            </a>
+          </li>
+        </div>
+        <div class="footer-logos">
+          <li class="nav-item">
+            <a class="mr-3" href="https://openthebox.be/search">
+              <img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="mr-3" href="https://vlaanderenkiest.be/verkiezingen2012/">
+              <img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3">
+            </a>
+          </li>
+        </div>
       </ul>
     </div>
     <div class="mr-5">
@@ -209,6 +224,7 @@
   <script src="static/js/boots/bootstrap.bundle.min.js"></script>
   <script>
     $('.carousel').carousel('pause')
+
   </script>
 </body>
 
