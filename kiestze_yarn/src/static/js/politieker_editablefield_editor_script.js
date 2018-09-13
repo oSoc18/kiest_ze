@@ -29,12 +29,13 @@ const fieldname = getParameterByName("fieldname");
 
 // Used from HTML
 function submitUserEdit(evt) {
-  approve(politieker_id, fieldname, evt.target.parentElement.querySelector('input[name="suggestedValue"]').value, AfterSubmit)
+  approve(politieker_id, fieldname, evt.target.parentElement.parentElement.querySelector('input[name="suggestedValue"]').value, AfterSubmit)
 }
 
 function AfterSubmit()
 {
-  model.djangoData.get_sugested_edits.Reload();
+  location.reload();
+  //model.djangoData.get_sugested_edits.Reload();
 }
 
 function DisplayBelijdsThemas()

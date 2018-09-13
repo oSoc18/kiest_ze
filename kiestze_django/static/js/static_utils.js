@@ -1,8 +1,19 @@
-﻿
+
 // https://stackoverflow.com/questions/22119673/find-the-closest-ancestor-element-that-has-a-specific-class
-function findAncestor (el, sel) {
-    while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
+function findAncestor (el, className) {
+    if(className[0] != ".") console.warn("className should start with dot")
+    while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,className)));
     return el;
+}
+
+// Could be optimized by not checking the previous node
+function findClosestTagnameInHiarchy(el, tagName) {
+  while(el) {
+    const test = el.getElementsByTagName(tagName)
+    if(test && test.length > 0) return test[0];
+    el = el.parentElement;
+  }
+  console.warn("tagName not found! Performance burdon!", tagName)
 }
 
 const updateQueryStringParam = function (key, value) {
@@ -38,6 +49,7 @@ function getParameterByName(name, url) {
 // https://stackoverflow.com/questions/9838812/how-can-i-open-a-json-file-in-javascript-without-jquery
 function loadJSON(path, success, error) {
   const xhr = new XMLHttpRequest();
+  xhr.withCredentials = false;
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
@@ -53,4 +65,23 @@ function loadJSON(path, success, error) {
   xhr.send();
 }
 
-export { updateQueryStringParam, getParameterByName, loadJSON, findAncestor};
+function string_to_slug(str)
+{
+  str = str.replace(/^\s+|\s+$/g, ''); // trim
+  str = str.toLowerCase();
+
+  // remove accents, swap ñ for n, etc
+  const from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+  const to   = "aaaaeeeeiiiioooouuuunc------";
+  for (let i=0, l=from.length ; i<l ; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+
+  str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+      .replace(/\s+/g, '-') // collapse whitespace and replace by -
+      .replace(/-+/g, '-'); // collapse dashes
+
+  return str;
+}
+
+export { updateQueryStringParam, getParameterByName, loadJSON, findAncestor, findClosestTagnameInHiarchy, string_to_slug};
