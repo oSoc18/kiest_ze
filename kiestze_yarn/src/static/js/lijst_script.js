@@ -172,11 +172,14 @@ function DisplayKanidaten() {
         profiel_foto = GetDjangoUrl(`/proxy?url=${encodeURIComponent(profiel_foto)}`)
       }
       const shortName2 = politieker.naam.replace(/ /g, "_");
-      option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}&selectedNis=${getParameterByName("selectedNis")}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
+      option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
         <img class="card-img-top politieker-img" src="${profiel_foto}" alt="Card image cap" style="object-fit:${objectFit}">
         <div class="card-body">
         <h3 class="card-title">${politieker.naam}</h5>
+        <div class="lijstplaats">
+        <p class="lijstnummer">1</p> 
         <p class="card-text">${partij.lijstnaam}</p>
+        </div>
         </div>
         </article></a>`
     }
