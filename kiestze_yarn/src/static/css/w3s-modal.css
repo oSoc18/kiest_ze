@@ -22,7 +22,7 @@
 
 .w3s-closeSpan {
   color: #aaa;
-  /*float: right;*/
+  float: right;
   font-size: 28px;
   font-weight: bold;
 }

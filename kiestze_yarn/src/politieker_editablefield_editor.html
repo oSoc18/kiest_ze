@@ -25,11 +25,26 @@
 
 <div style="display: none">{% csrf_token %}</div>
 
-<p>Dit zijn suggesties:</p>
+<div>
+  <div class="titel-popup"><span id="name_change"></span> toevoegen of bevestigen</div>
+  <div class="intro-popup">We zijn nog niet zeker welke <span id="name_change_plural"></span> deze persoon heeft, daarvoor
+    hebben wij bestiging nodig van vier gebruikers.</div>
+</div>
+
+<div class="popup-heading-list">
+    <p class="popup-listitem">Suggesties</p>
+    <p class="popup-listitem">Stem zelf</p>
+    <p class="popup-listitem">Stemmen</p>
+</div>
+
 <ul class="no-bullets" id="ul_suggesties">
     <!-- Gets filled in by JS now -->
 </ul>
 
+<div class="edit-toevoegen">
+    <p>Voeg zelf een <span id="add"></span> toe:</p>
+    <p id="add_subtitle"></p>
+</div>
 
 <input type="text" class="form-control mb-2 form-popover" name="suggestedValue" id="input_new_value" placeholder="http://..."
 name="suggestedValue" autocomplete="off" />

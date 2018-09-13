@@ -12,6 +12,8 @@ const belijds_thema_div = document.getElementById("belijds_thema_div");
 const belijds_thema_1 = document.getElementById("belijds_thema_1");
 const belijds_thema_2 = document.getElementById("belijds_thema_2");
 const belijds_thema_3 = document.getElementById("belijds_thema_3");
+const name_change = document.getElementById("name_change");
+const name_change_plural = document.getElementById("name_change_plural");
 
 document.body.addEventListener("change", function(){
   UpdateAll(); // Bring the overkill!
@@ -131,21 +133,27 @@ function UpdateAll()
   }*/
 
   input_new_value.style.display = "block";
-  belijds_thema_div.style.display = "none"
-  input_new_value.placeholder = ""
+  belijds_thema_div.style.display = "none";
+  input_new_value.placeholder = "";
+  name_change.innerText = "Suggesties";
+  name_change_plural.innerText = "suggesties";
 
   switch(fieldname)
   {
     case "belijds_thema":
       input_new_value.style.display = "none";
-      belijds_thema_div.style.display = "block"
+      belijds_thema_div.style.display = "block";
+      name_change.innerText = "Beleidsthema";
+      name_change_plural.innerText = "beleidsthema's";
 
       input_new_value.value = 
           `${belijds_thema_1.value}|${belijds_thema_2.value  }|${belijds_thema_3.value}`;
       break;
 
     case "openthebox_id":
-      input_new_value.placeholder = "Paste ID here"
+      input_new_value.placeholder = "Paste ID here";
+      name_change.innerText = "Mandaat";
+      name_change_plural.innerText = "mandaten";
       break;
 
     case "facebook":

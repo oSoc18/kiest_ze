@@ -661,6 +661,41 @@ a:hover {
   margin: 0 auto;
 }
 
+.titel-popup {
+  text-align: center;
+  font-family: 'Brandon_blk';
+  font-size: 1.8rem;
+}
+
+.intro-popup {
+  text-align: center;
+  font-family: 'Brandon_reg';
+  font-size: 1.4rem;
+  width: 70vw;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.popup-heading-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+  margin: 0 auto;
+  padding-top: 3rem;
+}
+
+.edit-toevoegen {
+  width: 80vw;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.popup-listitem {
+  font-family: 'Brandon_blk';
+  font-size: 1.3rem;
+}
+
 @media only screen  and (min-width: 1024px) {
 
   .facebook_tweede_login {
@@ -698,11 +733,6 @@ a:hover {
     width: 25%;
     align-self: stretch;
   }
-
-
-
-
-
 
   .main_index {
     background-image: url(../assets/img/boven-img.svg);
