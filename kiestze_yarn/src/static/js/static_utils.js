@@ -1,8 +1,19 @@
-﻿
+
 // https://stackoverflow.com/questions/22119673/find-the-closest-ancestor-element-that-has-a-specific-class
-function findAncestor (el, sel) {
-    while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
+function findAncestor (el, className) {
+    if(className[0] != ".") console.warn("className should start with dot")
+    while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,className)));
     return el;
+}
+
+// Could be optimized by not checking the previous node
+function findClosestTagnameInHiarchy(el, tagName) {
+  while(el) {
+    const test = el.getElementsByTagName(tagName)
+    if(test && test.length > 0) return test[0];
+    el = el.parentElement;
+  }
+  console.warn("tagName not found! Performance burdon!", tagName)
 }
 
 const updateQueryStringParam = function (key, value) {
@@ -53,4 +64,4 @@ function loadJSON(path, success, error) {
   xhr.send();
 }
 
-export { updateQueryStringParam, getParameterByName, loadJSON, findAncestor};
+export { updateQueryStringParam, getParameterByName, loadJSON, findAncestor, findClosestTagnameInHiarchy};

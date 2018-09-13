@@ -148,8 +148,10 @@ function UpdateAll()
       input_new_value.placeholder = "Paste ID here"
       break;
 
+    case "facebook":
+    case "twitter":
     case "website":
-      input_new_value.placeholder = "http://..."
+      input_new_value.placeholder = "https://..."
       break;
 
     default:

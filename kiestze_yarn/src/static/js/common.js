@@ -22,6 +22,11 @@ function RenderEditableFieldStringToHtml(suggested_value, fieldtype)
       return list.join(", ");
     })();
 
+    case "facebook":
+    case "twitter":
+    case "website":
+      return `<a target="_blank" href='${suggested_value}'>${suggested_value}</a>`
+
     case "openthebox_id":
       return `<a target="_blank" href='${GetOtbUrl(suggested_value)}'>${suggested_value}</a>`
     default:

@@ -1,16 +1,11 @@
 "use strict";
 
-import { updateQueryStringParam, getParameterByName, findAncestor } from './static_utils.js';
+import { updateQueryStringParam, getParameterByName, findAncestor, findClosestTagnameInHiarchy } from './static_utils.js';
 import { JsonRequest, GetDjangoUrl, GetGemeenteNaamForNis, RenderEditableFieldStringToHtml, approve, GetOtbUrl } from './common.js';
 
 const politieker_naam = document.getElementById("politieker_naam");
 const persoon_foto = document.getElementById("persoon_foto");
 const partij_naam = document.getElementById("partij_naam");
-//const politieker_website = document.getElementById("politieker_website");
-//const politieker_website_button = document.getElementById("politieker_website_button");
-const politieker_facebook = document.getElementById("politieker_facebook");
-const politieker_twitter = document.getElementById("politieker_twitter");
-const politieker_linkedin = document.getElementById("politieker_linkedin");
 const politieker_openthebox = document.getElementById("politieker_openthebox");
 const politieker_openthebox_not_found = document.getElementById("politieker_openthebox_not_found");
 const gemeente_element = document.getElementById("gemeente_element");
@@ -66,9 +61,10 @@ function CloseModal(m)
   const w3sModals = document.getElementsByClassName("w3s-modal");
   // In separate function to give m a new scope
   const attachCloseEvent = function(m) {
-    m.onclick = function() {
+    m.addEventListener("click", function(evt){
+      console.log("click", evt)
       CloseModal(m)
-    }
+    })
   }
   for (let i = 0; i < w3sModals.length; i++) {
     const m = w3sModals[i]
@@ -77,54 +73,43 @@ function CloseModal(m)
 })();
 
 
-const edit_openthebox_id = document.getElementById("edit_openthebox_id");
-const edit_openthebox_id_modal = document.getElementById('edit_openthebox_id_modal');
-if(edit_openthebox_id) {
+function HookUpModalBlock(fieldname)
+{
+  const edit_fieldname = document.getElementById(`edit_${fieldname}`);
+  const edit_fieldname_modal = document.getElementById(`edit_${fieldname}_modal`);
+  if(edit_fieldname) {
 
-  edit_openthebox_id.onclick = function (evt) {
-    OpenModal(edit_openthebox_id_modal)
+    edit_fieldname.onclick = function (evt) {
+      OpenModal(edit_fieldname_modal)
 
-    const politieker = model.selectedPolitiekerId;
-    const fieldname = evt.target.value;
-    evt.target.parentElement.getElementsByTagName("iframe")[0].src = 
-    GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}&userName=${model.userName}`);
+      const politieker = model.selectedPolitiekerId;
+      const fieldname = evt.target.value;
+      const iframe = findClosestTagnameInHiarchy(evt.target, "iframe");
+      iframe.src = 
+        GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}&userName=${model.userName}`);
+    }
   }
 }
-const edit_belijds_thema = document.getElementById("edit_belijds_thema");
-const edit_belijds_thema_modal = document.getElementById('edit_belijds_thema_modal');
-if(edit_belijds_thema) {
+HookUpModalBlock("openthebox_id")
+HookUpModalBlock("belijds_thema")
+HookUpModalBlock("facebook")
+HookUpModalBlock("twitter")
+HookUpModalBlock("linkedin")
+HookUpModalBlock("website")
+//HookUpModalBlock("email")
 
-  edit_belijds_thema.onclick = function (evt) {
-    OpenModal(edit_belijds_thema_modal)
 
-    const politieker = model.selectedPolitiekerId;
-    const fieldname = evt.target.value;
-    evt.target.parentElement.getElementsByTagName("iframe")[0].src = 
-    GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}&userName=${model.userName}`);
+function ShowSocialMediaIcon(politieker, fieldname) {
+  const fieldVal = politieker.edits[fieldname];
+  const el = document.getElementById(`politieker_${fieldname}`)
+  if(fieldVal == null)
+    el.parentElement.parentElement.style.display = "none"
+  else{
+    RemoveInlineDisplayStyle(el)
+    el.href = fieldVal
   }
 }
 
-
-/*
-function approve(politieker, fieldname, suggested_value) {
-  const data = new FormData();
-  const csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0]
-  if(csrfmiddlewaretoken != null)
-    data.append('csrfmiddlewaretoken', csrfmiddlewaretoken.value);
-  else console.error("csrfmiddlewaretoken should be injected by Django")
-  data.append('politieker', politieker);
-  data.append('fieldname', fieldname);
-  data.append('value', suggested_value);
-
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST',  GetDjangoUrl('request_edit'), true);
-  xhr.onload = function () {
-    console.log(this.responseText);
-    model.djangoData.get_last_accepted_edit.Reload();
-    //location.reload();
-  };
-  xhr.send(data);
-}*/
 
 function ShowPolitiekerBelijdsThemas(suggested_value)
 {
@@ -134,6 +119,14 @@ function ShowPolitiekerBelijdsThemas(suggested_value)
 function BadString(str)
 {
   return str == null || str == "";
+}
+
+function RemoveInlineDisplayStyle(elem){
+  if (elem.style.removeProperty) {
+    elem.style.removeProperty('display');
+  } else {
+    elem.style.removeAttribute('display'); // IE
+  }
 }
 
 function UpdateAll()
@@ -177,32 +170,13 @@ function UpdateAll()
 
   partij_naam.innerText = partij.lijstnaam
 
-  //let website_value = "";
-  //if(politieker.edits.website != null)
-  //  website_value = politieker.edits.website
-
-  //politieker_website.innerText = website_value;
-  //politieker_website.href = website_value;
-  //politieker_website_input.value = website_value;
-
-  if(politieker.edits.facebook == null)
-    politieker_facebook.style.display = "none"
-  else{
-    politieker_facebook.style.display = "inline"
-    politieker_facebook.href = politieker.edits.facebook
-  }
-  if(politieker.edits.twitter == null)
-    politieker_twitter.style.display = "none"
-  else{
-    politieker_twitter.style.display = "inline"
-    politieker_twitter.href = politieker.edits.twitter
-  }
-  if(politieker.edits.linkedin == null)
-    politieker_linkedin.style.display = "none"
-  else{
-    politieker_linkedin.style.display = "inline"
-    politieker_linkedin.href = politieker.edits.linkedin
-  }
+  //ShowSocialMediaIcon(politieker, "openthebox_id")
+  //ShowSocialMediaIcon(politieker, "belijds_thema")
+  ShowSocialMediaIcon(politieker, "facebook")
+  ShowSocialMediaIcon(politieker, "twitter")
+  ShowSocialMediaIcon(politieker, "linkedin")
+  ShowSocialMediaIcon(politieker, "website")
+  //ShowSocialMediaIcon(politieker, "email")
 
   if(politieker.edits.openthebox_id == null){
     politieker_openthebox.style.display = "none"

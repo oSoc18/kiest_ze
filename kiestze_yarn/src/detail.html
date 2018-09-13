@@ -12,6 +12,9 @@
     .hide-django {
       display:none;
     }
+    .social-media-icon-div {
+      display: inline-block
+    }
   </style>
   <script>
     WebFontConfig = {
@@ -77,18 +80,108 @@
         <div class="socials-hd">
           <h2 class="title" id="politieker_naam">- -</h2>
           <div class="socials">
-            <img src="static/assets/img/lijn-grijs.svg" alt="scheidingslijn" width="20" height="20" class="scheidingslijn">
-            <a href="" id="politieker_facebook" target="_blank"><img src="static/assets/img/facebook-detail.svg" alt="social media"
-                width="25" height="25" class="mr-2"></a>
-            <a href="" id="politieker_twitter" target="_blank"><img src="static/assets/img/twitter-detail.svg" alt="social media"
-                width="25" height="25" class="mr-2"></a>
-            <a href="" id="politieker_linkedin" target="_blank"><img src="static/assets/img/linkedin.svg" alt="social media"
-                width="25" height="25" class="mr-2"></a>
-            <a href="" id="politieker_website" target="_blank"><img src="static/assets/img/internet_icon.svg" alt="social media"
-                width="25" height="25" class="mr-2"></a>
-            <a href="" id="politieker_email" target="_blank"><img src="static/assets/img/envelope-icon.svg" alt="social media"
-                width="25" height="25" class="mr-2"></a>
-            <img src="static/assets/img/lijn-grijs.svg" alt="scheidingslijn" width="20" height="20" class="scheidingslijn">
+            <img src="static/assets/img/lijn-grijs.svg" alt="" width="20" height="20" class="scheidingslijn">
+            
+
+
+            <div class="social-media-icon-div">
+              <div class="popover__wrapper">
+                <a href="" id="politieker_facebook" target="_blank"><img src="static/assets/img/facebook-detail.svg" alt="facebook"
+                  width="25" height="25" class="mr-2"></a>
+                  <div class="push popover__content">
+                    <button id="edit_facebook" style="display: block" value="facebook">Maak aanpassing...</button>
+                  </div>
+
+                </div>
+                <div id="edit_facebook_modal" class="w3s-modal">
+                  <div class="w3s-modal-content">
+                    <span class="w3s-closeSpan">&times;</span>
+                    <iframe src="" frameborder="0" height="400px" style="width:100%;"></iframe>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="social-media-icon-div">
+                <div class="popover__wrapper">
+                  <a href="" id="politieker_twitter" target="_blank"><img src="static/assets/img/twitter-detail.svg" alt="twitter"
+                    width="25" height="25" class="mr-2"></a>
+                    <div class="push popover__content">
+                      <button id="edit_twitter" style="display: block" value="twitter">Maak aanpassing...</button>
+                    </div>
+
+                  </div>
+                  <div id="edit_twitter_modal" class="w3s-modal">
+                    <div class="w3s-modal-content">
+                      <span class="w3s-closeSpan">&times;</span>
+                      <iframe src="" frameborder="0" height="400px" style="width:100%;"></iframe>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="social-media-icon-div">
+                  <div class="popover__wrapper">
+                    <a href="" id="politieker_linkedin" target="_blank"><img src="static/assets/img/linkedin.svg" alt="linkedin"
+                      width="25" height="25" class="mr-2"></a>
+                      <div class="push popover__content">
+                        <button id="edit_linkedin" style="display: block" value="linkedin">Maak aanpassing...</button>
+                      </div>
+
+                    </div>
+                    <div id="edit_linkedin_modal" class="w3s-modal">
+                      <div class="w3s-modal-content">
+                        <span class="w3s-closeSpan">&times;</span>
+                        <iframe src="" frameborder="0" height="400px" style="width:100%;"></iframe>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="social-media-icon-div">
+                    <div class="popover__wrapper">
+                      <a href="" id="politieker_website" target="_blank"><img src="static/assets/img/internet_icon.svg" alt="website"
+                        width="25" height="25" class="mr-2"></a>
+                        <div class="push popover__content">
+                          <button id="edit_website" style="display: block" value="website">Maak aanpassing...</button>
+                        </div>
+
+                      </div>
+                      <div id="edit_website_modal" class="w3s-modal">
+                        <div class="w3s-modal-content">
+                          <span class="w3s-closeSpan">&times;</span>
+                          <iframe src="" frameborder="0" height="400px" style="width:100%;"></iframe>
+                        </div>
+                      </div>
+                    </div>
+
+
+<!--
+  Email is not yet implemented.
+                    <div class="social-media-icon-div">
+                      <div class="popover__wrapper">
+                        <a href="" id="politieker_email" target="_blank"><img src="static/assets/img/envelope-icon.svg" alt="email"
+                          width="25" height="25" class="mr-2"></a>
+                          <div class="push popover__content">
+                            <button id="edit_email" style="display: block" value="email">Maak aanpassing...</button>
+                          </div>
+
+                        </div>
+                        <div id="edit_email_modal" class="w3s-modal">
+                          <div class="w3s-modal-content">
+                            <span class="w3s-closeSpan">&times;</span>
+                            <iframe src="" frameborder="0" height="400px" style="width:100%;"></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    -->
+
+
+
+                      <img src="static/assets/img/lijn-grijs.svg" alt="" width="20" height="20" class="scheidingslijn">
           </div>
           <h3 class="subtitle" id="partij_naam">-</h3>
         </div>
