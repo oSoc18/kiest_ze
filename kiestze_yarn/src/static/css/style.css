@@ -1040,7 +1040,7 @@ a:hover {
   .lead {
     font-size: 1.8rem;
   }
-
+/*
   .background-teken {
     background-image: url(../assets/img/uitroepteken.svg);
     background-repeat: no-repeat;
@@ -1050,7 +1050,7 @@ a:hover {
     width: 46.5rem;
     margin-top: -2rem;
   }
-
+*/
   .home {
     margin-left: 8rem;
   }

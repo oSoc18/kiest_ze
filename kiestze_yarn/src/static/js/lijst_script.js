@@ -332,6 +332,14 @@ function ShorterNis(longNisCode)
   return parseInt(longNisCode)
 }
 
+function GetTextForGemeente(line)
+{
+  const key = line.key
+  let postcode = nisCode_to_postCode[parseInt(ShorterNis(key))]
+  if(postcode == null) postcode = ""
+  return `${line.naam} ${postcode}`
+}
+
 function UpdateGemeenteInput() {
   while (opties_gemeentes.firstChild) {
     opties_gemeentes.removeChild(opties_gemeentes.firstChild);
@@ -346,7 +354,7 @@ function UpdateGemeenteInput() {
     const key = lines[i].key
     option.id = key;
     // Bad code:
-    option.innerText = `${lines[i].naam  } ${nisCode_to_postCode[parseInt(ShorterNis(key))]}`;
+    option.innerText = GetTextForGemeente(lines[i]);
     option.addEventListener("click", GemeenteClick)
     opties_gemeentes.appendChild(option);
   }

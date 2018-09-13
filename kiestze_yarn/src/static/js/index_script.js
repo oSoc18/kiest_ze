@@ -1,6 +1,6 @@
-﻿import { GetGemeentes } from './common.js';
+﻿import { GetGemeentes, GetGemeenteLineForNis } from './common.js';
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
-import { updateQueryStringParam } from './static_utils.js';
+import { updateQueryStringParam, getParameterByName } from './static_utils.js';
 
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
 const opties_gemeentes = document.getElementById("opties_gemeentes");
@@ -34,11 +34,18 @@ const model = {
 
 
 }
+model.selectedNis = getParameterByName("selectedNis")
 
 window["model"] = model;
 function UpdateAll() {
   UpdateGemeenteInput();
-  lijst_link.href = `lijst?selectedNis=${model.selectedNis}`;
+  if(model.selectedNis != "" && !isNaN(model.selectedNis)){
+    input_gemeente.placeholder = GetTextForGemeente(GetGemeenteLineForNis(ShorterNis(model.selectedNis)))
+    lijst_link.href = `lijst?selectedNis=${model.selectedNis}`;
+  }
+  else
+    lijst_link.removeAttribute("href")
+
 }
 UpdateAll();
 
@@ -48,6 +55,13 @@ input_gemeente.addEventListener(`keyup`, GemeenteInputEvent);
 input_gemeente.addEventListener(`input`, GemeenteInputEvent);
 //input_gemeente.addEventListener(`mouseup`, GemeenteInputEvent);
 
+function GetTextForGemeente(line)
+{
+  const key = line.key
+  let postcode = nisCode_to_postCode[parseInt(ShorterNis(key))]
+  if(postcode == null) postcode = ""
+  return `${line.naam} ${postcode}`
+}
 
 function GemeenteInputEvent() {
   model.inputString = input_gemeente.value;
@@ -61,13 +75,14 @@ function UpdateGemeenteInput() {
   const lines = GetGemeentes(model.inputString);
   for (let i = 0; i < lines.length; i++) {
     if (lines[i] == "") continue;
-    const option = document.createElement("li")
+    const option = document.createElement("a") // a or li
     option.classList.add(`optie_gemeente`)
     option.classList.add(`dropdown-item`)
     const key = lines[i].key
     option.id = key;
+    option.href = `lijst?selectedNis=${key}`
     // Bad code:
-    option.innerText = `${lines[i].naam  } ${nisCode_to_postCode[parseInt(ShorterNis(key))]}`;
+    option.innerText = GetTextForGemeente(lines[i]);
     option.addEventListener("click", GemeenteClick)
     opties_gemeentes.appendChild(option);
   }
@@ -85,5 +100,4 @@ function GemeenteClick(evt)
   console.log("Click", evt.target, evt.target.id);
   model.selectedNis = parseInt(evt.target.id);
   input_gemeente.value = ""
-  input_gemeente.placeholder = evt.target.innerText
 }

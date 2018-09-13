@@ -29,6 +29,7 @@ DEBUG = secret.DEBUG
 
 ALLOWED_HOSTS = ['.kiestze.be', '192.81.221.154', 'localhost', '127.0.0.1']
 
+INTERNAL_IPS = ['127.0.0.1'] # "The Debug Toolbar is shown only if your IP is listed in the INTERNAL_IPS setting"
 
 # Application definition
 
@@ -53,6 +54,8 @@ INSTALLED_APPS = [
 
     'corsheaders',
 
+    'debug_toolbar',
+
     'kiestze',
 ]
 
@@ -66,6 +69,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+
+    # You should include the Debug Toolbar middleware as early as possible in the list.
+    # However, it must come after any other middleware that encodes 
+    # the response’s content, such as GZipMiddleware.
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
