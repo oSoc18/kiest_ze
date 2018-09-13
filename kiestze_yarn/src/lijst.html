@@ -36,36 +36,39 @@
 </head>
 
 <body>
-  <header class="d-flex flex-row justify-content-between card-header-lijst card-header">
-    <div class="d-flex flex-row   dropdown">
+  <header class="card-header-lijst card-header overzicht-header">
+    <div class="d-flex flex-row search-lijst-group dropdown">
       <img src="static/assets/img/nav-kies.svg" alt="nav-kies" width="92" height="18" class="mt-1">
-      <div class="search-lijst-group d-flex flex-row" style="height: 2rem;">
-        <div class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <input type="text" class="form-control w-75 search-lijst" id="search" placeholder="Gemeente" name="input_gemeente" autocomplete="off">
+      <div class="search-lijst-group d-flex flex-row search-group-flex" style="height: 2rem;">
+        <div class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <input type="text" class="form-control w-75 search-lijst focus-search" id="search" placeholder="Gemeente"
+            name="input_gemeente" autocomplete="off">
         </div>
-        <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23">
+        <img src="static/assets/img/search-blue.svg" alt="search-blue" width="23" height="23" class="search-blue">
         <ul id="opties_gemeentes" class="dropdown-menu" aria-labelledby="dropdownMenu2">
         </ul>
       </div>
     </div>
-    <div class="mr-3 d-flex align-items-bottom popover__wrapper">
+    <div class="mr-3 d-flex align-items-bottom popover__wrapper facebook_tweede_login">
       <img src="static/assets/img/facebook-detail.svg" alt="facebook" width="30" height="30" class="linken">
-        {% if user.is_authenticated %}
-            <span id="user_login_span">{{ user }}</span>
-        {% else %}
-            <a href="/allauth/facebook/login" class="facebook-link">Log in</a>
-        {% endif %}
+      {% if user.is_authenticated %}
+      <span>{{ user }}</span>
+      {% else %}
+      <a href="/allauth/facebook/login" class="facebook-link">Log in</a>
+      {% endif %}
       <div class="push popover__content tekst-popover-lijst">
         <p class="popover__message"></p>
-        <p class="ml-3"> Om zaken over de kandidaten te bewerken moet je ingelogd zijn.</p></div>
+        <p class="ml-3"> Om zaken over de kandidaten te bewerken moet je ingelogd zijn.</p>
+      </div>
     </div>
   </header>
 
   <main>
-    <div class="d-flex flex-row justify-content-between">
-      <form class="form-background align-self-stretch" style="width: 18rem;">
-        <div class="ml-4 h-100 mt-3 mr-3">
-          <b id="geselecteerde_gemeente" style="display: none;"></b>
+    <div class="overzicht-div">
+      <form class="form-background">
+        <div class="">
+          <b id="geselecteerde_gemeente"></b>
           <div class="mt-4 font-filter">
             <h2 class="lead mt-2" style="color: white;" class="kies-partij">Kies een partij:</h2>
             <img src="static/assets/img/white-line.svg" alt="white_line" width="40" height="3" class="white-line">
@@ -78,76 +81,67 @@
           <div class="mt-4 font-filter">
             <h2 class="lead" style="color: white;">Beleidsthema's</h2>
             <img src="static/assets/img/white-line.svg" alt="white_line" width="40" height="3" class="white-line">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
-              <label class="form-check-label" for="partijRadio">Gezondheid</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
-              <label class="form-check-label" for="partijRadio">Mobiliteit</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
-              <label class="form-check-label" for="partijRadio">Ouderenzorg</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
-              <label class="form-check-label" for="partijRadio">Milieu en duurzaamheid</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
-              <label class="form-check-label" for="partijRadio">Veiligheid</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
-              <label class="form-check-label" for="partijRadio">Onderwijs</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
-              <label class="form-check-label" for="partijRadio">Integratie</label>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle dropdown-thema" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Beleidsthema
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">
+                  <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
+                  <label class="form-check-label" for="partijRadio">Asiel en migratie</label>
+                </div>
+                <div class="dropdown-item">
+                  <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
+                  <label class="form-check-label" for="partijRadio">Gezondheid</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </form>
 
-      <section class="mt-3 mb-5 w-75">
+      <section class="mt-3 mb-5 kandidaten-overzicht">
         <header class="text-center">
-          <h2 class="title">Kandidaten voor de gemeente
+          <h2 class="title kandidaten-titel">Kandidaten voor de gemeente
             <b id="stad_display"></b>
           </h2>
           <img src="static/assets/img/yellow-line.svg" alt="yellow-line" width="56" height="3">
-          <p class="lead-title">Filter de kandidaten volgens jouw interesses, om de perfecte kandidaat te vinden.</p>
         </header>
-        <div id="kanidaaten_lijst" class="d-flex justify-content-center flex-wrap w-100">
+        <div id="kanidaaten_lijst" class="kandidaten-lijst">
         </div>
       </section>
     </div>
   </main>
 
-  <footer class="d-flex flex-row justify-content-between align-items-center footer" style="height:18vh;">
-    <div class="ml-5">
+  <footer class="footer">
+    <div class="pl-5 footer-div">
       <p style="color: white;" class="lead lead-footer">Onze partners:</p>
-      <ul style="list-style: none; margin-left: -2.8rem;" class="d-flex flex-row justify-content-between">
-        <li class="nav-item">
-          <a class="mr-3" href="#">
-            <img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="mr-3" href="#">
-            <img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="mr-3" href="#">
-            <img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="mr-3" href="#">
-            <img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3">
-          </a>
-        </li>
+      <ul style="list-style: none; margin-left: -2.8rem;" class="footer-item-one">
+        <div class="footer-logos">
+          <li class="nav-item">
+            <a class="mr-3" href="http://2018.summerofcode.be/">
+              <img src="static/assets/img/logo-osoc-color.svg" alt="facebook" width="65" height="65" class="mr-3">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="mr-3" href="https://www.openknowledge.be/">
+              <img src="static/assets/img/okbe-logo.svg" alt="twitter" width="65" height="65" class="mr-3">
+            </a>
+          </li>
+        </div>
+        <div class="footer-logos">
+          <li class="nav-item">
+            <a class="mr-3" href="https://openthebox.be/search">
+              <img src="static/assets/img/openthebox-logo.svg" alt="mail" width="65" height="65" class="mr-3">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="mr-3" href="https://vlaanderenkiest.be/verkiezingen2012/">
+              <img src="static/assets/img/vlaanderen-logo.svg" alt="mail" width="65" height="65" class="mr-3">
+            </a>
+          </li>
+        </div>
       </ul>
     </div>
     <div class="mr-5">

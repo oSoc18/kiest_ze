@@ -409,6 +409,25 @@ a:hover {
   text-decoration: none;
 }
 
+.popover__tweede_content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  transform: translate(-6rem,10px);
+  background-color: white;
+  border-radius: 1rem;
+  padding: .5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  width: 10rem;
+  color: black;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Brandon_reg';
+  font-size: 1.2rem;
+}
+
 .popover__content {
   opacity: 0;
   visibility: hidden;
@@ -637,11 +656,26 @@ a:hover {
   align-items: center;
 }
 
+.facebook_tweede_login {
+  width: 80vw;
+  margin: 0 auto;
+}
+
 @media only screen  and (min-width: 1024px) {
+
+  .facebook_tweede_login {
+    width: auto;
+    margin: 0;
+  }
 
   .overzicht-header {
     display: flex;
     justify-content: space-between;
+    width: 100vw;
+  }
+
+  .kandidaten-titel {
+    margin-top: 0;
   }
 
   .search-group-flex {
