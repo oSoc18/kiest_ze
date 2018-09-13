@@ -33,6 +33,11 @@
 
     gtag('config', 'UA-122933363-1');
   </script>
+  <style type="text/css">
+    .hide-django {
+      display:none;
+    }
+  </style>
 </head>
 
 <body>
@@ -51,12 +56,22 @@
       </div>
     </div>
     <div class="mr-3 d-flex align-items-bottom popover__wrapper facebook_tweede_login">
+
+      <div class="hide-django">{% if user.is_authenticated %}</div>
+            <span id="user_login_span">{{ user }}</span>
+        <div class="hide-django">{% else %}</div>
+            <a href="/allauth/facebook/login" class="facebook-link">
+              <img src="static/assets/img/login_facebook.svg" alt="login_facebook" width="227" height="42" class="login-facebook mt-4">
+            </a>
+        <div class="hide-django">{% endif %}</div>
+      <!--
       <img src="static/assets/img/facebook-detail.svg" alt="facebook" width="30" height="30" class="linken">
       {% if user.is_authenticated %}
       <span>{{ user }}</span>
       {% else %}
       <a href="/allauth/facebook/login" class="facebook-link">Log in</a>
       {% endif %}
+      -->
       <div class="push popover__content tekst-popover-lijst">
         <p class="popover__message"></p>
         <p class="ml-3"> Om zaken over de kandidaten te bewerken moet je ingelogd zijn.</p>
@@ -68,7 +83,6 @@
     <div class="overzicht-div">
       <form class="form-background">
         <div class="">
-          <b id="geselecteerde_gemeente"></b>
           <div class="mt-4 font-filter">
             <h2 class="lead mt-2" style="color: white;" class="kies-partij">Kies een partij:</h2>
             <img src="static/assets/img/white-line.svg" alt="white_line" width="40" height="3" class="white-line">
@@ -86,7 +100,7 @@
                 aria-haspopup="true" aria-expanded="false">
                 Beleidsthema
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="beleidsthemas_dropdown">
                 <div class="dropdown-item">
                   <input class="form-check-input" type="checkbox" name="partijRadio" id="partijpunt" value="option">
                   <label class="form-check-label" for="partijRadio">Asiel en migratie</label>
