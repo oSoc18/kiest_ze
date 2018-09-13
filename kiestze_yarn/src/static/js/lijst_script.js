@@ -46,6 +46,10 @@ const model = {
     if(this._selectedPartijId === value) return;
 
     this._selectedPartijId = value;
+
+    if(this._selectedPartijId == 0)
+      kanidaaten_lijst.innerHTML = "" // HACK: Clear, because remaining HtmlELements won't be sorted.
+
     updateQueryStringParam("selectedPartijId", model.selectedPartijId)
     UpdateAll();
   },
@@ -121,6 +125,47 @@ function DisplayPartijen() {
   }
 }
 
+function ComparePoliticians(p1, p2)
+{
+  const politieker_partij_link1 = model.djangoData.get_all_politieker_partij_link_van_gemeente.json[p1];
+  const politieker_partij_link2 = model.djangoData.get_all_politieker_partij_link_van_gemeente.json[p2];
+  return politieker_partij_link1.volgnummer - politieker_partij_link2.volgnummer;
+}
+
+function GetFilterBeleidsThema()
+{
+  let oneFalse = false;
+  let oneTrue = false;
+  const mustHaves = {}
+  for (let i = 0; i < belijds_themas.length; i++) {
+    const t = belijds_themas[i]
+    if(t == "-") continue; // Ignore empty value
+    const check = document.getElementsByName(`belijds_thema_radio_${string_to_slug(t)}`)[0];
+    if(check.checked){
+      oneTrue = true;
+      mustHaves[t] = true;
+    }
+    else
+      oneFalse = true;
+  }
+  if(oneTrue && oneFalse) // If everything, or none is selected, we don't filter
+    return mustHaves;
+  else return null; // Return null if no filter applies
+}
+
+function PassesBelijdsThemaFilter(filter, belijds_thema)
+{
+  if(filter == null) return true; // Duh
+  if(belijds_thema == null) return false;
+
+  const belijds_themas = belijds_thema.split("|")
+  for (let i = 0; i < belijds_themas.length; i++) {
+    const bt = belijds_themas[i];
+    if(bt != "-" && filter[bt] == true)
+      return true;
+  }
+}
+
 function DisplayKanidaten() {
   if(model.djangoData.get_all_politieker_partij_link_van_gemeente.json == null) return;
   if(model.djangoData.get_politiekers.json == null) return;
@@ -133,17 +178,23 @@ function DisplayKanidaten() {
 
   const links = model.djangoData.get_all_politieker_partij_link_van_gemeente.json
 
+  const filter = GetFilterBeleidsThema();
   for (const link_id in links) {
     if (links.hasOwnProperty(link_id)) {
       const link = links[link_id];
 
       if(link.partij == model.selectedPartijId || model.selectedPartijId == 0)
       {
-        selectedPolitiekerIds.push(link.politieker)
+        const politieker_id = link.politieker;
+        const politieker = model.djangoData.get_politiekers.json[politieker_id];
+
+        if(PassesBelijdsThemaFilter(filter, politieker.edits.belijds_thema))
+          selectedPolitiekerIds.push(link.politieker)
       }
     }
   }
 
+  selectedPolitiekerIds.sort(ComparePoliticians) // Heavy lifting
 
 
   for (const i in selectedPolitiekerIds) {
@@ -187,16 +238,19 @@ function DisplayKanidaten() {
       const partij = model.djangoData.get_partij.json[partij_id]
 
       const shortName2 = politieker.naam.replace(/ /g, "_");
-      option.innerHTML = `<a href="detail?politieker_id=${politieker_id}&partij_id=${model.selectedPartijId}#${shortName2}"><article class="card mr-4 mt-4" style="width: 17rem;">
-        <img class="card-img-top politieker-img" src="${profiel_foto}" alt="Card image cap" style="object-fit:${objectFit}">
-        <div class="card-body">
-        <h3 class="card-title">${politieker.naam}</h5>
-        <div class="lijstplaats">
-        <p class="lijstnummer">1</p> 
-        <p class="card-text">${partij.lijstnaam}</p>
-        </div>
-        </div>
-        </article></a>`
+      option.innerHTML = `
+        <a href="detail?politieker_id=${politieker_id}&partij_id=${partij_id}#${shortName2}">
+          <article class="card mr-4 mt-4" style="width: 17rem;">
+            <img class="card-img-top politieker-img" src="${profiel_foto}" alt="Card image cap" style="object-fit:${objectFit}">
+            <div class="card-body">
+              <h3 class="card-title">${politieker.naam}</h5>
+              <div class="lijstplaats">
+                <p class="volgnummer">${politieker_partij_link.volgnummer}</p> 
+                <p class="card-text">${partij.lijstnaam}</p>
+              </div>
+            </div>
+          </article>
+        </a>`
     }
   }
 
@@ -215,10 +269,11 @@ function DisplayBelijdsThemas()
 {
   let html = ""
     for (let i = 0; i < belijds_themas.length; i++) {
-      const thema_string = belijds_themas[i]
+      const thema_string = belijds_themas[i];
+      if(thema_string == "-") continue; // Ignore empty value
       html += `<div class="dropdown-item">
-                  <input class="form-check-input" type="checkbox" name="partijRadio_${string_to_slug(thema_string)}" value="option">
-                  <label class="form-check-label" for="partijRadio_${string_to_slug(thema_string)}">${thema_string}</label>
+                  <input class="form-check-input" type="checkbox" name="belijds_thema_radio_${string_to_slug(thema_string)}" value="option">
+                  <label class="form-check-label" for="belijds_thema_radio_${string_to_slug(thema_string)}">${thema_string}</label>
                 </div>`
     }
     beleidsthemas_dropdown.innerHTML = html;
