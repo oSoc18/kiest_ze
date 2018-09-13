@@ -384,12 +384,12 @@ a:hover {
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  transform: translate(0,10px);
+  transform: translate(-6rem,10px);
   background-color: white;
   border-radius: 1rem;
   padding: .5rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-  width: 10rem;
+  width: 14rem;
   color: black;
   display: flex;
   flex-flow: column;
@@ -425,7 +425,7 @@ a:hover {
   z-index: 10;
   opacity: 1;
   visibility: visible;
-  transform: translate(0,-7px);
+  transform: translate(-6rem,3px);
   transition: all .5s cubic-bezier(.75, -.02, .2, .97);
   text-decoration: none;
 }
