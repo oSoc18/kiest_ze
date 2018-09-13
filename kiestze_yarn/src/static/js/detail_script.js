@@ -86,7 +86,7 @@ function HookUpModalBlock(fieldname)
       const politieker = model.selectedPolitiekerId;
       const iframe = findClosestTagnameInHiarchy(evt.target, "iframe");
       iframe.src = 
-        GetDjangoUrl(`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}&userName=${model.userName}`);
+        (`/politieker_editablefield_editor?politieker=${politieker}&fieldname=${fieldname}&userName=${model.userName}`);
     }
   }
 }
@@ -123,10 +123,10 @@ function ShowPolitiekerBelijdsThemas(suggested_value)
     const belijds_thema = suggested_value.split("|");
     for (let i = 0; i < belijds_thema.length; i++) {
       const t = belijds_thema[i]
-      html+=`<div class="d-flex flex-row">
-      <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
-      <p class="list-items-detail">${capitalizeFirstLetter(t)}</p>
-      </div>`
+      html+= `<div class="d-flex flex-row">
+                <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
+                <p class="list-items-detail">${capitalizeFirstLetter(t)}</p>
+              </div>`
     }
   }
   belijds_thema_paragraph.innerHTML = html; // Clear
@@ -161,7 +161,7 @@ function UpdateAll()
 
   {
     if(politieker.edits.openthebox_id)
-      model.openthebox_person.url = `https://openthebox.be/api/graph/neighbourhood/Person/${politieker.edits.openthebox_id}/nl?hops=1`;
+      model.openthebox_person.url = GetDjangoUrl(`/proxy?url=${encodeURIComponent(`https://openthebox.be/api/graph/neighbourhood/Person/${politieker.edits.openthebox_id}/nl?hops=1`)}`);
     else
       model.openthebox_person.url = "";
 
@@ -171,8 +171,11 @@ function UpdateAll()
     {
       for (let i = 0; i < otb_json.length; i++) {
         const j = otb_json[i]
-        if(j.group == "nodes" && j.data.pid != politieker.data.openthebox_id) {
-          html += `<b>${j.data.caption}</b><br/>`
+        if(j.group == "nodes" && j.data.pid != politieker.edits.openthebox_id) {
+          html +=`<div class="d-flex flex-row">
+                    <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
+                    <p class="list-items-detail">${capitalizeFirstLetter(j.data.caption)}</p>
+                  </div>`
         }
       }
 

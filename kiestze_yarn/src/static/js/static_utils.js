@@ -49,6 +49,7 @@ function getParameterByName(name, url) {
 // https://stackoverflow.com/questions/9838812/how-can-i-open-a-json-file-in-javascript-without-jquery
 function loadJSON(path, success, error) {
   const xhr = new XMLHttpRequest();
+  xhr.withCredentials = false;
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
