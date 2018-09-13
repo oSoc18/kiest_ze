@@ -197,7 +197,7 @@ function GetGemeentes(inputStr) {
   return results;
 }
 
-function GetGemeenteNaamForNis(nis)
+function GetGemeenteLineForNis(nis)
 {
   let result = null;
   function Recurse(el)
@@ -212,7 +212,7 @@ function GetGemeenteNaamForNis(nis)
         }
         if(property == nis)
         {
-          result = child_el["naam"]
+          result = child_el; //["naam"]
           return;
         }
         Recurse(child_el);
@@ -225,12 +225,21 @@ function GetGemeenteNaamForNis(nis)
   return result;
 }
 
+function GetGemeenteNaamForNis(nis)
+{
+  const line = GetGemeenteLineForNis(nis)
+  if(line)
+    return line["naam"]
+  return null
+}
+
 export { StateEnum,
   JsonRequest,
   GetTableUrl,
   GetDjangoUrl,
   GetGemeentes,
   GetGemeenteNaamForNis,
+  GetGemeenteLineForNis,
   approve,
   RenderEditableFieldStringToHtml,
   GetOtbUrl};
