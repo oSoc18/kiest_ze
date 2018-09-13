@@ -169,6 +169,7 @@ function UpdateAll()
     let html = ""
     if(otb_json)
     {
+      let mandaten_count = 0;
       for (let i = 0; i < otb_json.length; i++) {
         const j = otb_json[i]
         if(j.group == "nodes" && j.data.pid != politieker.edits.openthebox_id) {
@@ -176,6 +177,11 @@ function UpdateAll()
                     <img src="static/assets/img/blue-bol.svg" alt="opsommingsteken" width="20" height="20" class="mr-3 mt-1">
                     <p class="list-items-detail">${capitalizeFirstLetter(j.data.caption)}</p>
                   </div>`
+          mandaten_count +=1;
+          if(mandaten_count > 5){
+            html += "... (maar 5 resultaten getoont)";
+            break;
+          }
         }
       }
 
