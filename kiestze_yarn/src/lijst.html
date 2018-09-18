@@ -4,7 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KiestZe</title>
+  <meta name="author" content="Open The Box team OSOC 18" />
+  <meta name="description" content="Kiest ze! is een online informatief platform over alle locale politieke partijen en partij leden in Vlaanderen. Kiezen op wie je gaat stemmen is moeilijk, zeker voor jongern die voor het eerst gaan stemmen. Dit platform voorziet een objectieve overview van wie welke persoon is om makkelijk en efficiënt kandidaten te vergelijken en een doorgronde keuze te maken." />
+  <title>Kiest ze</title>
+  <link rel="icon" href="assets/img/favicon.png">
   <link rel="stylesheet" href="static/css/bootstrap.min.css">
   <link rel="stylesheet" href="static/css/style.css">
   <script>
@@ -57,8 +60,11 @@
     </div>
     <div class="mr-3 d-flex align-items-bottom popover__wrapper facebook_tweede_login">
 
-      <div class="hide-django">{% if user.is_authenticated %}</div>
-            <span id="user_login_span">{{ user }}</span>
+        <div class="hide-django">{% if user.is_authenticated %}</div>
+            <div class="d-flex align-items-center">
+              <img src="static/assets/img/facebook-detail.svg" alt="facebook" width="25" height="25">
+              <span id="user_login_span" class="user-login">{{ user }}</span>
+            </div>
         <div class="hide-django">{% else %}</div>
             <a href="/allauth/facebook/login" class="facebook-link">
               <img src="static/assets/img/login_facebook.svg" alt="login_facebook" width="227" height="42" class="login-facebook mt-4">
