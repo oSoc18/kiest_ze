@@ -27,7 +27,8 @@ with open('REFNIS_2019.csv', newline='', encoding="utf8") as csvfile:
 		nis = int(row['Code INS'])
 		naam = row["Entités administratives"]
 
-		sql += f"('{common.eazyEscape(naam)}',	{nis},	NULL, NULL),\n"
+		if nis not in nisToNaam:
+			sql += f"('{common.eazyEscape(naam)}',	{nis},	NULL, NULL),\n"
 
 
 
