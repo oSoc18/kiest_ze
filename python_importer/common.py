@@ -11,3 +11,6 @@ politiekers_tablename = 'kiestze_politieker'
 politieker_partijen_link_tablename = 'kiestze_politiekerpartijlink'
 
 conn = psycopg2.connect(host="localhost",database="kiestze", user=secret.psql_user, password=secret.psql_password)
+
+def eazyEscape(str):
+	return str.replace("'", "''")

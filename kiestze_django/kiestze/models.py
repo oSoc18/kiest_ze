@@ -38,7 +38,7 @@ class Politieker(models.Model):
 	id = models.AutoField(primary_key=True)
 	naam = models.CharField(max_length=100)
 	geboorte = models.DateField(blank=True, null=True)
-	geslacht = models.CharField(max_length=1)
+	geslacht = models.CharField(max_length=1, blank=True, null=True)
 
 	class Meta:
 		verbose_name = 'Politieker'

@@ -41,7 +41,7 @@ nis_to_partijen_id = {}
 with open('gemeente-2012-12-17T21 28 08_Lijstresultaten.csv', newline='', encoding="utf8") as csvfile:
 	reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
 	for row in reader:
-		naam = row['lijst'].replace("'", "''")
+		naam = common.eazyEscape(row['lijst'])
 		nis = int(row['NIS'])
 		lijstnummer = int(row['Lijstnummer'])
 
