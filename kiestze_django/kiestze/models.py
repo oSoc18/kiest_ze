@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 class Gemeente(models.Model):
 	naam = models.CharField(max_length=100)
 	nis = models.IntegerField(primary_key=True)
-	begindatum = models.DateField(default=timezone.now)
-	einddatum = models.DateField(default=timezone.now)
+	begindatum = models.DateField(null=True, blank=True)
+	einddatum = models.DateField(null=True, blank=True)
 
 	class Meta:
 		verbose_name = 'Gemeente'
@@ -53,7 +53,7 @@ class PolitiekerPartijLink(models.Model):
 	politieker = models.ForeignKey(Politieker, on_delete=models.CASCADE)
 	volgnummer = models.IntegerField(blank=True, null=True)
 	voorkeurstemmen = models.IntegerField(blank=True, null=True)
-	verkozen = models.BooleanField(blank=True, default=False)
+	verkozen = models.NullBooleanField(blank=True, default=False)
 	verkozen_volgnummer = models.IntegerField(blank=True, null=True)
 
 	class Meta:

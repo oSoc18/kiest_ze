@@ -37,7 +37,7 @@ politiekers = cur.fetchall()
 politiekersDict = {}  # naam to id
 for tupe in politiekers:
 	# there are some duplicate names, but it is impossible to separate them 100% correctly
-	politiekersDict[tupe[1]] = tupe[1]
+	politiekersDict[tupe[1]] = tupe[0]
 
 nisLijstnaamToPartijDict = {}
 
@@ -67,7 +67,7 @@ with open('Export_ADef_TtesInfos_CGV_21092018_13h02_pers.csv', newline='', encod
 			incrementing_partijen_id += 1
 			sql_partijen += f"({incrementing_partijen_id},	2018,	{lijstnummer},	'{common.eazyEscape(partij_naam)}',	{nis}),\n"
 			nisLijstnaamToPartijDict[key] = incrementing_partijen_id
-			partijId = incerementing_politieker_id
+			partijId = incrementing_partijen_id
 		else:
 			partijId = nisLijstnaamToPartijDict[key]
 
