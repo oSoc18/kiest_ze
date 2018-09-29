@@ -3,7 +3,20 @@
 	[
 		{
 			"path": ".",
-			"folder_exclude_patterns": [".svn", ".git", ".hg", "CVS", "node_modules"]
+			"folder_exclude_patterns": [".svn", ".git", ".hg", "CVS",
+				"node_modules", ".idea", "python3.5"],
+			"file_exclude_patterns":
+            [
+                "*.js.map",
+                "*.css.map",
+                "*.min.js",
+                "*.min.css",
+                
+                "alasql.js",
+                "jquery.js",
+                "sql.js",
+                "sql-debug.js",
+            ],
 		}
 	]
 }
