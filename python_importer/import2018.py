@@ -58,7 +58,7 @@ with open('Export_ADef_TtesInfos_CGV_21092018_13h02_pers.csv', newline='', encod
 		politiekerId = -1
 		if naam not in politiekersDict:
 			incerementing_politieker_id += 1
-			sql_politiekers += f"({incerementing_politieker_id},	'{common.eazyEscape(naam)}',	NULL,	NULL),\n"
+			sql_politiekers += "("+incerementing_politieker_id+",	'"+common.eazyEscape(naam)+"',	NULL,	NULL),\n"
 			politiekerId = incerementing_politieker_id
 		else:
 			politiekerId = politiekersDict[naam]
@@ -67,13 +67,13 @@ with open('Export_ADef_TtesInfos_CGV_21092018_13h02_pers.csv', newline='', encod
 		partijId = -1
 		if key not in nisLijstnaamToPartijDict:
 			incrementing_partijen_id += 1
-			sql_partijen += f"({incrementing_partijen_id},	2018,	{lijstnummer},	'{common.eazyEscape(partij_naam)}',	{nis}),\n"
+			sql_partijen += "("+incrementing_partijen_id+",	2018,	"+lijstnummer+",	'"+common.eazyEscape(partij_naam)+"',	"+nis+"),\n"
 			nisLijstnaamToPartijDict[key] = incrementing_partijen_id
 			partijId = incrementing_partijen_id
 		else:
 			partijId = nisLijstnaamToPartijDict[key]
 
-		sql_partijen_politiekers_link += f"({partijId},{politiekerId},{volgnummer},{voorkeurstemmen}, NULL, NULL),\n"
+		sql_partijen_politiekers_link += "("+partijId+","+politiekerId+","+volgnummer+","+voorkeurstemmen+", NULL, NULL),\n"
 
 sql_politiekers = sql_politiekers[:-2]  # remove trailing comma
 sql_politiekers += ";\n\n\n\n\n\n"

@@ -27,6 +27,8 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postg
 - ssh kiestze.be
 - cd /home/sam/kiest_ze
 - git pull
+- source env/bin/activate
+- python3 manage.py migrate
 - `python build_steps.py`
 - Create a file called `secret.py` in `kiestze_django/kiestze_django/` with the variables `key`, `psql_user` and `psql_password` (you can generate a Django secret key on https://djskgen.herokuapp.com/)
 - Start nginx and gunicorn (follow digitalocean tutorial above for info on how to set it up)
