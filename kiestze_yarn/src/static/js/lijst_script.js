@@ -57,11 +57,12 @@ const model = {
     return this._selectedPartijId;
   },
 
+  yearAndpoliticianId_toLink: {},
   djangoData: {
     get_all_gemeentes:  new JsonRequest(GetDjangoUrl("/get_all_gemeentes"), UpdateAll), // TODO
     get_partij:  new JsonRequest("", UpdateAll),
     get_politiekers:  new JsonRequest("", UpdateAll),
-    get_all_politieker_partij_link_van_gemeente:  new JsonRequest("", UpdateAll),
+    get_all_politieker_partij_link_van_gemeente:  new JsonRequest("", CalculatePoliticianToLinl_and_UpdateAll),
   },
 }
 window["model"] = model;
@@ -69,6 +70,22 @@ window["model"] = model;
 
 model.selectedNis = getParameterByName("selectedNis")
 model.selectedPartijId = getParameterByName("selectedPartijId")
+
+
+function CalculatePoliticianToLinl_and_UpdateAll(){
+  const j = model.djangoData.get_all_politieker_partij_link_van_gemeente.json;
+  if(j) {
+    const tmp = {}
+    for (const linkId in j) {
+      if (j.hasOwnProperty(linkId)) {
+        const el = j[linkId]
+        tmp[el.politieker] = el;
+      }
+    }
+    model.yearAndpoliticianId_toLink = tmp;
+  }
+  UpdateAll()
+}
 
 function PartijClicked(evt){
   const id = evt.target.id.replace("partij_id_", "")
@@ -127,8 +144,8 @@ function DisplayPartijen() {
 
 function ComparePoliticians(p1, p2)
 {
-  const politieker_partij_link1 = model.djangoData.get_all_politieker_partij_link_van_gemeente.json[p1];
-  const politieker_partij_link2 = model.djangoData.get_all_politieker_partij_link_van_gemeente.json[p2];
+  const politieker_partij_link1 = model.yearAndpoliticianId_toLink[p1];
+  const politieker_partij_link2 = model.yearAndpoliticianId_toLink[p2];
   return politieker_partij_link1.volgnummer - politieker_partij_link2.volgnummer;
 }
 
@@ -233,7 +250,7 @@ function DisplayKanidaten() {
         // Proxy, becouse twitter has some CORS restrictions
         profiel_foto = GetDjangoUrl(`/proxy?url=${encodeURIComponent(profiel_foto)}`)
       }
-      const politieker_partij_link = model.djangoData.get_all_politieker_partij_link_van_gemeente.json[politieker_id];
+      const politieker_partij_link = model.yearAndpoliticianId_toLink[politieker_id];
       const partij_id = politieker_partij_link.partij;
       const partij = model.djangoData.get_partij.json[partij_id]
 
@@ -307,8 +324,8 @@ function UpdateAll() {
 
   if(!BadString(model.selectedNis)){
     const shortNis = ShorterNis(model.selectedNis)
-    model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?gemeente_nis=${shortNis}&jaar=0`)
-    model.djangoData.get_politiekers.url = GetDjangoUrl(`/get_politiekers?gemeente_nis=${shortNis}&jaar=0`)
+    model.djangoData.get_partij.url = GetDjangoUrl(`/get_partij?gemeente_nis=${shortNis}&jaar=2018`)
+    model.djangoData.get_politiekers.url = GetDjangoUrl(`/get_politiekers?gemeente_nis=${shortNis}&jaar=2018`)
     model.djangoData.get_all_politieker_partij_link_van_gemeente.url = GetDjangoUrl(`/get_all_politieker_partij_link_van_gemeente?gemeente_nis=${shortNis}&jaar=0`)
   }
 

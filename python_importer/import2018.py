@@ -50,16 +50,18 @@ with open('Export_ADef_TtesInfos_CGV_21092018_13h02_pers.csv', newline='', encod
 		lijstnummer = intTryParse(row['nr lijst'], 666)  # Zuienkerke heeft lijst nr 'A'
 		volgnummer = int(row['volgnr'])
 		voorkeurstemmen = "NULL"
-		verkozen = "NULL"
-		verkozen_volgnummer = "NULL"
-		partij_naam = row["kieskring"]
+		partij_naam = row["lijstnaam"]
 
 		# cur.execute("SELECT * FROM kiestze_politieker WHERE naam = '" + naam + "';")
 		# politieker_from_db = cur.fetchone()
 		# if politieker_from_db is None:
+		politiekerId = -1
 		if naam not in politiekersDict:
 			incerementing_politieker_id += 1
 			sql_politiekers += f"({incerementing_politieker_id},	'{common.eazyEscape(naam)}',	NULL,	NULL),\n"
+			politiekerId = incerementing_politieker_id
+		else:
+			politiekerId = politiekersDict[naam]
 
 		key = "" + nis.__str__() + "-" + partij_naam
 		partijId = -1
@@ -71,7 +73,7 @@ with open('Export_ADef_TtesInfos_CGV_21092018_13h02_pers.csv', newline='', encod
 		else:
 			partijId = nisLijstnaamToPartijDict[key]
 
-		sql_partijen_politiekers_link += f"({partijId},{incerementing_politieker_id},{volgnummer},{voorkeurstemmen},{verkozen},{verkozen_volgnummer}),\n"
+		sql_partijen_politiekers_link += f"({partijId},{politiekerId},{volgnummer},{voorkeurstemmen}, NULL, NULL),\n"
 
 sql_politiekers = sql_politiekers[:-2]  # remove trailing comma
 sql_politiekers += ";\n\n\n\n\n\n"
