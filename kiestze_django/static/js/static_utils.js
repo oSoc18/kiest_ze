@@ -63,6 +63,7 @@ function loadJSON(path, success, error) {
   };
   xhr.open("GET", path, true);
   xhr.send();
+  return xhr;
 }
 
 function string_to_slug(str)

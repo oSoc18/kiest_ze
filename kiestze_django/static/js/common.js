@@ -65,6 +65,7 @@ class JsonRequest {
     this.callback = callback
     this._json = null;
     this.state = StateEnum.init
+    this.runningXhr = null;
   }
 
   get json() {
@@ -82,6 +83,8 @@ class JsonRequest {
   {
     if(this._url === value) return;
     this._url = value;
+    if(this.runningXhr)
+      this.runningXhr.abort() // untested
     this._json = null;
     this.state = StateEnum.init
     this.callback()
@@ -101,7 +104,10 @@ class JsonRequest {
       this.state = StateEnum.fail;
       return;
     }
-    loadJSON(this._url,
+
+    if(this.runningXhr)
+      this.runningXhr.abort()
+    this.runningXhr = loadJSON(this._url,
       function (json) {
         self.state = StateEnum.succes;
 
