@@ -58,7 +58,7 @@ with open('Export_ADef_TtesInfos_CGV_21092018_13h02_pers.csv', newline='', encod
 		politiekerId = -1
 		if naam not in politiekersDict:
 			incerementing_politieker_id += 1
-			sql_politiekers += "("+incerementing_politieker_id+",	'"+common.eazyEscape(naam)+"',	NULL,	NULL),\n"
+			sql_politiekers += "("+str(incerementing_politieker_id)+",	'"+common.eazyEscape(naam)+"',	NULL,	NULL),\n"
 			politiekerId = incerementing_politieker_id
 		else:
 			politiekerId = politiekersDict[naam]
