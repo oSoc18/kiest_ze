@@ -2,7 +2,7 @@
 
 import { nisCode_to_postCode } from './nisCode_to_postCode.js';
 import { updateQueryStringParam, getParameterByName, string_to_slug } from './static_utils.js';
-import { JsonRequest, GetDjangoUrl, GetGemeentes } from './common.js';
+import { JsonRequest, GetDjangoUrl, GetGemeentes, GetGemeenteNaamForNis } from './common.js';
 import { belijds_themas } from './belijds_themas.js';
 
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
@@ -10,6 +10,7 @@ const opties_gemeentes = document.getElementById("opties_gemeentes");
 const opties_partijen = document.getElementById("opties_partijen");
 const kanidaaten_lijst = document.getElementById("kanidaaten_lijst");
 const beleidsthemas_dropdown = document.getElementById("beleidsthemas_dropdown");
+const search = document.getElementById("search");
 
 
 
@@ -348,6 +349,7 @@ function BadString(str)
 
 function UpdateAll() {
   UpdateGemeenteInput();
+  search.placeholder = GetGemeenteNaamForNis(model.selectedNis)
 
   const j = model.djangoData.get_all_politieker_partij_link_van_gemeente.json;
   if(j 

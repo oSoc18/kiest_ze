@@ -102,9 +102,13 @@ HookUpModalBlock("website")
 function ShowSocialMediaIcon(politieker, fieldname) {
   const fieldVal = politieker.edits[fieldname];
   const el = document.getElementById(`politieker_${fieldname}`)
-  if(fieldVal == null)
+  if(fieldVal == null && model.userName == null){
     el.parentElement.parentElement.style.display = "none"
-  else{
+  }else{
+    if(fieldVal == null)
+        el.style.opacity = 0.5
+      else
+        el.style.opacity = 1
     RemoveInlineDisplayStyle(el)
     el.href = fieldVal
   }
@@ -286,6 +290,7 @@ const model = {
   get userName() {
     const el = document.getElementById("user_login_span");
     if(el == null) return null;
+    if(el.innerText == "{{ user }}") return null;
     return el.innerText;
   },
 
