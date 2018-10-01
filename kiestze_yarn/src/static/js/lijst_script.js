@@ -86,7 +86,7 @@ function PartijClicked(evt){
 }
 
 // Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/prepend()/prepend().md
-/*(function (arr) {
+(function (arr) {
   arr.forEach(function (item) {
     if (item.hasOwnProperty('prepend')) {
       return;
@@ -109,7 +109,7 @@ function PartijClicked(evt){
     });
   });
 })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-*/
+
 
 function DisplayPartijen() {
   const usedChildren = []
@@ -141,7 +141,7 @@ function DisplayPartijen() {
         }
         else{
           label = `<b>${partij.lijstnaam}</b>`
-          opties_partijen.appendChild(option);
+          opties_partijen.prepend(option);
         }
         option.innerHTML = `<div class="form-check"> 
           <input class="form-check-input" type="radio" name="partijRadio" id="partij_id_${partij_id}" value="option">
