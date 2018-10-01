@@ -8,7 +8,6 @@ import { belijds_themas } from './belijds_themas.js';
 const input_gemeente = document.getElementsByName("input_gemeente")[0];
 const opties_gemeentes = document.getElementById("opties_gemeentes");
 const opties_partijen = document.getElementById("opties_partijen");
-const opties_partijen_2012 = document.getElementById("opties_partijen_2012");
 const kanidaaten_lijst = document.getElementById("kanidaaten_lijst");
 const beleidsthemas_dropdown = document.getElementById("beleidsthemas_dropdown");
 
@@ -80,7 +79,6 @@ function CalculatePoliticianToLink_and_UpdateAll() {
 
 function PartijClicked(evt){
   const id = evt.target.id.replace("partij_id_", "")
-  console.log("PartijClicked", evt.target, id);
   model.selectedPartijId = id;
   UpdateAll()
 }
@@ -96,7 +94,7 @@ function PartijClicked(evt){
       enumerable: true,
       writable: true,
       value: function prepend() {
-        let argArr = Array.prototype.slice.call(arguments),
+        const argArr = Array.prototype.slice.call(arguments),
           docFrag = document.createDocumentFragment();
         
         argArr.forEach(function (argItem) {
@@ -118,7 +116,7 @@ function DisplayPartijen() {
   if(get_partij){
     get_partij = JSON.parse(JSON.stringify(get_partij)); // Potential performance burdon
     get_partij[0] = {
-      "jaar": 2012, // not relevant here
+      "jaar": 2018,
       "lijstnaam": "Alle partijen",
       "lijstnummer": -1,
       "nis": model.selectedNis
@@ -166,12 +164,12 @@ function DisplayPartijen() {
 
 function ComparePoliticians(p1, p2)
 {
-  const jr = model.selectedPartijId == 0 ? 2018 : model.selectedPartijId
-  const partijJaar = model.djangoData.get_partij.json[jr].jaar
+  const partijJaar = model.selectedPartijId == 0 ? 2018 : model.djangoData.get_partij.json[model.selectedPartijId].jaar
 
   const politieker_partij_link1 = model.yearAndpoliticianId_toLink[`${partijJaar}-${p1}`];
   const politieker_partij_link2 = model.yearAndpoliticianId_toLink[`${partijJaar}-${p2}`];
-  return politieker_partij_link1.volgnummer - politieker_partij_link2.volgnummer;
+  return (politieker_partij_link1?politieker_partij_link1.volgnummer:0)
+       - (politieker_partij_link2?politieker_partij_link2.volgnummer:0);
 }
 
 function GetFilterBeleidsThema()
@@ -228,10 +226,15 @@ function DisplayKanidaten() {
       if(link.partij == model.selectedPartijId || model.selectedPartijId == 0)
       {
         const politieker_id = link.politieker;
-        const politieker = model.djangoData.get_politiekers.json[politieker_id];
+        const partijJaar = 2018
+        const politieker_partij_link = model.yearAndpoliticianId_toLink[`${partijJaar}-${politieker_id}`];
+        if(politieker_partij_link)
+        {
+          const politieker = model.djangoData.get_politiekers.json[politieker_id];
 
-        if(PassesBelijdsThemaFilter(filter, politieker.edits.belijds_thema))
-          selectedPolitiekerIds.push(link.politieker)
+          if(PassesBelijdsThemaFilter(filter, politieker.edits.belijds_thema))
+            selectedPolitiekerIds.push(link.politieker)
+        }
       }
     }
   }
@@ -272,10 +275,12 @@ function DisplayKanidaten() {
         const begin = i + "twitter.com/".length;
         const screen_name = s.substring(begin, j);
         profiel_foto = `https://twitter.com/${screen_name}/profile_image?size=original`
-        // Proxy, becouse twitter has some CORS restrictions
-        profiel_foto = GetDjangoUrl(`/proxy?url=${encodeURIComponent(profiel_foto)}`)
       }
-      const partijJaar = model.selectedPartijId == 0 ? 0 : model.djangoData.get_partij.json[model.selectedPartijId].jaar
+      if(profiel_foto.indexOf("kiestze.be") == -1 
+        && profiel_foto.indexOf("airtable.com") == -1
+        && !profiel_foto.startsWith("static/"))
+        profiel_foto = GetDjangoUrl(`/proxy?url=${encodeURIComponent(profiel_foto)}`)
+      const partijJaar = model.selectedPartijId == 0 ? 2018 : model.djangoData.get_partij.json[model.selectedPartijId].jaar
       const politieker_partij_link = model.yearAndpoliticianId_toLink[`${partijJaar}-${politieker_id}`];
       const partij_id = politieker_partij_link.partij;
       const partij = model.djangoData.get_partij.json[partij_id]
@@ -354,7 +359,7 @@ function UpdateAll() {
     for (const linkId in j) {
       if (j.hasOwnProperty(linkId)) {
         const el = j[linkId]
-        const partijJaar = model.selectedPartijId == 0 ? 2018 : model.djangoData.get_partij.json[el.partij].jaar
+        const partijJaar = model.djangoData.get_partij.json[el.partij].jaar
         tmp[`${partijJaar}-${el.politieker}`] = el;
       }
     }

@@ -209,8 +209,11 @@ function UpdateAll()
     const screen_name = s.substring(begin, j);
     profiel_foto = `https://twitter.com/${screen_name}/profile_image?size=original`
     // Proxy, becouse twitter has some CORS restrictions
-    profiel_foto = GetDjangoUrl(`/proxy?url=${encodeURIComponent(profiel_foto)}`)
   }
+  if(profiel_foto.indexOf("kiestze.be") == -1 
+    && profiel_foto.indexOf("airtable.com") == -1
+    && !profiel_foto.startsWith("static/"))
+    profiel_foto = GetDjangoUrl(`/proxy?url=${encodeURIComponent(profiel_foto)}`)
   persoon_foto.src = profiel_foto;
   persoon_foto.style.objectFit = objectFit;
 
