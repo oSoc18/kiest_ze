@@ -1,6 +1,8 @@
 # kiest_ze
 Team Open the box met Emile, Beau, Greet en Sam
 
+This project used to run on http://kiestze.be Meanwhile this domain is used by another party.
+
 yarn development-windows
 yarn production-windows
 
@@ -54,12 +56,12 @@ All assets go through webpack to go minified. Javascript will also get bundles a
 
 ## API
 To get get all 'politiekers' for a certain 'gemeente', use:  
-https://kiestze.be/get_politiekers?gemeente_nis=36012&jaar=0
+http://localhost/get_politiekers?gemeente_nis=36012&jaar=0
 
 To get all 'partijen' for a certain 'gemeente', use:  
-https://kiestze.be/get_partij?gemeente_nis=36012&jaar=0
+http://localhost/get_partij?gemeente_nis=36012&jaar=0
 
 To know what 'politiekers' are connected to what 'partijen', use the following call:  
-https://kiestze.be/get_all_politieker_partij_link_van_gemeente?gemeente_nis=36012&jaar=0
+http://localhost/get_all_politieker_partij_link_van_gemeente?gemeente_nis=36012&jaar=0
 
 (Note, that when jaar=0, information of all years will be returned)
